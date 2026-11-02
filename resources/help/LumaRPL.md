@@ -46,7 +46,7 @@ Analysis can find roots, intersections and extrema, draw a tangent, or calculate
 
 Parametric plots use X(T),Y(T); polar plots use r(T). Surfaces use X,Y. Differential equations ask for the slope and an initial point. Each has its own saved document.
 
-For calculus, open Home > Math & graphs > Calculus. Try X^2: its derivative is 2*X and its antiderivative is X^3/3, plus a constant. Use radians for trigonometric calculus.
+For calculus, open Home > Math & graphs > Calculus & algebra > Calculus in X. Try X^2: its derivative is 2*X and its antiderivative is X^3/3, plus a constant. Use radians for trigonometric calculus.
 
 Export saves a graph as SVG or sampled CSV under /db48x/exports. Geometry uses the same graph controls; its Help explains how to move points.
 
@@ -66,7 +66,7 @@ Nothing is copied or stored just by viewing an answer. Choose Copy to stack or S
 
 ## Data, forms & notebooks
 
-Ctrl+D opens your X,Y table. Enter a few pairs, then look at statistics, fit a regression or plot the points. With (0,1), (1,3) and (2,5), a linear fit gives Y=1+2*X. CSV files go under /db48x/data.
+Ctrl+D opens your X,Y table. Enter a few pairs, then look at statistics, fit a regression or plot the points. With (0,1), (1,3) and (2,5), a linear fit gives Y=1+2*X. CSV observations go under /db48x/datasets; /db48x/data contains SD RPL source files.
 
 Ctrl+F opens formula forms. A form lets you keep a formula and fill in named inputs instead of retyping it. Inputs can have units, and the result can be converted to a chosen unit. Calculate gives an answer; Graph an input sweep varies one input while keeping the others as defined.
 
@@ -346,6 +346,6 @@ Enter #FFD2h and press Enter. Type Bin and Enter to show binary 1111111111010010
 
 Ctrl+Y opens Bases from the calculator. Tab selects the row with Base, Bin, Oct, Dec and Hex; F2 is Bin, F3 Oct, F4 Dec and F5 Hex. Esc returns to the previous menu. In source editors Ctrl+Y remains Redo.
 
-Ordinary integers such as 255 need RealToBinary first. That command creates a based integer, not necessarily a base-2 display. Then use Bin, Oct, Dec or Hex. BinaryToReal returns a based value to an ordinary integer.
+Ordinary decimal integers such as 255 also convert directly with Bin, Oct, Dec or Hex on LumaRPL. Decimal fractions are not converted by this shortcut. RealToBinary remains available explicitly and creates a based integer, not necessarily a base-2 display. BinaryToReal returns a based value to an ordinary integer.
 
 Explicit suffixes identify input bases: #FFh is hex 255, #101010b is binary 42, #377o is octal 255 and #255d is decimal 255. WordSize affects fixed-width bit operations; display-base conversion does not truncate the integer.

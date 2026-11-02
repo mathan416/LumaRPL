@@ -2,6 +2,7 @@
 """Create a current-only bundle and corresponding source; never deploy."""
 import argparse,hashlib,json,shutil,subprocess,tarfile
 from pathlib import Path
+from license_bundle import copy_license_bundle
 root=Path(__file__).resolve().parents[1]
 version=(root/'VERSION').read_text().strip()
 parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--loader',type=Path);args=parser.parse_args()
@@ -24,6 +25,8 @@ shutil.copy2(firmware,output/'LumaRPL-Pico-2-W.uf2')
 for name in ('config','state','help','library'):
     shutil.copytree(root/'db48x'/name,card/'db48x'/name,ignore=shutil.ignore_patterns('.DS_Store','bad','*.log'))
 shutil.copytree(root/'resources',card/'db48x',dirs_exist_ok=True,ignore=shutil.ignore_patterns('.DS_Store','__pycache__'))
+copy_license_bundle(root,card/'db48x/licenses')
+shutil.copytree(root/'docs/manuals/pdf',card/'db48x/manuals',dirs_exist_ok=True)
 for name in ('README.md','BUILDING.md','NOTICE.md','LICENSE','CHANGELOG.md','VERSION'):
     shutil.copy2(root/name,output/name)
 shutil.copytree(root/'licenses',output/'licenses')

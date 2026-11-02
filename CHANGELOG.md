@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0-rc.2
+
+- Add illustrated User and Programming Guides, tested language examples and PDF build tools.
+- Expand public installation and development instructions.
+- Correct help wording for direct integer base conversion, CSV storage and calculus navigation.
+- Complete font credits and package component notices under `/db48x/licenses/`.
+- Retain the original evaluator, mathematics, memory reservations and document formats.
+
 ## 0.10.0-rc.1
 
 - Prepare a standalone LumaRPL source repository from port 30.5.

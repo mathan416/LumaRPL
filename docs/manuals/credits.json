@@ -1,0 +1,163 @@
+[
+  {
+    "name": "Iain Bennett",
+    "role": "Design direction and physical-device testing",
+    "authors": "LumaRPL",
+    "url": "",
+    "terms": "Personal acknowledgement"
+  },
+  {
+    "name": "DB48X",
+    "role": "RPL engine, arithmetic, symbolic mathematics, calculator fonts and upstream simulator",
+    "authors": "Christophe de Dinechin and contributors",
+    "url": "https://github.com/c3d/db48x",
+    "terms": "LGPL-3.0 terms supplied upstream"
+  },
+  {
+    "name": "ClockworkPi PicoCalc",
+    "role": "Hardware, published board design and driver origins",
+    "authors": "ClockworkPi and contributors",
+    "url": "https://github.com/clockworkpi/PicoCalc",
+    "terms": "Hardware/reference; driver notices retained"
+  },
+  {
+    "name": "UF2 Loader 2.4.1",
+    "role": "Loader workflow, display/keyboard/SD driver origins",
+    "authors": "pelrun and contributors",
+    "url": "https://github.com/pelrun/uf2loader",
+    "terms": "GPL-3.0 driver/source terms"
+  },
+  {
+    "name": "Raspberry Pi Pico SDK 2.2.0",
+    "role": "RP2350 platform and runtime integration",
+    "authors": "Raspberry Pi and contributors",
+    "url": "https://github.com/raspberrypi/pico-sdk",
+    "terms": "BSD-3-Clause and component-specific notices"
+  },
+  {
+    "name": "FatFS R0.16",
+    "role": "SD filesystem",
+    "authors": "ChaN",
+    "url": "https://elm-chan.org/fsw/ff/",
+    "terms": "Permissive notice retained in sources"
+  },
+  {
+    "name": "SwissMicros DMCP",
+    "role": "Interface declarations used by the port",
+    "authors": "SwissMicros",
+    "url": "https://github.com/swissmicros/DMCP_SDK",
+    "terms": "BSD-3-Clause declarations; no ROM linked"
+  },
+  {
+    "name": "Lua 5.4.9",
+    "role": "Embedded scripting runtime",
+    "authors": "Lua.org, PUC-Rio",
+    "url": "https://www.lua.org/",
+    "terms": "MIT; Copyright 1994-2026 Lua.org, PUC-Rio"
+  },
+  {
+    "name": "CYW43 driver / firmware",
+    "role": "Pico 2 W radio support",
+    "authors": "George Robotics / Raspberry Pi and contributors",
+    "url": "https://github.com/georgerobotics/cyw43-driver",
+    "terms": "Raspberry Pi semiconductor-license terms; original notices retained"
+  },
+  {
+    "name": "lwIP",
+    "role": "Network stack",
+    "authors": "lwIP authors and contributors",
+    "url": "https://savannah.nongnu.org/projects/lwip/",
+    "terms": "BSD-style notice"
+  },
+  {
+    "name": "Mbed TLS 3.6.7",
+    "role": "TLS and certificate validation",
+    "authors": "Mbed TLS authors and contributors",
+    "url": "https://github.com/Mbed-TLS/mbedtls",
+    "terms": "Apache-2.0 OR GPL-2.0-or-later, as supplied"
+  },
+  {
+    "name": "Google Trust Services",
+    "role": "Public GTS Root R4 trust certificate",
+    "authors": "Google Trust Services",
+    "url": "https://pki.goog/repository/",
+    "terms": "Certificate source and DER fingerprint retained"
+  },
+  {
+    "name": "Frankfurter",
+    "role": "Exchange-rate reference observations; underlying official providers retain their attribution",
+    "authors": "Frankfurter contributors and data providers",
+    "url": "https://frankfurter.dev/",
+    "terms": "External data service; cached observation dates retained"
+  },
+  {
+    "name": "Pixel Operator Mono",
+    "role": "Compact source-editor font base",
+    "authors": "Jayvee Enaguas / GrandChaos9000; The Grandoplex Project",
+    "url": "https://github.com/c3d/db48x/tree/master/fonts",
+    "terms": "SIL Open Font License 1.1; Copyright 2009-2015 The Grandoplex Project"
+  },
+  {
+    "name": "FogSans",
+    "role": "Calculator/compact font source and supplemental editor glyphs",
+    "authors": "Intel Corporation; DB48X font modifications by its contributors",
+    "url": "https://github.com/c3d/db48x/tree/master/fonts",
+    "terms": "Apache-2.0 font software; Copyright 2012 Intel Corporation"
+  },
+  {
+    "name": "CMSIS",
+    "role": "Arm platform headers",
+    "authors": "Arm and contributors",
+    "url": "https://github.com/ARM-software/CMSIS_6",
+    "terms": "Original component notices in source/licenses"
+  },
+  {
+    "name": "Pico printf",
+    "role": "SDK formatted-output component; this build selects compiler/Newlib printf",
+    "authors": "Marco Paland and contributors",
+    "url": "https://github.com/mpaland/printf",
+    "terms": "MIT notice retained"
+  },
+  {
+    "name": "GNU Arm toolchain, Newlib and C++ runtime",
+    "role": "Compilation and embedded runtime support",
+    "authors": "Their authors and contributors",
+    "url": "https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain",
+    "terms": "Original licenses and runtime exceptions retained"
+  },
+  {
+    "name": "picotool",
+    "role": "Firmware build and UF2 inspection",
+    "authors": "Raspberry Pi and contributors",
+    "url": "https://github.com/raspberrypi/picotool",
+    "terms": "Build/validation tool, not a calculator application"
+  },
+  {
+    "name": "Timendus CHIP-8 test suite",
+    "role": "VM validation only",
+    "authors": "Timendus and contributors",
+    "url": "https://github.com/Timendus/chip8-test-suite",
+    "terms": "GPL-3.0 test source; ordinary SD bundle omits test ROMs"
+  },
+  {
+    "name": "Qt and QEMU",
+    "role": "Desktop simulator, host rendering and Arm validation",
+    "authors": "Their authors and contributors",
+    "url": "https://www.qt.io/",
+    "terms": "Development/testing tools; not linked into the calculator firmware"
+  },
+  {
+    "name": "DejaVu fonts",
+    "role": "Embedded PDF typography only",
+    "authors": "Bitstream, Tavmjong Bah and DejaVu contributors",
+    "url": "https://dejavu-fonts.github.io/",
+    "terms": "Font-specific licenses reproduced in the manuals and PDF-FONT-NOTICES.txt"
+  },
+  {
+    "name": "ReportLab, Poppler, Pillow, pypdf and pdfplumber",
+    "role": "Manual generation, photo orientation, PDF structure, geometry and rendering checks only",
+    "authors": "Their authors and contributors",
+    "url": "https://www.reportlab.com/",
+    "terms": "Documentation build tools; not linked into calculator firmware"
+  }
+]
