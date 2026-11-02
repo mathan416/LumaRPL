@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
       - name: Install host tools
-        run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build python3
+        run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build python3 ripgrep
       - name: Fetch and verify pinned sources
         run: python3 tools/bootstrap.py
       - name: Run bounded host and Lua tests

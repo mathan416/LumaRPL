@@ -1,6 +1,6 @@
 # Build LumaRPL
 
-Use Python 3.12 or newer, Git, CMake 3.20+, Ninja, a complete Arm GNU Embedded
+Use Python 3.12 or newer, Git, ripgrep (`rg`), CMake 3.20+, Ninja, a complete Arm GNU Embedded
 compiler (C and C++ plus newlib), and Qt 6 with qmake for host integration tests.
 Clang and its address/undefined-behaviour sanitizers are used by the host tests.
 The firmware baseline uses Arm GNU Embedded **9.2.1**, Pico SDK **2.2.0**,
