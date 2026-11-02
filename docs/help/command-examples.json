@@ -1,0 +1,1393 @@
+{
+  "add": {
+    "source": "2 3 +",
+    "expected": "5",
+    "note": ""
+  },
+  "subtract": {
+    "source": "10 3 -",
+    "expected": "7",
+    "note": ""
+  },
+  "multiply": {
+    "source": "6 7 *",
+    "expected": "42",
+    "note": ""
+  },
+  "divide": {
+    "source": "1 3 /",
+    "expected": "¹/₃",
+    "note": ""
+  },
+  "mod": {
+    "source": "17 5 MOD",
+    "expected": "2",
+    "note": ""
+  },
+  "rem": {
+    "source": "17 5 REM",
+    "expected": "2",
+    "note": ""
+  },
+  "pow": {
+    "source": "2 8 ^",
+    "expected": "256",
+    "note": ""
+  },
+  "neg": {
+    "source": "7 NEG",
+    "expected": "-7",
+    "note": ""
+  },
+  "abs": {
+    "source": "-7 ABS",
+    "expected": "7",
+    "note": ""
+  },
+  "inv": {
+    "source": "4 INV",
+    "expected": "¹/₄",
+    "note": ""
+  },
+  "sqrt": {
+    "source": "81 SQRT",
+    "expected": "9.",
+    "note": ""
+  },
+  "sq": {
+    "source": "12 SQ",
+    "expected": "144",
+    "note": ""
+  },
+  "cubed": {
+    "source": "3 CUBED",
+    "expected": "27",
+    "note": ""
+  },
+  "cbrt": {
+    "source": "27 CBRT",
+    "expected": "3.",
+    "note": ""
+  },
+  "hypot": {
+    "source": "3 4 HYPOT",
+    "expected": "5.",
+    "note": ""
+  },
+  "xroot": {
+    "source": "27 3 XROOT",
+    "expected": "3.",
+    "note": ""
+  },
+  "sign": {
+    "source": "-5 SIGN",
+    "expected": "-1",
+    "note": ""
+  },
+  "IntPart": {
+    "source": "3.75 IP",
+    "expected": "3.",
+    "note": ""
+  },
+  "FracPart": {
+    "source": "3.75 FP",
+    "expected": "0.75",
+    "note": ""
+  },
+  "ceil": {
+    "source": "3.2 CEIL",
+    "expected": "4.",
+    "note": ""
+  },
+  "floor": {
+    "source": "3.8 FLOOR",
+    "expected": "3.",
+    "note": ""
+  },
+  "Round": {
+    "source": "1.234 2 RND",
+    "expected": "1.23",
+    "note": ""
+  },
+  "Truncate": {
+    "source": "1.239 2 TRNC",
+    "expected": "1.23",
+    "note": ""
+  },
+  "mant": {
+    "source": "1234 MANT",
+    "expected": "1.234",
+    "note": ""
+  },
+  "xpon": {
+    "source": "1234 XPON",
+    "expected": "3",
+    "note": ""
+  },
+  "Percent": {
+    "source": "200 15 %",
+    "expected": "30",
+    "note": ""
+  },
+  "PercentChange": {
+    "source": "100 125 %CH",
+    "expected": "25",
+    "note": ""
+  },
+  "PercentTotal": {
+    "source": "200 50 %T",
+    "expected": "25",
+    "note": ""
+  },
+  "Min": {
+    "source": "3 8 MIN",
+    "expected": "3",
+    "note": ""
+  },
+  "Max": {
+    "source": "3 8 MAX",
+    "expected": "8",
+    "note": ""
+  },
+  "GCD": {
+    "source": "48 18 GCD",
+    "expected": "6",
+    "note": ""
+  },
+  "LCM": {
+    "source": "6 8 LCM",
+    "expected": "24",
+    "note": ""
+  },
+  "IsPrime": {
+    "source": "17 ISPRIME",
+    "expected": "True",
+    "note": ""
+  },
+  "NextPrime": {
+    "source": "17 NEXTPRIME",
+    "expected": "19",
+    "note": ""
+  },
+  "PreviousPrime": {
+    "source": "17 PreviousPrime",
+    "expected": "13",
+    "note": ""
+  },
+  "Factors": {
+    "source": "60 FACTORS",
+    "expected": "{ 2 2 3 1 5 1 }",
+    "note": "The list alternates prime and exponent: 2^2 * 3^1 * 5^1 = 60."
+  },
+  "fact": {
+    "source": "5 FACT",
+    "expected": "120",
+    "note": ""
+  },
+  "comb": {
+    "source": "5 2 COMB",
+    "expected": "10",
+    "note": ""
+  },
+  "perm": {
+    "source": "5 2 PERM",
+    "expected": "20",
+    "note": ""
+  },
+  "ToFraction": {
+    "source": "0.5 ToFraction",
+    "expected": "¹/₂",
+    "note": ""
+  },
+  "ToQuotient": {
+    "source": "0.5 ToQuotient",
+    "expected": "¹/₂",
+    "note": ""
+  },
+  "ToDecimal": {
+    "source": "1 4 / ToDecimal",
+    "expected": "0.25",
+    "note": ""
+  },
+  "sin": {
+    "source": "Deg 90 SIN",
+    "expected": "1",
+    "note": ""
+  },
+  "cos": {
+    "source": "Deg 0 COS",
+    "expected": "1",
+    "note": ""
+  },
+  "tan": {
+    "source": "Deg 0 TAN",
+    "expected": "0",
+    "note": ""
+  },
+  "asin": {
+    "source": "Deg 1 ASIN",
+    "expected": "90. °",
+    "note": ""
+  },
+  "acos": {
+    "source": "Deg 1 ACOS",
+    "expected": "0. °",
+    "note": ""
+  },
+  "atan": {
+    "source": "Deg 0 ATAN",
+    "expected": "0. °",
+    "note": ""
+  },
+  "sec": {
+    "source": "Deg 0 SEC",
+    "expected": "1.",
+    "note": ""
+  },
+  "csc": {
+    "source": "Deg 90 CSC",
+    "expected": "1.",
+    "note": ""
+  },
+  "cot": {
+    "source": "Deg 45 COT",
+    "expected": "1.",
+    "note": ""
+  },
+  "asec": {
+    "source": "Deg 1 ASEC",
+    "expected": "0. °",
+    "note": ""
+  },
+  "acsc": {
+    "source": "Deg 1 ACSC",
+    "expected": "90. °",
+    "note": ""
+  },
+  "acot": {
+    "source": "Deg 1 ACOT",
+    "expected": "45. °",
+    "note": ""
+  },
+  "sinh": {
+    "source": "0 SINH",
+    "expected": "0.",
+    "note": ""
+  },
+  "cosh": {
+    "source": "0 COSH",
+    "expected": "1.",
+    "note": ""
+  },
+  "tanh": {
+    "source": "0 TANH",
+    "expected": "0.",
+    "note": ""
+  },
+  "asinh": {
+    "source": "0 ASINH",
+    "expected": "0.",
+    "note": ""
+  },
+  "acosh": {
+    "source": "1 ACOSH",
+    "expected": "0.",
+    "note": ""
+  },
+  "atanh": {
+    "source": "0 ATANH",
+    "expected": "0.",
+    "note": ""
+  },
+  "sech": {
+    "source": "0 SECH",
+    "expected": "1.",
+    "note": ""
+  },
+  "ln": {
+    "source": "1 LN",
+    "expected": "0.",
+    "note": ""
+  },
+  "exp": {
+    "source": "0 EXP",
+    "expected": "1.",
+    "note": ""
+  },
+  "log10": {
+    "source": "100 LOG",
+    "expected": "2.",
+    "note": ""
+  },
+  "exp10": {
+    "source": "2 ALOG",
+    "expected": "100.",
+    "note": ""
+  },
+  "log2": {
+    "source": "8 LOG2",
+    "expected": "3.",
+    "note": ""
+  },
+  "exp2": {
+    "source": "3 EXP2",
+    "expected": "8.",
+    "note": ""
+  },
+  "ln1p": {
+    "source": "0 LNP1",
+    "expected": "0.",
+    "note": ""
+  },
+  "expm1": {
+    "source": "0 EXPM",
+    "expected": "0.",
+    "note": ""
+  },
+  "erf": {
+    "source": "0 ERF",
+    "expected": "0.",
+    "note": ""
+  },
+  "erfc": {
+    "source": "0 ERFC",
+    "expected": "1.",
+    "note": ""
+  },
+  "tgamma": {
+    "source": "5 TGAMMA",
+    "expected": "24.",
+    "note": ""
+  },
+  "lgamma": {
+    "source": "1 LGAMMA",
+    "expected": "0.",
+    "note": ""
+  },
+  "GammaP": {
+    "source": "1 0 GammaP",
+    "expected": "0",
+    "note": ""
+  },
+  "BetaI": {
+    "source": "1 1 0 BetaI",
+    "expected": "0",
+    "note": ""
+  },
+  "UTPC": {
+    "source": "2 0 UTPC",
+    "expected": "1",
+    "note": ""
+  },
+  "UTPN": {
+    "source": "0 1 0 UTPN",
+    "expected": "0.5",
+    "note": ""
+  },
+  "UTPT": {
+    "source": "1 0 UTPT",
+    "expected": "0.5",
+    "note": ""
+  },
+  "UTPF": {
+    "source": "2 2 0 UTPF",
+    "expected": "1",
+    "note": ""
+  },
+  "Drop": {
+    "source": "10 20 DROP DEPTH ToList",
+    "expected": "{ 10 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Drop2": {
+    "source": "10 20 30 DROP2 DEPTH ToList",
+    "expected": "{ 10 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "DropN": {
+    "source": "10 20 30 2 DROPN DEPTH ToList",
+    "expected": "{ 10 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Dup": {
+    "source": "7 DUP DEPTH ToList",
+    "expected": "{ 7 7 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Dup2": {
+    "source": "2 3 DUP2 DEPTH ToList",
+    "expected": "{ 2 3 2 3 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "DupN": {
+    "source": "2 3 2 DUPN DEPTH ToList",
+    "expected": "{ 2 3 2 3 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Swap": {
+    "source": "2 3 SWAP DEPTH ToList",
+    "expected": "{ 3 2 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Over": {
+    "source": "2 3 OVER DEPTH ToList",
+    "expected": "{ 2 3 2 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Pick": {
+    "source": "10 20 30 3 PICK DEPTH ToList",
+    "expected": "{ 10 20 30 10 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Rot": {
+    "source": "1 2 3 ROT DEPTH ToList",
+    "expected": "{ 2 3 1 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Roll": {
+    "source": "1 2 3 3 ROLL DEPTH ToList",
+    "expected": "{ 2 3 1 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "RollD": {
+    "source": "1 2 3 3 ROLLD DEPTH ToList",
+    "expected": "{ 3 1 2 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Nip": {
+    "source": "1 2 NIP DEPTH ToList",
+    "expected": "{ 2 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "UnRot": {
+    "source": "1 2 3 UNROT DEPTH ToList",
+    "expected": "{ 3 1 2 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Pick3": {
+    "source": "1 2 3 PICK3 DEPTH ToList",
+    "expected": "{ 1 2 3 1 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "DupDup": {
+    "source": "7 DUPDUP DEPTH ToList",
+    "expected": "{ 7 7 7 }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "ClearStack": {
+    "source": "1 2 3 CLEAR DEPTH ToList",
+    "expected": "{ }",
+    "note": "The list shows the remaining stack from deepest value to top."
+  },
+  "Depth": {
+    "source": "10 20 DEPTH",
+    "expected": "10\n20\n2",
+    "note": ""
+  },
+  "Sto": {
+    "source": "42 'DEMO' STO 'DEMO' RCL",
+    "expected": "42",
+    "note": "Stores a HOME variable named DEMO; choose another name if it already exists."
+  },
+  "Rcl": {
+    "source": "42 'DEMO' STO 'DEMO' RCL",
+    "expected": "42",
+    "note": "Stores a HOME variable named DEMO; choose another name if it already exists."
+  },
+  "Purge": {
+    "source": "42 'DEMO' STO 'DEMO' PURGE 7",
+    "expected": "7",
+    "note": "Removes the temporary DEMO variable, then leaves 7."
+  },
+  "Eval": {
+    "source": "« 2 3 + » EVAL",
+    "expected": "5",
+    "note": ""
+  },
+  "ToProgram": {
+    "source": "{ 2 3 + } ToProgram EVAL",
+    "expected": "5",
+    "note": ""
+  },
+  "StoreAdd": {
+    "source": "10 'DEMO' STO 3 'DEMO' STO+ DEMO",
+    "expected": "13",
+    "note": ""
+  },
+  "StoreSub": {
+    "source": "10 'DEMO' STO 3 'DEMO' STO- DEMO",
+    "expected": "-7",
+    "note": "STO- uses the supplied value minus the stored value: 3 minus 10 gives -7."
+  },
+  "StoreMul": {
+    "source": "10 'DEMO' STO 3 'DEMO' STO* DEMO",
+    "expected": "30",
+    "note": ""
+  },
+  "StoreDiv": {
+    "source": "10 'DEMO' STO 2 'DEMO' STO/ DEMO",
+    "expected": "¹/₅",
+    "note": "STO/ uses the supplied value divided by the stored value: 2 divided by 10 gives 1/5."
+  },
+  "True": {
+    "source": "True",
+    "expected": "True",
+    "note": ""
+  },
+  "False": {
+    "source": "False",
+    "expected": "False",
+    "note": ""
+  },
+  "And": {
+    "source": "True False AND",
+    "expected": "False",
+    "note": ""
+  },
+  "Or": {
+    "source": "True False OR",
+    "expected": "True",
+    "note": ""
+  },
+  "Xor": {
+    "source": "True True XOR",
+    "expected": "False",
+    "note": ""
+  },
+  "Not": {
+    "source": "True NOT",
+    "expected": "False",
+    "note": ""
+  },
+  "same": {
+    "source": "3 3 SAME",
+    "expected": "True",
+    "note": ""
+  },
+  "TestSame": {
+    "source": "3 3 TestSame",
+    "expected": "True",
+    "note": ""
+  },
+  "TestLT": {
+    "source": "2 3 <",
+    "expected": "True",
+    "note": ""
+  },
+  "TestEQ": {
+    "source": "3 3 TestEQ",
+    "expected": "True",
+    "note": ""
+  },
+  "TestGT": {
+    "source": "3 2 >",
+    "expected": "True",
+    "note": ""
+  },
+  "TestNE": {
+    "source": "2 3 TestNE",
+    "expected": "True",
+    "note": ""
+  },
+  "IFT": {
+    "source": "True « 7 » IFT",
+    "expected": "7",
+    "note": ""
+  },
+  "IFTE": {
+    "source": "False « 7 » « 9 » IFTE",
+    "expected": "9",
+    "note": ""
+  },
+  "ToList": {
+    "source": "1 2 3 3 ToList",
+    "expected": "{ 1 2 3 }",
+    "note": ""
+  },
+  "FromList": {
+    "source": "{ 1 2 3 } FromList",
+    "expected": "1\n2\n3\n3",
+    "note": "The values 1, 2, 3 are pushed, followed by their count, 3."
+  },
+  "Get": {
+    "source": "{ 10 20 30 } 2 GET",
+    "expected": "20",
+    "note": ""
+  },
+  "Put": {
+    "source": "{ 10 20 30 } 2 99 PUT",
+    "expected": "{ 10 99 30 }",
+    "note": ""
+  },
+  "Size": {
+    "source": "{ 10 20 30 } SIZE",
+    "expected": "3",
+    "note": ""
+  },
+  "Head": {
+    "source": "{ 10 20 30 } HEAD",
+    "expected": "10",
+    "note": ""
+  },
+  "Tail": {
+    "source": "{ 10 20 30 } TAIL",
+    "expected": "{ 20 30 }",
+    "note": ""
+  },
+  "Sort": {
+    "source": "{ 3 1 2 } SORT",
+    "expected": "{ 1 2 3 }",
+    "note": ""
+  },
+  "QuickSort": {
+    "source": "{ 3 1 2 } QuickSort",
+    "expected": "{ 1 2 3 }",
+    "note": ""
+  },
+  "ReverseSort": {
+    "source": "{ 3 1 2 } ReverseSort",
+    "expected": "{ 3 2 1 }",
+    "note": ""
+  },
+  "ReverseQuickSort": {
+    "source": "{ 3 1 2 } ReverseQuickSort",
+    "expected": "{ 3 2 1 }",
+    "note": ""
+  },
+  "ReverseList": {
+    "source": "{ 1 2 3 } REVLIST",
+    "expected": "{ 3 2 1 }",
+    "note": ""
+  },
+  "Unique": {
+    "source": "{ 1 1 2 2 } UNIQUE",
+    "expected": "{ 1 2 }",
+    "note": ""
+  },
+  "QuickUnique": {
+    "source": "{ 1 1 2 2 } QuickUnique",
+    "expected": "{ 1 2 }",
+    "note": ""
+  },
+  "ListSum": {
+    "source": "{ 1 2 3 } ListSum",
+    "expected": "6",
+    "note": ""
+  },
+  "ListProduct": {
+    "source": "{ 2 3 4 } ListProduct",
+    "expected": "24",
+    "note": ""
+  },
+  "ListDifferences": {
+    "source": "{ 3 7 12 } ListDifferences",
+    "expected": "{ 4 5 }",
+    "note": ""
+  },
+  "Map": {
+    "source": "{ 1 2 3 } « SQ » MAP",
+    "expected": "{ 1 4 9 }",
+    "note": ""
+  },
+  "Reduce": {
+    "source": "{ 1 2 3 } « + » REDUCE",
+    "expected": "6",
+    "note": ""
+  },
+  "Filter": {
+    "source": "{ 1 2 3 4 } « 2 > » FILTER",
+    "expected": "{ 3 4 }",
+    "note": ""
+  },
+  "CharToUnicode": {
+    "source": "\"A\" CharToUnicode",
+    "expected": "65",
+    "note": ""
+  },
+  "UnicodeToText": {
+    "source": "65 UnicodeToText",
+    "expected": "\"A\"",
+    "note": ""
+  },
+  "TextToUnicode": {
+    "source": "\"AB\" TextToUnicode",
+    "expected": "{ 65 66 }",
+    "note": ""
+  },
+  "Compile": {
+    "source": "\"2 3 +\" Compile EVAL",
+    "expected": "5",
+    "note": ""
+  },
+  "CompileToInteger": {
+    "source": "\"42\" CompileToInteger",
+    "expected": "42",
+    "note": ""
+  },
+  "CompileToReal": {
+    "source": "\"1.25\" CompileToReal",
+    "expected": "1.25",
+    "note": ""
+  },
+  "CompileToNumber": {
+    "source": "\"42\" CompileToNumber",
+    "expected": "42",
+    "note": ""
+  },
+  "CompileToPositive": {
+    "source": "\"42\" CompileToPositive",
+    "expected": "42",
+    "note": ""
+  },
+  "CompileToObject": {
+    "source": "\"{ 1 2 }\" CompileToObject",
+    "expected": "{ 1 2 }",
+    "note": ""
+  },
+  "ToText": {
+    "source": "42 ToText",
+    "expected": "\"42\"",
+    "note": ""
+  },
+  "re": {
+    "source": "(3;4) RE",
+    "expected": "3",
+    "note": ""
+  },
+  "im": {
+    "source": "(3;4) IM",
+    "expected": "4",
+    "note": ""
+  },
+  "conj": {
+    "source": "(3;4) CONJ",
+    "expected": "3-4ⅈ",
+    "note": ""
+  },
+  "arg": {
+    "source": "Deg (0;1) ARG",
+    "expected": "90 °",
+    "note": ""
+  },
+  "RealToRectangular": {
+    "source": "3 4 RealToRectangular",
+    "expected": "3+4ⅈ",
+    "note": ""
+  },
+  "dot": {
+    "source": "[1 2 3] [4 5 6] DOT",
+    "expected": "32",
+    "note": ""
+  },
+  "cross": {
+    "source": "[1 0 0] [0 1 0] CROSS",
+    "expected": "[ 0 0 1 ]",
+    "note": ""
+  },
+  "det": {
+    "source": "[[1 2][3 4]] DET",
+    "expected": "-2",
+    "note": ""
+  },
+  "norm": {
+    "source": "[3 4] NORM",
+    "expected": "5.",
+    "note": ""
+  },
+  "Transpose": {
+    "source": "[[1 2][3 4]] TRN",
+    "expected": "[[ 1 3 ]\n  [ 2 4 ]]",
+    "note": ""
+  },
+  "IdentityMatrix": {
+    "source": "2 IDN",
+    "expected": "[[ 1 0 ]\n  [ 0 1 ]]",
+    "note": ""
+  },
+  "ConstantArray": {
+    "source": "{ 2 2 } 7 CON",
+    "expected": "[[ 7 7 ]\n  [ 7 7 ]]",
+    "note": ""
+  },
+  "RowSwap": {
+    "source": "[[1 2][3 4]] 1 2 RowSwap",
+    "expected": "[[ 3 4 ]\n  [ 1 2 ]]",
+    "note": ""
+  },
+  "ColumnSwap": {
+    "source": "[[1 2][3 4]] 1 2 ColumnSwap",
+    "expected": "[[ 2 1 ]\n  [ 4 3 ]]",
+    "note": ""
+  },
+  "DeleteRow": {
+    "source": "[[1 2][3 4]] 1 DeleteRow",
+    "expected": "[[ 3 4 ]]\n[ 1 2 ]",
+    "note": "Leaves the reduced matrix below the removed row."
+  },
+  "DeleteColumn": {
+    "source": "[[1 2][3 4]] 1 DeleteColumn",
+    "expected": "[[ 2 ][ 4 ]]\n[ 1 3 ]",
+    "note": "Leaves the reduced matrix below the removed column."
+  },
+  "RREF": {
+    "source": "[[1 2][3 4]] RREF",
+    "expected": "[[ 1 0 ]\n  [ 0 1 ]]",
+    "note": ""
+  },
+  "Root": {
+    "source": "Rad 16 Precision 'COS(X)-X' 'X' 1 Root",
+    "expected": "X=0.73908 51332 15",
+    "note": "Finds one local solution; it does not list every possible root."
+  },
+  "Isolate": {
+    "source": "'X+2=5' 'X' ISOL",
+    "expected": "'X=3'",
+    "note": ""
+  },
+  "Derivative": {
+    "source": "'X^3' 'X' Derivative",
+    "expected": "'3·X²'",
+    "note": ""
+  },
+  "Integrate": {
+    "source": "Rad 0 1 'X^2' 'X' Integrate",
+    "expected": "¹/₃",
+    "note": ""
+  },
+  "Expand": {
+    "source": "'(X+1)^2' EXPAND",
+    "expected": "'X²+2·X+1'",
+    "note": ""
+  },
+  "Collect": {
+    "source": "'X+X' COLLECT",
+    "expected": "'2·X'",
+    "note": ""
+  },
+  "Subst": {
+    "source": "'X+2' 'X=3' SUBST",
+    "expected": "'3+2'",
+    "note": ""
+  },
+  "Convert": {
+    "source": "100_cm 1_m Convert",
+    "expected": "1 m",
+    "note": ""
+  },
+  "UBase": {
+    "source": "1_cm UBASE",
+    "expected": "¹/₁₀₀ m",
+    "note": ""
+  },
+  "UVal": {
+    "source": "25_m UVAL",
+    "expected": "25",
+    "note": ""
+  },
+  "ToUnit": {
+    "source": "5 1_m ToUnit",
+    "expected": "5 m",
+    "note": ""
+  },
+  "ToHMS": {
+    "source": "1.5 ToHMS",
+    "expected": "1:30:00",
+    "note": ""
+  },
+  "FromHMS": {
+    "source": "1.3 FromHMS",
+    "expected": "1 ¹/₂",
+    "note": ""
+  },
+  "ToDMS": {
+    "source": "1.5 ToDMS",
+    "expected": "1°30′00″",
+    "note": ""
+  },
+  "FromDMS": {
+    "source": "1.3 FromDMS",
+    "expected": "1 ¹/₂",
+    "note": ""
+  },
+  "DegreesToRadians": {
+    "source": "180 DegreesToRadians",
+    "expected": "3.14159 26535 9",
+    "note": "A decimal approximation of pi radians."
+  },
+  "RadiansToDegrees": {
+    "source": "1 RadiansToDegrees",
+    "expected": "57.29577 95131",
+    "note": "One radian is approximately 57.2958 degrees."
+  },
+  "CountBits": {
+    "source": "#Fh CountBits",
+    "expected": "4",
+    "note": ""
+  },
+  "SetBit": {
+    "source": "#0h 3 SetBit",
+    "expected": "#8₁₆",
+    "note": ""
+  },
+  "ClearBit": {
+    "source": "#Fh 0 ClearBit",
+    "expected": "#E₁₆",
+    "note": ""
+  },
+  "FlipBit": {
+    "source": "#0h 2 FlipBit",
+    "expected": "#4₁₆",
+    "note": ""
+  },
+  "BinaryToReal": {
+    "source": "#FFh B→R",
+    "expected": "255",
+    "note": ""
+  },
+  "RealToBinary": {
+    "source": "255 R→B",
+    "expected": "#FF₁₆",
+    "note": ""
+  },
+  "Type": {
+    "source": "42 TYPE",
+    "expected": "28",
+    "note": "28 is this engine's type code for an integer; TypeName gives a readable name."
+  },
+  "TypeName": {
+    "source": "42 TypeName",
+    "expected": "\"integer\"",
+    "note": ""
+  },
+  "ToTag": {
+    "source": "42 \"Answer\" ToTag",
+    "expected": "Answer:42",
+    "note": ""
+  },
+  "FromTag": {
+    "source": ":Answer:42 FromTag",
+    "expected": "42\n\"Answer\"",
+    "note": "Leaves the untagged value below its text tag; the display lists deepest first."
+  },
+  "DTag": {
+    "source": ":Answer:42 DTAG",
+    "expected": "42",
+    "note": ""
+  },
+  "Average": {
+    "source": "[[1 2][2 4][3 6]] StoreData Average",
+    "expected": "[ 2 4 ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Median": {
+    "source": "[[1 2][2 4][3 6]] StoreData Median",
+    "expected": "[ 2 4 ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "MinData": {
+    "source": "[[1 2][2 4][3 6]] StoreData MinData",
+    "expected": "[ 1 2 ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "MaxData": {
+    "source": "[[1 2][2 4][3 6]] StoreData MaxData",
+    "expected": "[ 3 6 ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "DataSize": {
+    "source": "[[1 2][2 4][3 6]] StoreData DataSize",
+    "expected": "3",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "SumOfX": {
+    "source": "[[1 2][2 4][3 6]] StoreData SumOfX",
+    "expected": "6",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "SumOfY": {
+    "source": "[[1 2][2 4][3 6]] StoreData SumOfY",
+    "expected": "12",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "SumOfXY": {
+    "source": "[[1 2][2 4][3 6]] StoreData SumOfXY",
+    "expected": "28",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "SumOfXSquares": {
+    "source": "[[1 2][2 4][3 6]] StoreData SumOfXSquares",
+    "expected": "14",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "SumOfYSquares": {
+    "source": "[[1 2][2 4][3 6]] StoreData SumOfYSquares",
+    "expected": "56",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Variance": {
+    "source": "[[1 2][2 4][3 6]] StoreData Variance",
+    "expected": "[ 1 4 ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "StandardDeviation": {
+    "source": "[[1 2][2 4][3 6]] StoreData StandardDeviation",
+    "expected": "[ 1. 2. ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "PopulationVariance": {
+    "source": "[[1 2][2 4][3 6]] StoreData PopulationVariance",
+    "expected": "[ ²/₃ 2 ²/₃ ]",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Correlation": {
+    "source": "[[1 2][2 4][3 6]] StoreData Correlation",
+    "expected": "1.",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Covariance": {
+    "source": "[[1 2][2 4][3 6]] StoreData Covariance",
+    "expected": "2",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Slope": {
+    "source": "[[1 2][2 4][3 6]] StoreData LinearRegression DROP2 Slope",
+    "expected": "2",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "Intercept": {
+    "source": "[[1 2][2 4][3 6]] StoreData LinearRegression DROP2 Intercept",
+    "expected": "0",
+    "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first."
+  },
+  "StoreData": {
+    "source": "[[1 2][2 4][3 6]] StoreData RecallData",
+    "expected": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+    "note": "Replaces the current statistics data. RecallData reads it back."
+  },
+  "RecallData": {
+    "source": "[[1 2][2 4][3 6]] StoreData RecallData",
+    "expected": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+    "note": "Sets example statistics data, then recalls it."
+  },
+  "ClearData": {
+    "source": "[[1 2][2 4][3 6]] StoreData ClearData DataSize",
+    "expected": "0",
+    "note": "Clears calculator statistics data. Save existing data first."
+  },
+  "RL": {
+    "source": "#1h RL",
+    "expected": "#2₁₆",
+    "note": ""
+  },
+  "RR": {
+    "source": "#2h RR",
+    "expected": "#1₁₆",
+    "note": ""
+  },
+  "SL": {
+    "source": "#1h SL",
+    "expected": "#2₁₆",
+    "note": ""
+  },
+  "SR": {
+    "source": "#8h SR",
+    "expected": "#4₁₆",
+    "note": ""
+  },
+  "SLB": {
+    "source": "#1h SLB",
+    "expected": "#100₁₆",
+    "note": ""
+  },
+  "SRB": {
+    "source": "#100h SRB",
+    "expected": "#1₁₆",
+    "note": ""
+  },
+  "FirstBitSet": {
+    "source": "#8h FirstBitSet",
+    "expected": "3",
+    "note": ""
+  },
+  "LastBitSet": {
+    "source": "#8h LastBitSet",
+    "expected": "3",
+    "note": ""
+  },
+  "NAnd": {
+    "source": "True True NAnd",
+    "expected": "False",
+    "note": ""
+  },
+  "NOr": {
+    "source": "False False NOr",
+    "expected": "True",
+    "note": ""
+  },
+  "Implies": {
+    "source": "True False Implies",
+    "expected": "False",
+    "note": ""
+  },
+  "Equiv": {
+    "source": "True True Equiv",
+    "expected": "True",
+    "note": ""
+  },
+  "Excludes": {
+    "source": "True True Excludes",
+    "expected": "False",
+    "note": ""
+  },
+  "RealToPolar": {
+    "source": "5 0 RealToPolar",
+    "expected": "5∡0°",
+    "note": ""
+  },
+  "RectangularToReal": {
+    "source": "(3;4) RectangularToReal",
+    "expected": "re:3\nim:4",
+    "note": "Pushes the real part, then the imaginary part."
+  },
+  "ToArray": {
+    "source": "1 2 3 { 3 } ToArray",
+    "expected": "[ 1 2 3 ]",
+    "note": ""
+  },
+  "FromArray": {
+    "source": "[1 2 3] FromArray",
+    "expected": "1\n2\n3\n{ 3 }",
+    "note": "Pushes elements followed by the dimensions."
+  },
+  "ToRange": {
+    "source": "2 4 ToRange",
+    "expected": "2…4",
+    "note": ""
+  },
+  "ToDeltaRange": {
+    "source": "10 2 ToDeltaRange",
+    "expected": "10±2",
+    "note": ""
+  },
+  "FromRange": {
+    "source": "2 4 ToRange FromRange",
+    "expected": "2\n4",
+    "note": ""
+  },
+  "ToUncertain": {
+    "source": "10 1 ToUncertain",
+    "expected": "10±σ1",
+    "note": ""
+  },
+  "Precision": {
+    "source": "16 Precision 'Precision' RCL",
+    "expected": "16",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "Base": {
+    "source": "16 Base 'Base' RCL",
+    "expected": "16",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "StackFont": {
+    "source": "2 StackFont 'StackFont' RCL",
+    "expected": "2",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "WordSize": {
+    "source": "32 WordSize 'WordSize' RCL",
+    "expected": "32",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "DisplayDigits": {
+    "source": "3 DisplayDigits 'DisplayDigits' RCL",
+    "expected": "3",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "LineWidth": {
+    "source": "2 LineWidth 'LineWidth' RCL",
+    "expected": "2",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "StandardExponent": {
+    "source": "9 StandardExponent 'StandardExponent' RCL",
+    "expected": "9",
+    "note": "Changes this calculator setting. Save the session to retain it after restart."
+  },
+  "MatrixToColumns": {
+    "source": "[ 1 2 3 ] MatrixToColumns\n4 ToList",
+    "expected": "{ 1 2 3 3 }",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "MatrixToRows": {
+    "source": "[ 1 2 3 ] MatrixToRows\n4 ToList",
+    "expected": "{ 1 2 3 3 }",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "ColumnsToMatrix": {
+    "source": "[ 1 2 ]\n[ 4 5 ]\n[ 7 8 ]\n3 ColumnsToMatrix",
+    "expected": "[[ 1 4 7 ]\n  [ 2 5 8 ]]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "RowsToMatrix": {
+    "source": "[ 1 2 ]\n[ 4 5 ]\n[ 7 8 ]\n3 RowsToMatrix",
+    "expected": "[[ 1 2 ]\n  [ 4 5 ]\n  [ 7 8 ]]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "AddColumn": {
+    "source": "[[ 1 2 3 ] [ 4 5 6 ]]  @ Input matrix\n[ 22 33 ]              @ Column to insert\n2                      @ Insertion position\nCOL+",
+    "expected": "[[ 1 22 2 3 ]\n  [ 4 33 5 6 ]]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "AddRow": {
+    "source": "[[ 1 2 3 ] [ 4 5 6 ]]  @ Input matrix\n[ 22 33 44 ]           @ Row to insert\n2                      @ Insertion position\nROW+",
+    "expected": "[[ 1 2 3 ]\n  [ 22 33 44 ]\n  [ 4 5 6 ]]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "RREFP": {
+    "source": "[[2 1][3 4]] RREFP 2 ToList",
+    "expected": "{\n\t{ 10 5 }\n\t[[ 10 0 ]\n\t  [ 0 5 ]]\n}",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "PEval": {
+    "source": "[ 1 -5 6 ] 2 PEval",
+    "expected": "0",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "PRoot": {
+    "source": "[ 1 2 -25 -26 120 ] PRoot",
+    "expected": "[ -5 -3 2 4 ]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "PCoef": {
+    "source": "CompatiblePolynomials\n[ 2 -3 4 -5 ] PCoef",
+    "expected": "[ 1 2 -25 -26 120 ]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "ToRectangular": {
+    "source": "Deg 5 90 RealToPolar ToRectangular",
+    "expected": "5ⅈ",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "To2DVector": {
+    "source": "3 4 To2DVector",
+    "expected": "[ 3 4 ]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "To3DVector": {
+    "source": "3 4 5 To3DVector",
+    "expected": "[ 3 4 5 ]",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "FromVector": {
+    "source": "[ 3 4 ] FromVector Depth ToList",
+    "expected": "{ 3 4 }",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "DateSub": {
+    "source": "20250101 20240101 DDAYS",
+    "expected": "366 d",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "JulianDayNumber": {
+    "source": "20000101.120000 JDN",
+    "expected": "2 451 545",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "ToPercentRange": {
+    "source": "10 20 ToPercentRange",
+    "expected": "10±20%",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "RangeUnion": {
+    "source": "1 3 ToRange 2 6 ToRange RangeUnion",
+    "expected": "1…6",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "RangeIntersect": {
+    "source": "1 3 ToRange 2 6 ToRange RangeIntersect",
+    "expected": "2…3",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "Infinity": {
+    "source": "infinity",
+    "expected": "∞",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "NegativeInfinity": {
+    "source": "NegativeInfinity",
+    "expected": "−∞",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "ToStandardUncertainty": {
+    "source": "-3.141592654_m  0.000012  ToStandardUncertainty",
+    "expected": "0.00003 8 m",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "ToRelativeUncertainty": {
+    "source": "-3.141592654_m  0.000097_m  ToRelativeUncertainty",
+    "expected": "0.00003 1",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "StandardRound": {
+    "source": "-3.141592654_m  0.000045_m  StdRnd",
+    "expected": "-3.14159 3 m",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "RelativeRound": {
+    "source": "-3.141592654_m  0.000012  RelRnd",
+    "expected": "-3.14159 3 m",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "PrecisionRound": {
+    "source": "-3.141592654_m 0.000045_m  PrcRnd",
+    "expected": "-3.14159 3 m",
+    "note": "Run from the calculator stack. This example uses the current calculation settings.",
+    "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result."
+  },
+  "Bin": {
+    "source": "65490 Bin",
+    "expected": "#1111 1111 1101 0010₂",
+    "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted."
+  },
+  "Oct": {
+    "source": "#FFD2h Oct",
+    "expected": "#17 7722₈",
+    "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted."
+  },
+  "Dec": {
+    "source": "#177722o Dec",
+    "expected": "#6 5490₁₀",
+    "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted."
+  },
+  "Hex": {
+    "source": "#1111111111010010b Hex",
+    "expected": "#FFD2₁₆",
+    "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted."
+  }
+}

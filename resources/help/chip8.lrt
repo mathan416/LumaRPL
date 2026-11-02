@@ -1,0 +1,370 @@
+Start by drawing a digit. This complete program shows 5 and waits for a keypad key before returning.
+
+1. Press Ctrl+P > CHIP-8 / assembly. Press F3 New and name it FIRST.
+2. Type the program below, one instruction per line. Press F1 Save, then F5 Back.
+3. With FIRST.asm selected, choose F4 Actions > Compatibility profile > SUPER-CHIP modern.
+4. Press F2 Run. This profile supports the EXIT instruction at the end.
+
+Complete program
+CLS
+LD V0, 5
+LD F, V0
+LD V1, 10
+LD V2, 8
+DRW V1, V2, 5
+LD V3, K
+EXIT
+
+You should see 5 near the upper-left of the CHIP-8 display. Press and release X to return.Begin with Run your first CHIP-8 program. Its picture and key wait make the result visible. Instruction reference pages show smaller fragments so you can see one operation at a time.
+
+Instruction fragment
+LD V0, 7
+ADD V0, 2
+
+In this fragment V0 becomes 9. It does not display a number and is not a complete ROM. Add fragments to a complete program before running them.Keep the .asm file: it is the text you can edit. Running assembles a separate .ch8 ROM. Opening a .ch8 file does not turn it back into editable assembly.
+
+1. Create an assembly file named SAVETEST and enter the program.
+2. Press F1 Save, then F5 Back.
+3. Select SAVETEST.asm and press F1 Open. F2 saves and builds/runs it.
+
+Complete program
+CLS
+LD V0, 5
+LD F, V0
+LD V1, 10
+LD V2, 8
+DRW V1, V2, 5
+LD V3, K
+EXIT
+
+After reopening, the same source is there. Running it in SUPER-CHIP modern displays 5 and waits for a keypad key.Use V0 through VF to keep small numbers. Each holds 0 to 255; arithmetic wraps around when it goes past that range. VF also carries arithmetic and drawing flags. I holds a memory address.
+
+Instruction fragment
+LD V0, 0x0A
+ADD V0, 2
+
+V0 becomes 12.
+
+This instruction fragment changes registers; it does not print their values. Use Run your first CHIP-8 program for a complete visible example.Give a jump target a label ending in a colon. Keep its spelling the same wherever you use it. Add a semicolon comment to explain a line. Instructions ignore case; labels do not.
+
+Instruction fragment
+JP start
+start:
+LD V0, 7 ; seven
+
+Jumps to start and sets V0 to 7.Point I at the built-in font with LD F,V0. The next DRW reads five rows of that glyph. Change the first number below to choose another hexadecimal digit, from 0 to 15.
+
+1. Create or open an .asm file and select SUPER-CHIP modern.
+2. Type the example and press F2 Save & run.
+
+Complete program
+CLS
+LD V0, 9
+LD F, V0
+LD V1, 10
+LD V2, 8
+DRW V1, V2, 5
+LD V3, K
+EXIT
+
+This complete SUPER-CHIP program displays 9. Press and release a keypad key to return.LD F,Vx chooses the small font glyph for a hexadecimal digit. For a decimal number with several digits, LD B,Vx writes its hundreds, tens and ones to three memory bytes. The fragment below splits 123 into 1, 2 and 3.
+
+Instruction fragment
+LD V0, 123
+LD I, 0x300
+LD B, V0
+
+Memory 0x300..0x302 contains 1, 2, 3.CHIP-8 expects sixteen hexadecimal keys. These PicoCalc keys provide them:
+
+1 2 3 4   =   1 2 3 C
+Q W E R   =   4 5 6 D
+A S D F   =   7 8 9 E
+Z X C V   =   A 0 B F
+
+LD Vx,K waits for a press and release. Esc stops a running program.
+
+Instruction fragment
+LD V0, K
+
+Press and release X: V0 receives the CHIP-8 key value 0. This fragment does not draw the value.Put a duration into ST to play a tone. The sound and delay timers count down at 60 ticks per second, so 30 ticks is about half a second. This complete program waits for the delay, then exits.
+
+1. Use SUPER-CHIP modern for this program.
+2. Save the source and run it with F2.
+
+Complete program
+LD V0, 30
+LD DT, V0
+LD ST, V0
+wait:
+LD V1, DT
+SE V1, 0
+JP wait
+EXIT
+
+In SCHIP, plays for roughly half a second, waits for the delay and exits.Add a byte or another register. ADD Vx,byte wraps without changing VF; ADD Vx,Vy sets VF when there is a carry. ADD I,Vx changes the address in I.
+
+Instruction fragment
+LD V0, 250
+LD V1, 10
+ADD V0, V1
+
+V0 becomes 4 and VF becomes 1.Keep only the bits set in both registers. The answer replaces Vx.
+
+Instruction fragment
+LD V0, 0x0F
+LD V1, 0x03
+AND V0, V1
+
+V0 becomes 3.Run a subroutine at a label, then use RET to come back. Calls can nest up to sixteen levels.
+
+Instruction fragment
+LD V0, 3
+CALL twice
+JP done
+twice:
+ADD V0, V0
+RET
+done:
+JP done
+
+V0 becomes 6, then waits in the done loop.Clear the display. Call it before drawing a new picture.
+
+Instruction fragment
+CLS
+
+The display is blank.Put bytes into the program, usually for a sprite. Jump over the data so the machine does not try to execute it. Pad an odd byte count before the next instruction.
+
+Instruction fragment
+JP start
+image:
+DB 0xF0, 0x90, 0xF0, 0
+start:
+LD I, image
+
+Defines three image rows and one padding byte; I points to them.Draw sprite bytes from memory at I, using Vx and Vy as the position. Drawing uses XOR: set pixels toggle. VF reports a collision. Height 1 to 15 draws that many eight-pixel rows; Super-CHIP height 0 uses a 16x16 sprite. DRAW is another spelling.
+
+Instruction fragment
+CLS
+LD V0, 10
+LD V1, 8
+LD I, dot
+DRW V0, V1, 1
+JP done
+dot:
+DB 0x80, 0
+done:
+JP done
+
+Draws one pixel at logical (10,8). SCHIP low-resolution mode scales logical pixels on its 128x64 backing display.Put a 16-bit word into the program, high byte first. Prefer instruction names when writing code; words are useful when you need exact bytes.
+
+Instruction fragment
+DW 0x6007
+
+Emits bytes 0x60,0x07: the opcode for LD V0,7.Stop the program and return to the calculator. Choose a Super-CHIP profile; classic CHIP-8 does not have this instruction.
+
+Instruction fragment
+LD V0, 7
+EXIT
+
+Returns after setting V0 to 7.Restore V0 through Vx from the temporary Super-CHIP flags. Choose V0 through V7.
+
+Instruction fragment
+LD V0, 42
+FLAGSAVE V0
+LD V0, 0
+FLAGLOAD V0
+
+V0 returns to 42.Keep V0 through Vx in the temporary Super-CHIP flag registers. Choose V0 through V7. These are not saved SD files.
+
+Instruction fragment
+LD V0, 42
+FLAGSAVE V0
+LD V0, 0
+FLAGLOAD V0
+
+V0 returns to 42.Choose the Super-CHIP 128x64 display and clear it. Use a Super-CHIP profile.
+
+Instruction fragment
+HIGH
+CLS
+
+Selects the higher-resolution display.Jump to an address or label. A jump back to the same loop repeats until Esc stops the program.
+
+Instruction fragment
+loop:
+LD V0, 5
+JP loop
+
+Repeatedly sets V0 to 5. Esc stops the program.Jump to the given address plus V0. Profile differences matter when you are adapting a ROM.
+
+Instruction fragment
+LD V0, 2
+JPOFF 0x204
+LD V1, 1
+LD V1, 9
+
+Jumps to 0x206, skipping the instruction that sets V1 to 1.Copy a value into a register, or move a value to or from a special register. V0 through VF hold bytes; I holds an address.
+
+Instruction fragment
+LD V0, 12
+LD V1, V0
+
+Both V0 and V1 contain 12.Read V0 through Vx from memory starting at I. LD Vx,[I] is another spelling. Reset I between a SAVE and LOAD for portable code.
+
+Instruction fragment
+LD I, 0x300
+LD V0, 7
+SAVE V0
+LD I, 0x300
+LD V0, 0
+LOAD V0
+
+V0 returns to 7.Choose the classic 64x32 logical display and clear it. This mode-switch instruction needs a Super-CHIP profile.
+
+Instruction fragment
+LOW
+CLS
+
+Selects the classic logical display.Set a bit when it is set in either register. The answer replaces Vx.
+
+Instruction fragment
+LD V0, 0x0A
+LD V1, 0x05
+OR V0, V1
+
+V0 becomes 15.Return to the instruction after the matching CALL. A RET without a call causes a return-stack error.
+
+Instruction fragment
+CALL twice
+JP done
+twice:
+ADD V0, V0
+RET
+done:
+JP done
+
+Calls a subroutine, doubles V0 and returns. The final jump keeps it from falling into subroutine data.Generate a random byte, then keep only the bits allowed by the mask. A mask of 0x0F gives a value from 0 to 15.
+
+Instruction fragment
+RND V0, 0x0F
+
+V0 is between 0 and 15.Store V0 through Vx in memory starting at I. This is CHIP-8 memory, not an SD save. Reset I explicitly before a later load if you want code to work across profiles.
+
+Instruction fragment
+LD I, 0x300
+LD V0, 7
+LD V1, 9
+SAVE V1
+
+Memory 0x300 contains 7 and 0x301 contains 9.Scroll down by a number from 0 to 15. Use a Super-CHIP profile. Modern and HP48 profiles scale low-resolution scrolling differently.
+
+Instruction fragment
+HIGH
+SCD 2
+
+Moves high-resolution pixels down two rows.Scroll the display left. In high resolution it moves four pixels; low-resolution behaviour depends on the Super-CHIP profile.
+
+Instruction fragment
+HIGH
+SCL
+
+Moves existing high-resolution pixels left by four.Scroll the display right. In high resolution it moves four pixels; low-resolution behaviour depends on the Super-CHIP profile.
+
+Instruction fragment
+HIGH
+SCR
+
+Moves existing high-resolution pixels right by four.Skip the next instruction when Vx equals the supplied byte or register. Otherwise continue normally.
+
+Instruction fragment
+LD V0, 5
+SE V0, 5
+LD V1, 1
+LD V2, 9
+
+Skips LD V1,1; V2 becomes 9.Shift left one bit and put the high bit into VF. The two-register form depends on the profile: VIP reads Vy; the other profiles read Vx.
+
+Instruction fragment
+LD V0, 0x81
+SHL V0
+
+V0 becomes 2 and VF becomes 1.Shift right one bit and put the bit shifted out into VF. With one register operand, that register is both the source and destination. The two-register form depends on the profile.
+
+Instruction fragment
+LD V0, 9
+SHR V0
+
+V0 becomes 4 and VF becomes 1.Skip the next instruction if the hexadecimal key named by Vx is not held.
+
+Instruction fragment
+LD V0, 1
+SKNP V0
+JP 0x202
+
+Skips the jump when key 1 is released.Skip the next instruction if the hexadecimal key named by Vx is held. See Use the PicoCalc keypad for the physical keys.
+
+Instruction fragment
+LD V0, 1
+SKP V0
+JP 0x202
+
+Waits here while key 1 is not held; pressing 1 skips the jump.Skip the next instruction when Vx differs from the supplied byte or register. Otherwise continue normally.
+
+Instruction fragment
+LD V0, 5
+SNE V0, 6
+LD V1, 1
+LD V2, 9
+
+Skips LD V1,1; V2 becomes 9.Subtract Vy from Vx. A result below zero wraps around; VF is 1 when no borrow was needed.
+
+Instruction fragment
+LD V0, 9
+LD V1, 4
+SUB V0, V1
+
+V0 becomes 5 and VF becomes 1.Subtract Vx from Vy and leave the answer in Vx. VF is 1 when no borrow was needed.
+
+Instruction fragment
+LD V0, 3
+LD V1, 8
+SUBN V0, V1
+
+V0 becomes 5 and VF becomes 1.Toggle the bits in Vx that are set in Vy. The answer replaces Vx.
+
+Instruction fragment
+LD V0, 0x0F
+LD V1, 0x03
+XOR V0, V1
+
+V0 becomes 12.Read the line number in the assembler message and check that line. For example, LD V0,256 is out of range: a byte must be 0 to 255. Correct it to the example below, then save and build again.
+
+1. Return to the editor and use F4 Tools > Go to line if needed.
+2. Fix the instruction, then press F2 Save & run.
+
+Complete program
+LD V0, 7
+EXIT
+
+In SUPER-CHIP modern the corrected program builds and returns. It changes V0 without drawing anything.Loading registers does not draw them. A visible picture needs I to point at sprite data and DRW to draw it. Check the selected profile as well. Try this complete program first.
+
+Complete program
+CLS
+LD V0, 5
+LD F, V0
+LD V1, 10
+LD V2, 8
+DRW V1, V2, 5
+LD V3, K
+EXIT
+
+You should see 5. If it appears, compare your own font/sprite address and draw instruction with this example. Press and release X to return.If a ROM draws or responds differently than expected, check its profile. From the assembly/ROM list, choose F4 Actions > Compatibility profile. Match the ROM first; changing its code should come later.
+
+Instruction fragment
+LD V0, 8
+LD V1, 2
+SHR V0, V1
+
+VIP shifts V1 into V0, giving 1. SCHIP shifts V0, giving 4. VF receives the bit shifted out.
+
+CHIP-8 (VIP), CHIP-48 (HP48), SUPER-CHIP modern and SUPER-CHIP HP48 differ in shifts, memory transfers and drawing. Use SUPER-CHIP modern for the complete programs in this guide. Their EXIT instruction is not part of classic CHIP-8.

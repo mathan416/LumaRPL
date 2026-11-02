@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "tests": 8443,
+    "failures": [],
+    "assertion_families": []
+  },
+  "post": {
+    "tests": 8443,
+    "failures": [],
+    "assertion_families": []
+  },
+  "new_regressions": [],
+  "same_failure_list": true,
+  "same_test_count": true,
+  "new_assertion_families": []
+}

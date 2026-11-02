@@ -1,0 +1,58 @@
+{
+  "db48x": {
+    "url": "https://github.com/c3d/db48x.git",
+    "directory": "db48x",
+    "commit": "5d5a638a5b7f56bfdcdbae55dfa726dcbd18de4f"
+  },
+  "pico-sdk": {
+    "url": "https://github.com/raspberrypi/pico-sdk.git",
+    "directory": "dependencies/pico-sdk",
+    "commit": "a1438dff1d38bd9c65dbd693f0e5db4b9ae91779"
+  },
+  "uf2loader": {
+    "url": "https://github.com/pelrun/uf2loader.git",
+    "directory": "dependencies/uf2loader",
+    "commit": "1a0b1c4b144a72445e44e4c545ec4163bc873685"
+  },
+  "picotool": {
+    "url": "https://github.com/raspberrypi/picotool.git",
+    "directory": "dependencies/picotool",
+    "commit": "a7eb3988f0645239185fadb4e25d8279478c2dbb"
+  },
+  "vendored": {
+    "pico/fatfs": "UF2 Loader 5c44a4b64749062b0200507ceeff3ef2b475e288, ChaN R0.16; writable configuration",
+    "pico/sdmmc.c": "UF2 Loader v2.4.1, single-sector writes and explicit sync added",
+    "pico/main.cc": "DB48X pinned src/dmcp/main.cc with native display/arena/input adaptations",
+    "pico/sysmenu.cc": "DB48X pinned src/dmcp/sysmenu.cc with checked state transactions",
+    "pico/dmcp_fonts.cc": "DB48X pinned sim/dmcp_fonts.c, arrays made const"
+  },
+  "required_submodules": {
+    "db48x": [
+      "4befe9b3763e7bf69eca8732fe39ad1f1638d1b7 dmcp (remotes/origin/master)",
+      " 929fb20fc2741dcb9b427a95d266b74f375b4c58 recorder (v1.2.2-29-g929fb20)",
+      " 1dd12444607212a20c755299b003e46e1b357d92 recorder/make-it-quick (v0.3.3-23-g1dd1244)"
+    ],
+    "pico-sdk": [
+      "86ad6e56c1700e85f1c5678607a762cfe3aa2f47 lib/tinyusb (0.18.0)",
+      "dd7568229f3bf7a37737b9e1ef250c26efe75b23 lib/cyw43-driver",
+      "77dcd25a72509eb83f72b033d219b1d40cd8eb95 lib/lwip"
+    ]
+  },
+  "lua": {
+    "url": "https://www.lua.org/ftp/lua-5.4.9.tar.gz",
+    "directory": "dependencies/lua-5.4.9",
+    "version": "5.4.9",
+    "sha256": "2335b6c582a52654f94612bf10d2f4672805d05329aa6568b1d8cd9e5c6fb8e6"
+  },
+  "chip8-test-suite": {
+    "url": "https://github.com/Timendus/chip8-test-suite.git",
+    "directory": "dependencies/chip8-test-suite",
+    "commit": "742e9eac9f5d44466c1c9d83fcaa8158c6683cb1"
+  },
+  "mbedtls": {
+    "url": "https://github.com/Mbed-TLS/mbedtls.git",
+    "directory": "dependencies/mbedtls-3.6.7",
+    "commit": "068ff080b369adfac81509f9b57b2afabaf82dc5",
+    "version": "3.6.7"
+  }
+}

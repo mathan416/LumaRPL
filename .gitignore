@@ -1,0 +1,11 @@
+/db48x/
+/dependencies/
+/build/
+/dist/
+/reports/
+*.pyc
+__pycache__/
+.DS_Store
+.env
+.env.*
+*.log

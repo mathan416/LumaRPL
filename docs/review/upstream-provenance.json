@@ -1,0 +1,27 @@
+{
+  "upstream_commit": "5d5a638a5b7f56bfdcdbae55dfa726dcbd18de4f",
+  "baseline_binary_sha256": "18654c7c04b92bec3ac0e5c20f170799f4e5b67001be04993692f189b60d9678",
+  "patched_binary_sha256": "9a921882e765d0ba0e4c8eb72b3ef8cd3e3e0467fd605b2111e44ec44e9fd57d",
+  "suite_arguments": [
+    "-H",
+    "-m500",
+    "-Tall",
+    "-w180000",
+    "-r1"
+  ],
+  "golden_file_comparisons_unchanged": 1376,
+  "baseline_help": {
+    "manual": "db48x/help/db48x.md",
+    "manual_sha256": "0a73f7168a617bf948a6bead75565d924649e536c7a8d783271633952639ce1f",
+    "index_sha256": "d70bf6548766f932b415e1abce0db3e56d2e531b085fb7fc0374e73e41bfd111",
+    "index_entries": 5936,
+    "colour_goldens": false
+  },
+  "post_help": {
+    "manual": "db48x/help/db48x.md",
+    "manual_sha256": "0a73f7168a617bf948a6bead75565d924649e536c7a8d783271633952639ce1f",
+    "index_sha256": "d70bf6548766f932b415e1abce0db3e56d2e531b085fb7fc0374e73e41bfd111",
+    "index_entries": 5936,
+    "colour_goldens": false
+  }
+}

@@ -1,0 +1,7323 @@
+{
+  "format": "LumaRPL native help v1",
+  "command_count": 1026,
+  "topic_count": 1042,
+  "categories": [
+    "Algebra and calculus",
+    "Bits and bases",
+    "Calculator entry",
+    "Calculator menus",
+    "Calculator settings",
+    "Complex numbers and matrices",
+    "Dates and time",
+    "Functions",
+    "Graphics",
+    "Lists and text",
+    "Logic and programs",
+    "Numbers and arithmetic",
+    "Stack and variables",
+    "Statistics and finance",
+    "System and libraries",
+    "Units and ranges",
+    "Using RPL"
+  ],
+  "record_bytes": 460,
+  "max_topic_bytes": 795,
+  "source": "docs/help/commands.json",
+  "records": [
+    {
+      "name": "AlgebraConfiguration",
+      "category": "Algebra and calculus",
+      "offset": 0,
+      "length": 97,
+      "crc32": 3329232591
+    },
+    {
+      "name": "AlgebraVariable",
+      "category": "Algebra and calculus",
+      "offset": 97,
+      "length": 73,
+      "crc32": 2001536608
+    },
+    {
+      "name": "Apply",
+      "category": "Algebra and calculus",
+      "offset": 170,
+      "length": 58,
+      "crc32": 1718644286
+    },
+    {
+      "name": "Collect",
+      "category": "Algebra and calculus",
+      "offset": 228,
+      "length": 96,
+      "crc32": 1133167392
+    },
+    {
+      "name": "Derivative",
+      "category": "Algebra and calculus",
+      "offset": 324,
+      "length": 184,
+      "crc32": 2478160861
+    },
+    {
+      "name": "Equation",
+      "category": "Algebra and calculus",
+      "offset": 508,
+      "length": 101,
+      "crc32": 798931758
+    },
+    {
+      "name": "EvalEq",
+      "category": "Algebra and calculus",
+      "offset": 609,
+      "length": 76,
+      "crc32": 3275112921
+    },
+    {
+      "name": "Expand",
+      "category": "Algebra and calculus",
+      "offset": 685,
+      "length": 137,
+      "crc32": 920558212
+    },
+    {
+      "name": "FoldConstants",
+      "category": "Algebra and calculus",
+      "offset": 822,
+      "length": 44,
+      "crc32": 775176382
+    },
+    {
+      "name": "FromPolynomial",
+      "category": "Algebra and calculus",
+      "offset": 866,
+      "length": 105,
+      "crc32": 3142176651
+    },
+    {
+      "name": "Integrate",
+      "category": "Algebra and calculus",
+      "offset": 971,
+      "length": 229,
+      "crc32": 845933159
+    },
+    {
+      "name": "Isolate",
+      "category": "Algebra and calculus",
+      "offset": 1200,
+      "length": 179,
+      "crc32": 2024507898
+    },
+    {
+      "name": "MatchDown",
+      "category": "Algebra and calculus",
+      "offset": 1379,
+      "length": 97,
+      "crc32": 2561053174
+    },
+    {
+      "name": "MatchUp",
+      "category": "Algebra and calculus",
+      "offset": 1476,
+      "length": 95,
+      "crc32": 78675515
+    },
+    {
+      "name": "MultipleEquationsSolver",
+      "category": "Algebra and calculus",
+      "offset": 1571,
+      "length": 157,
+      "crc32": 389349146
+    },
+    {
+      "name": "MultipleVariablesSolver",
+      "category": "Algebra and calculus",
+      "offset": 1728,
+      "length": 133,
+      "crc32": 2942851762
+    },
+    {
+      "name": "NextEq",
+      "category": "Algebra and calculus",
+      "offset": 1861,
+      "length": 87,
+      "crc32": 2647719939
+    },
+    {
+      "name": "PartFrac",
+      "category": "Algebra and calculus",
+      "offset": 1948,
+      "length": 110,
+      "crc32": 1084710019
+    },
+    {
+      "name": "PCoef",
+      "category": "Algebra and calculus",
+      "offset": 2058,
+      "length": 283,
+      "crc32": 52207179
+    },
+    {
+      "name": "PEval",
+      "category": "Algebra and calculus",
+      "offset": 2341,
+      "length": 222,
+      "crc32": 654994778
+    },
+    {
+      "name": "Primitive",
+      "category": "Algebra and calculus",
+      "offset": 2563,
+      "length": 149,
+      "crc32": 1861108406
+    },
+    {
+      "name": "Product",
+      "category": "Algebra and calculus",
+      "offset": 2712,
+      "length": 85,
+      "crc32": 3541445628
+    },
+    {
+      "name": "PRoot",
+      "category": "Algebra and calculus",
+      "offset": 2797,
+      "length": 252,
+      "crc32": 1059857797
+    },
+    {
+      "name": "RcEq",
+      "category": "Algebra and calculus",
+      "offset": 3049,
+      "length": 72,
+      "crc32": 261599531
+    },
+    {
+      "name": "ReorderTerms",
+      "category": "Algebra and calculus",
+      "offset": 3121,
+      "length": 55,
+      "crc32": 1251747950
+    },
+    {
+      "name": "Root",
+      "category": "Algebra and calculus",
+      "offset": 3176,
+      "length": 273,
+      "crc32": 3584627041
+    },
+    {
+      "name": "Simplify",
+      "category": "Algebra and calculus",
+      "offset": 3449,
+      "length": 55,
+      "crc32": 1087452447
+    },
+    {
+      "name": "StEq",
+      "category": "Algebra and calculus",
+      "offset": 3504,
+      "length": 97,
+      "crc32": 2747249807
+    },
+    {
+      "name": "StoreAlgebraVariable",
+      "category": "Algebra and calculus",
+      "offset": 3601,
+      "length": 86,
+      "crc32": 1155136610
+    },
+    {
+      "name": "Subst",
+      "category": "Algebra and calculus",
+      "offset": 3687,
+      "length": 177,
+      "crc32": 1975272442
+    },
+    {
+      "name": "Sum",
+      "category": "Algebra and calculus",
+      "offset": 3864,
+      "length": 86,
+      "crc32": 95386807
+    },
+    {
+      "name": "ToPolynomial",
+      "category": "Algebra and calculus",
+      "offset": 3950,
+      "length": 107,
+      "crc32": 2674769981
+    },
+    {
+      "name": "TrigSin",
+      "category": "Algebra and calculus",
+      "offset": 4057,
+      "length": 97,
+      "crc32": 960539563
+    },
+    {
+      "name": "Zeros",
+      "category": "Algebra and calculus",
+      "offset": 4154,
+      "length": 120,
+      "crc32": 933201547
+    },
+    {
+      "name": "ASR",
+      "category": "Bits and bases",
+      "offset": 4274,
+      "length": 101,
+      "crc32": 3000206399
+    },
+    {
+      "name": "ASRB",
+      "category": "Bits and bases",
+      "offset": 4375,
+      "length": 117,
+      "crc32": 1331047176
+    },
+    {
+      "name": "ASRC",
+      "category": "Bits and bases",
+      "offset": 4492,
+      "length": 124,
+      "crc32": 1625704325
+    },
+    {
+      "name": "ClearBit",
+      "category": "Bits and bases",
+      "offset": 4616,
+      "length": 92,
+      "crc32": 1478738227
+    },
+    {
+      "name": "CountBits",
+      "category": "Bits and bases",
+      "offset": 4708,
+      "length": 74,
+      "crc32": 777040603
+    },
+    {
+      "name": "Equiv",
+      "category": "Bits and bases",
+      "offset": 4782,
+      "length": 124,
+      "crc32": 2887136981
+    },
+    {
+      "name": "Excludes",
+      "category": "Bits and bases",
+      "offset": 4906,
+      "length": 150,
+      "crc32": 1970876747
+    },
+    {
+      "name": "FirstBitSet",
+      "category": "Bits and bases",
+      "offset": 5056,
+      "length": 109,
+      "crc32": 1534550853
+    },
+    {
+      "name": "FlipBit",
+      "category": "Bits and bases",
+      "offset": 5165,
+      "length": 92,
+      "crc32": 3156266613
+    },
+    {
+      "name": "Implies",
+      "category": "Bits and bases",
+      "offset": 5257,
+      "length": 142,
+      "crc32": 924990696
+    },
+    {
+      "name": "LastBitSet",
+      "category": "Bits and bases",
+      "offset": 5399,
+      "length": 107,
+      "crc32": 2302308813
+    },
+    {
+      "name": "NAnd",
+      "category": "Bits and bases",
+      "offset": 5506,
+      "length": 114,
+      "crc32": 4165136795
+    },
+    {
+      "name": "NOr",
+      "category": "Bits and bases",
+      "offset": 5620,
+      "length": 112,
+      "crc32": 2431324660
+    },
+    {
+      "name": "RecallWordSize",
+      "category": "Bits and bases",
+      "offset": 5732,
+      "length": 80,
+      "crc32": 3955279366
+    },
+    {
+      "name": "RL",
+      "category": "Bits and bases",
+      "offset": 5812,
+      "length": 130,
+      "crc32": 3486296861
+    },
+    {
+      "name": "RLB",
+      "category": "Bits and bases",
+      "offset": 5942,
+      "length": 77,
+      "crc32": 2712938716
+    },
+    {
+      "name": "RLC",
+      "category": "Bits and bases",
+      "offset": 6019,
+      "length": 88,
+      "crc32": 317761183
+    },
+    {
+      "name": "RR",
+      "category": "Bits and bases",
+      "offset": 6107,
+      "length": 132,
+      "crc32": 3880555473
+    },
+    {
+      "name": "RRB",
+      "category": "Bits and bases",
+      "offset": 6239,
+      "length": 79,
+      "crc32": 4292293180
+    },
+    {
+      "name": "RRC",
+      "category": "Bits and bases",
+      "offset": 6318,
+      "length": 90,
+      "crc32": 2077700493
+    },
+    {
+      "name": "SetBit",
+      "category": "Bits and bases",
+      "offset": 6408,
+      "length": 88,
+      "crc32": 3761216307
+    },
+    {
+      "name": "SL",
+      "category": "Bits and bases",
+      "offset": 6496,
+      "length": 132,
+      "crc32": 1337976067
+    },
+    {
+      "name": "SLB",
+      "category": "Bits and bases",
+      "offset": 6628,
+      "length": 119,
+      "crc32": 3512146493
+    },
+    {
+      "name": "SLC",
+      "category": "Bits and bases",
+      "offset": 6747,
+      "length": 86,
+      "crc32": 1470753618
+    },
+    {
+      "name": "SR",
+      "category": "Bits and bases",
+      "offset": 6833,
+      "length": 134,
+      "crc32": 3818767914
+    },
+    {
+      "name": "SRB",
+      "category": "Bits and bases",
+      "offset": 6967,
+      "length": 121,
+      "crc32": 3980853993
+    },
+    {
+      "name": "SRC",
+      "category": "Bits and bases",
+      "offset": 7088,
+      "length": 88,
+      "crc32": 1150053662
+    },
+    {
+      "name": "EditorBegin",
+      "category": "Calculator entry",
+      "offset": 7176,
+      "length": 38,
+      "crc32": 1320342156
+    },
+    {
+      "name": "EditorClear",
+      "category": "Calculator entry",
+      "offset": 7214,
+      "length": 77,
+      "crc32": 1221277029
+    },
+    {
+      "name": "EditorCopy",
+      "category": "Calculator entry",
+      "offset": 7291,
+      "length": 64,
+      "crc32": 1774028349
+    },
+    {
+      "name": "EditorCut",
+      "category": "Calculator entry",
+      "offset": 7355,
+      "length": 63,
+      "crc32": 3339282737
+    },
+    {
+      "name": "EditorEnd",
+      "category": "Calculator entry",
+      "offset": 7418,
+      "length": 36,
+      "crc32": 3940401466
+    },
+    {
+      "name": "EditorFlip",
+      "category": "Calculator entry",
+      "offset": 7454,
+      "length": 101,
+      "crc32": 646988978
+    },
+    {
+      "name": "EditorHistory",
+      "category": "Calculator entry",
+      "offset": 7555,
+      "length": 48,
+      "crc32": 1951667137
+    },
+    {
+      "name": "EditorHistoryBack",
+      "category": "Calculator entry",
+      "offset": 7603,
+      "length": 66,
+      "crc32": 1269452303
+    },
+    {
+      "name": "EditorPaste",
+      "category": "Calculator entry",
+      "offset": 7669,
+      "length": 63,
+      "crc32": 4140742666
+    },
+    {
+      "name": "EditorReplace",
+      "category": "Calculator entry",
+      "offset": 7732,
+      "length": 179,
+      "crc32": 753161133
+    },
+    {
+      "name": "EditorSearch",
+      "category": "Calculator entry",
+      "offset": 7911,
+      "length": 83,
+      "crc32": 2296722795
+    },
+    {
+      "name": "EditorSelect",
+      "category": "Calculator entry",
+      "offset": 7994,
+      "length": 145,
+      "crc32": 3440648494
+    },
+    {
+      "name": "EditorWordLeft",
+      "category": "Calculator entry",
+      "offset": 8139,
+      "length": 47,
+      "crc32": 3462814845
+    },
+    {
+      "name": "EditorWordRight",
+      "category": "Calculator entry",
+      "offset": 8186,
+      "length": 48,
+      "crc32": 827756506
+    },
+    {
+      "name": "UIAlgebraic",
+      "category": "Calculator entry",
+      "offset": 8234,
+      "length": 101,
+      "crc32": 1674649392
+    },
+    {
+      "name": "UIAlpha",
+      "category": "Calculator entry",
+      "offset": 8335,
+      "length": 156,
+      "crc32": 2804096050
+    },
+    {
+      "name": "UIBackspace",
+      "category": "Calculator entry",
+      "offset": 8491,
+      "length": 50,
+      "crc32": 802483603
+    },
+    {
+      "name": "UIDecimal",
+      "category": "Calculator entry",
+      "offset": 8541,
+      "length": 90,
+      "crc32": 2377687484
+    },
+    {
+      "name": "UIDelete",
+      "category": "Calculator entry",
+      "offset": 8631,
+      "length": 51,
+      "crc32": 1026459149
+    },
+    {
+      "name": "UIDown",
+      "category": "Calculator entry",
+      "offset": 8682,
+      "length": 92,
+      "crc32": 1467272857
+    },
+    {
+      "name": "UIEnter",
+      "category": "Calculator entry",
+      "offset": 8774,
+      "length": 110,
+      "crc32": 2604132231
+    },
+    {
+      "name": "UIExit",
+      "category": "Calculator entry",
+      "offset": 8884,
+      "length": 102,
+      "crc32": 1880576652
+    },
+    {
+      "name": "UILeft",
+      "category": "Calculator entry",
+      "offset": 8986,
+      "length": 95,
+      "crc32": 726810482
+    },
+    {
+      "name": "UILeftShift",
+      "category": "Calculator entry",
+      "offset": 9081,
+      "length": 147,
+      "crc32": 160771770
+    },
+    {
+      "name": "UILowercase",
+      "category": "Calculator entry",
+      "offset": 9228,
+      "length": 112,
+      "crc32": 800705709
+    },
+    {
+      "name": "UINoAlpha",
+      "category": "Calculator entry",
+      "offset": 9340,
+      "length": 92,
+      "crc32": 291414893
+    },
+    {
+      "name": "UINoShift",
+      "category": "Calculator entry",
+      "offset": 9432,
+      "length": 126,
+      "crc32": 2306222208
+    },
+    {
+      "name": "UIRight",
+      "category": "Calculator entry",
+      "offset": 9558,
+      "length": 90,
+      "crc32": 3709878285
+    },
+    {
+      "name": "UIRightShift",
+      "category": "Calculator entry",
+      "offset": 9648,
+      "length": 159,
+      "crc32": 3243328487
+    },
+    {
+      "name": "UIText",
+      "category": "Calculator entry",
+      "offset": 9807,
+      "length": 99,
+      "crc32": 1115665167
+    },
+    {
+      "name": "UIUp",
+      "category": "Calculator entry",
+      "offset": 9906,
+      "length": 90,
+      "crc32": 2233757669
+    },
+    {
+      "name": "AlarmMenu",
+      "category": "Calculator menus",
+      "offset": 9996,
+      "length": 337,
+      "crc32": 779774307
+    },
+    {
+      "name": "AlgebraMenu",
+      "category": "Calculator menus",
+      "offset": 10333,
+      "length": 343,
+      "crc32": 579453824
+    },
+    {
+      "name": "AnglesMenu",
+      "category": "Calculator menus",
+      "offset": 10676,
+      "length": 340,
+      "crc32": 3394191110
+    },
+    {
+      "name": "ArithmeticMenu",
+      "category": "Calculator menus",
+      "offset": 11016,
+      "length": 352,
+      "crc32": 2549721835
+    },
+    {
+      "name": "BasesMenu",
+      "category": "Calculator menus",
+      "offset": 11368,
+      "length": 337,
+      "crc32": 3208849677
+    },
+    {
+      "name": "CalculationMenu",
+      "category": "Calculator menus",
+      "offset": 11705,
+      "length": 355,
+      "crc32": 3581009784
+    },
+    {
+      "name": "CharactersMenu",
+      "category": "Calculator menus",
+      "offset": 12060,
+      "length": 352,
+      "crc32": 1309332256
+    },
+    {
+      "name": "CircularMenu",
+      "category": "Calculator menus",
+      "offset": 12412,
+      "length": 346,
+      "crc32": 4290620183
+    },
+    {
+      "name": "ClearThingsMenu",
+      "category": "Calculator menus",
+      "offset": 12758,
+      "length": 356,
+      "crc32": 512130301
+    },
+    {
+      "name": "CompareMenu",
+      "category": "Calculator menus",
+      "offset": 13114,
+      "length": 343,
+      "crc32": 2850884521
+    },
+    {
+      "name": "ComplexMenu",
+      "category": "Calculator menus",
+      "offset": 13457,
+      "length": 343,
+      "crc32": 1793858605
+    },
+    {
+      "name": "ConstantsMenu",
+      "category": "Calculator menus",
+      "offset": 13800,
+      "length": 396,
+      "crc32": 446478627
+    },
+    {
+      "name": "DateMenu",
+      "category": "Calculator menus",
+      "offset": 14196,
+      "length": 334,
+      "crc32": 2538899640
+    },
+    {
+      "name": "DebugMenu",
+      "category": "Calculator menus",
+      "offset": 14530,
+      "length": 337,
+      "crc32": 2602985775
+    },
+    {
+      "name": "DifferentialSolverMenu",
+      "category": "Calculator menus",
+      "offset": 14867,
+      "length": 377,
+      "crc32": 3106679314
+    },
+    {
+      "name": "DisplayModesMenu",
+      "category": "Calculator menus",
+      "offset": 15244,
+      "length": 359,
+      "crc32": 203764348
+    },
+    {
+      "name": "EditMenu",
+      "category": "Calculator menus",
+      "offset": 15603,
+      "length": 334,
+      "crc32": 1724065304
+    },
+    {
+      "name": "EquationsMenu",
+      "category": "Calculator menus",
+      "offset": 15937,
+      "length": 396,
+      "crc32": 2323789261
+    },
+    {
+      "name": "ExpLogIdentitiesMenu",
+      "category": "Calculator menus",
+      "offset": 16333,
+      "length": 372,
+      "crc32": 3146197963
+    },
+    {
+      "name": "FilesMenu",
+      "category": "Calculator menus",
+      "offset": 16705,
+      "length": 337,
+      "crc32": 1495149595
+    },
+    {
+      "name": "FlagsMenu",
+      "category": "Calculator menus",
+      "offset": 17042,
+      "length": 337,
+      "crc32": 531624186
+    },
+    {
+      "name": "FractionsMenu",
+      "category": "Calculator menus",
+      "offset": 17379,
+      "length": 349,
+      "crc32": 4152970086
+    },
+    {
+      "name": "GraphicsMenu",
+      "category": "Calculator menus",
+      "offset": 17728,
+      "length": 346,
+      "crc32": 3441419631
+    },
+    {
+      "name": "HyperbolicMenu",
+      "category": "Calculator menus",
+      "offset": 18074,
+      "length": 352,
+      "crc32": 645304506
+    },
+    {
+      "name": "IntegrationMenu",
+      "category": "Calculator menus",
+      "offset": 18426,
+      "length": 397,
+      "crc32": 2866542077
+    },
+    {
+      "name": "IOMenu",
+      "category": "Calculator menus",
+      "offset": 18823,
+      "length": 328,
+      "crc32": 3318717584
+    },
+    {
+      "name": "Library",
+      "category": "Calculator menus",
+      "offset": 19151,
+      "length": 335,
+      "crc32": 3794046046
+    },
+    {
+      "name": "LinearSolverMenu",
+      "category": "Calculator menus",
+      "offset": 19486,
+      "length": 359,
+      "crc32": 607586406
+    },
+    {
+      "name": "ListMenu",
+      "category": "Calculator menus",
+      "offset": 19845,
+      "length": 334,
+      "crc32": 2094039036
+    },
+    {
+      "name": "LoopsMenu",
+      "category": "Calculator menus",
+      "offset": 20179,
+      "length": 337,
+      "crc32": 2120429714
+    },
+    {
+      "name": "MainMenu",
+      "category": "Calculator menus",
+      "offset": 20516,
+      "length": 334,
+      "crc32": 2084078900
+    },
+    {
+      "name": "MathMenu",
+      "category": "Calculator menus",
+      "offset": 20850,
+      "length": 334,
+      "crc32": 102860617
+    },
+    {
+      "name": "MathModesMenu",
+      "category": "Calculator menus",
+      "offset": 21184,
+      "length": 350,
+      "crc32": 2708017803
+    },
+    {
+      "name": "MatrixMenu",
+      "category": "Calculator menus",
+      "offset": 21534,
+      "length": 340,
+      "crc32": 710955451
+    },
+    {
+      "name": "MemoryMenu",
+      "category": "Calculator menus",
+      "offset": 21874,
+      "length": 340,
+      "crc32": 2523703985
+    },
+    {
+      "name": "ModesMenu",
+      "category": "Calculator menus",
+      "offset": 22214,
+      "length": 337,
+      "crc32": 2223261732
+    },
+    {
+      "name": "MultiSolverMenu",
+      "category": "Calculator menus",
+      "offset": 22551,
+      "length": 356,
+      "crc32": 3590422936
+    },
+    {
+      "name": "NumbersMenu",
+      "category": "Calculator menus",
+      "offset": 22907,
+      "length": 343,
+      "crc32": 3223254400
+    },
+    {
+      "name": "NumericalSolverMenu",
+      "category": "Calculator menus",
+      "offset": 23250,
+      "length": 368,
+      "crc32": 3817832775
+    },
+    {
+      "name": "ObjectMenu",
+      "category": "Calculator menus",
+      "offset": 23618,
+      "length": 340,
+      "crc32": 1400306186
+    },
+    {
+      "name": "PartsMenu",
+      "category": "Calculator menus",
+      "offset": 23958,
+      "length": 337,
+      "crc32": 3435443938
+    },
+    {
+      "name": "PlotMenu",
+      "category": "Calculator menus",
+      "offset": 24295,
+      "length": 334,
+      "crc32": 2263042844
+    },
+    {
+      "name": "PolynomialsMenu",
+      "category": "Calculator menus",
+      "offset": 24629,
+      "length": 355,
+      "crc32": 3668031307
+    },
+    {
+      "name": "PolynomialSolverMenu",
+      "category": "Calculator menus",
+      "offset": 24984,
+      "length": 371,
+      "crc32": 3737559918
+    },
+    {
+      "name": "PowersMenu",
+      "category": "Calculator menus",
+      "offset": 25355,
+      "length": 373,
+      "crc32": 307044631
+    },
+    {
+      "name": "PrintingMenu",
+      "category": "Calculator menus",
+      "offset": 25728,
+      "length": 346,
+      "crc32": 796424017
+    },
+    {
+      "name": "ProbabilitiesMenu",
+      "category": "Calculator menus",
+      "offset": 26074,
+      "length": 361,
+      "crc32": 4157327256
+    },
+    {
+      "name": "ProgramMenu",
+      "category": "Calculator menus",
+      "offset": 26435,
+      "length": 343,
+      "crc32": 2906602035
+    },
+    {
+      "name": "RangeMenu",
+      "category": "Calculator menus",
+      "offset": 26778,
+      "length": 337,
+      "crc32": 780058534
+    },
+    {
+      "name": "RealMenu",
+      "category": "Calculator menus",
+      "offset": 27115,
+      "length": 334,
+      "crc32": 3492738255
+    },
+    {
+      "name": "SeparatorModesMenu",
+      "category": "Calculator menus",
+      "offset": 27449,
+      "length": 365,
+      "crc32": 1286405444
+    },
+    {
+      "name": "SignalProcessingMenu",
+      "category": "Calculator menus",
+      "offset": 27814,
+      "length": 371,
+      "crc32": 2437295477
+    },
+    {
+      "name": "SolverMenu",
+      "category": "Calculator menus",
+      "offset": 28185,
+      "length": 369,
+      "crc32": 3040366953
+    },
+    {
+      "name": "StackMenu",
+      "category": "Calculator menus",
+      "offset": 28554,
+      "length": 337,
+      "crc32": 120445635
+    },
+    {
+      "name": "StatisticsMenu",
+      "category": "Calculator menus",
+      "offset": 28891,
+      "length": 352,
+      "crc32": 3410080834
+    },
+    {
+      "name": "SymbolicMenu",
+      "category": "Calculator menus",
+      "offset": 29243,
+      "length": 346,
+      "crc32": 1032620156
+    },
+    {
+      "name": "SymbolicSolverMenu",
+      "category": "Calculator menus",
+      "offset": 29589,
+      "length": 365,
+      "crc32": 3756560041
+    },
+    {
+      "name": "TestsMenu",
+      "category": "Calculator menus",
+      "offset": 29954,
+      "length": 337,
+      "crc32": 130531519
+    },
+    {
+      "name": "TextMenu",
+      "category": "Calculator menus",
+      "offset": 30291,
+      "length": 334,
+      "crc32": 4249982250
+    },
+    {
+      "name": "TimeMenu",
+      "category": "Calculator menus",
+      "offset": 30625,
+      "length": 334,
+      "crc32": 1325168524
+    },
+    {
+      "name": "TrigIdentitiesMenu",
+      "category": "Calculator menus",
+      "offset": 30959,
+      "length": 365,
+      "crc32": 4264638625
+    },
+    {
+      "name": "UnitsConversionsMenu",
+      "category": "Calculator menus",
+      "offset": 31324,
+      "length": 371,
+      "crc32": 1622027342
+    },
+    {
+      "name": "UnitsMenu",
+      "category": "Calculator menus",
+      "offset": 31695,
+      "length": 337,
+      "crc32": 405600466
+    },
+    {
+      "name": "UserInterfaceModesMenu",
+      "category": "Calculator menus",
+      "offset": 32032,
+      "length": 378,
+      "crc32": 3849543722
+    },
+    {
+      "name": "UserModeMenu",
+      "category": "Calculator menus",
+      "offset": 32410,
+      "length": 347,
+      "crc32": 2765733340
+    },
+    {
+      "name": "VectorMenu",
+      "category": "Calculator menus",
+      "offset": 32757,
+      "length": 340,
+      "crc32": 2190946951
+    },
+    {
+      "name": "AllEquationVariables",
+      "category": "Calculator settings",
+      "offset": 33097,
+      "length": 327,
+      "crc32": 4188585956
+    },
+    {
+      "name": "AllSolutions",
+      "category": "Calculator settings",
+      "offset": 33424,
+      "length": 335,
+      "crc32": 2518528064
+    },
+    {
+      "name": "AlphaForeground",
+      "category": "Calculator settings",
+      "offset": 33759,
+      "length": 488,
+      "crc32": 2050323457
+    },
+    {
+      "name": "AngleMode",
+      "category": "Calculator settings",
+      "offset": 34247,
+      "length": 376,
+      "crc32": 1045639096
+    },
+    {
+      "name": "AutomaticConstants",
+      "category": "Calculator settings",
+      "offset": 34623,
+      "length": 320,
+      "crc32": 2971996292
+    },
+    {
+      "name": "AutomaticTemporariesCleanup",
+      "category": "Calculator settings",
+      "offset": 34943,
+      "length": 329,
+      "crc32": 891526409
+    },
+    {
+      "name": "AutomaticXLibs",
+      "category": "Calculator settings",
+      "offset": 35272,
+      "length": 270,
+      "crc32": 3440672320
+    },
+    {
+      "name": "AutoScaleStack",
+      "category": "Calculator settings",
+      "offset": 35542,
+      "length": 277,
+      "crc32": 277243927
+    },
+    {
+      "name": "AutoSimplify",
+      "category": "Calculator settings",
+      "offset": 35819,
+      "length": 307,
+      "crc32": 1754908359
+    },
+    {
+      "name": "Background",
+      "category": "Calculator settings",
+      "offset": 36126,
+      "length": 462,
+      "crc32": 624497985
+    },
+    {
+      "name": "Base",
+      "category": "Calculator settings",
+      "offset": 36588,
+      "length": 522,
+      "crc32": 2538790405
+    },
+    {
+      "name": "BasedDotOrComma",
+      "category": "Calculator settings",
+      "offset": 37110,
+      "length": 271,
+      "crc32": 667582023
+    },
+    {
+      "name": "BasedSeparatorCommand",
+      "category": "Calculator settings",
+      "offset": 37381,
+      "length": 444,
+      "crc32": 2369076594
+    },
+    {
+      "name": "BasedSpaces",
+      "category": "Calculator settings",
+      "offset": 37825,
+      "length": 259,
+      "crc32": 3338416746
+    },
+    {
+      "name": "BasedSpacing",
+      "category": "Calculator settings",
+      "offset": 38084,
+      "length": 368,
+      "crc32": 3510329770
+    },
+    {
+      "name": "BasedTicks",
+      "category": "Calculator settings",
+      "offset": 38452,
+      "length": 257,
+      "crc32": 1555081356
+    },
+    {
+      "name": "BasedUnderscore",
+      "category": "Calculator settings",
+      "offset": 38709,
+      "length": 268,
+      "crc32": 4046228919
+    },
+    {
+      "name": "BatteryBackground",
+      "category": "Calculator settings",
+      "offset": 38977,
+      "length": 498,
+      "crc32": 3627057301
+    },
+    {
+      "name": "BatteryForeground",
+      "category": "Calculator settings",
+      "offset": 39475,
+      "length": 498,
+      "crc32": 1125207139
+    },
+    {
+      "name": "BatteryLevelForeground",
+      "category": "Calculator settings",
+      "offset": 39973,
+      "length": 524,
+      "crc32": 932575809
+    },
+    {
+      "name": "BatteryRefresh",
+      "category": "Calculator settings",
+      "offset": 40497,
+      "length": 347,
+      "crc32": 533888649
+    },
+    {
+      "name": "BeepOff",
+      "category": "Calculator settings",
+      "offset": 40844,
+      "length": 284,
+      "crc32": 744089052
+    },
+    {
+      "name": "BeepOn",
+      "category": "Calculator settings",
+      "offset": 41128,
+      "length": 284,
+      "crc32": 3295005
+    },
+    {
+      "name": "BigFractions",
+      "category": "Calculator settings",
+      "offset": 41412,
+      "length": 265,
+      "crc32": 2371816846
+    },
+    {
+      "name": "Bin",
+      "category": "Calculator settings",
+      "offset": 41677,
+      "length": 794,
+      "crc32": 1718261498
+    },
+    {
+      "name": "BitwiseLogicForIntegers",
+      "category": "Calculator settings",
+      "offset": 42471,
+      "length": 312,
+      "crc32": 3276396551
+    },
+    {
+      "name": "BusyIndicatorRefresh",
+      "category": "Calculator settings",
+      "offset": 42783,
+      "length": 378,
+      "crc32": 1284162362
+    },
+    {
+      "name": "Capitalized",
+      "category": "Calculator settings",
+      "offset": 43161,
+      "length": 307,
+      "crc32": 1669556285
+    },
+    {
+      "name": "CapitalizedNames",
+      "category": "Calculator settings",
+      "offset": 43468,
+      "length": 301,
+      "crc32": 2482225470
+    },
+    {
+      "name": "CarefulEvaluation",
+      "category": "Calculator settings",
+      "offset": 43769,
+      "length": 341,
+      "crc32": 3820658737
+    },
+    {
+      "name": "ChargingForeground",
+      "category": "Calculator settings",
+      "offset": 44110,
+      "length": 503,
+      "crc32": 986563157
+    },
+    {
+      "name": "ClassicExponent",
+      "category": "Calculator settings",
+      "offset": 44613,
+      "length": 284,
+      "crc32": 289271196
+    },
+    {
+      "name": "CommandBackground",
+      "category": "Calculator settings",
+      "offset": 44897,
+      "length": 498,
+      "crc32": 4269210863
+    },
+    {
+      "name": "CommandDisplayMode",
+      "category": "Calculator settings",
+      "offset": 45395,
+      "length": 427,
+      "crc32": 2561792929
+    },
+    {
+      "name": "CommandForeground",
+      "category": "Calculator settings",
+      "offset": 45822,
+      "length": 498,
+      "crc32": 1700212761
+    },
+    {
+      "name": "CompatibleBasedNumbers",
+      "category": "Calculator settings",
+      "offset": 46320,
+      "length": 326,
+      "crc32": 1100161838
+    },
+    {
+      "name": "CompatibleGROBs",
+      "category": "Calculator settings",
+      "offset": 46646,
+      "length": 277,
+      "crc32": 4273733959
+    },
+    {
+      "name": "CompatiblePolynomials",
+      "category": "Calculator settings",
+      "offset": 46923,
+      "length": 332,
+      "crc32": 1698394485
+    },
+    {
+      "name": "CompatibleTypes",
+      "category": "Calculator settings",
+      "offset": 47255,
+      "length": 280,
+      "crc32": 766443969
+    },
+    {
+      "name": "ComplexIAfterImaginary",
+      "category": "Calculator settings",
+      "offset": 47535,
+      "length": 293,
+      "crc32": 3494260975
+    },
+    {
+      "name": "ComplexIBeforeImaginary",
+      "category": "Calculator settings",
+      "offset": 47828,
+      "length": 293,
+      "crc32": 180760627
+    },
+    {
+      "name": "ComplexResults",
+      "category": "Calculator settings",
+      "offset": 48121,
+      "length": 306,
+      "crc32": 645163998
+    },
+    {
+      "name": "CurrentEquationVariables",
+      "category": "Calculator settings",
+      "offset": 48427,
+      "length": 327,
+      "crc32": 3085338960
+    },
+    {
+      "name": "CurrentFitSums",
+      "category": "Calculator settings",
+      "offset": 48754,
+      "length": 294,
+      "crc32": 2268793774
+    },
+    {
+      "name": "CursorAlphaBackground",
+      "category": "Calculator settings",
+      "offset": 49048,
+      "length": 519,
+      "crc32": 1115827318
+    },
+    {
+      "name": "CursorAlphaBorder",
+      "category": "Calculator settings",
+      "offset": 49567,
+      "length": 499,
+      "crc32": 4942695
+    },
+    {
+      "name": "CursorAlphaForeground",
+      "category": "Calculator settings",
+      "offset": 50066,
+      "length": 519,
+      "crc32": 2248613428
+    },
+    {
+      "name": "CursorBackground",
+      "category": "Calculator settings",
+      "offset": 50585,
+      "length": 493,
+      "crc32": 1796968303
+    },
+    {
+      "name": "CursorBlinkRate",
+      "category": "Calculator settings",
+      "offset": 51078,
+      "length": 394,
+      "crc32": 2046475907
+    },
+    {
+      "name": "CursorBorder",
+      "category": "Calculator settings",
+      "offset": 51472,
+      "length": 473,
+      "crc32": 1832905043
+    },
+    {
+      "name": "CursorFont",
+      "category": "Calculator settings",
+      "offset": 51945,
+      "length": 445,
+      "crc32": 930967690
+    },
+    {
+      "name": "CursorForeground",
+      "category": "Calculator settings",
+      "offset": 52390,
+      "length": 493,
+      "crc32": 4126418246
+    },
+    {
+      "name": "CursorSelBackground",
+      "category": "Calculator settings",
+      "offset": 52883,
+      "length": 509,
+      "crc32": 990597680
+    },
+    {
+      "name": "CurveFilling",
+      "category": "Calculator settings",
+      "offset": 53392,
+      "length": 264,
+      "crc32": 146777242
+    },
+    {
+      "name": "CustomHeaderRefresh",
+      "category": "Calculator settings",
+      "offset": 53656,
+      "length": 373,
+      "crc32": 2136617543
+    },
+    {
+      "name": "DateDash",
+      "category": "Calculator settings",
+      "offset": 54029,
+      "length": 252,
+      "crc32": 3786751792
+    },
+    {
+      "name": "DateDot",
+      "category": "Calculator settings",
+      "offset": 54281,
+      "length": 249,
+      "crc32": 2195109471
+    },
+    {
+      "name": "DateForeground",
+      "category": "Calculator settings",
+      "offset": 54530,
+      "length": 483,
+      "crc32": 3894476505
+    },
+    {
+      "name": "DateSeparatorCommand",
+      "category": "Calculator settings",
+      "offset": 55013,
+      "length": 402,
+      "crc32": 1481046175
+    },
+    {
+      "name": "DateSlash",
+      "category": "Calculator settings",
+      "offset": 55415,
+      "length": 254,
+      "crc32": 3867794436
+    },
+    {
+      "name": "DateSpace",
+      "category": "Calculator settings",
+      "offset": 55669,
+      "length": 253,
+      "crc32": 3707911340
+    },
+    {
+      "name": "DayBeforeMonth",
+      "category": "Calculator settings",
+      "offset": 55922,
+      "length": 251,
+      "crc32": 1240709476
+    },
+    {
+      "name": "DebugOnError",
+      "category": "Calculator settings",
+      "offset": 56173,
+      "length": 274,
+      "crc32": 2324454130
+    },
+    {
+      "name": "Dec",
+      "category": "Calculator settings",
+      "offset": 56447,
+      "length": 785,
+      "crc32": 3029580557
+    },
+    {
+      "name": "DecimalComma",
+      "category": "Calculator settings",
+      "offset": 57232,
+      "length": 281,
+      "crc32": 2530620200
+    },
+    {
+      "name": "DecimalDot",
+      "category": "Calculator settings",
+      "offset": 57513,
+      "length": 281,
+      "crc32": 358696094
+    },
+    {
+      "name": "Deg",
+      "category": "Calculator settings",
+      "offset": 57794,
+      "length": 272,
+      "crc32": 817523384
+    },
+    {
+      "name": "DetailedTypes",
+      "category": "Calculator settings",
+      "offset": 58066,
+      "length": 280,
+      "crc32": 2240174364
+    },
+    {
+      "name": "DisplayDigits",
+      "category": "Calculator settings",
+      "offset": 58346,
+      "length": 379,
+      "crc32": 1085871982
+    },
+    {
+      "name": "DisplayMode",
+      "category": "Calculator settings",
+      "offset": 58725,
+      "length": 376,
+      "crc32": 3900097772
+    },
+    {
+      "name": "DistinguishSymbolCase",
+      "category": "Calculator settings",
+      "offset": 59101,
+      "length": 314,
+      "crc32": 1404125149
+    },
+    {
+      "name": "DMCPDisplayRefresh",
+      "category": "Calculator settings",
+      "offset": 59415,
+      "length": 331,
+      "crc32": 624090958
+    },
+    {
+      "name": "DrawPlotAxes",
+      "category": "Calculator settings",
+      "offset": 59746,
+      "length": 280,
+      "crc32": 1090794308
+    },
+    {
+      "name": "EchelonFormKeepLastColumn",
+      "category": "Calculator settings",
+      "offset": 60026,
+      "length": 335,
+      "crc32": 1070127728
+    },
+    {
+      "name": "EchelonFormReduceLastColumn",
+      "category": "Calculator settings",
+      "offset": 60361,
+      "length": 335,
+      "crc32": 3356202764
+    },
+    {
+      "name": "EditorBackground",
+      "category": "Calculator settings",
+      "offset": 60696,
+      "length": 493,
+      "crc32": 1920393233
+    },
+    {
+      "name": "EditorFont",
+      "category": "Calculator settings",
+      "offset": 61189,
+      "length": 440,
+      "crc32": 2533791174
+    },
+    {
+      "name": "EditorForeground",
+      "category": "Calculator settings",
+      "offset": 61629,
+      "length": 493,
+      "crc32": 3969468984
+    },
+    {
+      "name": "EditorLineForeground",
+      "category": "Calculator settings",
+      "offset": 62122,
+      "length": 514,
+      "crc32": 2228487986
+    },
+    {
+      "name": "EditorWrapColumn",
+      "category": "Calculator settings",
+      "offset": 62636,
+      "length": 388,
+      "crc32": 175893616
+    },
+    {
+      "name": "Eng",
+      "category": "Calculator settings",
+      "offset": 63024,
+      "length": 337,
+      "crc32": 973605879
+    },
+    {
+      "name": "ErrorBackground",
+      "category": "Calculator settings",
+      "offset": 63361,
+      "length": 488,
+      "crc32": 4131915880
+    },
+    {
+      "name": "ErrorBeepDuration",
+      "category": "Calculator settings",
+      "offset": 63849,
+      "length": 386,
+      "crc32": 1520538878
+    },
+    {
+      "name": "ErrorBeepFrequency",
+      "category": "Calculator settings",
+      "offset": 64235,
+      "length": 453,
+      "crc32": 2850133185
+    },
+    {
+      "name": "ErrorBorder",
+      "category": "Calculator settings",
+      "offset": 64688,
+      "length": 468,
+      "crc32": 3843263368
+    },
+    {
+      "name": "ErrorForeground",
+      "category": "Calculator settings",
+      "offset": 65156,
+      "length": 488,
+      "crc32": 220141684
+    },
+    {
+      "name": "ExitClearsMenu",
+      "category": "Calculator settings",
+      "offset": 65644,
+      "length": 341,
+      "crc32": 1218257572
+    },
+    {
+      "name": "ExitKeepsMenu",
+      "category": "Calculator settings",
+      "offset": 65985,
+      "length": 341,
+      "crc32": 3324482663
+    },
+    {
+      "name": "ExplicitConstants",
+      "category": "Calculator settings",
+      "offset": 66326,
+      "length": 320,
+      "crc32": 41063729
+    },
+    {
+      "name": "ExplicitWildcards",
+      "category": "Calculator settings",
+      "offset": 66646,
+      "length": 319,
+      "crc32": 2556944830
+    },
+    {
+      "name": "ExplicitXLibs",
+      "category": "Calculator settings",
+      "offset": 66965,
+      "length": 270,
+      "crc32": 1305336725
+    },
+    {
+      "name": "FancyExponent",
+      "category": "Calculator settings",
+      "offset": 67235,
+      "length": 284,
+      "crc32": 3712656599
+    },
+    {
+      "name": "FinalAlgebraResults",
+      "category": "Calculator settings",
+      "offset": 67519,
+      "length": 309,
+      "crc32": 2815955938
+    },
+    {
+      "name": "FinanceRounding",
+      "category": "Calculator settings",
+      "offset": 67828,
+      "length": 428,
+      "crc32": 3023060003
+    },
+    {
+      "name": "Fix",
+      "category": "Calculator settings",
+      "offset": 68256,
+      "length": 325,
+      "crc32": 4223221217
+    },
+    {
+      "name": "FixedWidthDigits",
+      "category": "Calculator settings",
+      "offset": 68581,
+      "length": 319,
+      "crc32": 4005893931
+    },
+    {
+      "name": "FlatMenus",
+      "category": "Calculator settings",
+      "offset": 68900,
+      "length": 237,
+      "crc32": 2608195921
+    },
+    {
+      "name": "FolderCornerForeground",
+      "category": "Calculator settings",
+      "offset": 69137,
+      "length": 524,
+      "crc32": 2552008948
+    },
+    {
+      "name": "Foreground",
+      "category": "Calculator settings",
+      "offset": 69661,
+      "length": 462,
+      "crc32": 2694902368
+    },
+    {
+      "name": "FourDigitYear",
+      "category": "Calculator settings",
+      "offset": 70123,
+      "length": 261,
+      "crc32": 896202015
+    },
+    {
+      "name": "FractionDigits",
+      "category": "Calculator settings",
+      "offset": 70384,
+      "length": 426,
+      "crc32": 3632956964
+    },
+    {
+      "name": "FractionIterations",
+      "category": "Calculator settings",
+      "offset": 70810,
+      "length": 396,
+      "crc32": 3641515362
+    },
+    {
+      "name": "FractionLargestPrime",
+      "category": "Calculator settings",
+      "offset": 71206,
+      "length": 411,
+      "crc32": 496300793
+    },
+    {
+      "name": "FractionSpacing",
+      "category": "Calculator settings",
+      "offset": 71617,
+      "length": 375,
+      "crc32": 2648222839
+    },
+    {
+      "name": "GCIconForeground",
+      "category": "Calculator settings",
+      "offset": 71992,
+      "length": 493,
+      "crc32": 575033644
+    },
+    {
+      "name": "GCStatsClearAfterRead",
+      "category": "Calculator settings",
+      "offset": 72485,
+      "length": 300,
+      "crc32": 3900992633
+    },
+    {
+      "name": "GCStatsKeepAfterRead",
+      "category": "Calculator settings",
+      "offset": 72785,
+      "length": 300,
+      "crc32": 2581924332
+    },
+    {
+      "name": "GCTemporariesCleanup",
+      "category": "Calculator settings",
+      "offset": 73085,
+      "length": 329,
+      "crc32": 3218205248
+    },
+    {
+      "name": "Grad",
+      "category": "Calculator settings",
+      "offset": 73414,
+      "length": 269,
+      "crc32": 2878938548
+    },
+    {
+      "name": "GraphicResultDisplay",
+      "category": "Calculator settings",
+      "offset": 73683,
+      "length": 286,
+      "crc32": 1730447812
+    },
+    {
+      "name": "GraphicStackDisplay",
+      "category": "Calculator settings",
+      "offset": 73969,
+      "length": 281,
+      "crc32": 3383441306
+    },
+    {
+      "name": "GraphingTimeLimit",
+      "category": "Calculator settings",
+      "offset": 74250,
+      "length": 409,
+      "crc32": 979875516
+    },
+    {
+      "name": "GraphRenderingSizeLimit",
+      "category": "Calculator settings",
+      "offset": 74659,
+      "length": 396,
+      "crc32": 230682809
+    },
+    {
+      "name": "HalfBatteryForeground",
+      "category": "Calculator settings",
+      "offset": 75055,
+      "length": 519,
+      "crc32": 2164176892
+    },
+    {
+      "name": "HaltedIconForeground",
+      "category": "Calculator settings",
+      "offset": 75574,
+      "length": 514,
+      "crc32": 988194609
+    },
+    {
+      "name": "HardwareFloatingPoint",
+      "category": "Calculator settings",
+      "offset": 76088,
+      "length": 352,
+      "crc32": 480939753
+    },
+    {
+      "name": "HeaderBackground",
+      "category": "Calculator settings",
+      "offset": 76440,
+      "length": 493,
+      "crc32": 1392022028
+    },
+    {
+      "name": "HeaderFont",
+      "category": "Calculator settings",
+      "offset": 76933,
+      "length": 466,
+      "crc32": 2117663444
+    },
+    {
+      "name": "HeaderForeground",
+      "category": "Calculator settings",
+      "offset": 77399,
+      "length": 493,
+      "crc32": 3424073765
+    },
+    {
+      "name": "Hex",
+      "category": "Calculator settings",
+      "offset": 77892,
+      "length": 795,
+      "crc32": 4201987486
+    },
+    {
+      "name": "HideAmbiguousNames",
+      "category": "Calculator settings",
+      "offset": 78687,
+      "length": 288,
+      "crc32": 1375936260
+    },
+    {
+      "name": "HideBuiltinCharacters",
+      "category": "Calculator settings",
+      "offset": 78975,
+      "length": 295,
+      "crc32": 3260819829
+    },
+    {
+      "name": "HideBuiltinConstants",
+      "category": "Calculator settings",
+      "offset": 79270,
+      "length": 290,
+      "crc32": 3430174352
+    },
+    {
+      "name": "HideBuiltinEquations",
+      "category": "Calculator settings",
+      "offset": 79560,
+      "length": 299,
+      "crc32": 1384699481
+    },
+    {
+      "name": "HideBuiltinLibrary",
+      "category": "Calculator settings",
+      "offset": 79859,
+      "length": 290,
+      "crc32": 2499088052
+    },
+    {
+      "name": "HideBuiltinUnits",
+      "category": "Calculator settings",
+      "offset": 80149,
+      "length": 293,
+      "crc32": 1800057659
+    },
+    {
+      "name": "HideDate",
+      "category": "Calculator settings",
+      "offset": 80442,
+      "length": 236,
+      "crc32": 4095511490
+    },
+    {
+      "name": "HideDayOfWeek",
+      "category": "Calculator settings",
+      "offset": 80678,
+      "length": 248,
+      "crc32": 365262195
+    },
+    {
+      "name": "HideEmptyMenu",
+      "category": "Calculator settings",
+      "offset": 80926,
+      "length": 248,
+      "crc32": 3771563076
+    },
+    {
+      "name": "HideEquationBody",
+      "category": "Calculator settings",
+      "offset": 81174,
+      "length": 296,
+      "crc32": 3530286674
+    },
+    {
+      "name": "HideMonthName",
+      "category": "Calculator settings",
+      "offset": 81470,
+      "length": 247,
+      "crc32": 1148570839
+    },
+    {
+      "name": "HideSeconds",
+      "category": "Calculator settings",
+      "offset": 81717,
+      "length": 257,
+      "crc32": 338733173
+    },
+    {
+      "name": "HideTime",
+      "category": "Calculator settings",
+      "offset": 81974,
+      "length": 237,
+      "crc32": 4153322184
+    },
+    {
+      "name": "HideVoltage",
+      "category": "Calculator settings",
+      "offset": 82211,
+      "length": 351,
+      "crc32": 3696834474
+    },
+    {
+      "name": "HorizontalLists",
+      "category": "Calculator settings",
+      "offset": 82562,
+      "length": 256,
+      "crc32": 1769893929
+    },
+    {
+      "name": "HorizontalProgramRendering",
+      "category": "Calculator settings",
+      "offset": 82818,
+      "length": 315,
+      "crc32": 1581640927
+    },
+    {
+      "name": "HorizontalVectors",
+      "category": "Calculator settings",
+      "offset": 83133,
+      "length": 269,
+      "crc32": 1798023327
+    },
+    {
+      "name": "IgnorePrecisionLoss",
+      "category": "Calculator settings",
+      "offset": 83402,
+      "length": 311,
+      "crc32": 1902500996
+    },
+    {
+      "name": "IgnoreSymbolCase",
+      "category": "Calculator settings",
+      "offset": 83713,
+      "length": 314,
+      "crc32": 2336298581
+    },
+    {
+      "name": "ImplicitWildcards",
+      "category": "Calculator settings",
+      "offset": 84027,
+      "length": 319,
+      "crc32": 1288445017
+    },
+    {
+      "name": "ImproperFractions",
+      "category": "Calculator settings",
+      "offset": 84346,
+      "length": 316,
+      "crc32": 54177269
+    },
+    {
+      "name": "IndexDidNotWrap",
+      "category": "Calculator settings",
+      "offset": 84662,
+      "length": 322,
+      "crc32": 1367314275
+    },
+    {
+      "name": "IndexWrapped",
+      "category": "Calculator settings",
+      "offset": 84984,
+      "length": 322,
+      "crc32": 2260290600
+    },
+    {
+      "name": "InfiniteResultIndicator",
+      "category": "Calculator settings",
+      "offset": 85306,
+      "length": 340,
+      "crc32": 359113379
+    },
+    {
+      "name": "InfinityError",
+      "category": "Calculator settings",
+      "offset": 85646,
+      "length": 257,
+      "crc32": 625961576
+    },
+    {
+      "name": "InfinityValue",
+      "category": "Calculator settings",
+      "offset": 85903,
+      "length": 257,
+      "crc32": 1631239288
+    },
+    {
+      "name": "IntegrationImprecision",
+      "category": "Calculator settings",
+      "offset": 86160,
+      "length": 388,
+      "crc32": 2000808326
+    },
+    {
+      "name": "IntegrationIterations",
+      "category": "Calculator settings",
+      "offset": 86548,
+      "length": 389,
+      "crc32": 1803567751
+    },
+    {
+      "name": "KillOnError",
+      "category": "Calculator settings",
+      "offset": 86937,
+      "length": 274,
+      "crc32": 2769886606
+    },
+    {
+      "name": "LaxArrayResizing",
+      "category": "Calculator settings",
+      "offset": 87211,
+      "length": 292,
+      "crc32": 192946477
+    },
+    {
+      "name": "LazyEvaluation",
+      "category": "Calculator settings",
+      "offset": 87503,
+      "length": 341,
+      "crc32": 272979500
+    },
+    {
+      "name": "LeadingZero",
+      "category": "Calculator settings",
+      "offset": 87844,
+      "length": 275,
+      "crc32": 914020996
+    },
+    {
+      "name": "LeftShiftBackground",
+      "category": "Calculator settings",
+      "offset": 88119,
+      "length": 509,
+      "crc32": 2328624919
+    },
+    {
+      "name": "LeftShiftForeground",
+      "category": "Calculator settings",
+      "offset": 88628,
+      "length": 509,
+      "crc32": 1531982578
+    },
+    {
+      "name": "LinearFitSums",
+      "category": "Calculator settings",
+      "offset": 89137,
+      "length": 294,
+      "crc32": 2184179201
+    },
+    {
+      "name": "LineWidth",
+      "category": "Calculator settings",
+      "offset": 89431,
+      "length": 367,
+      "crc32": 3572584469
+    },
+    {
+      "name": "ListAsData",
+      "category": "Calculator settings",
+      "offset": 89798,
+      "length": 287,
+      "crc32": 764221516
+    },
+    {
+      "name": "ListAsProgram",
+      "category": "Calculator settings",
+      "offset": 90085,
+      "length": 287,
+      "crc32": 2537430206
+    },
+    {
+      "name": "ListRecursionDepth",
+      "category": "Calculator settings",
+      "offset": 90372,
+      "length": 423,
+      "crc32": 2666833131
+    },
+    {
+      "name": "LongForm",
+      "category": "Calculator settings",
+      "offset": 90795,
+      "length": 299,
+      "crc32": 1215511283
+    },
+    {
+      "name": "LongFormNames",
+      "category": "Calculator settings",
+      "offset": 91094,
+      "length": 293,
+      "crc32": 183658809
+    },
+    {
+      "name": "LowBatteryForeground",
+      "category": "Calculator settings",
+      "offset": 91387,
+      "length": 514,
+      "crc32": 1429090458
+    },
+    {
+      "name": "LowerAlphaForeground",
+      "category": "Calculator settings",
+      "offset": 91901,
+      "length": 514,
+      "crc32": 969419281
+    },
+    {
+      "name": "LowerCase",
+      "category": "Calculator settings",
+      "offset": 92415,
+      "length": 302,
+      "crc32": 3101334920
+    },
+    {
+      "name": "LowerCaseNames",
+      "category": "Calculator settings",
+      "offset": 92717,
+      "length": 296,
+      "crc32": 2928205680
+    },
+    {
+      "name": "MantissaSpacing",
+      "category": "Calculator settings",
+      "offset": 93013,
+      "length": 383,
+      "crc32": 2114688239
+    },
+    {
+      "name": "MaxCallRecursion",
+      "category": "Calculator settings",
+      "offset": 93396,
+      "length": 363,
+      "crc32": 1947803242
+    },
+    {
+      "name": "MaxFactorIterations",
+      "category": "Calculator settings",
+      "offset": 93759,
+      "length": 356,
+      "crc32": 622060617
+    },
+    {
+      "name": "MaxFactorsBits",
+      "category": "Calculator settings",
+      "offset": 94115,
+      "length": 371,
+      "crc32": 647784421
+    },
+    {
+      "name": "MaxFlags",
+      "category": "Calculator settings",
+      "offset": 94486,
+      "length": 331,
+      "crc32": 497843124
+    },
+    {
+      "name": "MaximumDecimalExponent",
+      "category": "Calculator settings",
+      "offset": 94817,
+      "length": 425,
+      "crc32": 1719014230
+    },
+    {
+      "name": "MaximumShowHeight",
+      "category": "Calculator settings",
+      "offset": 95242,
+      "length": 400,
+      "crc32": 3954886326
+    },
+    {
+      "name": "MaximumShowWidth",
+      "category": "Calculator settings",
+      "offset": 95642,
+      "length": 395,
+      "crc32": 2619859727
+    },
+    {
+      "name": "MaxLaguerreIterations",
+      "category": "Calculator settings",
+      "offset": 96037,
+      "length": 383,
+      "crc32": 2960171598
+    },
+    {
+      "name": "MaxNameChainLength",
+      "category": "Calculator settings",
+      "offset": 96420,
+      "length": 363,
+      "crc32": 4050386653
+    },
+    {
+      "name": "MaxNumberBits",
+      "category": "Calculator settings",
+      "offset": 96783,
+      "length": 338,
+      "crc32": 2406565030
+    },
+    {
+      "name": "MaxPolynomialDegree",
+      "category": "Calculator settings",
+      "offset": 97121,
+      "length": 376,
+      "crc32": 1825357471
+    },
+    {
+      "name": "MaxRewrites",
+      "category": "Calculator settings",
+      "offset": 97497,
+      "length": 369,
+      "crc32": 2648569551
+    },
+    {
+      "name": "MaxRootDivisor",
+      "category": "Calculator settings",
+      "offset": 97866,
+      "length": 355,
+      "crc32": 3369128826
+    },
+    {
+      "name": "MaxStackDepth",
+      "category": "Calculator settings",
+      "offset": 98221,
+      "length": 386,
+      "crc32": 3583845237
+    },
+    {
+      "name": "MenuAppearance",
+      "category": "Calculator settings",
+      "offset": 98607,
+      "length": 411,
+      "crc32": 2163549756
+    },
+    {
+      "name": "MenuBackground",
+      "category": "Calculator settings",
+      "offset": 99018,
+      "length": 483,
+      "crc32": 966076083
+    },
+    {
+      "name": "MinimumBatteryVoltage",
+      "category": "Calculator settings",
+      "offset": 99501,
+      "length": 472,
+      "crc32": 3418768623
+    },
+    {
+      "name": "MinimumSignificantDigits",
+      "category": "Calculator settings",
+      "offset": 99973,
+      "length": 403,
+      "crc32": 1442369399
+    },
+    {
+      "name": "MixedFractions",
+      "category": "Calculator settings",
+      "offset": 100376,
+      "length": 316,
+      "crc32": 1579650160
+    },
+    {
+      "name": "ModernBasedNumbers",
+      "category": "Calculator settings",
+      "offset": 100692,
+      "length": 326,
+      "crc32": 1986237061
+    },
+    {
+      "name": "MonthBeforeDay",
+      "category": "Calculator settings",
+      "offset": 101018,
+      "length": 251,
+      "crc32": 3228024512
+    },
+    {
+      "name": "MultilineCursorFont",
+      "category": "Calculator settings",
+      "offset": 101269,
+      "length": 479,
+      "crc32": 1546063417
+    },
+    {
+      "name": "MultilineEditorFont",
+      "category": "Calculator settings",
+      "offset": 101748,
+      "length": 474,
+      "crc32": 411364843
+    },
+    {
+      "name": "MultiLineResult",
+      "category": "Calculator settings",
+      "offset": 102222,
+      "length": 287,
+      "crc32": 1999040023
+    },
+    {
+      "name": "MultiLineStack",
+      "category": "Calculator settings",
+      "offset": 102509,
+      "length": 282,
+      "crc32": 2208277425
+    },
+    {
+      "name": "NameDisplayMode",
+      "category": "Calculator settings",
+      "offset": 102791,
+      "length": 390,
+      "crc32": 975924084
+    },
+    {
+      "name": "NeedToClearErrors",
+      "category": "Calculator settings",
+      "offset": 103181,
+      "length": 370,
+      "crc32": 3433903460
+    },
+    {
+      "name": "NegativeUnderflowIndicator",
+      "category": "Calculator settings",
+      "offset": 103551,
+      "length": 308,
+      "crc32": 1471615706
+    },
+    {
+      "name": "NewStylePolynomials",
+      "category": "Calculator settings",
+      "offset": 103859,
+      "length": 332,
+      "crc32": 4221391776
+    },
+    {
+      "name": "NoAngleUnits",
+      "category": "Calculator settings",
+      "offset": 104191,
+      "length": 283,
+      "crc32": 245375477
+    },
+    {
+      "name": "NoAutoSimplify",
+      "category": "Calculator settings",
+      "offset": 104474,
+      "length": 307,
+      "crc32": 2481662313
+    },
+    {
+      "name": "NoCurveFilling",
+      "category": "Calculator settings",
+      "offset": 104781,
+      "length": 264,
+      "crc32": 3258581455
+    },
+    {
+      "name": "NoErrorForTooManyDigits",
+      "category": "Calculator settings",
+      "offset": 105045,
+      "length": 320,
+      "crc32": 541823759
+    },
+    {
+      "name": "NoInfiniteResult",
+      "category": "Calculator settings",
+      "offset": 105365,
+      "length": 340,
+      "crc32": 1925159388
+    },
+    {
+      "name": "NoLastArguments",
+      "category": "Calculator settings",
+      "offset": 105705,
+      "length": 272,
+      "crc32": 2196340234
+    },
+    {
+      "name": "NoLeadingZero",
+      "category": "Calculator settings",
+      "offset": 105977,
+      "length": 275,
+      "crc32": 3410398689
+    },
+    {
+      "name": "NoNeedToClearErrors",
+      "category": "Calculator settings",
+      "offset": 106252,
+      "length": 370,
+      "crc32": 910232825
+    },
+    {
+      "name": "NoNegativeUnderflow",
+      "category": "Calculator settings",
+      "offset": 106622,
+      "length": 308,
+      "crc32": 963581215
+    },
+    {
+      "name": "NoNumberedVariables",
+      "category": "Calculator settings",
+      "offset": 106930,
+      "length": 353,
+      "crc32": 729767370
+    },
+    {
+      "name": "NoOverflow",
+      "category": "Calculator settings",
+      "offset": 107283,
+      "length": 312,
+      "crc32": 724007285
+    },
+    {
+      "name": "NoPlotAxes",
+      "category": "Calculator settings",
+      "offset": 107595,
+      "length": 280,
+      "crc32": 2345444416
+    },
+    {
+      "name": "NoPositiveUnderflow",
+      "category": "Calculator settings",
+      "offset": 107875,
+      "length": 295,
+      "crc32": 1520454606
+    },
+    {
+      "name": "NoProgramLastArguments",
+      "category": "Calculator settings",
+      "offset": 108170,
+      "length": 317,
+      "crc32": 2536945139
+    },
+    {
+      "name": "NormalPolynomialRender",
+      "category": "Calculator settings",
+      "offset": 108487,
+      "length": 304,
+      "crc32": 563359034
+    },
+    {
+      "name": "NoStackAutoScale",
+      "category": "Calculator settings",
+      "offset": 108791,
+      "length": 277,
+      "crc32": 4282305919
+    },
+    {
+      "name": "NoStackSave",
+      "category": "Calculator settings",
+      "offset": 109068,
+      "length": 285,
+      "crc32": 2506946120
+    },
+    {
+      "name": "NoTrailingDecimal",
+      "category": "Calculator settings",
+      "offset": 109353,
+      "length": 323,
+      "crc32": 945914093
+    },
+    {
+      "name": "NoUndefinedResult",
+      "category": "Calculator settings",
+      "offset": 109676,
+      "length": 330,
+      "crc32": 2887511401
+    },
+    {
+      "name": "NumberDotOrComma",
+      "category": "Calculator settings",
+      "offset": 110006,
+      "length": 266,
+      "crc32": 3341091733
+    },
+    {
+      "name": "NumberedVariables",
+      "category": "Calculator settings",
+      "offset": 110272,
+      "length": 353,
+      "crc32": 1103120576
+    },
+    {
+      "name": "NumberSeparatorCommand",
+      "category": "Calculator settings",
+      "offset": 110625,
+      "length": 446,
+      "crc32": 2488393198
+    },
+    {
+      "name": "NumberSpaces",
+      "category": "Calculator settings",
+      "offset": 111071,
+      "length": 254,
+      "crc32": 2639856730
+    },
+    {
+      "name": "NumberTicks",
+      "category": "Calculator settings",
+      "offset": 111325,
+      "length": 252,
+      "crc32": 3121045356
+    },
+    {
+      "name": "NumberUnderscore",
+      "category": "Calculator settings",
+      "offset": 111577,
+      "length": 263,
+      "crc32": 1231262446
+    },
+    {
+      "name": "NumericalConstants",
+      "category": "Calculator settings",
+      "offset": 111840,
+      "length": 308,
+      "crc32": 3763059482
+    },
+    {
+      "name": "NumericalIntegration",
+      "category": "Calculator settings",
+      "offset": 112148,
+      "length": 307,
+      "crc32": 2029847891
+    },
+    {
+      "name": "NumericalResults",
+      "category": "Calculator settings",
+      "offset": 112455,
+      "length": 304,
+      "crc32": 2595688766
+    },
+    {
+      "name": "NumericalSolver",
+      "category": "Calculator settings",
+      "offset": 112759,
+      "length": 336,
+      "crc32": 918479610
+    },
+    {
+      "name": "Oct",
+      "category": "Calculator settings",
+      "offset": 113095,
+      "length": 778,
+      "crc32": 1744176024
+    },
+    {
+      "name": "OnesComplement",
+      "category": "Calculator settings",
+      "offset": 113873,
+      "length": 301,
+      "crc32": 3894452588
+    },
+    {
+      "name": "OverflowError",
+      "category": "Calculator settings",
+      "offset": 114174,
+      "length": 260,
+      "crc32": 3934798623
+    },
+    {
+      "name": "OverflowIndicator",
+      "category": "Calculator settings",
+      "offset": 114434,
+      "length": 312,
+      "crc32": 3221527081
+    },
+    {
+      "name": "OverflowValue",
+      "category": "Calculator settings",
+      "offset": 114746,
+      "length": 260,
+      "crc32": 2935854351
+    },
+    {
+      "name": "PackedBitmaps",
+      "category": "Calculator settings",
+      "offset": 115006,
+      "length": 277,
+      "crc32": 1052511806
+    },
+    {
+      "name": "PiRadians",
+      "category": "Calculator settings",
+      "offset": 115283,
+      "length": 323,
+      "crc32": 3835171983
+    },
+    {
+      "name": "PlotErrorBackground",
+      "category": "Calculator settings",
+      "offset": 115606,
+      "length": 509,
+      "crc32": 190289268
+    },
+    {
+      "name": "PlotRefreshRate",
+      "category": "Calculator settings",
+      "offset": 116115,
+      "length": 384,
+      "crc32": 2562148017
+    },
+    {
+      "name": "PositiveUnderflowIndicator",
+      "category": "Calculator settings",
+      "offset": 116499,
+      "length": 295,
+      "crc32": 2511231886
+    },
+    {
+      "name": "Precision",
+      "category": "Calculator settings",
+      "offset": 116794,
+      "length": 423,
+      "crc32": 1471834054
+    },
+    {
+      "name": "PrefixPolynomialRender",
+      "category": "Calculator settings",
+      "offset": 117217,
+      "length": 304,
+      "crc32": 993896253
+    },
+    {
+      "name": "PrincipalSolution",
+      "category": "Calculator settings",
+      "offset": 117521,
+      "length": 335,
+      "crc32": 970449557
+    },
+    {
+      "name": "ProgramLastArguments",
+      "category": "Calculator settings",
+      "offset": 117856,
+      "length": 317,
+      "crc32": 996566463
+    },
+    {
+      "name": "PushEvaluatedAssignment",
+      "category": "Calculator settings",
+      "offset": 118173,
+      "length": 323,
+      "crc32": 3927426545
+    },
+    {
+      "name": "PushOriginalAssignment",
+      "category": "Calculator settings",
+      "offset": 118496,
+      "length": 323,
+      "crc32": 3742563809
+    },
+    {
+      "name": "Rad",
+      "category": "Calculator settings",
+      "offset": 118819,
+      "length": 273,
+      "crc32": 1646392092
+    },
+    {
+      "name": "RandomGeneratorBits",
+      "category": "Calculator settings",
+      "offset": 119092,
+      "length": 372,
+      "crc32": 1916805256
+    },
+    {
+      "name": "RandomGeneratorOrder",
+      "category": "Calculator settings",
+      "offset": 119464,
+      "length": 442,
+      "crc32": 765986359
+    },
+    {
+      "name": "RealResults",
+      "category": "Calculator settings",
+      "offset": 119906,
+      "length": 306,
+      "crc32": 2483646596
+    },
+    {
+      "name": "ReportPrecisionLoss",
+      "category": "Calculator settings",
+      "offset": 120212,
+      "length": 311,
+      "crc32": 3525220674
+    },
+    {
+      "name": "ResultBackground",
+      "category": "Calculator settings",
+      "offset": 120523,
+      "length": 493,
+      "crc32": 3753572553
+    },
+    {
+      "name": "ResultFont",
+      "category": "Calculator settings",
+      "offset": 121016,
+      "length": 430,
+      "crc32": 3494325534
+    },
+    {
+      "name": "ResultForeground",
+      "category": "Calculator settings",
+      "offset": 121446,
+      "length": 493,
+      "crc32": 1096110816
+    },
+    {
+      "name": "ResultGraphingTimeLimit",
+      "category": "Calculator settings",
+      "offset": 121939,
+      "length": 411,
+      "crc32": 708142327
+    },
+    {
+      "name": "RightShiftBackground",
+      "category": "Calculator settings",
+      "offset": 122350,
+      "length": 514,
+      "crc32": 3884242789
+    },
+    {
+      "name": "RightShiftForeground",
+      "category": "Calculator settings",
+      "offset": 122864,
+      "length": 514,
+      "crc32": 1272124015
+    },
+    {
+      "name": "RoundedMenus",
+      "category": "Calculator settings",
+      "offset": 123378,
+      "length": 298,
+      "crc32": 3637501036
+    },
+    {
+      "name": "RoundMenuBackground",
+      "category": "Calculator settings",
+      "offset": 123676,
+      "length": 509,
+      "crc32": 2824003978
+    },
+    {
+      "name": "RoundMenuForeground",
+      "category": "Calculator settings",
+      "offset": 124185,
+      "length": 509,
+      "crc32": 2043227247
+    },
+    {
+      "name": "RunningIconForeground",
+      "category": "Calculator settings",
+      "offset": 124694,
+      "length": 519,
+      "crc32": 3781193652
+    },
+    {
+      "name": "RunStatsClearAfterRead",
+      "category": "Calculator settings",
+      "offset": 125213,
+      "length": 295,
+      "crc32": 3743981388
+    },
+    {
+      "name": "RunStatsKeepAfterRead",
+      "category": "Calculator settings",
+      "offset": 125508,
+      "length": 295,
+      "crc32": 1887973375
+    },
+    {
+      "name": "SaveLastArguments",
+      "category": "Calculator settings",
+      "offset": 125803,
+      "length": 272,
+      "crc32": 2194602596
+    },
+    {
+      "name": "SaveStack",
+      "category": "Calculator settings",
+      "offset": 126075,
+      "length": 285,
+      "crc32": 3468530787
+    },
+    {
+      "name": "Sci",
+      "category": "Calculator settings",
+      "offset": 126360,
+      "length": 298,
+      "crc32": 1487090571
+    },
+    {
+      "name": "SearchBackground",
+      "category": "Calculator settings",
+      "offset": 126658,
+      "length": 493,
+      "crc32": 3402667371
+    },
+    {
+      "name": "SearchForeground",
+      "category": "Calculator settings",
+      "offset": 127151,
+      "length": 493,
+      "crc32": 1413431106
+    },
+    {
+      "name": "SelectedMenuForeground",
+      "category": "Calculator settings",
+      "offset": 127644,
+      "length": 524,
+      "crc32": 3625198797
+    },
+    {
+      "name": "SelectionBackground",
+      "category": "Calculator settings",
+      "offset": 128168,
+      "length": 508,
+      "crc32": 509413032
+    },
+    {
+      "name": "SelectionForeground",
+      "category": "Calculator settings",
+      "offset": 128676,
+      "length": 508,
+      "crc32": 3485911885
+    },
+    {
+      "name": "SetAngleUnits",
+      "category": "Calculator settings",
+      "offset": 129184,
+      "length": 283,
+      "crc32": 4090608612
+    },
+    {
+      "name": "ShowAmbiguousNames",
+      "category": "Calculator settings",
+      "offset": 129467,
+      "length": 288,
+      "crc32": 4205825167
+    },
+    {
+      "name": "ShowAsDecimal",
+      "category": "Calculator settings",
+      "offset": 129755,
+      "length": 307,
+      "crc32": 2184907950
+    },
+    {
+      "name": "ShowBuiltinCharacters",
+      "category": "Calculator settings",
+      "offset": 130062,
+      "length": 295,
+      "crc32": 2332886197
+    },
+    {
+      "name": "ShowBuiltinConstants",
+      "category": "Calculator settings",
+      "offset": 130357,
+      "length": 290,
+      "crc32": 3628907318
+    },
+    {
+      "name": "ShowBuiltinEquations",
+      "category": "Calculator settings",
+      "offset": 130647,
+      "length": 299,
+      "crc32": 1185948671
+    },
+    {
+      "name": "ShowBuiltinLibrary",
+      "category": "Calculator settings",
+      "offset": 130946,
+      "length": 290,
+      "crc32": 1012522303
+    },
+    {
+      "name": "ShowBuiltinUnits",
+      "category": "Calculator settings",
+      "offset": 131236,
+      "length": 293,
+      "crc32": 1117765666
+    },
+    {
+      "name": "ShowDate",
+      "category": "Calculator settings",
+      "offset": 131529,
+      "length": 236,
+      "crc32": 1864572278
+    },
+    {
+      "name": "ShowDayOfWeek",
+      "category": "Calculator settings",
+      "offset": 131765,
+      "length": 248,
+      "crc32": 3129129889
+    },
+    {
+      "name": "ShowEmptyMenu",
+      "category": "Calculator settings",
+      "offset": 132013,
+      "length": 248,
+      "crc32": 1334489750
+    },
+    {
+      "name": "ShowEquationBody",
+      "category": "Calculator settings",
+      "offset": 132261,
+      "length": 296,
+      "crc32": 4223571275
+    },
+    {
+      "name": "ShowIntegersAndFractions",
+      "category": "Calculator settings",
+      "offset": 132557,
+      "length": 307,
+      "crc32": 796963659
+    },
+    {
+      "name": "ShowMonthName",
+      "category": "Calculator settings",
+      "offset": 132864,
+      "length": 247,
+      "crc32": 3945923077
+    },
+    {
+      "name": "ShowSeconds",
+      "category": "Calculator settings",
+      "offset": 133111,
+      "length": 257,
+      "crc32": 1150556513
+    },
+    {
+      "name": "ShowTime",
+      "category": "Calculator settings",
+      "offset": 133368,
+      "length": 237,
+      "crc32": 1823554684
+    },
+    {
+      "name": "ShowTimeLimit",
+      "category": "Calculator settings",
+      "offset": 133605,
+      "length": 363,
+      "crc32": 730575690
+    },
+    {
+      "name": "ShowVoltage",
+      "category": "Calculator settings",
+      "offset": 133968,
+      "length": 351,
+      "crc32": 2365425342
+    },
+    {
+      "name": "Sig",
+      "category": "Calculator settings",
+      "offset": 134319,
+      "length": 279,
+      "crc32": 923597833
+    },
+    {
+      "name": "SilentBeepOff",
+      "category": "Calculator settings",
+      "offset": 134598,
+      "length": 266,
+      "crc32": 3621270612
+    },
+    {
+      "name": "SilentBeepOn",
+      "category": "Calculator settings",
+      "offset": 134864,
+      "length": 266,
+      "crc32": 3304041542
+    },
+    {
+      "name": "SingleLineResult",
+      "category": "Calculator settings",
+      "offset": 135130,
+      "length": 287,
+      "crc32": 2333574938
+    },
+    {
+      "name": "SingleLineStack",
+      "category": "Calculator settings",
+      "offset": 135417,
+      "length": 282,
+      "crc32": 1708560402
+    },
+    {
+      "name": "SingleRowMenus",
+      "category": "Calculator settings",
+      "offset": 135699,
+      "length": 254,
+      "crc32": 409344167
+    },
+    {
+      "name": "SkippedMenuBackground",
+      "category": "Calculator settings",
+      "offset": 135953,
+      "length": 519,
+      "crc32": 288594120
+    },
+    {
+      "name": "SmallFractions",
+      "category": "Calculator settings",
+      "offset": 136472,
+      "length": 265,
+      "crc32": 3766858916
+    },
+    {
+      "name": "SoftwareDisplayRefresh",
+      "category": "Calculator settings",
+      "offset": 136737,
+      "length": 331,
+      "crc32": 1989366270
+    },
+    {
+      "name": "SoftwareFloatingPoint",
+      "category": "Calculator settings",
+      "offset": 137068,
+      "length": 352,
+      "crc32": 1945350296
+    },
+    {
+      "name": "SolverImprecision",
+      "category": "Calculator settings",
+      "offset": 137420,
+      "length": 362,
+      "crc32": 2016030248
+    },
+    {
+      "name": "SolverIterations",
+      "category": "Calculator settings",
+      "offset": 137782,
+      "length": 406,
+      "crc32": 2013955896
+    },
+    {
+      "name": "SolverShuffles",
+      "category": "Calculator settings",
+      "offset": 138188,
+      "length": 370,
+      "crc32": 3859210869
+    },
+    {
+      "name": "SquareMenuBackground",
+      "category": "Calculator settings",
+      "offset": 138558,
+      "length": 514,
+      "crc32": 3791044772
+    },
+    {
+      "name": "SquareMenuForeground",
+      "category": "Calculator settings",
+      "offset": 139072,
+      "length": 514,
+      "crc32": 1302398382
+    },
+    {
+      "name": "SquareMenus",
+      "category": "Calculator settings",
+      "offset": 139586,
+      "length": 298,
+      "crc32": 1948716455
+    },
+    {
+      "name": "StackBackground",
+      "category": "Calculator settings",
+      "offset": 139884,
+      "length": 488,
+      "crc32": 3173264405
+    },
+    {
+      "name": "StackFont",
+      "category": "Calculator settings",
+      "offset": 140372,
+      "length": 393,
+      "crc32": 3695477419
+    },
+    {
+      "name": "StackForeground",
+      "category": "Calculator settings",
+      "offset": 140765,
+      "length": 488,
+      "crc32": 1181957129
+    },
+    {
+      "name": "StackGraphingTimeLimit",
+      "category": "Calculator settings",
+      "offset": 141253,
+      "length": 402,
+      "crc32": 944883289
+    },
+    {
+      "name": "StackLevelBackground",
+      "category": "Calculator settings",
+      "offset": 141655,
+      "length": 514,
+      "crc32": 179784607
+    },
+    {
+      "name": "StackLevelForeground",
+      "category": "Calculator settings",
+      "offset": 142169,
+      "length": 514,
+      "crc32": 2799734421
+    },
+    {
+      "name": "StackLineForeground",
+      "category": "Calculator settings",
+      "offset": 142683,
+      "length": 509,
+      "crc32": 199880403
+    },
+    {
+      "name": "StandardExponent",
+      "category": "Calculator settings",
+      "offset": 143192,
+      "length": 325,
+      "crc32": 134354102
+    },
+    {
+      "name": "StateNameForeground",
+      "category": "Calculator settings",
+      "offset": 143517,
+      "length": 509,
+      "crc32": 1802842717
+    },
+    {
+      "name": "StatsPlotBins",
+      "category": "Calculator settings",
+      "offset": 144026,
+      "length": 386,
+      "crc32": 1776530616
+    },
+    {
+      "name": "Std",
+      "category": "Calculator settings",
+      "offset": 144412,
+      "length": 325,
+      "crc32": 1629303106
+    },
+    {
+      "name": "StepByStepAlgebraResults",
+      "category": "Calculator settings",
+      "offset": 144737,
+      "length": 309,
+      "crc32": 3153708701
+    },
+    {
+      "name": "SteppingIconForeground",
+      "category": "Calculator settings",
+      "offset": 145046,
+      "length": 524,
+      "crc32": 3409540248
+    },
+    {
+      "name": "StoreAtEnd",
+      "category": "Calculator settings",
+      "offset": 145570,
+      "length": 274,
+      "crc32": 2749721521
+    },
+    {
+      "name": "StoreAtStart",
+      "category": "Calculator settings",
+      "offset": 145844,
+      "length": 274,
+      "crc32": 1118930598
+    },
+    {
+      "name": "StrictArrayResizing",
+      "category": "Calculator settings",
+      "offset": 146118,
+      "length": 292,
+      "crc32": 552429226
+    },
+    {
+      "name": "SymbolicConstants",
+      "category": "Calculator settings",
+      "offset": 146410,
+      "length": 308,
+      "crc32": 3810906133
+    },
+    {
+      "name": "SymbolicIntegration",
+      "category": "Calculator settings",
+      "offset": 146718,
+      "length": 307,
+      "crc32": 1106748196
+    },
+    {
+      "name": "SymbolicResults",
+      "category": "Calculator settings",
+      "offset": 147025,
+      "length": 304,
+      "crc32": 2576638809
+    },
+    {
+      "name": "SymbolicSolver",
+      "category": "Calculator settings",
+      "offset": 147329,
+      "length": 336,
+      "crc32": 1387999872
+    },
+    {
+      "name": "TabWidth",
+      "category": "Calculator settings",
+      "offset": 147665,
+      "length": 370,
+      "crc32": 375616426
+    },
+    {
+      "name": "TextRenderingSizeLimit",
+      "category": "Calculator settings",
+      "offset": 148035,
+      "length": 387,
+      "crc32": 4165920660
+    },
+    {
+      "name": "TextResultDisplay",
+      "category": "Calculator settings",
+      "offset": 148422,
+      "length": 286,
+      "crc32": 3962692831
+    },
+    {
+      "name": "TextStackDisplay",
+      "category": "Calculator settings",
+      "offset": 148708,
+      "length": 281,
+      "crc32": 3436377657
+    },
+    {
+      "name": "ThreeRowsMenus",
+      "category": "Calculator settings",
+      "offset": 148989,
+      "length": 254,
+      "crc32": 1576927767
+    },
+    {
+      "name": "Time12H",
+      "category": "Calculator settings",
+      "offset": 149243,
+      "length": 229,
+      "crc32": 3448885176
+    },
+    {
+      "name": "Time24H",
+      "category": "Calculator settings",
+      "offset": 149472,
+      "length": 229,
+      "crc32": 3547479641
+    },
+    {
+      "name": "TimeForeground",
+      "category": "Calculator settings",
+      "offset": 149701,
+      "length": 483,
+      "crc32": 2288585739
+    },
+    {
+      "name": "TooManyDigitsErrors",
+      "category": "Calculator settings",
+      "offset": 150184,
+      "length": 320,
+      "crc32": 2834312943
+    },
+    {
+      "name": "TrailingDecimal",
+      "category": "Calculator settings",
+      "offset": 150504,
+      "length": 323,
+      "crc32": 1514189819
+    },
+    {
+      "name": "TruthLogicForIntegers",
+      "category": "Calculator settings",
+      "offset": 150827,
+      "length": 312,
+      "crc32": 2619958688
+    },
+    {
+      "name": "TVMPayAtBeginningOfPeriod",
+      "category": "Calculator settings",
+      "offset": 151139,
+      "length": 353,
+      "crc32": 3268285612
+    },
+    {
+      "name": "TVMPayAtEndOfPeriod",
+      "category": "Calculator settings",
+      "offset": 151492,
+      "length": 353,
+      "crc32": 2619069698
+    },
+    {
+      "name": "TwoDigitYear",
+      "category": "Calculator settings",
+      "offset": 151845,
+      "length": 261,
+      "crc32": 3006557236
+    },
+    {
+      "name": "TwosComplement",
+      "category": "Calculator settings",
+      "offset": 152106,
+      "length": 301,
+      "crc32": 597560975
+    },
+    {
+      "name": "UndefinedError",
+      "category": "Calculator settings",
+      "offset": 152407,
+      "length": 266,
+      "crc32": 3714559450
+    },
+    {
+      "name": "UndefinedResultIndicator",
+      "category": "Calculator settings",
+      "offset": 152673,
+      "length": 330,
+      "crc32": 2752811558
+    },
+    {
+      "name": "UndefinedValue",
+      "category": "Calculator settings",
+      "offset": 153003,
+      "length": 266,
+      "crc32": 2995332490
+    },
+    {
+      "name": "UnderflowError",
+      "category": "Calculator settings",
+      "offset": 153269,
+      "length": 291,
+      "crc32": 2840334257
+    },
+    {
+      "name": "UnderflowValue",
+      "category": "Calculator settings",
+      "offset": 153560,
+      "length": 291,
+      "crc32": 3332540385
+    },
+    {
+      "name": "UnimplementedForeground",
+      "category": "Calculator settings",
+      "offset": 153851,
+      "length": 528,
+      "crc32": 3018071115
+    },
+    {
+      "name": "UpperCase",
+      "category": "Calculator settings",
+      "offset": 154379,
+      "length": 302,
+      "crc32": 1474505445
+    },
+    {
+      "name": "UpperCaseNames",
+      "category": "Calculator settings",
+      "offset": 154681,
+      "length": 296,
+      "crc32": 2171349063
+    },
+    {
+      "name": "UseCrossForMultiplication",
+      "category": "Calculator settings",
+      "offset": 154977,
+      "length": 329,
+      "crc32": 321299594
+    },
+    {
+      "name": "UseDotForMultiplication",
+      "category": "Calculator settings",
+      "offset": 155306,
+      "length": 329,
+      "crc32": 3271225639
+    },
+    {
+      "name": "UserCommandBackground",
+      "category": "Calculator settings",
+      "offset": 155635,
+      "length": 519,
+      "crc32": 701620949
+    },
+    {
+      "name": "UserCommandBorder",
+      "category": "Calculator settings",
+      "offset": 156154,
+      "length": 499,
+      "crc32": 4147974818
+    },
+    {
+      "name": "UserCommandForeground",
+      "category": "Calculator settings",
+      "offset": 156653,
+      "length": 519,
+      "crc32": 3981758615
+    },
+    {
+      "name": "UserMode",
+      "category": "Calculator settings",
+      "offset": 157172,
+      "length": 332,
+      "crc32": 3126214213
+    },
+    {
+      "name": "UserModeLock",
+      "category": "Calculator settings",
+      "offset": 157504,
+      "length": 270,
+      "crc32": 700311175
+    },
+    {
+      "name": "UserModeOff",
+      "category": "Calculator settings",
+      "offset": 157774,
+      "length": 332,
+      "crc32": 1632813969
+    },
+    {
+      "name": "UserModeOnce",
+      "category": "Calculator settings",
+      "offset": 158106,
+      "length": 270,
+      "crc32": 1525159502
+    },
+    {
+      "name": "VariableWidthDigits",
+      "category": "Calculator settings",
+      "offset": 158376,
+      "length": 319,
+      "crc32": 425837529
+    },
+    {
+      "name": "VerticalLists",
+      "category": "Calculator settings",
+      "offset": 158695,
+      "length": 256,
+      "crc32": 1934673454
+    },
+    {
+      "name": "VerticalProgramRendering",
+      "category": "Calculator settings",
+      "offset": 158951,
+      "length": 315,
+      "crc32": 4026302744
+    },
+    {
+      "name": "VerticalVectors",
+      "category": "Calculator settings",
+      "offset": 159266,
+      "length": 269,
+      "crc32": 3371169125
+    },
+    {
+      "name": "VoltageForeground",
+      "category": "Calculator settings",
+      "offset": 159535,
+      "length": 498,
+      "crc32": 4274100011
+    },
+    {
+      "name": "WordSize",
+      "category": "Calculator settings",
+      "offset": 160033,
+      "length": 375,
+      "crc32": 2875722234
+    },
+    {
+      "name": "XYPlotBins",
+      "category": "Calculator settings",
+      "offset": 160408,
+      "length": 320,
+      "crc32": 4021525756
+    },
+    {
+      "name": "YearFirst",
+      "category": "Calculator settings",
+      "offset": 160728,
+      "length": 243,
+      "crc32": 3534131687
+    },
+    {
+      "name": "YearLast",
+      "category": "Calculator settings",
+      "offset": 160971,
+      "length": 243,
+      "crc32": 3746354461
+    },
+    {
+      "name": "ZeroOverZeroIsError",
+      "category": "Calculator settings",
+      "offset": 161214,
+      "length": 283,
+      "crc32": 2460370254
+    },
+    {
+      "name": "ZeroOverZeroIsUndefined",
+      "category": "Calculator settings",
+      "offset": 161497,
+      "length": 283,
+      "crc32": 1165659430
+    },
+    {
+      "name": "ZeroPowerZeroIsOne",
+      "category": "Calculator settings",
+      "offset": 161780,
+      "length": 267,
+      "crc32": 4174165695
+    },
+    {
+      "name": "ZeroPowerZeroIsUndefined",
+      "category": "Calculator settings",
+      "offset": 162047,
+      "length": 267,
+      "crc32": 1507686808
+    },
+    {
+      "name": "AddColumn",
+      "category": "Complex numbers and matrices",
+      "offset": 162314,
+      "length": 369,
+      "crc32": 516740698
+    },
+    {
+      "name": "AddRow",
+      "category": "Complex numbers and matrices",
+      "offset": 162683,
+      "length": 363,
+      "crc32": 3805640014
+    },
+    {
+      "name": "arg",
+      "category": "Complex numbers and matrices",
+      "offset": 163046,
+      "length": 140,
+      "crc32": 35788893
+    },
+    {
+      "name": "ColumnNorm",
+      "category": "Complex numbers and matrices",
+      "offset": 163186,
+      "length": 55,
+      "crc32": 1343700932
+    },
+    {
+      "name": "ColumnsToMatrix",
+      "category": "Complex numbers and matrices",
+      "offset": 163241,
+      "length": 259,
+      "crc32": 1940628759
+    },
+    {
+      "name": "ColumnSwap",
+      "category": "Complex numbers and matrices",
+      "offset": 163500,
+      "length": 138,
+      "crc32": 1419572880
+    },
+    {
+      "name": "conj",
+      "category": "Complex numbers and matrices",
+      "offset": 163638,
+      "length": 72,
+      "crc32": 1371722073
+    },
+    {
+      "name": "ConstantArray",
+      "category": "Complex numbers and matrices",
+      "offset": 163710,
+      "length": 132,
+      "crc32": 1010426519
+    },
+    {
+      "name": "cross",
+      "category": "Complex numbers and matrices",
+      "offset": 163842,
+      "length": 137,
+      "crc32": 2518284974
+    },
+    {
+      "name": "DeleteColumn",
+      "category": "Complex numbers and matrices",
+      "offset": 163979,
+      "length": 204,
+      "crc32": 2564130653
+    },
+    {
+      "name": "DeleteRow",
+      "category": "Complex numbers and matrices",
+      "offset": 164183,
+      "length": 183,
+      "crc32": 2355318186
+    },
+    {
+      "name": "det",
+      "category": "Complex numbers and matrices",
+      "offset": 164366,
+      "length": 80,
+      "crc32": 1358784244
+    },
+    {
+      "name": "dot",
+      "category": "Complex numbers and matrices",
+      "offset": 164446,
+      "length": 115,
+      "crc32": 2795682244
+    },
+    {
+      "name": "FromArray",
+      "category": "Complex numbers and matrices",
+      "offset": 164561,
+      "length": 186,
+      "crc32": 1144260533
+    },
+    {
+      "name": "FromVector",
+      "category": "Complex numbers and matrices",
+      "offset": 164747,
+      "length": 218,
+      "crc32": 1282642846
+    },
+    {
+      "name": "IdentityMatrix",
+      "category": "Complex numbers and matrices",
+      "offset": 164965,
+      "length": 129,
+      "crc32": 2586057648
+    },
+    {
+      "name": "im",
+      "category": "Complex numbers and matrices",
+      "offset": 165094,
+      "length": 81,
+      "crc32": 1209082869
+    },
+    {
+      "name": "LU",
+      "category": "Complex numbers and matrices",
+      "offset": 165175,
+      "length": 148,
+      "crc32": 1046001079
+    },
+    {
+      "name": "MatrixToColumns",
+      "category": "Complex numbers and matrices",
+      "offset": 165323,
+      "length": 231,
+      "crc32": 2605075282
+    },
+    {
+      "name": "MatrixToRows",
+      "category": "Complex numbers and matrices",
+      "offset": 165554,
+      "length": 222,
+      "crc32": 3893732596
+    },
+    {
+      "name": "norm",
+      "category": "Complex numbers and matrices",
+      "offset": 165776,
+      "length": 86,
+      "crc32": 2826730285
+    },
+    {
+      "name": "PolarToReal",
+      "category": "Complex numbers and matrices",
+      "offset": 165862,
+      "length": 97,
+      "crc32": 2257070654
+    },
+    {
+      "name": "RandomMatrix",
+      "category": "Complex numbers and matrices",
+      "offset": 165959,
+      "length": 102,
+      "crc32": 2743120324
+    },
+    {
+      "name": "re",
+      "category": "Complex numbers and matrices",
+      "offset": 166061,
+      "length": 76,
+      "crc32": 527916969
+    },
+    {
+      "name": "RealToPolar",
+      "category": "Complex numbers and matrices",
+      "offset": 166137,
+      "length": 148,
+      "crc32": 3647402524
+    },
+    {
+      "name": "RealToRectangular",
+      "category": "Complex numbers and matrices",
+      "offset": 166285,
+      "length": 169,
+      "crc32": 2516733771
+    },
+    {
+      "name": "RectangularToReal",
+      "category": "Complex numbers and matrices",
+      "offset": 166454,
+      "length": 215,
+      "crc32": 2851903969
+    },
+    {
+      "name": "REF",
+      "category": "Complex numbers and matrices",
+      "offset": 166669,
+      "length": 73,
+      "crc32": 3924236541
+    },
+    {
+      "name": "RowNorm",
+      "category": "Complex numbers and matrices",
+      "offset": 166742,
+      "length": 52,
+      "crc32": 1606603802
+    },
+    {
+      "name": "RowsToMatrix",
+      "category": "Complex numbers and matrices",
+      "offset": 166794,
+      "length": 256,
+      "crc32": 3967959609
+    },
+    {
+      "name": "RowSwap",
+      "category": "Complex numbers and matrices",
+      "offset": 167050,
+      "length": 132,
+      "crc32": 3115167880
+    },
+    {
+      "name": "RREF",
+      "category": "Complex numbers and matrices",
+      "offset": 167182,
+      "length": 151,
+      "crc32": 1864264144
+    },
+    {
+      "name": "RREFMOD",
+      "category": "Complex numbers and matrices",
+      "offset": 167333,
+      "length": 176,
+      "crc32": 3935185022
+    },
+    {
+      "name": "RREFP",
+      "category": "Complex numbers and matrices",
+      "offset": 167509,
+      "length": 357,
+      "crc32": 3997947055
+    },
+    {
+      "name": "To2DVector",
+      "category": "Complex numbers and matrices",
+      "offset": 167866,
+      "length": 216,
+      "crc32": 1824585864
+    },
+    {
+      "name": "To3DVector",
+      "category": "Complex numbers and matrices",
+      "offset": 168082,
+      "length": 222,
+      "crc32": 1913403756
+    },
+    {
+      "name": "ToArray",
+      "category": "Complex numbers and matrices",
+      "offset": 168304,
+      "length": 150,
+      "crc32": 68634597
+    },
+    {
+      "name": "ToCylindrical",
+      "category": "Complex numbers and matrices",
+      "offset": 168454,
+      "length": 77,
+      "crc32": 3341210051
+    },
+    {
+      "name": "ToPolar",
+      "category": "Complex numbers and matrices",
+      "offset": 168531,
+      "length": 90,
+      "crc32": 2655083549
+    },
+    {
+      "name": "ToRectangular",
+      "category": "Complex numbers and matrices",
+      "offset": 168621,
+      "length": 264,
+      "crc32": 4005125376
+    },
+    {
+      "name": "ToSpherical",
+      "category": "Complex numbers and matrices",
+      "offset": 168885,
+      "length": 73,
+      "crc32": 2943533471
+    },
+    {
+      "name": "TransConjugate",
+      "category": "Complex numbers and matrices",
+      "offset": 168958,
+      "length": 71,
+      "crc32": 1006867902
+    },
+    {
+      "name": "Transpose",
+      "category": "Complex numbers and matrices",
+      "offset": 169029,
+      "length": 122,
+      "crc32": 1410736835
+    },
+    {
+      "name": "ChronoTime",
+      "category": "Dates and time",
+      "offset": 169151,
+      "length": 113,
+      "crc32": 2761407202
+    },
+    {
+      "name": "Date",
+      "category": "Dates and time",
+      "offset": 169264,
+      "length": 47,
+      "crc32": 4206246015
+    },
+    {
+      "name": "DateAdd",
+      "category": "Dates and time",
+      "offset": 169311,
+      "length": 70,
+      "crc32": 1744056596
+    },
+    {
+      "name": "DateFromJulianDayNumber",
+      "category": "Dates and time",
+      "offset": 169381,
+      "length": 67,
+      "crc32": 2893268208
+    },
+    {
+      "name": "DateSub",
+      "category": "Dates and time",
+      "offset": 169448,
+      "length": 236,
+      "crc32": 3685146550
+    },
+    {
+      "name": "DateTime",
+      "category": "Dates and time",
+      "offset": 169684,
+      "length": 38,
+      "crc32": 1089843877
+    },
+    {
+      "name": "DegreesToRadians",
+      "category": "Dates and time",
+      "offset": 169722,
+      "length": 192,
+      "crc32": 1952513008
+    },
+    {
+      "name": "DMSAdd",
+      "category": "Dates and time",
+      "offset": 169914,
+      "length": 66,
+      "crc32": 1693122912
+    },
+    {
+      "name": "DMSSub",
+      "category": "Dates and time",
+      "offset": 169980,
+      "length": 67,
+      "crc32": 2491542720
+    },
+    {
+      "name": "FromDMS",
+      "category": "Dates and time",
+      "offset": 170047,
+      "length": 128,
+      "crc32": 29326324
+    },
+    {
+      "name": "FromHMS",
+      "category": "Dates and time",
+      "offset": 170175,
+      "length": 129,
+      "crc32": 4033878873
+    },
+    {
+      "name": "HMSAdd",
+      "category": "Dates and time",
+      "offset": 170304,
+      "length": 64,
+      "crc32": 2414942563
+    },
+    {
+      "name": "HMSSub",
+      "category": "Dates and time",
+      "offset": 170368,
+      "length": 65,
+      "crc32": 395765947
+    },
+    {
+      "name": "JulianDayNumber",
+      "category": "Dates and time",
+      "offset": 170433,
+      "length": 208,
+      "crc32": 950767575
+    },
+    {
+      "name": "RadiansToDegrees",
+      "category": "Dates and time",
+      "offset": 170641,
+      "length": 193,
+      "crc32": 2327428931
+    },
+    {
+      "name": "SetDate",
+      "category": "Dates and time",
+      "offset": 170834,
+      "length": 144,
+      "crc32": 2412247224
+    },
+    {
+      "name": "SetTime",
+      "category": "Dates and time",
+      "offset": 170978,
+      "length": 131,
+      "crc32": 682162177
+    },
+    {
+      "name": "Ticks",
+      "category": "Dates and time",
+      "offset": 171109,
+      "length": 61,
+      "crc32": 3915779514
+    },
+    {
+      "name": "Time",
+      "category": "Dates and time",
+      "offset": 171170,
+      "length": 47,
+      "crc32": 156834745
+    },
+    {
+      "name": "ToDegrees",
+      "category": "Dates and time",
+      "offset": 171217,
+      "length": 69,
+      "crc32": 2858198445
+    },
+    {
+      "name": "ToDMS",
+      "category": "Dates and time",
+      "offset": 171286,
+      "length": 127,
+      "crc32": 3585796186
+    },
+    {
+      "name": "ToGrads",
+      "category": "Dates and time",
+      "offset": 171413,
+      "length": 94,
+      "crc32": 3665825176
+    },
+    {
+      "name": "ToHMS",
+      "category": "Dates and time",
+      "offset": 171507,
+      "length": 116,
+      "crc32": 3495676111
+    },
+    {
+      "name": "ToPiRadians",
+      "category": "Dates and time",
+      "offset": 171623,
+      "length": 109,
+      "crc32": 1264421051
+    },
+    {
+      "name": "ToRadians",
+      "category": "Dates and time",
+      "offset": 171732,
+      "length": 69,
+      "crc32": 3450045092
+    },
+    {
+      "name": "acos",
+      "category": "Functions",
+      "offset": 171801,
+      "length": 216,
+      "crc32": 3227270744
+    },
+    {
+      "name": "acosh",
+      "category": "Functions",
+      "offset": 172017,
+      "length": 221,
+      "crc32": 1755552106
+    },
+    {
+      "name": "acot",
+      "category": "Functions",
+      "offset": 172238,
+      "length": 220,
+      "crc32": 3301600769
+    },
+    {
+      "name": "acoth",
+      "category": "Functions",
+      "offset": 172458,
+      "length": 188,
+      "crc32": 340819301
+    },
+    {
+      "name": "acsc",
+      "category": "Functions",
+      "offset": 172646,
+      "length": 219,
+      "crc32": 2211857335
+    },
+    {
+      "name": "acsch",
+      "category": "Functions",
+      "offset": 172865,
+      "length": 187,
+      "crc32": 634480506
+    },
+    {
+      "name": "asec",
+      "category": "Functions",
+      "offset": 173052,
+      "length": 216,
+      "crc32": 2209647906
+    },
+    {
+      "name": "asech",
+      "category": "Functions",
+      "offset": 173268,
+      "length": 185,
+      "crc32": 4080306740
+    },
+    {
+      "name": "asin",
+      "category": "Functions",
+      "offset": 173453,
+      "length": 215,
+      "crc32": 3346559910
+    },
+    {
+      "name": "asinh",
+      "category": "Functions",
+      "offset": 173668,
+      "length": 219,
+      "crc32": 3290823614
+    },
+    {
+      "name": "atan",
+      "category": "Functions",
+      "offset": 173887,
+      "length": 217,
+      "crc32": 811284550
+    },
+    {
+      "name": "atan2",
+      "category": "Functions",
+      "offset": 174104,
+      "length": 154,
+      "crc32": 1190859236
+    },
+    {
+      "name": "atanh",
+      "category": "Functions",
+      "offset": 174258,
+      "length": 222,
+      "crc32": 2108532866
+    },
+    {
+      "name": "BetaI",
+      "category": "Functions",
+      "offset": 174480,
+      "length": 166,
+      "crc32": 1462263310
+    },
+    {
+      "name": "comb",
+      "category": "Functions",
+      "offset": 174646,
+      "length": 154,
+      "crc32": 2452951564
+    },
+    {
+      "name": "cos",
+      "category": "Functions",
+      "offset": 174800,
+      "length": 162,
+      "crc32": 751024143
+    },
+    {
+      "name": "cosh",
+      "category": "Functions",
+      "offset": 174962,
+      "length": 180,
+      "crc32": 3045011112
+    },
+    {
+      "name": "cot",
+      "category": "Functions",
+      "offset": 175142,
+      "length": 167,
+      "crc32": 1987901766
+    },
+    {
+      "name": "coth",
+      "category": "Functions",
+      "offset": 175309,
+      "length": 148,
+      "crc32": 3269394011
+    },
+    {
+      "name": "csc",
+      "category": "Functions",
+      "offset": 175457,
+      "length": 166,
+      "crc32": 3978205965
+    },
+    {
+      "name": "csch",
+      "category": "Functions",
+      "offset": 175623,
+      "length": 147,
+      "crc32": 774567655
+    },
+    {
+      "name": "erf",
+      "category": "Functions",
+      "offset": 175770,
+      "length": 233,
+      "crc32": 2836544238
+    },
+    {
+      "name": "erfc",
+      "category": "Functions",
+      "offset": 176003,
+      "length": 248,
+      "crc32": 1297961923
+    },
+    {
+      "name": "exp",
+      "category": "Functions",
+      "offset": 176251,
+      "length": 177,
+      "crc32": 659084090
+    },
+    {
+      "name": "exp10",
+      "category": "Functions",
+      "offset": 176428,
+      "length": 208,
+      "crc32": 1474455074
+    },
+    {
+      "name": "exp2",
+      "category": "Functions",
+      "offset": 176636,
+      "length": 206,
+      "crc32": 2399969537
+    },
+    {
+      "name": "expm1",
+      "category": "Functions",
+      "offset": 176842,
+      "length": 204,
+      "crc32": 2603760407
+    },
+    {
+      "name": "fact",
+      "category": "Functions",
+      "offset": 177046,
+      "length": 177,
+      "crc32": 1524052200
+    },
+    {
+      "name": "GammaP",
+      "category": "Functions",
+      "offset": 177223,
+      "length": 138,
+      "crc32": 3397462279
+    },
+    {
+      "name": "lgamma",
+      "category": "Functions",
+      "offset": 177361,
+      "length": 289,
+      "crc32": 576156423
+    },
+    {
+      "name": "ln",
+      "category": "Functions",
+      "offset": 177650,
+      "length": 178,
+      "crc32": 1203670405
+    },
+    {
+      "name": "ln1p",
+      "category": "Functions",
+      "offset": 177828,
+      "length": 214,
+      "crc32": 4224624216
+    },
+    {
+      "name": "log10",
+      "category": "Functions",
+      "offset": 178042,
+      "length": 208,
+      "crc32": 2115549623
+    },
+    {
+      "name": "log2",
+      "category": "Functions",
+      "offset": 178250,
+      "length": 181,
+      "crc32": 3860328484
+    },
+    {
+      "name": "perm",
+      "category": "Functions",
+      "offset": 178431,
+      "length": 152,
+      "crc32": 4187904686
+    },
+    {
+      "name": "sec",
+      "category": "Functions",
+      "offset": 178583,
+      "length": 163,
+      "crc32": 3504072470
+    },
+    {
+      "name": "sech",
+      "category": "Functions",
+      "offset": 178746,
+      "length": 180,
+      "crc32": 2609233906
+    },
+    {
+      "name": "sin",
+      "category": "Functions",
+      "offset": 178926,
+      "length": 161,
+      "crc32": 1473174260
+    },
+    {
+      "name": "sinh",
+      "category": "Functions",
+      "offset": 179087,
+      "length": 178,
+      "crc32": 1540131816
+    },
+    {
+      "name": "tan",
+      "category": "Functions",
+      "offset": 179265,
+      "length": 163,
+      "crc32": 2610342944
+    },
+    {
+      "name": "tanh",
+      "category": "Functions",
+      "offset": 179428,
+      "length": 181,
+      "crc32": 661857886
+    },
+    {
+      "name": "tgamma",
+      "category": "Functions",
+      "offset": 179609,
+      "length": 269,
+      "crc32": 1321548565
+    },
+    {
+      "name": "UTPC",
+      "category": "Functions",
+      "offset": 179878,
+      "length": 170,
+      "crc32": 485217388
+    },
+    {
+      "name": "UTPF",
+      "category": "Functions",
+      "offset": 180048,
+      "length": 185,
+      "crc32": 798515750
+    },
+    {
+      "name": "UTPN",
+      "category": "Functions",
+      "offset": 180233,
+      "length": 180,
+      "crc32": 2290468105
+    },
+    {
+      "name": "UTPT",
+      "category": "Functions",
+      "offset": 180413,
+      "length": 129,
+      "crc32": 2864092240
+    },
+    {
+      "name": "Bar",
+      "category": "Graphics",
+      "offset": 180542,
+      "length": 63,
+      "crc32": 3774405889
+    },
+    {
+      "name": "BlankBitmap",
+      "category": "Graphics",
+      "offset": 180605,
+      "length": 58,
+      "crc32": 1765972578
+    },
+    {
+      "name": "BlankGraphic",
+      "category": "Graphics",
+      "offset": 180663,
+      "length": 84,
+      "crc32": 576220984
+    },
+    {
+      "name": "BlankGrob",
+      "category": "Graphics",
+      "offset": 180747,
+      "length": 70,
+      "crc32": 3925096424
+    },
+    {
+      "name": "BlankPixmap",
+      "category": "Graphics",
+      "offset": 180817,
+      "length": 54,
+      "crc32": 3967874088
+    },
+    {
+      "name": "Center",
+      "category": "Graphics",
+      "offset": 180871,
+      "length": 67,
+      "crc32": 3374818334
+    },
+    {
+      "name": "Circle",
+      "category": "Graphics",
+      "offset": 180938,
+      "length": 112,
+      "crc32": 3542032963
+    },
+    {
+      "name": "Clip",
+      "category": "Graphics",
+      "offset": 181050,
+      "length": 65,
+      "crc32": 4250481098
+    },
+    {
+      "name": "ClLCD",
+      "category": "Graphics",
+      "offset": 181115,
+      "length": 65,
+      "crc32": 3994767226
+    },
+    {
+      "name": "Color",
+      "category": "Graphics",
+      "offset": 181180,
+      "length": 106,
+      "crc32": 1872567977
+    },
+    {
+      "name": "CurrentClip",
+      "category": "Graphics",
+      "offset": 181286,
+      "length": 51,
+      "crc32": 2277451919
+    },
+    {
+      "name": "Depnd",
+      "category": "Graphics",
+      "offset": 181337,
+      "length": 91,
+      "crc32": 557678781
+    },
+    {
+      "name": "Disp",
+      "category": "Graphics",
+      "offset": 181428,
+      "length": 103,
+      "crc32": 1031312632
+    },
+    {
+      "name": "DispXY",
+      "category": "Graphics",
+      "offset": 181531,
+      "length": 104,
+      "crc32": 1591094430
+    },
+    {
+      "name": "Draw",
+      "category": "Graphics",
+      "offset": 181635,
+      "length": 143,
+      "crc32": 3747291950
+    },
+    {
+      "name": "Drax",
+      "category": "Graphics",
+      "offset": 181778,
+      "length": 95,
+      "crc32": 3329397330
+    },
+    {
+      "name": "Ellipse",
+      "category": "Graphics",
+      "offset": 181873,
+      "length": 104,
+      "crc32": 3002662554
+    },
+    {
+      "name": "Freeze",
+      "category": "Graphics",
+      "offset": 181977,
+      "length": 102,
+      "crc32": 2743887809
+    },
+    {
+      "name": "FromLCD",
+      "category": "Graphics",
+      "offset": 182079,
+      "length": 95,
+      "crc32": 3976241293
+    },
+    {
+      "name": "Function",
+      "category": "Graphics",
+      "offset": 182174,
+      "length": 90,
+      "crc32": 965701740
+    },
+    {
+      "name": "GAnd",
+      "category": "Graphics",
+      "offset": 182264,
+      "length": 67,
+      "crc32": 2649227675
+    },
+    {
+      "name": "GOr",
+      "category": "Graphics",
+      "offset": 182331,
+      "length": 65,
+      "crc32": 424975503
+    },
+    {
+      "name": "GraphicAppend",
+      "category": "Graphics",
+      "offset": 182396,
+      "length": 35,
+      "crc32": 3153484339
+    },
+    {
+      "name": "GraphicExponent",
+      "category": "Graphics",
+      "offset": 182431,
+      "length": 43,
+      "crc32": 2916037714
+    },
+    {
+      "name": "GraphicIntegral",
+      "category": "Graphics",
+      "offset": 182474,
+      "length": 49,
+      "crc32": 1551873996
+    },
+    {
+      "name": "GraphicNorm",
+      "category": "Graphics",
+      "offset": 182523,
+      "length": 42,
+      "crc32": 1812211116
+    },
+    {
+      "name": "GraphicParentheses",
+      "category": "Graphics",
+      "offset": 182565,
+      "length": 44,
+      "crc32": 1832241167
+    },
+    {
+      "name": "GraphicProduct",
+      "category": "Graphics",
+      "offset": 182609,
+      "length": 48,
+      "crc32": 1712109027
+    },
+    {
+      "name": "GraphicRatio",
+      "category": "Graphics",
+      "offset": 182657,
+      "length": 39,
+      "crc32": 1752407820
+    },
+    {
+      "name": "GraphicRoot",
+      "category": "Graphics",
+      "offset": 182696,
+      "length": 43,
+      "crc32": 274420503
+    },
+    {
+      "name": "GraphicStack",
+      "category": "Graphics",
+      "offset": 182739,
+      "length": 71,
+      "crc32": 1846571152
+    },
+    {
+      "name": "GraphicSubscript",
+      "category": "Graphics",
+      "offset": 182810,
+      "length": 43,
+      "crc32": 2235418053
+    },
+    {
+      "name": "GraphicSum",
+      "category": "Graphics",
+      "offset": 182853,
+      "length": 50,
+      "crc32": 3415356680
+    },
+    {
+      "name": "Gray",
+      "category": "Graphics",
+      "offset": 182903,
+      "length": 115,
+      "crc32": 3420652273
+    },
+    {
+      "name": "GXor",
+      "category": "Graphics",
+      "offset": 183018,
+      "length": 76,
+      "crc32": 1491077488
+    },
+    {
+      "name": "Histogram",
+      "category": "Graphics",
+      "offset": 183094,
+      "length": 69,
+      "crc32": 3269716377
+    },
+    {
+      "name": "HSV",
+      "category": "Graphics",
+      "offset": 183163,
+      "length": 88,
+      "crc32": 3567576653
+    },
+    {
+      "name": "Indep",
+      "category": "Graphics",
+      "offset": 183251,
+      "length": 95,
+      "crc32": 1618022909
+    },
+    {
+      "name": "Line",
+      "category": "Graphics",
+      "offset": 183346,
+      "length": 95,
+      "crc32": 1317509810
+    },
+    {
+      "name": "Parametric",
+      "category": "Graphics",
+      "offset": 183441,
+      "length": 94,
+      "crc32": 4239263592
+    },
+    {
+      "name": "Pict",
+      "category": "Graphics",
+      "offset": 183535,
+      "length": 79,
+      "crc32": 3729512513
+    },
+    {
+      "name": "PixColor",
+      "category": "Graphics",
+      "offset": 183614,
+      "length": 92,
+      "crc32": 1953820672
+    },
+    {
+      "name": "PixOff",
+      "category": "Graphics",
+      "offset": 183706,
+      "length": 121,
+      "crc32": 368939579
+    },
+    {
+      "name": "PixOn",
+      "category": "Graphics",
+      "offset": 183827,
+      "length": 109,
+      "crc32": 3418882804
+    },
+    {
+      "name": "PixTest",
+      "category": "Graphics",
+      "offset": 183936,
+      "length": 92,
+      "crc32": 3990525661
+    },
+    {
+      "name": "PlotMax",
+      "category": "Graphics",
+      "offset": 184028,
+      "length": 64,
+      "crc32": 3061197423
+    },
+    {
+      "name": "PlotMin",
+      "category": "Graphics",
+      "offset": 184092,
+      "length": 64,
+      "crc32": 672870626
+    },
+    {
+      "name": "PlotParameters",
+      "category": "Graphics",
+      "offset": 184156,
+      "length": 107,
+      "crc32": 2921624003
+    },
+    {
+      "name": "Polar",
+      "category": "Graphics",
+      "offset": 184263,
+      "length": 84,
+      "crc32": 332673959
+    },
+    {
+      "name": "Rect",
+      "category": "Graphics",
+      "offset": 184347,
+      "length": 78,
+      "crc32": 3861069796
+    },
+    {
+      "name": "Res",
+      "category": "Graphics",
+      "offset": 184425,
+      "length": 64,
+      "crc32": 4201752913
+    },
+    {
+      "name": "RGB",
+      "category": "Graphics",
+      "offset": 184489,
+      "length": 190,
+      "crc32": 715407556
+    },
+    {
+      "name": "RRect",
+      "category": "Graphics",
+      "offset": 184679,
+      "length": 108,
+      "crc32": 925557607
+    },
+    {
+      "name": "Scale",
+      "category": "Graphics",
+      "offset": 184787,
+      "length": 65,
+      "crc32": 2959386018
+    },
+    {
+      "name": "Scatter",
+      "category": "Graphics",
+      "offset": 184852,
+      "length": 94,
+      "crc32": 1954972508
+    },
+    {
+      "name": "Show",
+      "category": "Graphics",
+      "offset": 184946,
+      "length": 114,
+      "crc32": 2669710173
+    },
+    {
+      "name": "ToBitmap",
+      "category": "Graphics",
+      "offset": 185060,
+      "length": 70,
+      "crc32": 1437772896
+    },
+    {
+      "name": "ToGrob",
+      "category": "Graphics",
+      "offset": 185130,
+      "length": 80,
+      "crc32": 3354244542
+    },
+    {
+      "name": "ToHPGrob",
+      "category": "Graphics",
+      "offset": 185210,
+      "length": 76,
+      "crc32": 1437775248
+    },
+    {
+      "name": "ToLCD",
+      "category": "Graphics",
+      "offset": 185286,
+      "length": 98,
+      "crc32": 2536592358
+    },
+    {
+      "name": "ToPixmap",
+      "category": "Graphics",
+      "offset": 185384,
+      "length": 59,
+      "crc32": 3646726834
+    },
+    {
+      "name": "Truth",
+      "category": "Graphics",
+      "offset": 185443,
+      "length": 84,
+      "crc32": 3063967806
+    },
+    {
+      "name": "XRange",
+      "category": "Graphics",
+      "offset": 185527,
+      "length": 79,
+      "crc32": 1297111600
+    },
+    {
+      "name": "XScale",
+      "category": "Graphics",
+      "offset": 185606,
+      "length": 86,
+      "crc32": 3610469521
+    },
+    {
+      "name": "YRange",
+      "category": "Graphics",
+      "offset": 185692,
+      "length": 77,
+      "crc32": 2443200543
+    },
+    {
+      "name": "YScale",
+      "category": "Graphics",
+      "offset": 185769,
+      "length": 84,
+      "crc32": 3076947040
+    },
+    {
+      "name": "CharToUnicode",
+      "category": "Lists and text",
+      "offset": 185853,
+      "length": 151,
+      "crc32": 2356232303
+    },
+    {
+      "name": "DoList",
+      "category": "Lists and text",
+      "offset": 186004,
+      "length": 126,
+      "crc32": 897713246
+    },
+    {
+      "name": "DoSubs",
+      "category": "Lists and text",
+      "offset": 186130,
+      "length": 93,
+      "crc32": 1223549157
+    },
+    {
+      "name": "Explode",
+      "category": "Lists and text",
+      "offset": 186223,
+      "length": 85,
+      "crc32": 3693699393
+    },
+    {
+      "name": "Filter",
+      "category": "Lists and text",
+      "offset": 186308,
+      "length": 109,
+      "crc32": 3907606913
+    },
+    {
+      "name": "FromList",
+      "category": "Lists and text",
+      "offset": 186417,
+      "length": 226,
+      "crc32": 3987221324
+    },
+    {
+      "name": "Get",
+      "category": "Lists and text",
+      "offset": 186643,
+      "length": 113,
+      "crc32": 2788399469
+    },
+    {
+      "name": "GetI",
+      "category": "Lists and text",
+      "offset": 186756,
+      "length": 125,
+      "crc32": 679878657
+    },
+    {
+      "name": "Head",
+      "category": "Lists and text",
+      "offset": 186881,
+      "length": 81,
+      "crc32": 535896860
+    },
+    {
+      "name": "ListDifferences",
+      "category": "Lists and text",
+      "offset": 186962,
+      "length": 142,
+      "crc32": 3709493029
+    },
+    {
+      "name": "ListProduct",
+      "category": "Lists and text",
+      "offset": 187104,
+      "length": 112,
+      "crc32": 3766514226
+    },
+    {
+      "name": "ListSum",
+      "category": "Lists and text",
+      "offset": 187216,
+      "length": 101,
+      "crc32": 338082396
+    },
+    {
+      "name": "Map",
+      "category": "Lists and text",
+      "offset": 187317,
+      "length": 128,
+      "crc32": 2834557483
+    },
+    {
+      "name": "Put",
+      "category": "Lists and text",
+      "offset": 187445,
+      "length": 127,
+      "crc32": 3354177420
+    },
+    {
+      "name": "PutI",
+      "category": "Lists and text",
+      "offset": 187572,
+      "length": 126,
+      "crc32": 3991142871
+    },
+    {
+      "name": "QuickSort",
+      "category": "Lists and text",
+      "offset": 187698,
+      "length": 151,
+      "crc32": 1675692289
+    },
+    {
+      "name": "QuickUnique",
+      "category": "Lists and text",
+      "offset": 187849,
+      "length": 123,
+      "crc32": 971723777
+    },
+    {
+      "name": "Reduce",
+      "category": "Lists and text",
+      "offset": 187972,
+      "length": 132,
+      "crc32": 2417476364
+    },
+    {
+      "name": "ReverseList",
+      "category": "Lists and text",
+      "offset": 188104,
+      "length": 118,
+      "crc32": 2669165732
+    },
+    {
+      "name": "ReverseQuickSort",
+      "category": "Lists and text",
+      "offset": 188222,
+      "length": 110,
+      "crc32": 3297241426
+    },
+    {
+      "name": "ReverseSort",
+      "category": "Lists and text",
+      "offset": 188332,
+      "length": 96,
+      "crc32": 2391049597
+    },
+    {
+      "name": "Size",
+      "category": "Lists and text",
+      "offset": 188428,
+      "length": 113,
+      "crc32": 833825743
+    },
+    {
+      "name": "Sort",
+      "category": "Lists and text",
+      "offset": 188541,
+      "length": 88,
+      "crc32": 2515058331
+    },
+    {
+      "name": "Tail",
+      "category": "Lists and text",
+      "offset": 188629,
+      "length": 102,
+      "crc32": 1234261151
+    },
+    {
+      "name": "TextToUnicode",
+      "category": "Lists and text",
+      "offset": 188731,
+      "length": 136,
+      "crc32": 1000242454
+    },
+    {
+      "name": "ToList",
+      "category": "Lists and text",
+      "offset": 188867,
+      "length": 160,
+      "crc32": 666393007
+    },
+    {
+      "name": "ToText",
+      "category": "Lists and text",
+      "offset": 189027,
+      "length": 142,
+      "crc32": 75933423
+    },
+    {
+      "name": "UnicodeToText",
+      "category": "Lists and text",
+      "offset": 189169,
+      "length": 143,
+      "crc32": 1900374727
+    },
+    {
+      "name": "Unique",
+      "category": "Lists and text",
+      "offset": 189312,
+      "length": 83,
+      "crc32": 3698319781
+    },
+    {
+      "name": "And",
+      "category": "Logic and programs",
+      "offset": 189395,
+      "length": 155,
+      "crc32": 1689648762
+    },
+    {
+      "name": "BinaryToFlags",
+      "category": "Logic and programs",
+      "offset": 189550,
+      "length": 120,
+      "crc32": 3874214268
+    },
+    {
+      "name": "ClearFlag",
+      "category": "Logic and programs",
+      "offset": 189670,
+      "length": 76,
+      "crc32": 436031710
+    },
+    {
+      "name": "Compile",
+      "category": "Logic and programs",
+      "offset": 189746,
+      "length": 166,
+      "crc32": 1665450294
+    },
+    {
+      "name": "CompileToAlgebraic",
+      "category": "Logic and programs",
+      "offset": 189912,
+      "length": 89,
+      "crc32": 813114001
+    },
+    {
+      "name": "CompileToExpression",
+      "category": "Logic and programs",
+      "offset": 190001,
+      "length": 84,
+      "crc32": 1868335423
+    },
+    {
+      "name": "CompileToInteger",
+      "category": "Logic and programs",
+      "offset": 190085,
+      "length": 128,
+      "crc32": 3638390090
+    },
+    {
+      "name": "CompileToNumber",
+      "category": "Logic and programs",
+      "offset": 190213,
+      "length": 124,
+      "crc32": 2041731094
+    },
+    {
+      "name": "CompileToObject",
+      "category": "Logic and programs",
+      "offset": 190337,
+      "length": 138,
+      "crc32": 3641661816
+    },
+    {
+      "name": "CompileToPositive",
+      "category": "Logic and programs",
+      "offset": 190475,
+      "length": 136,
+      "crc32": 2613225837
+    },
+    {
+      "name": "CompileToReal",
+      "category": "Logic and programs",
+      "offset": 190611,
+      "length": 128,
+      "crc32": 3696848816
+    },
+    {
+      "name": "Continue",
+      "category": "Logic and programs",
+      "offset": 190739,
+      "length": 55,
+      "crc32": 1411208980
+    },
+    {
+      "name": "Debug",
+      "category": "Logic and programs",
+      "offset": 190794,
+      "length": 74,
+      "crc32": 3336495416
+    },
+    {
+      "name": "EndSub",
+      "category": "Logic and programs",
+      "offset": 190868,
+      "length": 59,
+      "crc32": 377635696
+    },
+    {
+      "name": "False",
+      "category": "Logic and programs",
+      "offset": 190927,
+      "length": 76,
+      "crc32": 4154466115
+    },
+    {
+      "name": "FlagsToBinary",
+      "category": "Logic and programs",
+      "offset": 191003,
+      "length": 101,
+      "crc32": 2622047893
+    },
+    {
+      "name": "FlipFlag",
+      "category": "Logic and programs",
+      "offset": 191104,
+      "length": 77,
+      "crc32": 1399828037
+    },
+    {
+      "name": "Halt",
+      "category": "Logic and programs",
+      "offset": 191181,
+      "length": 51,
+      "crc32": 2551885008
+    },
+    {
+      "name": "IFT",
+      "category": "Logic and programs",
+      "offset": 191232,
+      "length": 138,
+      "crc32": 3778293636
+    },
+    {
+      "name": "IFTE",
+      "category": "Logic and programs",
+      "offset": 191370,
+      "length": 198,
+      "crc32": 776069203
+    },
+    {
+      "name": "Input",
+      "category": "Logic and programs",
+      "offset": 191568,
+      "length": 65,
+      "crc32": 1784240738
+    },
+    {
+      "name": "Kill",
+      "category": "Logic and programs",
+      "offset": 191633,
+      "length": 26,
+      "crc32": 2633496466
+    },
+    {
+      "name": "MultipleSteps",
+      "category": "Logic and programs",
+      "offset": 191659,
+      "length": 46,
+      "crc32": 1375348935
+    },
+    {
+      "name": "Not",
+      "category": "Logic and programs",
+      "offset": 191705,
+      "length": 135,
+      "crc32": 529377005
+    },
+    {
+      "name": "NSub",
+      "category": "Logic and programs",
+      "offset": 191840,
+      "length": 114,
+      "crc32": 2731591281
+    },
+    {
+      "name": "Or",
+      "category": "Logic and programs",
+      "offset": 191954,
+      "length": 151,
+      "crc32": 1659185699
+    },
+    {
+      "name": "Prompt",
+      "category": "Logic and programs",
+      "offset": 192105,
+      "length": 49,
+      "crc32": 1961187332
+    },
+    {
+      "name": "Quote",
+      "category": "Logic and programs",
+      "offset": 192154,
+      "length": 76,
+      "crc32": 11742506
+    },
+    {
+      "name": "Run",
+      "category": "Logic and programs",
+      "offset": 192230,
+      "length": 98,
+      "crc32": 2878551651
+    },
+    {
+      "name": "same",
+      "category": "Logic and programs",
+      "offset": 192328,
+      "length": 128,
+      "crc32": 3938717532
+    },
+    {
+      "name": "SetFlag",
+      "category": "Logic and programs",
+      "offset": 192456,
+      "length": 74,
+      "crc32": 1693193715
+    },
+    {
+      "name": "SingleStep",
+      "category": "Logic and programs",
+      "offset": 192530,
+      "length": 79,
+      "crc32": 2745661680
+    },
+    {
+      "name": "StepOut",
+      "category": "Logic and programs",
+      "offset": 192609,
+      "length": 50,
+      "crc32": 3448502778
+    },
+    {
+      "name": "StepOver",
+      "category": "Logic and programs",
+      "offset": 192659,
+      "length": 64,
+      "crc32": 2511240618
+    },
+    {
+      "name": "TestEQ",
+      "category": "Logic and programs",
+      "offset": 192723,
+      "length": 107,
+      "crc32": 2835516947
+    },
+    {
+      "name": "TestFlagClear",
+      "category": "Logic and programs",
+      "offset": 192830,
+      "length": 71,
+      "crc32": 4027125562
+    },
+    {
+      "name": "TestFlagClearThenClear",
+      "category": "Logic and programs",
+      "offset": 192901,
+      "length": 83,
+      "crc32": 635452163
+    },
+    {
+      "name": "TestFlagClearThenSet",
+      "category": "Logic and programs",
+      "offset": 192984,
+      "length": 75,
+      "crc32": 937892749
+    },
+    {
+      "name": "TestFlagSet",
+      "category": "Logic and programs",
+      "offset": 193059,
+      "length": 69,
+      "crc32": 2833478876
+    },
+    {
+      "name": "TestFlagSetThenClear",
+      "category": "Logic and programs",
+      "offset": 193128,
+      "length": 75,
+      "crc32": 2753013462
+    },
+    {
+      "name": "TestFlagSetThenSet",
+      "category": "Logic and programs",
+      "offset": 193203,
+      "length": 79,
+      "crc32": 3212306554
+    },
+    {
+      "name": "TestGE",
+      "category": "Logic and programs",
+      "offset": 193282,
+      "length": 104,
+      "crc32": 2144928173
+    },
+    {
+      "name": "TestGT",
+      "category": "Logic and programs",
+      "offset": 193386,
+      "length": 126,
+      "crc32": 1671820528
+    },
+    {
+      "name": "TestLE",
+      "category": "Logic and programs",
+      "offset": 193512,
+      "length": 101,
+      "crc32": 3298819521
+    },
+    {
+      "name": "TestLT",
+      "category": "Logic and programs",
+      "offset": 193613,
+      "length": 123,
+      "crc32": 986507770
+    },
+    {
+      "name": "TestNE",
+      "category": "Logic and programs",
+      "offset": 193736,
+      "length": 106,
+      "crc32": 877285330
+    },
+    {
+      "name": "TestSame",
+      "category": "Logic and programs",
+      "offset": 193842,
+      "length": 154,
+      "crc32": 657033851
+    },
+    {
+      "name": "TimedEval",
+      "category": "Logic and programs",
+      "offset": 193996,
+      "length": 75,
+      "crc32": 4122550024
+    },
+    {
+      "name": "ToInteger",
+      "category": "Logic and programs",
+      "offset": 194071,
+      "length": 89,
+      "crc32": 2965309419
+    },
+    {
+      "name": "ToProgram",
+      "category": "Logic and programs",
+      "offset": 194160,
+      "length": 138,
+      "crc32": 1950884953
+    },
+    {
+      "name": "True",
+      "category": "Logic and programs",
+      "offset": 194298,
+      "length": 73,
+      "crc32": 1873087276
+    },
+    {
+      "name": "Wait",
+      "category": "Logic and programs",
+      "offset": 194371,
+      "length": 149,
+      "crc32": 75473520
+    },
+    {
+      "name": "Where",
+      "category": "Logic and programs",
+      "offset": 194520,
+      "length": 78,
+      "crc32": 2860748962
+    },
+    {
+      "name": "Xor",
+      "category": "Logic and programs",
+      "offset": 194598,
+      "length": 163,
+      "crc32": 1744468547
+    },
+    {
+      "name": "abs",
+      "category": "Numbers and arithmetic",
+      "offset": 194761,
+      "length": 125,
+      "crc32": 1755272509
+    },
+    {
+      "name": "add",
+      "category": "Numbers and arithmetic",
+      "offset": 194886,
+      "length": 117,
+      "crc32": 3651900788
+    },
+    {
+      "name": "BinaryToReal",
+      "category": "Numbers and arithmetic",
+      "offset": 195003,
+      "length": 116,
+      "crc32": 570021416
+    },
+    {
+      "name": "cbrt",
+      "category": "Numbers and arithmetic",
+      "offset": 195119,
+      "length": 108,
+      "crc32": 2822521994
+    },
+    {
+      "name": "ceil",
+      "category": "Numbers and arithmetic",
+      "offset": 195227,
+      "length": 66,
+      "crc32": 3951392783
+    },
+    {
+      "name": "cubed",
+      "category": "Numbers and arithmetic",
+      "offset": 195293,
+      "length": 108,
+      "crc32": 1558472011
+    },
+    {
+      "name": "DFC",
+      "category": "Numbers and arithmetic",
+      "offset": 195401,
+      "length": 103,
+      "crc32": 1881311722
+    },
+    {
+      "name": "DFC2F",
+      "category": "Numbers and arithmetic",
+      "offset": 195504,
+      "length": 108,
+      "crc32": 606649821
+    },
+    {
+      "name": "Div2",
+      "category": "Numbers and arithmetic",
+      "offset": 195612,
+      "length": 118,
+      "crc32": 2407497306
+    },
+    {
+      "name": "divide",
+      "category": "Numbers and arithmetic",
+      "offset": 195730,
+      "length": 79,
+      "crc32": 1513775784
+    },
+    {
+      "name": "EulerianNumber",
+      "category": "Numbers and arithmetic",
+      "offset": 195809,
+      "length": 114,
+      "crc32": 2885612296
+    },
+    {
+      "name": "Extract",
+      "category": "Numbers and arithmetic",
+      "offset": 195923,
+      "length": 107,
+      "crc32": 3509325540
+    },
+    {
+      "name": "Factors",
+      "category": "Numbers and arithmetic",
+      "offset": 196030,
+      "length": 180,
+      "crc32": 1493507405
+    },
+    {
+      "name": "floor",
+      "category": "Numbers and arithmetic",
+      "offset": 196210,
+      "length": 73,
+      "crc32": 2798544824
+    },
+    {
+      "name": "FracPart",
+      "category": "Numbers and arithmetic",
+      "offset": 196283,
+      "length": 138,
+      "crc32": 748741691
+    },
+    {
+      "name": "GCD",
+      "category": "Numbers and arithmetic",
+      "offset": 196421,
+      "length": 134,
+      "crc32": 3497603506
+    },
+    {
+      "name": "hypot",
+      "category": "Numbers and arithmetic",
+      "offset": 196555,
+      "length": 121,
+      "crc32": 3624880767
+    },
+    {
+      "name": "Infinity",
+      "category": "Numbers and arithmetic",
+      "offset": 196676,
+      "length": 182,
+      "crc32": 658050304
+    },
+    {
+      "name": "IntPart",
+      "category": "Numbers and arithmetic",
+      "offset": 196858,
+      "length": 120,
+      "crc32": 1440228425
+    },
+    {
+      "name": "inv",
+      "category": "Numbers and arithmetic",
+      "offset": 196978,
+      "length": 168,
+      "crc32": 4046125025
+    },
+    {
+      "name": "IsPrime",
+      "category": "Numbers and arithmetic",
+      "offset": 197146,
+      "length": 84,
+      "crc32": 1771389222
+    },
+    {
+      "name": "LCM",
+      "category": "Numbers and arithmetic",
+      "offset": 197230,
+      "length": 125,
+      "crc32": 102932231
+    },
+    {
+      "name": "mant",
+      "category": "Numbers and arithmetic",
+      "offset": 197355,
+      "length": 112,
+      "crc32": 2076219113
+    },
+    {
+      "name": "Max",
+      "category": "Numbers and arithmetic",
+      "offset": 197467,
+      "length": 73,
+      "crc32": 1427881231
+    },
+    {
+      "name": "Min",
+      "category": "Numbers and arithmetic",
+      "offset": 197540,
+      "length": 74,
+      "crc32": 482100773
+    },
+    {
+      "name": "mod",
+      "category": "Numbers and arithmetic",
+      "offset": 197614,
+      "length": 149,
+      "crc32": 2825792968
+    },
+    {
+      "name": "multiply",
+      "category": "Numbers and arithmetic",
+      "offset": 197763,
+      "length": 62,
+      "crc32": 914049528
+    },
+    {
+      "name": "neg",
+      "category": "Numbers and arithmetic",
+      "offset": 197825,
+      "length": 96,
+      "crc32": 1876108158
+    },
+    {
+      "name": "NegativeInfinity",
+      "category": "Numbers and arithmetic",
+      "offset": 197921,
+      "length": 196,
+      "crc32": 3495614732
+    },
+    {
+      "name": "NextPrime",
+      "category": "Numbers and arithmetic",
+      "offset": 198117,
+      "length": 117,
+      "crc32": 1854071089
+    },
+    {
+      "name": "Percent",
+      "category": "Numbers and arithmetic",
+      "offset": 198234,
+      "length": 155,
+      "crc32": 395497867
+    },
+    {
+      "name": "PercentChange",
+      "category": "Numbers and arithmetic",
+      "offset": 198389,
+      "length": 138,
+      "crc32": 703508943
+    },
+    {
+      "name": "PercentTotal",
+      "category": "Numbers and arithmetic",
+      "offset": 198527,
+      "length": 134,
+      "crc32": 1913872940
+    },
+    {
+      "name": "Pi",
+      "category": "Numbers and arithmetic",
+      "offset": 198661,
+      "length": 125,
+      "crc32": 1950746689
+    },
+    {
+      "name": "pow",
+      "category": "Numbers and arithmetic",
+      "offset": 198786,
+      "length": 138,
+      "crc32": 59602809
+    },
+    {
+      "name": "PreviousPrime",
+      "category": "Numbers and arithmetic",
+      "offset": 198924,
+      "length": 127,
+      "crc32": 2191768807
+    },
+    {
+      "name": "Random",
+      "category": "Numbers and arithmetic",
+      "offset": 199051,
+      "length": 106,
+      "crc32": 3791116636
+    },
+    {
+      "name": "RandomNumber",
+      "category": "Numbers and arithmetic",
+      "offset": 199157,
+      "length": 86,
+      "crc32": 340424658
+    },
+    {
+      "name": "RandomSeed",
+      "category": "Numbers and arithmetic",
+      "offset": 199243,
+      "length": 120,
+      "crc32": 2641557542
+    },
+    {
+      "name": "RealToBinary",
+      "category": "Numbers and arithmetic",
+      "offset": 199363,
+      "length": 194,
+      "crc32": 844131782
+    },
+    {
+      "name": "rem",
+      "category": "Numbers and arithmetic",
+      "offset": 199557,
+      "length": 122,
+      "crc32": 1555062752
+    },
+    {
+      "name": "Round",
+      "category": "Numbers and arithmetic",
+      "offset": 199679,
+      "length": 183,
+      "crc32": 2481355739
+    },
+    {
+      "name": "SigDig",
+      "category": "Numbers and arithmetic",
+      "offset": 199862,
+      "length": 88,
+      "crc32": 4202671428
+    },
+    {
+      "name": "sign",
+      "category": "Numbers and arithmetic",
+      "offset": 199950,
+      "length": 131,
+      "crc32": 333881453
+    },
+    {
+      "name": "sq",
+      "category": "Numbers and arithmetic",
+      "offset": 200081,
+      "length": 56,
+      "crc32": 2315050803
+    },
+    {
+      "name": "sqrt",
+      "category": "Numbers and arithmetic",
+      "offset": 200137,
+      "length": 193,
+      "crc32": 1064356778
+    },
+    {
+      "name": "subtract",
+      "category": "Numbers and arithmetic",
+      "offset": 200330,
+      "length": 81,
+      "crc32": 1046686451
+    },
+    {
+      "name": "ToDecimal",
+      "category": "Numbers and arithmetic",
+      "offset": 200411,
+      "length": 175,
+      "crc32": 2889509828
+    },
+    {
+      "name": "ToFraction",
+      "category": "Numbers and arithmetic",
+      "offset": 200586,
+      "length": 160,
+      "crc32": 2452774024
+    },
+    {
+      "name": "ToQuotient",
+      "category": "Numbers and arithmetic",
+      "offset": 200746,
+      "length": 158,
+      "crc32": 643402433
+    },
+    {
+      "name": "Truncate",
+      "category": "Numbers and arithmetic",
+      "offset": 200904,
+      "length": 141,
+      "crc32": 1905294023
+    },
+    {
+      "name": "xpon",
+      "category": "Numbers and arithmetic",
+      "offset": 201045,
+      "length": 108,
+      "crc32": 2921474232
+    },
+    {
+      "name": "xroot",
+      "category": "Numbers and arithmetic",
+      "offset": 201153,
+      "length": 103,
+      "crc32": 184565976
+    },
+    {
+      "name": "ClearStack",
+      "category": "Stack and variables",
+      "offset": 201256,
+      "length": 229,
+      "crc32": 4254750726
+    },
+    {
+      "name": "Clone",
+      "category": "Stack and variables",
+      "offset": 201485,
+      "length": 90,
+      "crc32": 2412760137
+    },
+    {
+      "name": "Copy",
+      "category": "Stack and variables",
+      "offset": 201575,
+      "length": 125,
+      "crc32": 2005963201
+    },
+    {
+      "name": "CrDir",
+      "category": "Stack and variables",
+      "offset": 201700,
+      "length": 107,
+      "crc32": 2923645129
+    },
+    {
+      "name": "CurrentDirectory",
+      "category": "Stack and variables",
+      "offset": 201807,
+      "length": 108,
+      "crc32": 2615291737
+    },
+    {
+      "name": "Decrement",
+      "category": "Stack and variables",
+      "offset": 201915,
+      "length": 80,
+      "crc32": 4223620464
+    },
+    {
+      "name": "Depth",
+      "category": "Stack and variables",
+      "offset": 201995,
+      "length": 96,
+      "crc32": 428287255
+    },
+    {
+      "name": "Drop",
+      "category": "Stack and variables",
+      "offset": 202091,
+      "length": 154,
+      "crc32": 2940432093
+    },
+    {
+      "name": "Drop2",
+      "category": "Stack and variables",
+      "offset": 202245,
+      "length": 148,
+      "crc32": 4061937835
+    },
+    {
+      "name": "DropN",
+      "category": "Stack and variables",
+      "offset": 202393,
+      "length": 227,
+      "crc32": 2092207974
+    },
+    {
+      "name": "Dup",
+      "category": "Stack and variables",
+      "offset": 202620,
+      "length": 213,
+      "crc32": 1351526707
+    },
+    {
+      "name": "Dup2",
+      "category": "Stack and variables",
+      "offset": 202833,
+      "length": 203,
+      "crc32": 3042766728
+    },
+    {
+      "name": "DupDup",
+      "category": "Stack and variables",
+      "offset": 203036,
+      "length": 208,
+      "crc32": 2079693006
+    },
+    {
+      "name": "DupN",
+      "category": "Stack and variables",
+      "offset": 203244,
+      "length": 219,
+      "crc32": 774566025
+    },
+    {
+      "name": "Eval",
+      "category": "Stack and variables",
+      "offset": 203463,
+      "length": 111,
+      "crc32": 47224781
+    },
+    {
+      "name": "Home",
+      "category": "Stack and variables",
+      "offset": 203574,
+      "length": 76,
+      "crc32": 154550703
+    },
+    {
+      "name": "Increment",
+      "category": "Stack and variables",
+      "offset": 203650,
+      "length": 80,
+      "crc32": 3086485393
+    },
+    {
+      "name": "LastArg",
+      "category": "Stack and variables",
+      "offset": 203730,
+      "length": 143,
+      "crc32": 2902755905
+    },
+    {
+      "name": "LastX",
+      "category": "Stack and variables",
+      "offset": 203873,
+      "length": 37,
+      "crc32": 3258503512
+    },
+    {
+      "name": "LName",
+      "category": "Stack and variables",
+      "offset": 203910,
+      "length": 81,
+      "crc32": 4039780951
+    },
+    {
+      "name": "NDupN",
+      "category": "Stack and variables",
+      "offset": 203991,
+      "length": 90,
+      "crc32": 428741189
+    },
+    {
+      "name": "Nip",
+      "category": "Stack and variables",
+      "offset": 204081,
+      "length": 165,
+      "crc32": 2852768454
+    },
+    {
+      "name": "Order",
+      "category": "Stack and variables",
+      "offset": 204246,
+      "length": 61,
+      "crc32": 830409084
+    },
+    {
+      "name": "Over",
+      "category": "Stack and variables",
+      "offset": 204307,
+      "length": 191,
+      "crc32": 2561383555
+    },
+    {
+      "name": "Path",
+      "category": "Stack and variables",
+      "offset": 204498,
+      "length": 117,
+      "crc32": 2055922125
+    },
+    {
+      "name": "PgDir",
+      "category": "Stack and variables",
+      "offset": 204615,
+      "length": 98,
+      "crc32": 527592254
+    },
+    {
+      "name": "Pick",
+      "category": "Stack and variables",
+      "offset": 204713,
+      "length": 236,
+      "crc32": 962473529
+    },
+    {
+      "name": "Pick3",
+      "category": "Stack and variables",
+      "offset": 204949,
+      "length": 162,
+      "crc32": 1570043703
+    },
+    {
+      "name": "Purge",
+      "category": "Stack and variables",
+      "offset": 205111,
+      "length": 195,
+      "crc32": 670209608
+    },
+    {
+      "name": "Rcl",
+      "category": "Stack and variables",
+      "offset": 205306,
+      "length": 277,
+      "crc32": 1401179150
+    },
+    {
+      "name": "RecallAdd",
+      "category": "Stack and variables",
+      "offset": 205583,
+      "length": 147,
+      "crc32": 1773869130
+    },
+    {
+      "name": "RecallDiv",
+      "category": "Stack and variables",
+      "offset": 205730,
+      "length": 167,
+      "crc32": 1156753185
+    },
+    {
+      "name": "RecallMul",
+      "category": "Stack and variables",
+      "offset": 205897,
+      "length": 169,
+      "crc32": 1649646757
+    },
+    {
+      "name": "RecallSub",
+      "category": "Stack and variables",
+      "offset": 206066,
+      "length": 152,
+      "crc32": 3869350818
+    },
+    {
+      "name": "Roll",
+      "category": "Stack and variables",
+      "offset": 206218,
+      "length": 228,
+      "crc32": 3172254631
+    },
+    {
+      "name": "RollD",
+      "category": "Stack and variables",
+      "offset": 206446,
+      "length": 240,
+      "crc32": 3232234012
+    },
+    {
+      "name": "Rot",
+      "category": "Stack and variables",
+      "offset": 206686,
+      "length": 194,
+      "crc32": 3264855292
+    },
+    {
+      "name": "Sto",
+      "category": "Stack and variables",
+      "offset": 206880,
+      "length": 290,
+      "crc32": 2075895220
+    },
+    {
+      "name": "StoreAdd",
+      "category": "Stack and variables",
+      "offset": 207170,
+      "length": 210,
+      "crc32": 3415364120
+    },
+    {
+      "name": "StoreDiv",
+      "category": "Stack and variables",
+      "offset": 207380,
+      "length": 318,
+      "crc32": 2561340486
+    },
+    {
+      "name": "StoreMul",
+      "category": "Stack and variables",
+      "offset": 207698,
+      "length": 231,
+      "crc32": 665602830
+    },
+    {
+      "name": "StoreSub",
+      "category": "Stack and variables",
+      "offset": 207929,
+      "length": 289,
+      "crc32": 3842730648
+    },
+    {
+      "name": "Swap",
+      "category": "Stack and variables",
+      "offset": 208218,
+      "length": 181,
+      "crc32": 477946566
+    },
+    {
+      "name": "TVars",
+      "category": "Stack and variables",
+      "offset": 208399,
+      "length": 106,
+      "crc32": 2502386356
+    },
+    {
+      "name": "Undo",
+      "category": "Stack and variables",
+      "offset": 208505,
+      "length": 96,
+      "crc32": 1085385079
+    },
+    {
+      "name": "UnPick",
+      "category": "Stack and variables",
+      "offset": 208601,
+      "length": 90,
+      "crc32": 680867921
+    },
+    {
+      "name": "UnRot",
+      "category": "Stack and variables",
+      "offset": 208691,
+      "length": 183,
+      "crc32": 3083791400
+    },
+    {
+      "name": "UpDir",
+      "category": "Stack and variables",
+      "offset": 208874,
+      "length": 74,
+      "crc32": 2446926335
+    },
+    {
+      "name": "Vars",
+      "category": "Stack and variables",
+      "offset": 208948,
+      "length": 79,
+      "crc32": 1363619945
+    },
+    {
+      "name": "XVars",
+      "category": "Stack and variables",
+      "offset": 209027,
+      "length": 89,
+      "crc32": 4093092193
+    },
+    {
+      "name": "AddData",
+      "category": "Statistics and finance",
+      "offset": 209116,
+      "length": 83,
+      "crc32": 3997718551
+    },
+    {
+      "name": "Average",
+      "category": "Statistics and finance",
+      "offset": 209199,
+      "length": 297,
+      "crc32": 115396752
+    },
+    {
+      "name": "BestFit",
+      "category": "Statistics and finance",
+      "offset": 209496,
+      "length": 65,
+      "crc32": 1714096788
+    },
+    {
+      "name": "ClearData",
+      "category": "Statistics and finance",
+      "offset": 209561,
+      "length": 205,
+      "crc32": 3757996284
+    },
+    {
+      "name": "Correlation",
+      "category": "Statistics and finance",
+      "offset": 209766,
+      "length": 273,
+      "crc32": 3971549347
+    },
+    {
+      "name": "Covariance",
+      "category": "Statistics and finance",
+      "offset": 210039,
+      "length": 260,
+      "crc32": 2072088294
+    },
+    {
+      "name": "DataColumns",
+      "category": "Statistics and finance",
+      "offset": 210299,
+      "length": 97,
+      "crc32": 3587788599
+    },
+    {
+      "name": "DataSize",
+      "category": "Statistics and finance",
+      "offset": 210396,
+      "length": 244,
+      "crc32": 3763308794
+    },
+    {
+      "name": "DataTotal",
+      "category": "Statistics and finance",
+      "offset": 210640,
+      "length": 82,
+      "crc32": 3646677643
+    },
+    {
+      "name": "DependentColumn",
+      "category": "Statistics and finance",
+      "offset": 210722,
+      "length": 72,
+      "crc32": 742925976
+    },
+    {
+      "name": "ExponentialFit",
+      "category": "Statistics and finance",
+      "offset": 210794,
+      "length": 76,
+      "crc32": 3142805976
+    },
+    {
+      "name": "FrequencyBins",
+      "category": "Statistics and finance",
+      "offset": 210870,
+      "length": 77,
+      "crc32": 238022589
+    },
+    {
+      "name": "IndependentColumn",
+      "category": "Statistics and finance",
+      "offset": 210947,
+      "length": 74,
+      "crc32": 1039050958
+    },
+    {
+      "name": "Intercept",
+      "category": "Statistics and finance",
+      "offset": 211021,
+      "length": 289,
+      "crc32": 1208910041
+    },
+    {
+      "name": "LinearFit",
+      "category": "Statistics and finance",
+      "offset": 211310,
+      "length": 71,
+      "crc32": 2350108185
+    },
+    {
+      "name": "LinearRegression",
+      "category": "Statistics and finance",
+      "offset": 211381,
+      "length": 79,
+      "crc32": 614190986
+    },
+    {
+      "name": "LogarithmicFit",
+      "category": "Statistics and finance",
+      "offset": 211460,
+      "length": 76,
+      "crc32": 2597655324
+    },
+    {
+      "name": "MaxData",
+      "category": "Statistics and finance",
+      "offset": 211536,
+      "length": 260,
+      "crc32": 4250073252
+    },
+    {
+      "name": "Median",
+      "category": "Statistics and finance",
+      "offset": 211796,
+      "length": 216,
+      "crc32": 162021054
+    },
+    {
+      "name": "MinData",
+      "category": "Statistics and finance",
+      "offset": 212012,
+      "length": 260,
+      "crc32": 1675323617
+    },
+    {
+      "name": "PopulationCovariance",
+      "category": "Statistics and finance",
+      "offset": 212272,
+      "length": 56,
+      "crc32": 641784539
+    },
+    {
+      "name": "PopulationStandardDeviation",
+      "category": "Statistics and finance",
+      "offset": 212328,
+      "length": 65,
+      "crc32": 2639631347
+    },
+    {
+      "name": "PopulationVariance",
+      "category": "Statistics and finance",
+      "offset": 212393,
+      "length": 293,
+      "crc32": 620813499
+    },
+    {
+      "name": "PowerFit",
+      "category": "Statistics and finance",
+      "offset": 212686,
+      "length": 74,
+      "crc32": 3111545192
+    },
+    {
+      "name": "PredictX",
+      "category": "Statistics and finance",
+      "offset": 212760,
+      "length": 92,
+      "crc32": 4279311275
+    },
+    {
+      "name": "PredictY",
+      "category": "Statistics and finance",
+      "offset": 212852,
+      "length": 92,
+      "crc32": 4125108026
+    },
+    {
+      "name": "RecallData",
+      "category": "Statistics and finance",
+      "offset": 212944,
+      "length": 236,
+      "crc32": 3710964854
+    },
+    {
+      "name": "RegressionFormula",
+      "category": "Statistics and finance",
+      "offset": 213180,
+      "length": 125,
+      "crc32": 1604186676
+    },
+    {
+      "name": "RemoveData",
+      "category": "Statistics and finance",
+      "offset": 213305,
+      "length": 88,
+      "crc32": 1812174667
+    },
+    {
+      "name": "Slope",
+      "category": "Statistics and finance",
+      "offset": 213393,
+      "length": 285,
+      "crc32": 3636648642
+    },
+    {
+      "name": "StandardDeviation",
+      "category": "Statistics and finance",
+      "offset": 213678,
+      "length": 276,
+      "crc32": 3331207111
+    },
+    {
+      "name": "StatsData",
+      "category": "Statistics and finance",
+      "offset": 213954,
+      "length": 120,
+      "crc32": 335606130
+    },
+    {
+      "name": "StatsParameters",
+      "category": "Statistics and finance",
+      "offset": 214074,
+      "length": 83,
+      "crc32": 2720775477
+    },
+    {
+      "name": "StoreData",
+      "category": "Statistics and finance",
+      "offset": 214157,
+      "length": 305,
+      "crc32": 2978535786
+    },
+    {
+      "name": "SumOfX",
+      "category": "Statistics and finance",
+      "offset": 214462,
+      "length": 250,
+      "crc32": 2967841670
+    },
+    {
+      "name": "SumOfXSquares",
+      "category": "Statistics and finance",
+      "offset": 214712,
+      "length": 245,
+      "crc32": 4085806004
+    },
+    {
+      "name": "SumOfXY",
+      "category": "Statistics and finance",
+      "offset": 214957,
+      "length": 233,
+      "crc32": 1594137614
+    },
+    {
+      "name": "SumOfY",
+      "category": "Statistics and finance",
+      "offset": 215190,
+      "length": 249,
+      "crc32": 27033602
+    },
+    {
+      "name": "SumOfYSquares",
+      "category": "Statistics and finance",
+      "offset": 215439,
+      "length": 245,
+      "crc32": 1856658456
+    },
+    {
+      "name": "TVMAmort",
+      "category": "Statistics and finance",
+      "offset": 215684,
+      "length": 91,
+      "crc32": 1286892059
+    },
+    {
+      "name": "TVMAmortTable",
+      "category": "Statistics and finance",
+      "offset": 215775,
+      "length": 132,
+      "crc32": 2048651192
+    },
+    {
+      "name": "TVMEquation",
+      "category": "Statistics and finance",
+      "offset": 215907,
+      "length": 100,
+      "crc32": 3216968140
+    },
+    {
+      "name": "TVMRoot",
+      "category": "Statistics and finance",
+      "offset": 216007,
+      "length": 71,
+      "crc32": 1895451122
+    },
+    {
+      "name": "Variance",
+      "category": "Statistics and finance",
+      "offset": 216078,
+      "length": 258,
+      "crc32": 3849911138
+    },
+    {
+      "name": "AssignKey",
+      "category": "System and libraries",
+      "offset": 216336,
+      "length": 77,
+      "crc32": 607671336
+    },
+    {
+      "name": "Attach",
+      "category": "System and libraries",
+      "offset": 216413,
+      "length": 36,
+      "crc32": 791557728
+    },
+    {
+      "name": "BatteryVoltage",
+      "category": "System and libraries",
+      "offset": 216449,
+      "length": 154,
+      "crc32": 1194256927
+    },
+    {
+      "name": "Beep",
+      "category": "System and libraries",
+      "offset": 216603,
+      "length": 116,
+      "crc32": 580744432
+    },
+    {
+      "name": "Bytes",
+      "category": "System and libraries",
+      "offset": 216719,
+      "length": 81,
+      "crc32": 1864198940
+    },
+    {
+      "name": "Catalog",
+      "category": "System and libraries",
+      "offset": 216800,
+      "length": 100,
+      "crc32": 1325625213
+    },
+    {
+      "name": "Const",
+      "category": "System and libraries",
+      "offset": 216900,
+      "length": 124,
+      "crc32": 1133106384
+    },
+    {
+      "name": "ConstantName",
+      "category": "System and libraries",
+      "offset": 217024,
+      "length": 83,
+      "crc32": 1705726748
+    },
+    {
+      "name": "ConstantRange",
+      "category": "System and libraries",
+      "offset": 217107,
+      "length": 80,
+      "crc32": 1671469604
+    },
+    {
+      "name": "Constants",
+      "category": "System and libraries",
+      "offset": 217187,
+      "length": 36,
+      "crc32": 566946908
+    },
+    {
+      "name": "ConstantValue",
+      "category": "System and libraries",
+      "offset": 217223,
+      "length": 86,
+      "crc32": 916124567
+    },
+    {
+      "name": "CustomMenu",
+      "category": "System and libraries",
+      "offset": 217309,
+      "length": 99,
+      "crc32": 516082141
+    },
+    {
+      "name": "Cycle",
+      "category": "System and libraries",
+      "offset": 217408,
+      "length": 54,
+      "crc32": 2300567215
+    },
+    {
+      "name": "DeleteKeys",
+      "category": "System and libraries",
+      "offset": 217462,
+      "length": 78,
+      "crc32": 1436549524
+    },
+    {
+      "name": "Detach",
+      "category": "System and libraries",
+      "offset": 217540,
+      "length": 36,
+      "crc32": 40561121
+    },
+    {
+      "name": "DMCPLowBattery",
+      "category": "System and libraries",
+      "offset": 217576,
+      "length": 68,
+      "crc32": 3842159438
+    },
+    {
+      "name": "doerr",
+      "category": "System and libraries",
+      "offset": 217644,
+      "length": 86,
+      "crc32": 212986413
+    },
+    {
+      "name": "DTag",
+      "category": "System and libraries",
+      "offset": 217730,
+      "length": 99,
+      "crc32": 1437616105
+    },
+    {
+      "name": "Edit",
+      "category": "System and libraries",
+      "offset": 217829,
+      "length": 122,
+      "crc32": 693772401
+    },
+    {
+      "name": "err0",
+      "category": "System and libraries",
+      "offset": 217951,
+      "length": 104,
+      "crc32": 3924806654
+    },
+    {
+      "name": "errm",
+      "category": "System and libraries",
+      "offset": 218055,
+      "length": 83,
+      "crc32": 2169368678
+    },
+    {
+      "name": "errn",
+      "category": "System and libraries",
+      "offset": 218138,
+      "length": 81,
+      "crc32": 3664160406
+    },
+    {
+      "name": "FinanceSolverMenu",
+      "category": "System and libraries",
+      "offset": 218219,
+      "length": 126,
+      "crc32": 1275813886
+    },
+    {
+      "name": "FlightRecorderConfigure",
+      "category": "System and libraries",
+      "offset": 218345,
+      "length": 125,
+      "crc32": 1314401942
+    },
+    {
+      "name": "FlightRecorderDump",
+      "category": "System and libraries",
+      "offset": 218470,
+      "length": 90,
+      "crc32": 3863984541
+    },
+    {
+      "name": "FlightRecorderDumpSome",
+      "category": "System and libraries",
+      "offset": 218560,
+      "length": 85,
+      "crc32": 3005924792
+    },
+    {
+      "name": "FreeMemory",
+      "category": "System and libraries",
+      "offset": 218645,
+      "length": 38,
+      "crc32": 2023548946
+    },
+    {
+      "name": "FromTag",
+      "category": "System and libraries",
+      "offset": 218683,
+      "length": 233,
+      "crc32": 938882660
+    },
+    {
+      "name": "GarbageCollect",
+      "category": "System and libraries",
+      "offset": 218916,
+      "length": 65,
+      "crc32": 2623868154
+    },
+    {
+      "name": "GarbageCollectorStatistics",
+      "category": "System and libraries",
+      "offset": 218981,
+      "length": 74,
+      "crc32": 2322436338
+    },
+    {
+      "name": "Header",
+      "category": "System and libraries",
+      "offset": 219055,
+      "length": 92,
+      "crc32": 1237660796
+    },
+    {
+      "name": "Help",
+      "category": "System and libraries",
+      "offset": 219147,
+      "length": 124,
+      "crc32": 2026191018
+    },
+    {
+      "name": "KeyCode",
+      "category": "System and libraries",
+      "offset": 219271,
+      "length": 155,
+      "crc32": 157664001
+    },
+    {
+      "name": "KeyEval",
+      "category": "System and libraries",
+      "offset": 219426,
+      "length": 121,
+      "crc32": 3975689058
+    },
+    {
+      "name": "KeyMap",
+      "category": "System and libraries",
+      "offset": 219547,
+      "length": 195,
+      "crc32": 238328598
+    },
+    {
+      "name": "LastMenu",
+      "category": "System and libraries",
+      "offset": 219742,
+      "length": 119,
+      "crc32": 2022736073
+    },
+    {
+      "name": "LibEq",
+      "category": "System and libraries",
+      "offset": 219861,
+      "length": 110,
+      "crc32": 2425173422
+    },
+    {
+      "name": "Libs",
+      "category": "System and libraries",
+      "offset": 219971,
+      "length": 63,
+      "crc32": 2321351934
+    },
+    {
+      "name": "LowBattery",
+      "category": "System and libraries",
+      "offset": 220034,
+      "length": 104,
+      "crc32": 2197582172
+    },
+    {
+      "name": "Mem",
+      "category": "System and libraries",
+      "offset": 220138,
+      "length": 80,
+      "crc32": 2750881787
+    },
+    {
+      "name": "Menu",
+      "category": "System and libraries",
+      "offset": 220218,
+      "length": 56,
+      "crc32": 2188506958
+    },
+    {
+      "name": "Modes",
+      "category": "System and libraries",
+      "offset": 220274,
+      "length": 166,
+      "crc32": 4180302680
+    },
+    {
+      "name": "Off",
+      "category": "System and libraries",
+      "offset": 220440,
+      "length": 121,
+      "crc32": 212705274
+    },
+    {
+      "name": "OffWithImage",
+      "category": "System and libraries",
+      "offset": 220561,
+      "length": 148,
+      "crc32": 1167342066
+    },
+    {
+      "name": "PowerVoltage",
+      "category": "System and libraries",
+      "offset": 220709,
+      "length": 108,
+      "crc32": 1770147867
+    },
+    {
+      "name": "PurgeAll",
+      "category": "System and libraries",
+      "offset": 220817,
+      "length": 118,
+      "crc32": 2511390772
+    },
+    {
+      "name": "RecallKeys",
+      "category": "System and libraries",
+      "offset": 220935,
+      "length": 68,
+      "crc32": 3282798206
+    },
+    {
+      "name": "RecallMenu",
+      "category": "System and libraries",
+      "offset": 221003,
+      "length": 61,
+      "crc32": 2876661424
+    },
+    {
+      "name": "ResetModes",
+      "category": "System and libraries",
+      "offset": 221064,
+      "length": 136,
+      "crc32": 2178432061
+    },
+    {
+      "name": "RuntimeStatistics",
+      "category": "System and libraries",
+      "offset": 221200,
+      "length": 66,
+      "crc32": 3081748164
+    },
+    {
+      "name": "SaveState",
+      "category": "System and libraries",
+      "offset": 221266,
+      "length": 121,
+      "crc32": 1124605386
+    },
+    {
+      "name": "ScreenCapture",
+      "category": "System and libraries",
+      "offset": 221387,
+      "length": 123,
+      "crc32": 1955094938
+    },
+    {
+      "name": "SolvingMenu",
+      "category": "System and libraries",
+      "offset": 221510,
+      "length": 105,
+      "crc32": 3151914137
+    },
+    {
+      "name": "StackEditor",
+      "category": "System and libraries",
+      "offset": 221615,
+      "length": 128,
+      "crc32": 2420338029
+    },
+    {
+      "name": "StandardKey",
+      "category": "System and libraries",
+      "offset": 221743,
+      "length": 85,
+      "crc32": 1862514709
+    },
+    {
+      "name": "StoreKeys",
+      "category": "System and libraries",
+      "offset": 221828,
+      "length": 68,
+      "crc32": 3793505434
+    },
+    {
+      "name": "SystemMemory",
+      "category": "System and libraries",
+      "offset": 221896,
+      "length": 155,
+      "crc32": 3990794192
+    },
+    {
+      "name": "SystemSetup",
+      "category": "System and libraries",
+      "offset": 222051,
+      "length": 86,
+      "crc32": 254852760
+    },
+    {
+      "name": "TemporaryMenu",
+      "category": "System and libraries",
+      "offset": 222137,
+      "length": 87,
+      "crc32": 1670835528
+    },
+    {
+      "name": "ToggleCustomMenu",
+      "category": "System and libraries",
+      "offset": 222224,
+      "length": 45,
+      "crc32": 2519882929
+    },
+    {
+      "name": "ToggleUserMode",
+      "category": "System and libraries",
+      "offset": 222269,
+      "length": 99,
+      "crc32": 1912237991
+    },
+    {
+      "name": "ToolsMenu",
+      "category": "System and libraries",
+      "offset": 222368,
+      "length": 80,
+      "crc32": 4122470253
+    },
+    {
+      "name": "ToTag",
+      "category": "System and libraries",
+      "offset": 222448,
+      "length": 121,
+      "crc32": 4227242617
+    },
+    {
+      "name": "Type",
+      "category": "System and libraries",
+      "offset": 222569,
+      "length": 160,
+      "crc32": 1967051835
+    },
+    {
+      "name": "TypeName",
+      "category": "System and libraries",
+      "offset": 222729,
+      "length": 91,
+      "crc32": 3527076861
+    },
+    {
+      "name": "Unimplemented",
+      "category": "System and libraries",
+      "offset": 222820,
+      "length": 68,
+      "crc32": 934453979
+    },
+    {
+      "name": "USBPowered",
+      "category": "System and libraries",
+      "offset": 222888,
+      "length": 245,
+      "crc32": 2026608875
+    },
+    {
+      "name": "VariablesMenu",
+      "category": "System and libraries",
+      "offset": 223133,
+      "length": 96,
+      "crc32": 2403102059
+    },
+    {
+      "name": "Version",
+      "category": "System and libraries",
+      "offset": 223229,
+      "length": 90,
+      "crc32": 959828640
+    },
+    {
+      "name": "XLib",
+      "category": "System and libraries",
+      "offset": 223319,
+      "length": 96,
+      "crc32": 1962635373
+    },
+    {
+      "name": "ApplyInverseUnit",
+      "category": "Units and ranges",
+      "offset": 223415,
+      "length": 72,
+      "crc32": 1874814338
+    },
+    {
+      "name": "ApplyUnit",
+      "category": "Units and ranges",
+      "offset": 223487,
+      "length": 133,
+      "crc32": 2298036788
+    },
+    {
+      "name": "Convert",
+      "category": "Units and ranges",
+      "offset": 223620,
+      "length": 131,
+      "crc32": 2512955761
+    },
+    {
+      "name": "ConvertToUnit",
+      "category": "Units and ranges",
+      "offset": 223751,
+      "length": 107,
+      "crc32": 2455674522
+    },
+    {
+      "name": "ConvertToUnitPrefix",
+      "category": "Units and ranges",
+      "offset": 223858,
+      "length": 68,
+      "crc32": 3990088630
+    },
+    {
+      "name": "FromRange",
+      "category": "Units and ranges",
+      "offset": 223926,
+      "length": 135,
+      "crc32": 3577771541
+    },
+    {
+      "name": "PrecisionRound",
+      "category": "Units and ranges",
+      "offset": 224061,
+      "length": 220,
+      "crc32": 2146942857
+    },
+    {
+      "name": "RangeIntersect",
+      "category": "Units and ranges",
+      "offset": 224281,
+      "length": 223,
+      "crc32": 3087275673
+    },
+    {
+      "name": "RangeUnion",
+      "category": "Units and ranges",
+      "offset": 224504,
+      "length": 233,
+      "crc32": 2777871252
+    },
+    {
+      "name": "RelativeRound",
+      "category": "Units and ranges",
+      "offset": 224737,
+      "length": 233,
+      "crc32": 3949434571
+    },
+    {
+      "name": "RelativeUncertainty",
+      "category": "Units and ranges",
+      "offset": 224970,
+      "length": 69,
+      "crc32": 1872091187
+    },
+    {
+      "name": "StandardRound",
+      "category": "Units and ranges",
+      "offset": 225039,
+      "length": 235,
+      "crc32": 4064409386
+    },
+    {
+      "name": "StandardUncertainty",
+      "category": "Units and ranges",
+      "offset": 225274,
+      "length": 78,
+      "crc32": 3446888583
+    },
+    {
+      "name": "ToDeltaRange",
+      "category": "Units and ranges",
+      "offset": 225352,
+      "length": 144,
+      "crc32": 3966629017
+    },
+    {
+      "name": "ToPercentRange",
+      "category": "Units and ranges",
+      "offset": 225496,
+      "length": 232,
+      "crc32": 1431795312
+    },
+    {
+      "name": "ToRange",
+      "category": "Units and ranges",
+      "offset": 225728,
+      "length": 122,
+      "crc32": 3451656560
+    },
+    {
+      "name": "ToRelativeUncertainty",
+      "category": "Units and ranges",
+      "offset": 225850,
+      "length": 264,
+      "crc32": 1369118834
+    },
+    {
+      "name": "ToStandardUncertainty",
+      "category": "Units and ranges",
+      "offset": 226114,
+      "length": 266,
+      "crc32": 54196020
+    },
+    {
+      "name": "ToUncertain",
+      "category": "Units and ranges",
+      "offset": 226380,
+      "length": 246,
+      "crc32": 1077662962
+    },
+    {
+      "name": "ToUnit",
+      "category": "Units and ranges",
+      "offset": 226626,
+      "length": 186,
+      "crc32": 1983332255
+    },
+    {
+      "name": "UBase",
+      "category": "Units and ranges",
+      "offset": 226812,
+      "length": 118,
+      "crc32": 1019483914
+    },
+    {
+      "name": "UFact",
+      "category": "Units and ranges",
+      "offset": 226930,
+      "length": 90,
+      "crc32": 2125838075
+    },
+    {
+      "name": "UnitsSIPrefixCycle",
+      "category": "Units and ranges",
+      "offset": 227020,
+      "length": 49,
+      "crc32": 1839058988
+    },
+    {
+      "name": "UVal",
+      "category": "Units and ranges",
+      "offset": 227069,
+      "length": 117,
+      "crc32": 2985713188
+    },
+    {
+      "name": "Algebraic expressions",
+      "category": "Using RPL",
+      "offset": 227186,
+      "length": 396,
+      "crc32": 538020974
+    },
+    {
+      "name": "Arrays",
+      "category": "Using RPL",
+      "offset": 227582,
+      "length": 330,
+      "crc32": 639497550
+    },
+    {
+      "name": "Based numbers",
+      "category": "Using RPL",
+      "offset": 227912,
+      "length": 608,
+      "crc32": 1996406643
+    },
+    {
+      "name": "DO UNTIL END",
+      "category": "Using RPL",
+      "offset": 228520,
+      "length": 236,
+      "crc32": 350794628
+    },
+    {
+      "name": "FOR NEXT",
+      "category": "Using RPL",
+      "offset": 228756,
+      "length": 311,
+      "crc32": 109400561
+    },
+    {
+      "name": "IF THEN ELSE END",
+      "category": "Using RPL",
+      "offset": 229067,
+      "length": 310,
+      "crc32": 2372314092
+    },
+    {
+      "name": "Library programs",
+      "category": "Using RPL",
+      "offset": 229377,
+      "length": 467,
+      "crc32": 1493924143
+    },
+    {
+      "name": "Lists",
+      "category": "Using RPL",
+      "offset": 229844,
+      "length": 307,
+      "crc32": 1049151809
+    },
+    {
+      "name": "Local variables",
+      "category": "Using RPL",
+      "offset": 230151,
+      "length": 350,
+      "crc32": 2948677338
+    },
+    {
+      "name": "Reading command pages",
+      "category": "Using RPL",
+      "offset": 230501,
+      "length": 458,
+      "crc32": 3425504635
+    },
+    {
+      "name": "RPL Programming",
+      "category": "Using RPL",
+      "offset": 230959,
+      "length": 524,
+      "crc32": 2330502710
+    },
+    {
+      "name": "Settings and saving",
+      "category": "Using RPL",
+      "offset": 231483,
+      "length": 438,
+      "crc32": 3426171817
+    },
+    {
+      "name": "Stack order",
+      "category": "Using RPL",
+      "offset": 231921,
+      "length": 372,
+      "crc32": 3187673662
+    },
+    {
+      "name": "START NEXT",
+      "category": "Using RPL",
+      "offset": 232293,
+      "length": 233,
+      "crc32": 4152600414
+    },
+    {
+      "name": "Units and conversions",
+      "category": "Using RPL",
+      "offset": 232526,
+      "length": 321,
+      "crc32": 3883516296
+    },
+    {
+      "name": "WHILE REPEAT END",
+      "category": "Using RPL",
+      "offset": 232847,
+      "length": 273,
+      "crc32": 2879340233
+    }
+  ]
+}

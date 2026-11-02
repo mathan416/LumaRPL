@@ -1,0 +1,27 @@
+{
+  "upstream_commit": "5d5a638a5b7f56bfdcdbae55dfa726dcbd18de4f",
+  "patch_sha256": "faff458c3ed218f22913daf04fbdf055c0eb447869da50b524131174f5089eee",
+  "files": {
+    "sim/sim-screen.cpp": "8bc52002980b84f2f6780cbb5936b6424f3b7fe97d944490c9bba61fd2b942f4",
+    "src/array.cc": "aa2b6aa4e49c7353fc50aaee38f6144b138702aafeb2dfff672818d81fdef045",
+    "src/blitter.h": "80518626a9fa4193c94b1c26a0a1755408e9f3b749ff52798207c7be346448a6",
+    "src/dmcp/main.cc": "b5672820ef6ef629e0323cc6d6f4c57256bf24e89c4ba5501ec08baea6841fd3",
+    "src/dmcp/target.h": "f4a5238d6f47b7244b8e9e28b9ff876fff909bad400130edb3444f545a3dc901",
+    "src/expression.cc": "f3273b66a2a5d90e69eccfccb5495e097c5aa947be2a363bc732fb8a44bb3c4a",
+    "src/functions.cc": "aded8f7d71eb342f7b68c1c3bcd6bca8c9bbb0fd54af4e4d23862acc3fdee526",
+    "src/graphics.cc": "8abc428dd17c8fec114f641662400b548456ed9e00d5634d324f1379d3a85f64",
+    "src/graphics.h": "043517761ea3117a4344fa09ffc039ba8c67d25a095c70ef3cfae3de90c5a62b",
+    "src/list.cc": "67436bc91f43f68309c5a8845812e850dec97b57256a45fee3407acedd016c23",
+    "src/locals.cc": "beb956f20cb66d1b7ac5c9d752fbb68e0f242c3ec834cd7c30453ca01297d6c4",
+    "src/menu.cc": "29930edbfa93e902a830b7e1239f03f8652395fb9c67bd3369166ecaffd2c884",
+    "src/polynomial.cc": "9514397d58c59fd571777954ca8c91c2361df11c49686beec4c25bf05235c126",
+    "src/program.cc": "f61961046e07558824366cbb38a05565107c2be87a901f9cab17c23cbb21ce25",
+    "src/runtime.cc": "7de8a242743fbf0ace5a1f8d23caa76b1f1ac158bc06205c9ac76ffb15204cfd",
+    "src/runtime.h": "3c5eca90a938edfabe3d56a84ef6364652e8c28fbd511aa7b6d20536a4a4ca54",
+    "src/scoped_array.h": "85146789ad61b5d3094902277ba26c52e1c5ce3a6bb2393ce1de08bfb770f142",
+    "src/settings.cc": "c27b84bf5698547836638edeef60659414fb96ec5273634abe7e14bfc81728dd",
+    "src/settings.h": "7063ce173b769a007db72f04d73fb3e39bf82e7ecc8c7fc0f682179b7b8d817d",
+    "src/user_interface.cc": "81ed8e816f8be9c89a18a1885c149b8204b09d1534ce47608a46d743e7ed3949",
+    "src/user_interface.h": "1601cb695369c2eec0c6d803b6a2d44d10ad30bf331e8a43595494b4d8d90d65"
+  }
+}

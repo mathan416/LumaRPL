@@ -1,0 +1,431 @@
+[
+  {
+    "name": "Start with Lua",
+    "category": "Start here",
+    "text": "Make a tiny script first, then run it from the editor. You can come back and change it as often as you like.",
+    "source": "print(2+3)",
+    "expected": "Prints 5.",
+    "title": "Run your first script",
+    "steps": [
+      "Press Ctrl+P and choose Lua scripts.",
+      "Press F3 New and name the script HELLO. Type the code below.",
+      "Press F2 Save & run. Read the output, then Esc returns to the editor."
+    ],
+    "example_kind": "script"
+  },
+  {
+    "name": "Lua console",
+    "title": "Try a quick calculation",
+    "category": "Start here",
+    "text": "Use the console when you want an answer without creating a file. Its variables are temporary.",
+    "source": "print(12*12)",
+    "expected": "You should see 144.",
+    "example_kind": "script",
+    "steps": [
+      "Press Ctrl+P and choose Lua console.",
+      "Type the example and press Enter.",
+      "Press Esc at an empty prompt to return."
+    ],
+    "stdout": "144\n"
+  },
+  {
+    "name": "Save a Lua script",
+    "title": "Save and reopen a script",
+    "category": "Start here",
+    "text": "Save a script on SD when you want it after a restart. The console does not save your code as a file.",
+    "source": "print(\"Saved script\")",
+    "expected": "Running the saved script prints Saved script.",
+    "example_kind": "script",
+    "steps": [
+      "In Lua scripts, press F3 New and name it SAVETEST.",
+      "Type the example. F1 saves it; F5 returns to the file list.",
+      "Select SAVETEST.lua and press F1 Open to check it. F2 runs it."
+    ],
+    "stdout": "Saved script\n"
+  },
+  {
+    "name": "Variables and functions",
+    "category": "Write Lua",
+    "text": "A function lets you name a calculation and use it with different inputs. Here square takes a number and returns its square.",
+    "source": "local function square(x)\n  return x*x\nend\nprint(square(12))",
+    "expected": "Prints 144.",
+    "title": "Reuse a calculation",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "Loops and decisions",
+    "category": "Write Lua",
+    "text": "Use a for loop to repeat a calculation. This one adds the numbers 1 through 5. The if line checks the answer before printing a message.",
+    "source": "local total=0\nfor i=1,5 do total=total+i end\nif total==15 then print(\"Correct\") end",
+    "expected": "Prints Correct.",
+    "title": "Repeat a task",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "Tables and strings",
+    "category": "Write Lua",
+    "text": "Use a table for a list; the first item is number 1. Use .. to join pieces of text. Change the names below and run it again.",
+    "source": "local names={\"Iain\",\"LumaRPL\"}\nprint(names[1]..\": \"..names[2])",
+    "expected": "Prints Iain: LumaRPL.",
+    "title": "Keep a list of values",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "math functions",
+    "category": "Write Lua",
+    "text": "Use math.sqrt for a square root. Lua sine and cosine take radians; math.rad converts degrees before the calculation. Calculator angle settings do not change Lua math functions.",
+    "source": "print(math.sqrt(81))\nprint(math.sin(math.rad(90)))",
+    "expected": "Prints 9.0 and 1.0 on separate lines.",
+    "title": "Calculate with Lua maths",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "print",
+    "category": "Write Lua",
+    "text": "Show an answer in the output reader. Each call starts a new line; multiple arguments are separated by tabs. For text placed on the drawing canvas, use screen.text instead.",
+    "source": "print(\"Answer\",6*7)",
+    "expected": "Prints Answer followed by a tab and 42.",
+    "title": "print",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "print(value, ...)"
+  },
+  {
+    "name": "calc.eval",
+    "category": "Write Lua",
+    "text": "Ask the calculator to evaluate an expression and return the answer as text. Write the expression in calculator syntax, without surrounding single quotes. Calculator angle and precision settings apply. Your stack is kept as it was.",
+    "source": "print(calc.eval(\"2+3\"))",
+    "expected": "Prints 5. It returns text, so use tonumber only when a plain Lua number is suitable.",
+    "title": "calc.eval",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "answer = calc.eval(expression)"
+  },
+  {
+    "name": "Draw a greeting",
+    "title": "Draw your first picture",
+    "category": "Draw on screen",
+    "text": "Clear the canvas, add your message, then show the frame. You can change the position and colour and run it again.",
+    "source": "screen.clear(\"black\")\nscreen.text(10,10,\"Hello!\",\"cyan\")\nscreen.show()",
+    "expected": "You should see Hello! near the upper-left corner. Esc returns to your script.",
+    "example_kind": "script",
+    "steps": [
+      "Create a Lua script named GREETING.",
+      "Type the three lines below and press F2 Save & run."
+    ]
+  },
+  {
+    "name": "Colours and coordinates",
+    "category": "Draw on screen",
+    "text": "The upper-left pixel is (0,0). Increase x to move right and y to move down. Choose a named colour, or use a value such as \"#FF8000\". The screen uses the nearest available RGB332 colour.",
+    "source": "screen.clear(\"black\")\nscreen.pixel(20,20,\"yellow\")\nscreen.show()",
+    "expected": "Shows a yellow pixel on black. Available names: black, white, red, green, blue, cyan, magenta, yellow, orange, gray.",
+    "title": "Choose positions and colours",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "Plot two curves",
+    "title": "Compare two curves",
+    "category": "Plot graphs",
+    "text": "Give each curve its own function and label. Lua trigonometric functions use radians.",
+    "source": "plot.clear()\nplot.window(-4,4,-2,2)\nplot.function2d(function(x) return math.sin(x) end,\n  {colour=\"cyan\",label=\"Sine\"})\nplot.function2d(function(x) return math.cos(x) end,\n  {colour=\"orange\",label=\"Cosine\"})\nplot.show()",
+    "expected": "The native viewer shows sine and cosine together. Use its labelled graph controls; Esc returns.",
+    "example_kind": "script",
+    "steps": [
+      "Save this as a Lua script, then press F2 Save & run."
+    ]
+  },
+  {
+    "name": "Available libraries",
+    "category": "Solve a problem",
+    "text": "Use math for numerical functions, string for text, and table for lists. utf8 and coroutine are also available. Files are opened and saved through the calculator editor; desktop examples using io, os, require or loadfile will not work here.",
+    "source": "print(type(math),type(io),type(os),type(package))",
+    "expected": "Prints table, nil, nil, nil separated by tabs.",
+    "title": "Use the Lua libraries",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "Errors and pcall",
+    "category": "Solve a problem",
+    "text": "Read the line number in the error message, return to the editor and check that line. A missing quote or end is often the cause. When you expect a function to fail, pcall lets you handle the error and continue.",
+    "source": "local ok,err=pcall(function() error(\"Try again\") end)\nprint(ok,type(err))",
+    "expected": "Prints false and string. The script continues.",
+    "title": "Find an error in a script",
+    "steps": [],
+    "example_kind": "script"
+  },
+  {
+    "name": "screen.clear",
+    "category": "Draw on screen",
+    "text": "Start a fresh drawing by filling the canvas. Omit the colour for black. Draw your objects next, then call screen.show to display the frame.",
+    "source": "screen.clear(\"blue\")\nscreen.show()",
+    "expected": "Shows a blue canvas.",
+    "title": "screen.clear",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.clear([colour])"
+  },
+  {
+    "name": "screen.pixel",
+    "category": "Draw on screen",
+    "text": "Draw one pixel at a chosen position. Omit the colour for white. Positions outside the canvas are clipped.",
+    "source": "screen.clear()\nscreen.pixel(100,100,\"red\")\nscreen.show()",
+    "expected": "Shows one red pixel at (100,100).",
+    "title": "screen.pixel",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.pixel(x, y [,colour])"
+  },
+  {
+    "name": "screen.line",
+    "category": "Draw on screen",
+    "text": "Draw a straight line between two positions. The example joins (20,20) to (280,280).",
+    "source": "screen.clear()\nscreen.line(20,20,280,280,\"cyan\")\nscreen.show()",
+    "expected": "Shows a cyan diagonal.",
+    "title": "screen.line",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.line(x1, y1, x2, y2 [,colour])"
+  },
+  {
+    "name": "screen.rect",
+    "category": "Draw on screen",
+    "text": "Draw a rectangle by giving its top-left position, width and height. Add false for an outline; leave it out for a filled rectangle.",
+    "source": "screen.clear()\nscreen.rect(20,30,120,60,\"green\",false)\nscreen.show()",
+    "expected": "Shows a green rectangle outline.",
+    "title": "screen.rect",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.rect(x, y, width, height [,colour [,filled]])"
+  },
+  {
+    "name": "screen.circle",
+    "category": "Draw on screen",
+    "text": "Draw a circle around a centre point. Give its radius, and add true if you want it filled. Without that final argument it draws an outline.",
+    "source": "screen.clear()\nscreen.circle(160,160,50,\"orange\",true)\nscreen.show()",
+    "expected": "Shows a filled orange circle.",
+    "title": "screen.circle",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.circle(x, y, radius [,colour [,filled]])"
+  },
+  {
+    "name": "screen.text",
+    "category": "Draw on screen",
+    "text": "Place a message on the canvas. Give its top-left position and the text in quotes. Add a colour if you want one; otherwise the text is white. Use \\n inside the string for a new line.",
+    "source": "screen.clear()\nscreen.text(10,10,\"Hello, Iain!\",\"white\")\nscreen.show()",
+    "expected": "Shows the greeting near the upper-left corner.",
+    "title": "screen.text",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.text(x, y, text [,colour])"
+  },
+  {
+    "name": "screen.font",
+    "category": "Draw on screen",
+    "text": "Choose compact for ordinary text or mono for aligned columns. Use legacy when an older script needs its previous font. With no argument, screen.font() tells you the current choice. Changing it returns the previous choice and lasts until this Lua session closes.",
+    "source": "print(screen.font())\nscreen.font(\"mono\")\nprint(screen.font())",
+    "expected": "Prints compact, then mono in a new session.",
+    "title": "screen.font",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.font() or screen.font(\"compact\" | \"mono\" | \"legacy\")",
+    "after": "New sessions start with compact. The choice does not change the calculator stack font."
+  },
+  {
+    "name": "screen.measure",
+    "category": "Draw on screen",
+    "text": "Measure text before placing it. The two returned values are its width and height in pixels, using the active font. Select the font first so measurement and drawing agree.",
+    "source": "local w,h=screen.measure(\"Hello\")\nprint(w>0,h>=13)",
+    "expected": "Prints true and true. Width depends on the selected font.",
+    "title": "screen.measure",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "width, height = screen.measure(text)"
+  },
+  {
+    "name": "screen.show",
+    "category": "Draw on screen",
+    "text": "Display the frame you have drawn. Make all the changes for one frame, then show it once. When a drawing script finishes, Esc leaves its canvas.",
+    "source": "screen.clear()\nscreen.text(10,10,\"One frame\")\nscreen.show()",
+    "expected": "Shows One frame.",
+    "title": "screen.show",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "screen.show()"
+  },
+  {
+    "name": "screen.sprite",
+    "category": "Draw on screen",
+    "text": "Draw a colour sprite you saved in Sprite editor. Give the .sprite filename and a position. Transparent pixels leave the canvas visible. If the file cannot be read, the function returns nil and an error you can print.",
+    "source": "local ok,err=screen.sprite(\"DEMO.sprite\",20,30)\nif ok then screen.show() else print(err) end",
+    "expected": "Draws DEMO.sprite if present; otherwise prints a readable error. Replace the name with your saved sprite.",
+    "title": "screen.sprite",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "ok, error = screen.sprite(filename, x, y)",
+    "after": "Save sprites under /db48x/sprites. Use a filename from that folder, not a path to another directory."
+  },
+  {
+    "name": "keyboard.poll",
+    "category": "Use keys and sound",
+    "text": "Check for a key without waiting. It returns a key name, or nil when no key is queued. Arrow keys return names such as \"left\"; ordinary letter keys return a single character. Esc interrupts the script.",
+    "source": "local key=keyboard.poll()\nprint(key or \"No key\")",
+    "expected": "Prints a queued key, or No key.",
+    "title": "keyboard.poll",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "key = keyboard.poll()"
+  },
+  {
+    "name": "keyboard.wait",
+    "category": "Use keys and sound",
+    "text": "Wait for a key, optionally with a timeout in milliseconds. With no timeout it waits until a key arrives. A timed-out wait returns nil. Esc cancels the script.",
+    "source": "local key=keyboard.wait(1000)\nprint(key or \"Timed out\")",
+    "expected": "Waits up to one second, then prints a key or Timed out.",
+    "title": "keyboard.wait",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "key = keyboard.wait([timeout_ms])"
+  },
+  {
+    "name": "keyboard.down",
+    "category": "Use keys and sound",
+    "text": "Check whether a key is currently held. Give an arrow name such as \"left\", f1 through f5, or one printable character. The answer is true or false.",
+    "source": "print(keyboard.down(\"left\"))",
+    "expected": "Prints true while Left is held, otherwise false.",
+    "title": "keyboard.down",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "held = keyboard.down(key)"
+  },
+  {
+    "name": "system.sleep",
+    "category": "Use keys and sound",
+    "text": "Pause for a number of milliseconds. For example, 100 means a tenth of a second. Esc can still interrupt the pause.",
+    "source": "print(\"Wait\")\nsystem.sleep(100)\nprint(\"Done\")",
+    "expected": "Prints Wait, pauses about a tenth of a second, then prints Done.",
+    "title": "system.sleep",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "system.sleep(milliseconds)"
+  },
+  {
+    "name": "system.millis",
+    "category": "Use keys and sound",
+    "text": "Measure how long something takes. Save the counter before an operation, then subtract it from the counter afterward. This counter measures elapsed milliseconds, not the date or clock time.",
+    "source": "local start=system.millis()\nsystem.sleep(20)\nprint(system.millis()-start>=20)",
+    "expected": "Prints true.",
+    "title": "system.millis",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "milliseconds = system.millis()"
+  },
+  {
+    "name": "sound.beep",
+    "category": "Use keys and sound",
+    "text": "Play a tone by giving its frequency in hertz and its length in milliseconds. The example makes a short, high note.",
+    "source": "sound.beep(880,100)",
+    "expected": "Plays a short 880 Hz tone when sound is available.",
+    "title": "sound.beep",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "sound.beep(frequency_hz, duration_ms)",
+    "after": "Use 20 to 16000 Hz and up to 10000 ms. A frequency of 0 is silence."
+  },
+  {
+    "name": "sound.stop",
+    "category": "Use keys and sound",
+    "text": "Turn off the current tone. You can use this when leaving a sound-producing part of your script.",
+    "source": "sound.beep(440,50)\nsound.stop()",
+    "expected": "Plays a short tone and stops sound.",
+    "title": "sound.stop",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "sound.stop()"
+  },
+  {
+    "name": "plot.clear",
+    "category": "Plot graphs",
+    "text": "Start a new Lua plot. This removes the Lua curves you previously added and restores the default window. It leaves saved calculator graphs alone.",
+    "source": "plot.clear()\nplot.function2d(function(x) return x*x end)\nplot.show()",
+    "expected": "Opens the native view with one parabola. Esc returns to Lua.",
+    "title": "plot.clear",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "plot.clear()"
+  },
+  {
+    "name": "plot.window",
+    "category": "Plot graphs",
+    "text": "Choose the visible x and y ranges for a 2D plot: xmin, xmax, ymin, ymax. Each minimum must be smaller than its maximum. Add a curve, then show the plot.",
+    "source": "plot.clear()\nplot.window(-4,4,-1,16)\nplot.function2d(function(x) return x*x end)\nplot.show()",
+    "expected": "Shows the parabola in the selected window.",
+    "title": "plot.window",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "plot.window(xmin, xmax, ymin, ymax)"
+  },
+  {
+    "name": "plot.function2d",
+    "category": "Plot graphs",
+    "text": "Add a curve to a 2D plot. Your function receives x and returns y; return nil to leave a gap. You can add up to three curves. The optional table chooses the colour and a short label.",
+    "source": "plot.clear()\nplot.window(-4,4,-2,2)\nplot.function2d(function(x) return math.sin(x) end,\n  {colour=\"cyan\",label=\"Sine\"})\nplot.show()",
+    "expected": "Shows a cyan sine curve. Lua math.sin uses radians.",
+    "title": "plot.function2d",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "plot.function2d(function, [options])",
+    "after": "Labels use printable ASCII and at most 79 bytes. Keep drawing and plot changes outside the sampling function."
+  },
+  {
+    "name": "plot.surface",
+    "category": "Plot graphs",
+    "text": "Make a 3D surface from a function of x and y. Return the height z at each position, or nil for a gap. The options below choose the horizontal bounds.",
+    "source": "plot.clear()\nplot.surface(function(x,y) return x*x-y*y end,\n  {xmin=-2,xmax=2,ymin=-2,ymax=2})\nplot.show()",
+    "expected": "Opens a saddle surface in the native 3D viewer.",
+    "title": "plot.surface",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "plot.surface(function, [options])",
+    "after": "Optional camera settings: yaw, pitch and zoom. Angles are radians; pitch is -1.4 to 1.4 and zoom is 0.4 to 2.5."
+  },
+  {
+    "name": "plot.show",
+    "category": "Plot graphs",
+    "text": "Open the native graph viewer with the curves or surface you added. Use its labelled controls to explore. Returning to Lua continues the script after plot.show().",
+    "source": "plot.clear()\nplot.function2d(function(x) return x end)\nplot.show()\nprint(\"Back from plot\")",
+    "expected": "Shows y=x, then prints Back from plot when you leave the viewer.",
+    "title": "plot.show",
+    "steps": [],
+    "example_kind": "script",
+    "signature": "plot.show()"
+  },
+  {
+    "name": "Memory and saving",
+    "category": "Solve a problem",
+    "text": "If a script reports a memory error, save the source and make its tables or strings smaller. Keep only the values you need. This small list is a useful starting point; it stores ten squares.",
+    "source": "local values={}\nfor i=1,10 do values[i]=i*i end\nprint(values[10])",
+    "expected": "Prints 100. Start with small tables before increasing their size.",
+    "title": "A script runs out of memory",
+    "steps": [],
+    "example_kind": "script",
+    "after": "The Lua allocation budget is 48 KiB. Save before closing the editor; console variables disappear when you close the console."
+  },
+  {
+    "name": "Lua drawing is blank",
+    "title": "A drawing does not appear",
+    "category": "Solve a problem",
+    "text": "Check that your script calls screen.show() after drawing. White text on a white background is also easy to miss. Start with this high-contrast example.",
+    "source": "screen.clear(\"black\")\nscreen.text(10,10,\"Visible\",\"white\")\nscreen.show()",
+    "expected": "You should see Visible. If this works, add your own drawing commands back one at a time.",
+    "example_kind": "script",
+    "steps": []
+  }
+]

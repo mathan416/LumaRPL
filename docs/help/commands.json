@@ -1,0 +1,2386 @@
+{
+  "Drop": {
+    "category": "Stack and variables",
+    "text": "Remove the top value from the stack."
+  },
+  "Drop2": {
+    "category": "Stack and variables",
+    "text": "Remove the top two values."
+  },
+  "DropN": {
+    "category": "Stack and variables",
+    "text": "Remove several values. Put the count on top of the values you want to remove; the count is removed too."
+  },
+  "Dup": {
+    "category": "Stack and variables",
+    "text": "Make a second copy of the top value. Example: 7 DUP leaves 7 and 7."
+  },
+  "Dup2": {
+    "category": "Stack and variables",
+    "text": "Copy the top pair of values, keeping their order."
+  },
+  "DupN": {
+    "category": "Stack and variables",
+    "text": "Copy a group of values. Put the size of the group on top first."
+  },
+  "Swap": {
+    "category": "Stack and variables",
+    "text": "Exchange the top two values. Example: 2 3 SWAP leaves 3 below 2."
+  },
+  "Over": {
+    "category": "Stack and variables",
+    "text": "Copy the second value to the top without removing either original value."
+  },
+  "Pick": {
+    "category": "Stack and variables",
+    "text": "Copy a chosen stack level. Put the level number on top first; level 1 is the value immediately below it."
+  },
+  "Rot": {
+    "category": "Stack and variables",
+    "text": "Rotate the top three values, bringing the deepest of the three to the top."
+  },
+  "Roll": {
+    "category": "Stack and variables",
+    "text": "Bring a chosen stack level to the top, moving the intervening values down. Supply the level number first."
+  },
+  "RollD": {
+    "category": "Stack and variables",
+    "text": "Move the top value down to a chosen level. Supply the destination level number first."
+  },
+  "Depth": {
+    "category": "Stack and variables",
+    "text": "Put the number of stack values on top of the stack."
+  },
+  "Purge": {
+    "category": "Stack and variables",
+    "text": "Remove the variable named on the stack. Use a quoted name to avoid evaluating it first."
+  },
+  "Sto": {
+    "category": "Stack and variables",
+    "text": "Store a value under a name: type 42 'ANSWER' STO and press Enter. To keep HOME variables after restart, save the calculator session."
+  },
+  "Rcl": {
+    "category": "Stack and variables",
+    "text": "Fetch a stored object without running it: type 'ANSWER' RCL. A recalled program stays on the stack until you run EVAL."
+  },
+  "Eval": {
+    "category": "Stack and variables",
+    "text": "Evaluate the top object. For a program, this runs its instructions. Example: « 2 3 + » EVAL gives 5."
+  },
+  "LastArg": {
+    "category": "Stack and variables",
+    "text": "Recall the arguments saved from the previous command. Argument-saving settings determine what is available."
+  },
+  "LastX": {
+    "category": "Stack and variables",
+    "text": "Recall the last saved first argument."
+  },
+  "ClearStack": {
+    "category": "Stack and variables",
+    "text": "Remove every value from the stack. Save anything important before using this command."
+  },
+  "Nip": {
+    "category": "Stack and variables",
+    "text": "Remove the second stack value and keep the top one."
+  },
+  "Pick3": {
+    "category": "Stack and variables",
+    "text": "Copy the third stack value to the top."
+  },
+  "UnPick": {
+    "category": "Stack and variables",
+    "text": "Replace a chosen stack level with the supplied value. Check the level before replacing it."
+  },
+  "UnRot": {
+    "category": "Stack and variables",
+    "text": "Rotate the top three values in the opposite direction to ROT."
+  },
+  "NDupN": {
+    "category": "Stack and variables",
+    "text": "Repeat a group of stack values using the supplied count."
+  },
+  "DupDup": {
+    "category": "Stack and variables",
+    "text": "Duplicate the top value twice, leaving three copies."
+  },
+  "Clone": {
+    "category": "Stack and variables",
+    "text": "Make an independent copy of the top object."
+  },
+  "Copy": {
+    "category": "Stack and variables",
+    "text": "Copy a named object between calculator directories using the supplied source and destination names."
+  },
+  "Vars": {
+    "category": "Stack and variables",
+    "text": "List names in the current calculator directory."
+  },
+  "TVars": {
+    "category": "Stack and variables",
+    "text": "List variables of the requested object type in the current directory."
+  },
+  "XVars": {
+    "category": "Stack and variables",
+    "text": "List variables used by the supplied expression."
+  },
+  "LName": {
+    "category": "Stack and variables",
+    "text": "Find names used in the supplied object."
+  },
+  "Path": {
+    "category": "Stack and variables",
+    "text": "Return the path through calculator variable directories to the current directory."
+  },
+  "CurrentDirectory": {
+    "category": "Stack and variables",
+    "text": "Return the current calculator directory as an object. This is calculator variable storage, not an SD folder."
+  },
+  "Home": {
+    "category": "Stack and variables",
+    "text": "Return to the HOME calculator directory."
+  },
+  "CrDir": {
+    "category": "Stack and variables",
+    "text": "Create a calculator variable directory with the supplied name."
+  },
+  "UpDir": {
+    "category": "Stack and variables",
+    "text": "Move to the parent calculator directory."
+  },
+  "PgDir": {
+    "category": "Stack and variables",
+    "text": "Purge the named calculator directory and its contents."
+  },
+  "Order": {
+    "category": "Stack and variables",
+    "text": "Reorder the current directory using a list of variable names."
+  },
+  "Undo": {
+    "category": "Stack and variables",
+    "text": "Restore the saved calculator stack from before the last operation, when stack saving is enabled."
+  },
+  "add": {
+    "category": "Numbers and arithmetic",
+    "text": "Add the top two values. Type 2 3 + and press Enter to get 5."
+  },
+  "subtract": {
+    "category": "Numbers and arithmetic",
+    "text": "Subtract the top value from the value below it. Example: 10 3 - gives 7."
+  },
+  "multiply": {
+    "category": "Numbers and arithmetic",
+    "text": "Multiply the top two values. Example: 6 7 * gives 42."
+  },
+  "divide": {
+    "category": "Numbers and arithmetic",
+    "text": "Divide the second value by the top value. Example: 1 3 / keeps the exact fraction when exact arithmetic is enabled."
+  },
+  "mod": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the mathematical modulo of two numbers, in dividend then divisor order. Negative inputs can differ from REM."
+  },
+  "rem": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the division remainder, in dividend then divisor order. Example: 5 2 rem gives 1."
+  },
+  "pow": {
+    "category": "Numbers and arithmetic",
+    "text": "Raise the second value to the power on top. Example: 2 3 ^ gives 8."
+  },
+  "neg": {
+    "category": "Numbers and arithmetic",
+    "text": "Change the sign of the top value."
+  },
+  "abs": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the absolute value, or the magnitude of a complex value."
+  },
+  "inv": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the reciprocal of the top value: 1 divided by that value. Zero has no finite reciprocal."
+  },
+  "sqrt": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the square root. The real/complex result setting determines whether negative real inputs can give complex results."
+  },
+  "sq": {
+    "category": "Numbers and arithmetic",
+    "text": "Square the top value. Example: 12 SQ gives 144."
+  },
+  "cubed": {
+    "category": "Numbers and arithmetic",
+    "text": "Cube the top value. Example: 3 cubed gives 27."
+  },
+  "ToDecimal": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert the top value to a decimal approximation using the current precision."
+  },
+  "ToFraction": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert a value to a fraction using the fraction-conversion settings."
+  },
+  "ToQuotient": {
+    "category": "Numbers and arithmetic",
+    "text": "Rewrite a value or expression as a quotient where supported."
+  },
+  "cbrt": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the cube root of the top value."
+  },
+  "hypot": {
+    "category": "Numbers and arithmetic",
+    "text": "Find sqrt(x^2+y^2) from two supplied values."
+  },
+  "xroot": {
+    "category": "Numbers and arithmetic",
+    "text": "Find a root of the supplied value using the supplied root order."
+  },
+  "sign": {
+    "category": "Numbers and arithmetic",
+    "text": "Return the sign of a real value, or its normalized direction when supported for complex values."
+  },
+  "IntPart": {
+    "category": "Numbers and arithmetic",
+    "text": "Keep the integer part, truncating toward zero."
+  },
+  "FracPart": {
+    "category": "Numbers and arithmetic",
+    "text": "Keep the fractional remainder after truncation toward zero."
+  },
+  "ceil": {
+    "category": "Numbers and arithmetic",
+    "text": "Round up to the next integer."
+  },
+  "floor": {
+    "category": "Numbers and arithmetic",
+    "text": "Round down to the previous integer."
+  },
+  "Round": {
+    "category": "Numbers and arithmetic",
+    "text": "Round a value using the supplied digit count. The sign of the digit count selects the engine's rounding convention."
+  },
+  "Truncate": {
+    "category": "Numbers and arithmetic",
+    "text": "Discard digits using the supplied digit count instead of rounding them."
+  },
+  "mant": {
+    "category": "Numbers and arithmetic",
+    "text": "Return the decimal mantissa of a number."
+  },
+  "xpon": {
+    "category": "Numbers and arithmetic",
+    "text": "Return the decimal exponent of a number."
+  },
+  "SigDig": {
+    "category": "Numbers and arithmetic",
+    "text": "Count the significant decimal digits of a value."
+  },
+  "Percent": {
+    "category": "Numbers and arithmetic",
+    "text": "Calculate a percentage of the value below it. The base amount goes first, then the percentage."
+  },
+  "PercentChange": {
+    "category": "Numbers and arithmetic",
+    "text": "Calculate percentage change from the first value to the second."
+  },
+  "PercentTotal": {
+    "category": "Numbers and arithmetic",
+    "text": "Calculate the second amount as a percentage of the first total."
+  },
+  "Min": {
+    "category": "Numbers and arithmetic",
+    "text": "Keep the smaller of the top two values."
+  },
+  "Max": {
+    "category": "Numbers and arithmetic",
+    "text": "Keep the larger of the top two values."
+  },
+  "DFC": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert a decimal value to a continued-fraction representation."
+  },
+  "DFC2F": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert a continued-fraction representation to a fraction."
+  },
+  "Extract": {
+    "category": "Numbers and arithmetic",
+    "text": "Extract the requested part of an object using the supplied selection information."
+  },
+  "Pi": {
+    "category": "Numbers and arithmetic",
+    "text": "Put the mathematical constant pi on the stack. Symbolic/numerical constant settings affect its form."
+  },
+  "EulerianNumber": {
+    "category": "Numbers and arithmetic",
+    "text": "Put Euler's number e on the stack. Symbolic/numerical constant settings affect its form."
+  },
+  "Infinity": {
+    "category": "Numbers and arithmetic",
+    "text": "Put positive infinity on the stack."
+  },
+  "NegativeInfinity": {
+    "category": "Numbers and arithmetic",
+    "text": "Put negative infinity on the stack."
+  },
+  "RealToBinary": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert a real integer to a based-number object. Base and WordSize control its representation and fixed-width operations."
+  },
+  "BinaryToReal": {
+    "category": "Numbers and arithmetic",
+    "text": "Convert a based integer to a real-number object."
+  },
+  "Factors": {
+    "category": "Numbers and arithmetic",
+    "text": "Factor an integer, subject to the configured factorization limits."
+  },
+  "IsPrime": {
+    "category": "Numbers and arithmetic",
+    "text": "Test whether the supplied integer is prime."
+  },
+  "NextPrime": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the next prime after the supplied integer."
+  },
+  "PreviousPrime": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the preceding prime before the supplied integer."
+  },
+  "GCD": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the greatest common divisor of two integers."
+  },
+  "LCM": {
+    "category": "Numbers and arithmetic",
+    "text": "Find the least common multiple of two integers."
+  },
+  "Div2": {
+    "category": "Numbers and arithmetic",
+    "text": "Perform integer division and return the quotient and remainder."
+  },
+  "RandomSeed": {
+    "category": "Numbers and arithmetic",
+    "text": "Set the random-number generator seed. Reusing a seed is useful when reproducing a calculation."
+  },
+  "RandomNumber": {
+    "category": "Numbers and arithmetic",
+    "text": "Generate a random value from 0 up to, but not including, 1."
+  },
+  "Random": {
+    "category": "Numbers and arithmetic",
+    "text": "Generate a random value between two supplied bounds. Put the lower bound first and the upper bound on top."
+  },
+  "asin": {
+    "category": "Functions",
+    "text": "Find the inverse sine of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "acos": {
+    "category": "Functions",
+    "text": "Find the inverse cosine of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "atan": {
+    "category": "Functions",
+    "text": "Find the inverse tangent of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "sin": {
+    "category": "Functions",
+    "text": "Find the sine of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "cos": {
+    "category": "Functions",
+    "text": "Find the cosine of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "tan": {
+    "category": "Functions",
+    "text": "Find the tangent of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "sec": {
+    "category": "Functions",
+    "text": "Find the secant of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "csc": {
+    "category": "Functions",
+    "text": "Find the cosecant of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "cot": {
+    "category": "Functions",
+    "text": "Find the cotangent of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "asec": {
+    "category": "Functions",
+    "text": "Find the inverse secant of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "acsc": {
+    "category": "Functions",
+    "text": "Find the inverse cosecant of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "acot": {
+    "category": "Functions",
+    "text": "Find the inverse cotangent of the top value. Real angles follow the calculator angle mode; choose Degrees or Radians before calculating."
+  },
+  "asinh": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic sine for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "acosh": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic cosine for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "atanh": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic tangent for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "acsch": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic cosecant for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "asech": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic secant for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "acoth": {
+    "category": "Functions",
+    "text": "Calculate the inverse hyperbolic cotangent for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "sinh": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic sine for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "cosh": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic cosine for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "tanh": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic tangent for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "csch": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic cosecant for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "sech": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic secant for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "coth": {
+    "category": "Functions",
+    "text": "Calculate the hyperbolic cotangent for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "ln": {
+    "category": "Functions",
+    "text": "Calculate the natural logarithm for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "exp": {
+    "category": "Functions",
+    "text": "Calculate the exponential e^x for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "log10": {
+    "category": "Functions",
+    "text": "Calculate the base-ten logarithm for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "exp10": {
+    "category": "Functions",
+    "text": "Calculate the exponential 10^x for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "ln1p": {
+    "category": "Functions",
+    "text": "Calculate the natural logarithm of 1+x for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "expm1": {
+    "category": "Functions",
+    "text": "Calculate the value of e^x-1 for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "log2": {
+    "category": "Functions",
+    "text": "Calculate the base-two logarithm for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "exp2": {
+    "category": "Functions",
+    "text": "Calculate the exponential 2^x for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted."
+  },
+  "erf": {
+    "category": "Functions",
+    "text": "Calculate the error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+  },
+  "erfc": {
+    "category": "Functions",
+    "text": "Calculate the complementary error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+  },
+  "tgamma": {
+    "category": "Functions",
+    "text": "Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+  },
+  "lgamma": {
+    "category": "Functions",
+    "text": "Calculate the logarithm of the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+  },
+  "GammaP": {
+    "category": "Functions",
+    "text": "Calculate the regularized lower incomplete gamma function. Enter a followed by x, with a>0 and x>=0."
+  },
+  "BetaI": {
+    "category": "Functions",
+    "text": "Calculate the regularized incomplete beta function. Enter a, b, then x; a and b must be positive and x must be between 0 and 1."
+  },
+  "UTPC": {
+    "category": "Functions",
+    "text": "Find the upper-tail chi-square probability. Enter degrees of freedom followed by the statistic x. Degrees of freedom must be positive."
+  },
+  "UTPN": {
+    "category": "Functions",
+    "text": "Find the upper-tail normal probability. Enter mean, variance, then x. The variance must be positive; it is variance, not standard deviation."
+  },
+  "UTPT": {
+    "category": "Functions",
+    "text": "Find the upper-tail Student t probability. Enter positive degrees of freedom followed by t."
+  },
+  "UTPF": {
+    "category": "Functions",
+    "text": "Find the upper-tail F probability. Enter numerator degrees of freedom, denominator degrees of freedom, then x. Both degree counts must be positive."
+  },
+  "fact": {
+    "category": "Functions",
+    "text": "Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported."
+  },
+  "comb": {
+    "category": "Functions",
+    "text": "Count unordered selections. Supply population size n followed by selection size r."
+  },
+  "perm": {
+    "category": "Functions",
+    "text": "Count ordered selections. Supply population size n followed by selection size r."
+  },
+  "True": {
+    "category": "Logic and programs",
+    "text": "Put a true Boolean value on the stack."
+  },
+  "False": {
+    "category": "Logic and programs",
+    "text": "Put a false Boolean value on the stack."
+  },
+  "And": {
+    "category": "Logic and programs",
+    "text": "Combine two values with AND. Integer inputs follow the truth/bitwise logic setting."
+  },
+  "Or": {
+    "category": "Logic and programs",
+    "text": "Combine two values with OR. Integer inputs follow the truth/bitwise logic setting."
+  },
+  "Xor": {
+    "category": "Logic and programs",
+    "text": "Combine two values with exclusive OR. Integer inputs follow the truth/bitwise logic setting."
+  },
+  "Not": {
+    "category": "Logic and programs",
+    "text": "Invert a truth value or bits, according to the integer logic setting."
+  },
+  "same": {
+    "category": "Logic and programs",
+    "text": "Compare two objects for identical content and type, rather than mathematical equivalence."
+  },
+  "TestSame": {
+    "category": "Logic and programs",
+    "text": "Test whether the supplied objects are the same, using the engine comparison operation."
+  },
+  "TestLT": {
+    "category": "Logic and programs",
+    "text": "Test whether the second stack value is less than the top value."
+  },
+  "TestEQ": {
+    "category": "Logic and programs",
+    "text": "Test whether the top two values are equal."
+  },
+  "TestGT": {
+    "category": "Logic and programs",
+    "text": "Test whether the second stack value is greater than the top value."
+  },
+  "TestLE": {
+    "category": "Logic and programs",
+    "text": "Test whether the second stack value is less than or equal to the top value."
+  },
+  "TestNE": {
+    "category": "Logic and programs",
+    "text": "Test whether the top two values differ."
+  },
+  "TestGE": {
+    "category": "Logic and programs",
+    "text": "Test whether the second stack value is greater than or equal to the top value."
+  },
+  "IFTE": {
+    "category": "Logic and programs",
+    "text": "Choose between two branches from a condition. Supply the condition, true branch and false branch in that order."
+  },
+  "IFT": {
+    "category": "Logic and programs",
+    "text": "Run the supplied branch only when the supplied condition is true."
+  },
+  "Where": {
+    "category": "Logic and programs",
+    "text": "Apply the supplied local assignments to an expression."
+  },
+  "NSub": {
+    "category": "Logic and programs",
+    "text": "Return the current subsequence index while DoSubs is running. Outside that operation there is no such local index."
+  },
+  "EndSub": {
+    "category": "Logic and programs",
+    "text": "Return the final subsequence index while DoSubs is running."
+  },
+  "SetFlag": {
+    "category": "Logic and programs",
+    "text": "Set the numbered user flag supplied on the stack."
+  },
+  "ClearFlag": {
+    "category": "Logic and programs",
+    "text": "Clear the numbered user flag supplied on the stack."
+  },
+  "TestFlagSet": {
+    "category": "Logic and programs",
+    "text": "Test whether the supplied user flag is set."
+  },
+  "TestFlagClear": {
+    "category": "Logic and programs",
+    "text": "Test whether the supplied user flag is clear."
+  },
+  "TestFlagClearThenClear": {
+    "category": "Logic and programs",
+    "text": "Test whether a user flag was clear, then leave it clear."
+  },
+  "TestFlagClearThenSet": {
+    "category": "Logic and programs",
+    "text": "Test whether a user flag was clear, then set it."
+  },
+  "TestFlagSetThenClear": {
+    "category": "Logic and programs",
+    "text": "Test whether a user flag was set, then clear it."
+  },
+  "TestFlagSetThenSet": {
+    "category": "Logic and programs",
+    "text": "Test whether a user flag was set, then leave it set."
+  },
+  "FlagsToBinary": {
+    "category": "Logic and programs",
+    "text": "Pack the engine flag state into a based integer for storage or inspection."
+  },
+  "BinaryToFlags": {
+    "category": "Logic and programs",
+    "text": "Restore engine flag state from a supplied based integer. This can change calculator behavior."
+  },
+  "FlipFlag": {
+    "category": "Logic and programs",
+    "text": "Toggle the numbered user flag supplied on the stack."
+  },
+  "Compile": {
+    "category": "Logic and programs",
+    "text": "Parse source text into calculator objects. It does not run a Lua or CHIP-8 file."
+  },
+  "CompileToAlgebraic": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require an algebraic object."
+  },
+  "CompileToNumber": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require a number."
+  },
+  "CompileToInteger": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require an integer."
+  },
+  "CompileToPositive": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require a positive value."
+  },
+  "CompileToReal": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require a real value."
+  },
+  "CompileToObject": {
+    "category": "Logic and programs",
+    "text": "Parse source text as one calculator object."
+  },
+  "CompileToExpression": {
+    "category": "Logic and programs",
+    "text": "Parse source text and require an expression."
+  },
+  "ToProgram": {
+    "category": "Logic and programs",
+    "text": "Turn the supplied object into an RPL program."
+  },
+  "ToInteger": {
+    "category": "Logic and programs",
+    "text": "Convert a supported object to an integer."
+  },
+  "Quote": {
+    "category": "Logic and programs",
+    "text": "Keep the supplied expression unevaluated in the applicable symbolic context."
+  },
+  "Halt": {
+    "category": "Logic and programs",
+    "text": "Pause RPL execution so you can inspect or debug it."
+  },
+  "Debug": {
+    "category": "Logic and programs",
+    "text": "Start the supplied RPL program in the debugger."
+  },
+  "SingleStep": {
+    "category": "Logic and programs",
+    "text": "Execute the next instruction of a paused RPL program."
+  },
+  "StepOver": {
+    "category": "Logic and programs",
+    "text": "Run the next instruction without stepping into a called program."
+  },
+  "StepOut": {
+    "category": "Logic and programs",
+    "text": "Continue until the current nested program returns."
+  },
+  "MultipleSteps": {
+    "category": "Logic and programs",
+    "text": "Execute the supplied number of debugger steps."
+  },
+  "Continue": {
+    "category": "Logic and programs",
+    "text": "Resume a paused RPL program."
+  },
+  "Kill": {
+    "category": "Logic and programs",
+    "text": "Stop paused RPL execution."
+  },
+  "Input": {
+    "category": "Logic and programs",
+    "text": "Ask for calculator input using the supplied prompt specification."
+  },
+  "Prompt": {
+    "category": "Logic and programs",
+    "text": "Display the supplied prompt during RPL execution."
+  },
+  "Run": {
+    "category": "Logic and programs",
+    "text": "Run the supplied program or named object. In Programming browsers, use the labelled F2 Run action."
+  },
+  "TimedEval": {
+    "category": "Logic and programs",
+    "text": "Evaluate an object and report its elapsed time."
+  },
+  "Wait": {
+    "category": "Logic and programs",
+    "text": "Wait for the supplied duration or a key, according to the engine WAIT convention. Returned key positions are engine keys, not QWERTY character codes."
+  },
+  "ToText": {
+    "category": "Lists and text",
+    "text": "Convert the top object to its source-text representation."
+  },
+  "ToList": {
+    "category": "Lists and text",
+    "text": "Collect the requested number of stack values into a list. Supply the count last."
+  },
+  "FromList": {
+    "category": "Lists and text",
+    "text": "Unpack a list into its elements and return its size using the engine list convention."
+  },
+  "Explode": {
+    "category": "Lists and text",
+    "text": "Break an object into its components."
+  },
+  "Put": {
+    "category": "Lists and text",
+    "text": "Replace an element in the supplied object at the supplied position."
+  },
+  "Get": {
+    "category": "Lists and text",
+    "text": "Read an element from the supplied object at the supplied position."
+  },
+  "Size": {
+    "category": "Lists and text",
+    "text": "Return an object's size, such as a list length or matrix dimensions."
+  },
+  "Sort": {
+    "category": "Lists and text",
+    "text": "Sort list elements in ascending order."
+  },
+  "QuickSort": {
+    "category": "Lists and text",
+    "text": "Sort a list in ascending order with the engine quick-sort operation."
+  },
+  "ReverseSort": {
+    "category": "Lists and text",
+    "text": "Sort list elements in descending order."
+  },
+  "ReverseQuickSort": {
+    "category": "Lists and text",
+    "text": "Sort a list in descending order with quick sort."
+  },
+  "ReverseList": {
+    "category": "Lists and text",
+    "text": "Reverse the order of list elements."
+  },
+  "Unique": {
+    "category": "Lists and text",
+    "text": "Remove duplicate list elements."
+  },
+  "QuickUnique": {
+    "category": "Lists and text",
+    "text": "Remove duplicate elements using the engine quick unique operation."
+  },
+  "Head": {
+    "category": "Lists and text",
+    "text": "Return the first element of a list."
+  },
+  "Tail": {
+    "category": "Lists and text",
+    "text": "Return the list after removing its first element."
+  },
+  "Map": {
+    "category": "Lists and text",
+    "text": "Apply the supplied operation to list elements and collect the results."
+  },
+  "Reduce": {
+    "category": "Lists and text",
+    "text": "Combine list elements using the supplied operation."
+  },
+  "Filter": {
+    "category": "Lists and text",
+    "text": "Keep list elements that pass the supplied test."
+  },
+  "DoList": {
+    "category": "Lists and text",
+    "text": "Apply an operation across one or more lists. Supply the lists, their count and the operation using the engine list convention."
+  },
+  "DoSubs": {
+    "category": "Lists and text",
+    "text": "Apply an operation to list subsequences. NSub and EndSub provide local indices while it runs."
+  },
+  "ListSum": {
+    "category": "Lists and text",
+    "text": "Add the elements of a list."
+  },
+  "ListProduct": {
+    "category": "Lists and text",
+    "text": "Multiply the elements of a list."
+  },
+  "ListDifferences": {
+    "category": "Lists and text",
+    "text": "Return differences between successive list elements."
+  },
+  "GetI": {
+    "category": "Lists and text",
+    "text": "Read the indexed element and advance the index using the engine indexed-access convention."
+  },
+  "PutI": {
+    "category": "Lists and text",
+    "text": "Write the indexed element and advance the index using the engine indexed-access convention."
+  },
+  "CharToUnicode": {
+    "category": "Lists and text",
+    "text": "Return the Unicode code point for a supplied character."
+  },
+  "UnicodeToText": {
+    "category": "Lists and text",
+    "text": "Build text from supplied Unicode code points."
+  },
+  "TextToUnicode": {
+    "category": "Lists and text",
+    "text": "Return the Unicode code points in supplied text."
+  },
+  "Sum": {
+    "category": "Algebra and calculus",
+    "text": "Evaluate a summation from an expression, variable and bounds."
+  },
+  "Product": {
+    "category": "Algebra and calculus",
+    "text": "Evaluate a product over an expression, variable and bounds."
+  },
+  "Root": {
+    "category": "Algebra and calculus",
+    "text": "Find a local numerical solution. Supply an expression, quoted variable and initial guess. Example: Rad 16 Precision 'COS(X)-X' 'X' 1 Root gives X near 0.7390851332. Ctrl+W offers the guided solver."
+  },
+  "MultipleEquationsSolver": {
+    "category": "Algebra and calculus",
+    "text": "Solve several equations numerically using the supplied variables and guesses. Ctrl+W > Equation system is the guided alternative."
+  },
+  "MultipleVariablesSolver": {
+    "category": "Algebra and calculus",
+    "text": "Solve using the supplied equation, variables and starting values through the engine multi-variable solver."
+  },
+  "Integrate": {
+    "category": "Algebra and calculus",
+    "text": "Numerically integrate an expression over the supplied variable and bounds. Home > Math & graphs > Calculus provides a guided definite integral."
+  },
+  "Subst": {
+    "category": "Algebra and calculus",
+    "text": "Substitute the supplied replacement into an expression without assigning a calculator variable."
+  },
+  "MatchUp": {
+    "category": "Algebra and calculus",
+    "text": "Apply a symbolic rewrite while traversing the expression upward."
+  },
+  "MatchDown": {
+    "category": "Algebra and calculus",
+    "text": "Apply a symbolic rewrite while traversing the expression downward."
+  },
+  "Expand": {
+    "category": "Algebra and calculus",
+    "text": "Expand products and powers in an algebraic expression."
+  },
+  "Collect": {
+    "category": "Algebra and calculus",
+    "text": "Collect matching terms in an algebraic expression."
+  },
+  "PartFrac": {
+    "category": "Algebra and calculus",
+    "text": "Decompose a rational expression into partial fractions where supported."
+  },
+  "FoldConstants": {
+    "category": "Algebra and calculus",
+    "text": "Combine the constant parts of an expression."
+  },
+  "ReorderTerms": {
+    "category": "Algebra and calculus",
+    "text": "Put expression terms into the engine's canonical order."
+  },
+  "Simplify": {
+    "category": "Algebra and calculus",
+    "text": "Simplify an expression using the current algebra rules."
+  },
+  "TrigSin": {
+    "category": "Algebra and calculus",
+    "text": "Rewrite trigonometric expressions in terms of sine where supported."
+  },
+  "ToPolynomial": {
+    "category": "Algebra and calculus",
+    "text": "Convert an expression to the engine polynomial representation."
+  },
+  "FromPolynomial": {
+    "category": "Algebra and calculus",
+    "text": "Convert a polynomial object back to an algebraic expression."
+  },
+  "PEval": {
+    "category": "Algebra and calculus",
+    "text": "Evaluate a polynomial using the supplied argument."
+  },
+  "PRoot": {
+    "category": "Algebra and calculus",
+    "text": "Find roots of the supplied polynomial using the polynomial solver."
+  },
+  "PCoef": {
+    "category": "Algebra and calculus",
+    "text": "Return polynomial coefficients using the engine's coefficient order."
+  },
+  "Zeros": {
+    "category": "Algebra and calculus",
+    "text": "Find zeros using the engine symbolic/polynomial operation. A result is subject to the expression and solver limitations."
+  },
+  "Apply": {
+    "category": "Algebra and calculus",
+    "text": "Apply a supplied symbolic transformation to an expression."
+  },
+  "Isolate": {
+    "category": "Algebra and calculus",
+    "text": "Rearrange an equation to isolate the supplied variable. Some equations cannot be isolated by the engine."
+  },
+  "Derivative": {
+    "category": "Algebra and calculus",
+    "text": "Differentiate an expression with respect to a quoted variable. Example: 'X^2' 'X' Derivative gives 2*X."
+  },
+  "Primitive": {
+    "category": "Algebra and calculus",
+    "text": "Find a symbolic antiderivative. Example: 'X^2' 'X' Primitive gives X^3/3. The arbitrary constant is implicit."
+  },
+  "AlgebraConfiguration": {
+    "category": "Algebra and calculus",
+    "text": "Return the calculator directory used for algebra configuration."
+  },
+  "AlgebraVariable": {
+    "category": "Algebra and calculus",
+    "text": "Recall the current algebra variable."
+  },
+  "StoreAlgebraVariable": {
+    "category": "Algebra and calculus",
+    "text": "Set the algebra variable from the supplied name."
+  },
+  "StEq": {
+    "category": "Algebra and calculus",
+    "text": "Store the supplied equation as the engine's current equation."
+  },
+  "RcEq": {
+    "category": "Algebra and calculus",
+    "text": "Recall the current engine equation."
+  },
+  "NextEq": {
+    "category": "Algebra and calculus",
+    "text": "Select the next equation in the engine equation set."
+  },
+  "EvalEq": {
+    "category": "Algebra and calculus",
+    "text": "Evaluate the current engine equation."
+  },
+  "Equation": {
+    "category": "Algebra and calculus",
+    "text": "Use the supplied equation definition in the engine equation/library context."
+  },
+  "re": {
+    "category": "Complex numbers and matrices",
+    "text": "Return the real part of a complex value."
+  },
+  "im": {
+    "category": "Complex numbers and matrices",
+    "text": "Return the imaginary part of a complex value."
+  },
+  "arg": {
+    "category": "Complex numbers and matrices",
+    "text": "Return the phase of a complex value in the current angle unit. Zero has no defined direction."
+  },
+  "conj": {
+    "category": "Complex numbers and matrices",
+    "text": "Return the complex conjugate."
+  },
+  "dot": {
+    "category": "Complex numbers and matrices",
+    "text": "Calculate the dot product of two vectors."
+  },
+  "cross": {
+    "category": "Complex numbers and matrices",
+    "text": "Calculate the cross product of two compatible vectors."
+  },
+  "det": {
+    "category": "Complex numbers and matrices",
+    "text": "Find a square matrix's determinant. Example: [[1 2][3 4]] DET gives -2."
+  },
+  "norm": {
+    "category": "Complex numbers and matrices",
+    "text": "Find the norm of the supplied vector or matrix."
+  },
+  "ColumnNorm": {
+    "category": "Complex numbers and matrices",
+    "text": "Find the matrix column norm."
+  },
+  "RowNorm": {
+    "category": "Complex numbers and matrices",
+    "text": "Find the matrix row norm."
+  },
+  "MatrixToColumns": {
+    "category": "Complex numbers and matrices",
+    "text": "Split a matrix into column vectors."
+  },
+  "MatrixToRows": {
+    "category": "Complex numbers and matrices",
+    "text": "Split a matrix into row vectors."
+  },
+  "ColumnsToMatrix": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a matrix from supplied column vectors."
+  },
+  "RowsToMatrix": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a matrix from supplied row vectors."
+  },
+  "AddColumn": {
+    "category": "Complex numbers and matrices",
+    "text": "Insert the supplied column into a matrix at the supplied position."
+  },
+  "AddRow": {
+    "category": "Complex numbers and matrices",
+    "text": "Insert the supplied row into a matrix at the supplied position."
+  },
+  "DeleteColumn": {
+    "category": "Complex numbers and matrices",
+    "text": "Remove the specified column from a matrix."
+  },
+  "DeleteRow": {
+    "category": "Complex numbers and matrices",
+    "text": "Remove the specified row from a matrix."
+  },
+  "ColumnSwap": {
+    "category": "Complex numbers and matrices",
+    "text": "Exchange two specified matrix columns."
+  },
+  "RowSwap": {
+    "category": "Complex numbers and matrices",
+    "text": "Exchange two specified matrix rows."
+  },
+  "REF": {
+    "category": "Complex numbers and matrices",
+    "text": "Reduce a matrix to row echelon form."
+  },
+  "RREF": {
+    "category": "Complex numbers and matrices",
+    "text": "Reduce a matrix to reduced row echelon form."
+  },
+  "RREFP": {
+    "category": "Complex numbers and matrices",
+    "text": "Reduce a matrix and also return its pivot values. The reduced matrix is on top of the stack, with the pivot list below it."
+  },
+  "RREFMOD": {
+    "category": "Complex numbers and matrices",
+    "text": "Modulo row reduction is not implemented in this engine build and reports an error. Use REF or RREF for ordinary row reduction."
+  },
+  "LU": {
+    "category": "Complex numbers and matrices",
+    "text": "Factor a matrix into lower and upper triangular factors using the engine pivoting convention."
+  },
+  "ToArray": {
+    "category": "Complex numbers and matrices",
+    "text": "Build an array from the supplied values and dimensions."
+  },
+  "FromArray": {
+    "category": "Complex numbers and matrices",
+    "text": "Unpack an array into its values and dimensions."
+  },
+  "ConstantArray": {
+    "category": "Complex numbers and matrices",
+    "text": "Build an array filled with a supplied constant."
+  },
+  "IdentityMatrix": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a square identity matrix of the supplied size."
+  },
+  "RandomMatrix": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a matrix of random entries with the supplied dimensions."
+  },
+  "Transpose": {
+    "category": "Complex numbers and matrices",
+    "text": "Exchange matrix rows and columns."
+  },
+  "TransConjugate": {
+    "category": "Complex numbers and matrices",
+    "text": "Transpose a matrix and conjugate its entries."
+  },
+  "RealToRectangular": {
+    "category": "Complex numbers and matrices",
+    "text": "Combine two real components into a rectangular complex value."
+  },
+  "RealToPolar": {
+    "category": "Complex numbers and matrices",
+    "text": "Combine magnitude and phase into a polar complex value."
+  },
+  "RectangularToReal": {
+    "category": "Complex numbers and matrices",
+    "text": "Split a rectangular complex value into real components."
+  },
+  "PolarToReal": {
+    "category": "Complex numbers and matrices",
+    "text": "Split a polar complex value into magnitude and phase."
+  },
+  "ToRectangular": {
+    "category": "Complex numbers and matrices",
+    "text": "Convert a complex value or coordinate object to rectangular form."
+  },
+  "ToPolar": {
+    "category": "Complex numbers and matrices",
+    "text": "Convert a complex value or coordinate object to polar form."
+  },
+  "ToCylindrical": {
+    "category": "Complex numbers and matrices",
+    "text": "Convert coordinates to cylindrical form."
+  },
+  "ToSpherical": {
+    "category": "Complex numbers and matrices",
+    "text": "Convert coordinates to spherical form."
+  },
+  "To2DVector": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a two-component vector from supplied values."
+  },
+  "To3DVector": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a three-component vector from supplied values."
+  },
+  "FromVector": {
+    "category": "Complex numbers and matrices",
+    "text": "Unpack a vector into components."
+  },
+  "Convert": {
+    "category": "Units and ranges",
+    "text": "Convert a quantity to the supplied target unit. Example: 100_cm 1_m Convert gives 1 m. Ctrl+U offers From/To unit lists."
+  },
+  "UBase": {
+    "category": "Units and ranges",
+    "text": "Express a quantity in base units."
+  },
+  "UVal": {
+    "category": "Units and ranges",
+    "text": "Extract the value from a unit-bearing quantity."
+  },
+  "UFact": {
+    "category": "Units and ranges",
+    "text": "Factor a quantity's units using the supplied unit factor."
+  },
+  "ToUnit": {
+    "category": "Units and ranges",
+    "text": "Combine the supplied value and unit into a quantity. Use Convert to change an existing quantity to another unit."
+  },
+  "ApplyUnit": {
+    "category": "Units and ranges",
+    "text": "Attach the unit chosen by the current engine unit-menu key. The menu supplies the unit; typing this helper alone does not choose one."
+  },
+  "ConvertToUnit": {
+    "category": "Units and ranges",
+    "text": "Convert to the unit supplied by the current engine unit-menu key. Ctrl+U is easier for a guided conversion."
+  },
+  "ApplyInverseUnit": {
+    "category": "Units and ranges",
+    "text": "Attach the reciprocal of the unit supplied by the current unit-menu key."
+  },
+  "ConvertToUnitPrefix": {
+    "category": "Units and ranges",
+    "text": "Apply the prefix supplied by the active engine unit-prefix menu key."
+  },
+  "UnitsSIPrefixCycle": {
+    "category": "Units and ranges",
+    "text": "Cycle the SI prefix used by a unit-bearing value."
+  },
+  "FromRange": {
+    "category": "Units and ranges",
+    "text": "Unpack a range into its defining values."
+  },
+  "ToRange": {
+    "category": "Units and ranges",
+    "text": "Build a range from supplied bounds."
+  },
+  "ToDeltaRange": {
+    "category": "Units and ranges",
+    "text": "Build a range using a central value and absolute uncertainty."
+  },
+  "ToPercentRange": {
+    "category": "Units and ranges",
+    "text": "Build a range using a central value and percentage uncertainty."
+  },
+  "ToUncertain": {
+    "category": "Units and ranges",
+    "text": "Build an uncertain number from a central value and standard deviation. Converting an existing range to this representation is not implemented."
+  },
+  "RangeUnion": {
+    "category": "Units and ranges",
+    "text": "Return the union of two ranges where representable."
+  },
+  "RangeIntersect": {
+    "category": "Units and ranges",
+    "text": "Return the overlap of two ranges."
+  },
+  "StandardUncertainty": {
+    "category": "Units and ranges",
+    "text": "Return a quantity's absolute standard uncertainty."
+  },
+  "RelativeUncertainty": {
+    "category": "Units and ranges",
+    "text": "Return a quantity's relative uncertainty."
+  },
+  "ToStandardUncertainty": {
+    "category": "Units and ranges",
+    "text": "Build an uncertain quantity using absolute uncertainty."
+  },
+  "ToRelativeUncertainty": {
+    "category": "Units and ranges",
+    "text": "Build an uncertain quantity using relative uncertainty."
+  },
+  "StandardRound": {
+    "category": "Units and ranges",
+    "text": "Round using the supplied absolute uncertainty."
+  },
+  "RelativeRound": {
+    "category": "Units and ranges",
+    "text": "Round using the supplied relative uncertainty."
+  },
+  "PrecisionRound": {
+    "category": "Units and ranges",
+    "text": "Round to the supplied precision."
+  },
+  "ToHMS": {
+    "category": "Dates and time",
+    "text": "Convert hours to hours/minutes/seconds form."
+  },
+  "FromHMS": {
+    "category": "Dates and time",
+    "text": "Convert hours/minutes/seconds form to decimal hours."
+  },
+  "HMSAdd": {
+    "category": "Dates and time",
+    "text": "Add two hours/minutes/seconds values."
+  },
+  "HMSSub": {
+    "category": "Dates and time",
+    "text": "Subtract hours/minutes/seconds values."
+  },
+  "ToDMS": {
+    "category": "Dates and time",
+    "text": "Convert an angle to degrees/minutes/seconds form."
+  },
+  "FromDMS": {
+    "category": "Dates and time",
+    "text": "Convert degrees/minutes/seconds to decimal degrees."
+  },
+  "DMSAdd": {
+    "category": "Dates and time",
+    "text": "Add two degrees/minutes/seconds values."
+  },
+  "DMSSub": {
+    "category": "Dates and time",
+    "text": "Subtract degrees/minutes/seconds values."
+  },
+  "DateAdd": {
+    "category": "Dates and time",
+    "text": "Add the supplied number of days to a date."
+  },
+  "DateSub": {
+    "category": "Dates and time",
+    "text": "Find the difference between supplied dates."
+  },
+  "JulianDayNumber": {
+    "category": "Dates and time",
+    "text": "Convert a date to its Julian day number."
+  },
+  "DateFromJulianDayNumber": {
+    "category": "Dates and time",
+    "text": "Convert a Julian day number to a date."
+  },
+  "RadiansToDegrees": {
+    "category": "Dates and time",
+    "text": "Convert a plain radian value to degrees."
+  },
+  "DegreesToRadians": {
+    "category": "Dates and time",
+    "text": "Convert a plain degree value to radians."
+  },
+  "ToDegrees": {
+    "category": "Dates and time",
+    "text": "Express an angle in degrees."
+  },
+  "ToRadians": {
+    "category": "Dates and time",
+    "text": "Express an angle in radians."
+  },
+  "ToGrads": {
+    "category": "Dates and time",
+    "text": "Express an angle in grads: 400 grads make a full turn."
+  },
+  "ToPiRadians": {
+    "category": "Dates and time",
+    "text": "Express an angle as a multiple of pi radians: 2 makes a full turn."
+  },
+  "Date": {
+    "category": "Dates and time",
+    "text": "Put the calculator's current date on the stack."
+  },
+  "Time": {
+    "category": "Dates and time",
+    "text": "Put the calculator's current time on the stack."
+  },
+  "DateTime": {
+    "category": "Dates and time",
+    "text": "Return the calculator's date and time."
+  },
+  "ChronoTime": {
+    "category": "Dates and time",
+    "text": "Return calculator time with hundredths of a second in hms form. This reads the clock; it does not connect to NTP."
+  },
+  "Ticks": {
+    "category": "Dates and time",
+    "text": "Return the engine tick counter for elapsed-time measurements."
+  },
+  "SetDate": {
+    "category": "Dates and time",
+    "text": "Set the calculator date from the supplied date value. Settings > Clock / timezone offers the native clock options."
+  },
+  "SetTime": {
+    "category": "Dates and time",
+    "text": "Set the calculator time from the supplied time value. Use actual current time for HTTPS rate updates."
+  },
+  "StatsData": {
+    "category": "Statistics and finance",
+    "text": "Access the engine statistical-data object. Ctrl+D uses a separate native data table."
+  },
+  "StatsParameters": {
+    "category": "Statistics and finance",
+    "text": "Access the engine statistical parameters."
+  },
+  "AddData": {
+    "category": "Statistics and finance",
+    "text": "Add supplied observations to the engine statistical data."
+  },
+  "RemoveData": {
+    "category": "Statistics and finance",
+    "text": "Remove supplied observations from the engine statistical data."
+  },
+  "RecallData": {
+    "category": "Statistics and finance",
+    "text": "Recall the engine statistical-data object onto the stack."
+  },
+  "StoreData": {
+    "category": "Statistics and finance",
+    "text": "Replace engine statistical data with the supplied object. Save native Data tables through their CSV file menu."
+  },
+  "ClearData": {
+    "category": "Statistics and finance",
+    "text": "Clear the engine statistical data."
+  },
+  "Average": {
+    "category": "Statistics and finance",
+    "text": "Calculate the mean using the engine statistical data or supplied supported object."
+  },
+  "Median": {
+    "category": "Statistics and finance",
+    "text": "Calculate the median of the supplied data."
+  },
+  "MinData": {
+    "category": "Statistics and finance",
+    "text": "Return column minima from engine statistical data."
+  },
+  "MaxData": {
+    "category": "Statistics and finance",
+    "text": "Return column maxima from engine statistical data."
+  },
+  "DataSize": {
+    "category": "Statistics and finance",
+    "text": "Return the engine statistical-data size."
+  },
+  "SumOfX": {
+    "category": "Statistics and finance",
+    "text": "Return the sum of values in the independent data column."
+  },
+  "SumOfY": {
+    "category": "Statistics and finance",
+    "text": "Return the sum of values in the dependent data column."
+  },
+  "SumOfXY": {
+    "category": "Statistics and finance",
+    "text": "Return the sum of paired X*Y values."
+  },
+  "SumOfXSquares": {
+    "category": "Statistics and finance",
+    "text": "Return the sum of squared X values."
+  },
+  "SumOfYSquares": {
+    "category": "Statistics and finance",
+    "text": "Return the sum of squared Y values."
+  },
+  "Variance": {
+    "category": "Statistics and finance",
+    "text": "Return sample variance from the engine statistical data."
+  },
+  "Correlation": {
+    "category": "Statistics and finance",
+    "text": "Return the correlation coefficient for the engine selected data columns."
+  },
+  "Covariance": {
+    "category": "Statistics and finance",
+    "text": "Return sample covariance for the engine selected data columns."
+  },
+  "StandardDeviation": {
+    "category": "Statistics and finance",
+    "text": "Return sample standard deviation from engine statistical data."
+  },
+  "FrequencyBins": {
+    "category": "Statistics and finance",
+    "text": "Count observations in the supplied frequency bins."
+  },
+  "PopulationVariance": {
+    "category": "Statistics and finance",
+    "text": "Return population variance, using the full population denominator."
+  },
+  "PopulationStandardDeviation": {
+    "category": "Statistics and finance",
+    "text": "Return population standard deviation."
+  },
+  "PopulationCovariance": {
+    "category": "Statistics and finance",
+    "text": "Return population covariance."
+  },
+  "DataTotal": {
+    "category": "Statistics and finance",
+    "text": "Return totals from the engine statistical data."
+  },
+  "IndependentColumn": {
+    "category": "Statistics and finance",
+    "text": "Choose the independent statistical-data column."
+  },
+  "DependentColumn": {
+    "category": "Statistics and finance",
+    "text": "Choose the dependent statistical-data column."
+  },
+  "DataColumns": {
+    "category": "Statistics and finance",
+    "text": "Configure the statistical columns used by engine analysis."
+  },
+  "Intercept": {
+    "category": "Statistics and finance",
+    "text": "Recall the intercept last computed by LinearRegression. Run the regression after changing data."
+  },
+  "Slope": {
+    "category": "Statistics and finance",
+    "text": "Recall the slope last computed by LinearRegression. Importing data alone does not calculate it."
+  },
+  "LinearRegression": {
+    "category": "Statistics and finance",
+    "text": "Fit a linear regression using engine statistical data."
+  },
+  "PredictX": {
+    "category": "Statistics and finance",
+    "text": "Predict X from a supplied Y using the current engine regression."
+  },
+  "PredictY": {
+    "category": "Statistics and finance",
+    "text": "Predict Y from a supplied X using the current engine regression."
+  },
+  "RegressionFormula": {
+    "category": "Statistics and finance",
+    "text": "Return the current engine regression equation. Native Data regression is managed through Ctrl+D."
+  },
+  "BestFit": {
+    "category": "Statistics and finance",
+    "text": "Choose the best engine regression fit among its supported models."
+  },
+  "LinearFit": {
+    "category": "Statistics and finance",
+    "text": "Select the engine linear regression model."
+  },
+  "ExponentialFit": {
+    "category": "Statistics and finance",
+    "text": "Select the engine exponential regression model."
+  },
+  "PowerFit": {
+    "category": "Statistics and finance",
+    "text": "Select the engine power-law regression model."
+  },
+  "LogarithmicFit": {
+    "category": "Statistics and finance",
+    "text": "Select the engine logarithmic regression model."
+  },
+  "TVMAmort": {
+    "category": "Statistics and finance",
+    "text": "Calculate amortization using engine TVM variables."
+  },
+  "TVMAmortTable": {
+    "category": "Statistics and finance",
+    "text": "Build an amortization table using engine TVM variables."
+  },
+  "TVMRoot": {
+    "category": "Statistics and finance",
+    "text": "Solve the engine time-value-of-money equation for the selected unknown."
+  },
+  "TVMEquation": {
+    "category": "Statistics and finance",
+    "text": "Return the time-value-of-money equation. The native Financial calculator keeps its own saved inputs."
+  },
+  "StoreAdd": {
+    "category": "Stack and variables",
+    "text": "Update the named variable using add arithmetic with the supplied value. Supply the value and quoted variable name."
+  },
+  "RecallAdd": {
+    "category": "Stack and variables",
+    "text": "Recall the named value and combine it with a stack value using add arithmetic, without storing the result back."
+  },
+  "StoreSub": {
+    "category": "Stack and variables",
+    "text": "Update the named variable using subtract arithmetic with the supplied value. Supply the value and quoted variable name."
+  },
+  "RecallSub": {
+    "category": "Stack and variables",
+    "text": "Recall the named value and combine it with a stack value using subtract arithmetic, without storing the result back."
+  },
+  "StoreMul": {
+    "category": "Stack and variables",
+    "text": "Update the named variable using multiply arithmetic with the supplied value. Supply the value and quoted variable name."
+  },
+  "RecallMul": {
+    "category": "Stack and variables",
+    "text": "Recall the named value and combine it with a stack value using multiply arithmetic, without storing the result back."
+  },
+  "StoreDiv": {
+    "category": "Stack and variables",
+    "text": "Update the named variable using divide arithmetic with the supplied value. Supply the value and quoted variable name."
+  },
+  "RecallDiv": {
+    "category": "Stack and variables",
+    "text": "Recall the named value and combine it with a stack value using divide arithmetic, without storing the result back."
+  },
+  "Increment": {
+    "category": "Stack and variables",
+    "text": "Increase the supplied value or named variable by one."
+  },
+  "Decrement": {
+    "category": "Stack and variables",
+    "text": "Decrease the supplied value or named variable by one."
+  },
+  "RL": {
+    "category": "Bits and bases",
+    "text": "Rotate the bits of a based integer left within WordSize."
+  },
+  "RR": {
+    "category": "Bits and bases",
+    "text": "Rotate the bits of a based integer right within WordSize."
+  },
+  "RLB": {
+    "category": "Bits and bases",
+    "text": "Rotate a based integer left by one byte."
+  },
+  "RRB": {
+    "category": "Bits and bases",
+    "text": "Rotate a based integer right by one byte."
+  },
+  "SL": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer left, filling vacated bits with zero."
+  },
+  "SR": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right, filling vacated bits with zero."
+  },
+  "SLB": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer left by one byte."
+  },
+  "SRB": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right by one byte."
+  },
+  "ASR": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right while preserving its sign bit."
+  },
+  "ASRB": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right by one byte while preserving its sign bit."
+  },
+  "RLC": {
+    "category": "Bits and bases",
+    "text": "Rotate a based integer left by the supplied count."
+  },
+  "RRC": {
+    "category": "Bits and bases",
+    "text": "Rotate a based integer right by the supplied count."
+  },
+  "SLC": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer left by the supplied count."
+  },
+  "SRC": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right by the supplied count."
+  },
+  "ASRC": {
+    "category": "Bits and bases",
+    "text": "Shift a based integer right by the supplied count while preserving its sign."
+  },
+  "SetBit": {
+    "category": "Bits and bases",
+    "text": "Set the requested bit in a based integer."
+  },
+  "ClearBit": {
+    "category": "Bits and bases",
+    "text": "Clear the requested bit in a based integer."
+  },
+  "FlipBit": {
+    "category": "Bits and bases",
+    "text": "Toggle the requested bit in a based integer."
+  },
+  "FirstBitSet": {
+    "category": "Bits and bases",
+    "text": "Find the first set bit using the engine's bit-position convention."
+  },
+  "LastBitSet": {
+    "category": "Bits and bases",
+    "text": "Find the last set bit using the engine's bit-position convention."
+  },
+  "CountBits": {
+    "category": "Bits and bases",
+    "text": "Count the set bits of an integer."
+  },
+  "NAnd": {
+    "category": "Bits and bases",
+    "text": "Return NOT-AND for the supplied operands."
+  },
+  "NOr": {
+    "category": "Bits and bases",
+    "text": "Return NOT-OR for the supplied operands."
+  },
+  "Implies": {
+    "category": "Bits and bases",
+    "text": "Test logical implication from the first operand to the second."
+  },
+  "Equiv": {
+    "category": "Bits and bases",
+    "text": "Test logical equivalence of the supplied operands."
+  },
+  "Excludes": {
+    "category": "Bits and bases",
+    "text": "Test the engine logical exclusion relation for the supplied operands."
+  },
+  "RecallWordSize": {
+    "category": "Bits and bases",
+    "text": "Put the current based-integer word size on the stack."
+  },
+  "PlotParameters": {
+    "category": "Graphics",
+    "text": "Read or set the engine plot parameters using the supplied plot-parameter object."
+  },
+  "Disp": {
+    "category": "Graphics",
+    "text": "Display supplied text or an object at the requested engine display line."
+  },
+  "ClLCD": {
+    "category": "Graphics",
+    "text": "Clear the engine graphics display."
+  },
+  "DispXY": {
+    "category": "Graphics",
+    "text": "Draw supplied text or an object at the requested graphics position."
+  },
+  "PixOn": {
+    "category": "Graphics",
+    "text": "Set the pixel at the supplied graphics position using the foreground pattern."
+  },
+  "PixOff": {
+    "category": "Graphics",
+    "text": "Clear the pixel at the supplied graphics position using the background pattern."
+  },
+  "PixTest": {
+    "category": "Graphics",
+    "text": "Test the pixel at the supplied graphics position."
+  },
+  "PixColor": {
+    "category": "Graphics",
+    "text": "Return the colour at the supplied graphics position."
+  },
+  "Line": {
+    "category": "Graphics",
+    "text": "Draw between two supplied positions in the engine graphics view."
+  },
+  "Ellipse": {
+    "category": "Graphics",
+    "text": "Draw an ellipse using the supplied bounds in the engine graphics view."
+  },
+  "Circle": {
+    "category": "Graphics",
+    "text": "Draw a circle using the supplied centre and radius in the engine graphics view."
+  },
+  "Rect": {
+    "category": "Graphics",
+    "text": "Draw a rectangle between supplied corners."
+  },
+  "RRect": {
+    "category": "Graphics",
+    "text": "Draw a rounded rectangle using supplied bounds and corner radius."
+  },
+  "Draw": {
+    "category": "Graphics",
+    "text": "Draw the current engine equation using its plot parameters. For LumaRPL's interactive graph tools, press Ctrl+G."
+  },
+  "Drax": {
+    "category": "Graphics",
+    "text": "Draw axes in the engine graphics view using its plot parameters."
+  },
+  "ToLCD": {
+    "category": "Graphics",
+    "text": "Copy a graphics object to the calculator graphics display."
+  },
+  "FromLCD": {
+    "category": "Graphics",
+    "text": "Capture calculator display pixels as a graphics object."
+  },
+  "Function": {
+    "category": "Graphics",
+    "text": "Select function plotting in the engine plot parameters."
+  },
+  "Polar": {
+    "category": "Graphics",
+    "text": "Select polar plotting in the engine plot parameters."
+  },
+  "Parametric": {
+    "category": "Graphics",
+    "text": "Select parametric plotting in the engine plot parameters."
+  },
+  "Truth": {
+    "category": "Graphics",
+    "text": "Select truth plotting in the engine plot parameters."
+  },
+  "Scatter": {
+    "category": "Graphics",
+    "text": "Select engine scatter plotting from engine statistical data."
+  },
+  "Bar": {
+    "category": "Graphics",
+    "text": "Select engine bar-chart plotting."
+  },
+  "Histogram": {
+    "category": "Graphics",
+    "text": "Select engine histogram plotting."
+  },
+  "Freeze": {
+    "category": "Graphics",
+    "text": "Set the engine display-region freeze mask. This is a drawing control, not a native graph pause button."
+  },
+  "Clip": {
+    "category": "Graphics",
+    "text": "Set the engine graphics clipping region from the supplied object."
+  },
+  "CurrentClip": {
+    "category": "Graphics",
+    "text": "Return the current engine graphics clipping region."
+  },
+  "Gray": {
+    "category": "Graphics",
+    "text": "Build a greyscale drawing pattern from the supplied intensity."
+  },
+  "RGB": {
+    "category": "Graphics",
+    "text": "Build a drawing pattern from red, green and blue components. Foreground and Background accept drawing patterns; themes are selected under Settings > Display."
+  },
+  "HSV": {
+    "category": "Graphics",
+    "text": "Build a drawing pattern from hue, saturation and value."
+  },
+  "Color": {
+    "category": "Graphics",
+    "text": "Convert the supplied colour specification to an engine drawing pattern."
+  },
+  "ToGrob": {
+    "category": "Graphics",
+    "text": "Render the supplied object into a graphics object."
+  },
+  "ToHPGrob": {
+    "category": "Graphics",
+    "text": "Convert to an HP-compatible graphics object."
+  },
+  "ToBitmap": {
+    "category": "Graphics",
+    "text": "Convert to a packed monochrome bitmap."
+  },
+  "ToPixmap": {
+    "category": "Graphics",
+    "text": "Convert to a colour pixmap."
+  },
+  "BlankGraphic": {
+    "category": "Graphics",
+    "text": "Create a blank graphics object with supplied dimensions."
+  },
+  "BlankGrob": {
+    "category": "Graphics",
+    "text": "Create a blank compatibility graphics object with supplied dimensions."
+  },
+  "BlankBitmap": {
+    "category": "Graphics",
+    "text": "Create a blank monochrome bitmap with supplied dimensions."
+  },
+  "BlankPixmap": {
+    "category": "Graphics",
+    "text": "Create a blank colour pixmap with supplied dimensions."
+  },
+  "GXor": {
+    "category": "Graphics",
+    "text": "Combine graphics objects with exclusive OR."
+  },
+  "GOr": {
+    "category": "Graphics",
+    "text": "Combine graphics objects with OR."
+  },
+  "GAnd": {
+    "category": "Graphics",
+    "text": "Combine graphics objects with AND."
+  },
+  "Pict": {
+    "category": "Graphics",
+    "text": "Recall the engine picture graphics object."
+  },
+  "GraphicAppend": {
+    "category": "Graphics",
+    "text": "Join graphics objects side by side."
+  },
+  "GraphicStack": {
+    "category": "Graphics",
+    "text": "Place graphics objects above one another."
+  },
+  "GraphicSubscript": {
+    "category": "Graphics",
+    "text": "Compose a graphics object with a subscript."
+  },
+  "GraphicExponent": {
+    "category": "Graphics",
+    "text": "Compose a graphics object with an exponent."
+  },
+  "GraphicRatio": {
+    "category": "Graphics",
+    "text": "Compose graphics objects as a fraction."
+  },
+  "GraphicRoot": {
+    "category": "Graphics",
+    "text": "Compose a graphics object with a root sign."
+  },
+  "GraphicParentheses": {
+    "category": "Graphics",
+    "text": "Surround a graphics object with parentheses."
+  },
+  "GraphicNorm": {
+    "category": "Graphics",
+    "text": "Surround a graphics object with norm bars."
+  },
+  "GraphicSum": {
+    "category": "Graphics",
+    "text": "Compose graphics objects using summation notation."
+  },
+  "GraphicProduct": {
+    "category": "Graphics",
+    "text": "Compose graphics objects using product notation."
+  },
+  "GraphicIntegral": {
+    "category": "Graphics",
+    "text": "Compose graphics objects using integral notation."
+  },
+  "PlotMin": {
+    "category": "Graphics",
+    "text": "Set the engine plot's minimum corner."
+  },
+  "PlotMax": {
+    "category": "Graphics",
+    "text": "Set the engine plot's maximum corner."
+  },
+  "XRange": {
+    "category": "Graphics",
+    "text": "Set the engine horizontal plot interval."
+  },
+  "YRange": {
+    "category": "Graphics",
+    "text": "Set the engine vertical plot interval."
+  },
+  "Scale": {
+    "category": "Graphics",
+    "text": "Set both engine plot-axis scales."
+  },
+  "XScale": {
+    "category": "Graphics",
+    "text": "Set the engine horizontal plot scale."
+  },
+  "YScale": {
+    "category": "Graphics",
+    "text": "Set the engine vertical plot scale."
+  },
+  "Center": {
+    "category": "Graphics",
+    "text": "Set the engine plot centre."
+  },
+  "Res": {
+    "category": "Graphics",
+    "text": "Set the engine plot resolution."
+  },
+  "Indep": {
+    "category": "Graphics",
+    "text": "Choose the engine plot's independent variable."
+  },
+  "Depnd": {
+    "category": "Graphics",
+    "text": "Choose the engine plot's dependent variable."
+  },
+  "Header": {
+    "category": "System and libraries",
+    "text": "Set the calculator engine header using the supplied header object."
+  },
+  "KeyMap": {
+    "category": "System and libraries",
+    "text": "Store a complete engine virtual-key map from the supplied directory object. This is an advanced RPL key-assignment operation, separate from PicoCalc physical shortcuts."
+  },
+  "AssignKey": {
+    "category": "System and libraries",
+    "text": "Assign an object to an engine virtual-key position."
+  },
+  "DeleteKeys": {
+    "category": "System and libraries",
+    "text": "Remove specified engine virtual-key assignments."
+  },
+  "StoreKeys": {
+    "category": "System and libraries",
+    "text": "Store supplied engine key assignments."
+  },
+  "RecallKeys": {
+    "category": "System and libraries",
+    "text": "Recall engine virtual-key assignments."
+  },
+  "StandardKey": {
+    "category": "System and libraries",
+    "text": "Use the standard engine action for a virtual-key position."
+  },
+  "Beep": {
+    "category": "System and libraries",
+    "text": "Play a tone. Supply frequency in Hz followed by duration in seconds; for example 440 0.1 Beep. BeepOn enables sound."
+  },
+  "Menu": {
+    "category": "System and libraries",
+    "text": "Open the supplied engine menu or custom menu definition."
+  },
+  "TemporaryMenu": {
+    "category": "System and libraries",
+    "text": "Show a temporary engine menu using the supplied definition."
+  },
+  "RecallMenu": {
+    "category": "System and libraries",
+    "text": "Return the current engine menu."
+  },
+  "PurgeAll": {
+    "category": "System and libraries",
+    "text": "Remove calculator variables in the applicable directory scope. Save important state first."
+  },
+  "GarbageCollect": {
+    "category": "System and libraries",
+    "text": "Reclaim unused calculator arena objects."
+  },
+  "Mem": {
+    "category": "System and libraries",
+    "text": "Report available calculator object memory."
+  },
+  "FreeMemory": {
+    "category": "System and libraries",
+    "text": "Return engine free-memory information."
+  },
+  "SystemMemory": {
+    "category": "System and libraries",
+    "text": "The original system-memory diagnostic is unavailable here and returns zero. Open Settings > Device status > Memory / PSRAM for PicoCalc memory information."
+  },
+  "GarbageCollectorStatistics": {
+    "category": "System and libraries",
+    "text": "Return engine garbage-collection statistics."
+  },
+  "RuntimeStatistics": {
+    "category": "System and libraries",
+    "text": "Return engine execution statistics."
+  },
+  "errm": {
+    "category": "System and libraries",
+    "text": "Return the most recent calculator error message."
+  },
+  "errn": {
+    "category": "System and libraries",
+    "text": "Return the most recent calculator error number."
+  },
+  "err0": {
+    "category": "System and libraries",
+    "text": "Clear the current calculator error. Esc also dismisses a visible error."
+  },
+  "doerr": {
+    "category": "System and libraries",
+    "text": "Raise an error from the supplied message or error value."
+  },
+  "ToTag": {
+    "category": "System and libraries",
+    "text": "Attach the supplied label to an object."
+  },
+  "FromTag": {
+    "category": "System and libraries",
+    "text": "Remove a tag and return its contents using the engine tag convention."
+  },
+  "DTag": {
+    "category": "System and libraries",
+    "text": "Remove an object's tag."
+  },
+  "Cycle": {
+    "category": "System and libraries",
+    "text": "Cycle the supplied object between its supported forms."
+  },
+  "Type": {
+    "category": "System and libraries",
+    "text": "Return the type number of the supplied object."
+  },
+  "TypeName": {
+    "category": "System and libraries",
+    "text": "Return the type name of the supplied object."
+  },
+  "Version": {
+    "category": "System and libraries",
+    "text": "Return the engine version information. About LumaRPL shows the installed PicoCalc release."
+  },
+  "Bytes": {
+    "category": "System and libraries",
+    "text": "Return information about an object’s bytes and its binary check representation."
+  },
+  "ScreenCapture": {
+    "category": "System and libraries",
+    "text": "The original hardware screenshot command is unavailable on PicoCalc. Use Export from a native graph for SVG or sampled CSV."
+  },
+  "KeyEval": {
+    "category": "System and libraries",
+    "text": "Evaluate an engine virtual-key action. Its key positions refer to the engine keypad, not physical QWERTY character codes."
+  },
+  "KeyCode": {
+    "category": "System and libraries",
+    "text": "Return the object assigned to a supplied engine virtual-key position. The position is an engine keypad code, not an ASCII character or physical QWERTY key."
+  },
+  "Help": {
+    "category": "System and libraries",
+    "text": "Open the LumaRPL command reference. Its lists and pages use the same arrows, Enter and F5/Back controls as the rest of Help."
+  },
+  "FlightRecorderConfigure": {
+    "category": "System and libraries",
+    "text": "Configure the engine developer flight recorder with the supplied configuration. Recorder output depends on build diagnostics."
+  },
+  "FlightRecorderDump": {
+    "category": "System and libraries",
+    "text": "Send flight-recorder data to the configured diagnostic output."
+  },
+  "FlightRecorderDumpSome": {
+    "category": "System and libraries",
+    "text": "Send selected flight-recorder data to diagnostic output using the supplied selection."
+  },
+  "Const": {
+    "category": "System and libraries",
+    "text": "Look up the supplied name in the constants library. Its SD resource must be available."
+  },
+  "ConstantName": {
+    "category": "System and libraries",
+    "text": "Return the name of a library constant."
+  },
+  "ConstantValue": {
+    "category": "System and libraries",
+    "text": "Return the value of a library constant."
+  },
+  "ConstantRange": {
+    "category": "System and libraries",
+    "text": "Return the range of a library constant when its definition includes uncertainty."
+  },
+  "LibEq": {
+    "category": "System and libraries",
+    "text": "Load an equation from the equation library using the supplied reference."
+  },
+  "XLib": {
+    "category": "System and libraries",
+    "text": "Load or call an SD library object using its library reference."
+  },
+  "Constants": {
+    "category": "System and libraries",
+    "text": "Access the engine constants library."
+  },
+  "Attach": {
+    "category": "System and libraries",
+    "text": "Attach the specified engine library."
+  },
+  "Detach": {
+    "category": "System and libraries",
+    "text": "Detach the specified engine library."
+  },
+  "Libs": {
+    "category": "System and libraries",
+    "text": "List attached engine libraries."
+  },
+  "Modes": {
+    "category": "System and libraries",
+    "text": "Put a program containing the nondefault calculator settings on the stack. Type EVAL to apply that program. The Advanced RPL settings →Prog key performs this action."
+  },
+  "ResetModes": {
+    "category": "System and libraries",
+    "text": "Restore the engine's default calculator settings. This changes settings, so save the session first if you want to keep the current ones."
+  },
+  "SaveState": {
+    "category": "System and libraries",
+    "text": "Save engine calculator state using the supplied state-file workflow. Ctrl+S is the normal PicoCalc session-save shortcut."
+  },
+  "BatteryVoltage": {
+    "category": "System and libraries",
+    "text": "A measured battery voltage is unavailable on PicoCalc. Use Settings > Device status > Battery for the keyboard controller's percentage and charging state."
+  },
+  "PowerVoltage": {
+    "category": "System and libraries",
+    "text": "The port cannot provide a measured supply voltage through this command. Use Device status > Battery instead."
+  },
+  "USBPowered": {
+    "category": "System and libraries",
+    "text": "On PicoCalc this returns True when the keyboard battery controller reports charging, and False otherwise. It is not an independent USB-cable detector. Unknown battery data can also give False; Battery status shows whether a reading is available."
+  },
+  "DMCPLowBattery": {
+    "category": "System and libraries",
+    "text": "Read the platform low-battery flag supplied by the PicoCalc backend."
+  },
+  "LowBattery": {
+    "category": "System and libraries",
+    "text": "This legacy voltage-threshold check cannot measure PicoCalc battery health. Use Device status > Battery."
+  },
+  "Unimplemented": {
+    "category": "System and libraries",
+    "text": "Report that an engine operation has no implementation in this build."
+  },
+  "VariablesMenu": {
+    "category": "System and libraries",
+    "text": "Open the calculator variable soft menu. Tab selects a row; F1-F5 and Ctrl+F5 choose its columns."
+  },
+  "CustomMenu": {
+    "category": "System and libraries",
+    "text": "Open the calculator custom soft menu defined by its custom-menu settings."
+  },
+  "ToggleCustomMenu": {
+    "category": "System and libraries",
+    "text": "Switch the engine custom soft menu on or off."
+  },
+  "SolvingMenu": {
+    "category": "System and libraries",
+    "text": "Open the engine equation-variable solver menu. Ctrl+W provides guided single-equation and system solving."
+  },
+  "FinanceSolverMenu": {
+    "category": "System and libraries",
+    "text": "Open the engine TVM-variable solver menu. The native Financial calculator has separate saved inputs."
+  },
+  "ToolsMenu": {
+    "category": "System and libraries",
+    "text": "Open the context-sensitive calculator soft menu for the current object or entry."
+  },
+  "Catalog": {
+    "category": "System and libraries",
+    "text": "Open the calculator command catalogue. Ctrl+A opens it directly; choosing an entry inserts its name."
+  },
+  "ToggleUserMode": {
+    "category": "System and libraries",
+    "text": "Toggle engine user-key mode. This concerns virtual-key assignments, not a new QWERTY alphabet mode."
+  },
+  "Off": {
+    "category": "System and libraries",
+    "text": "Request engine power-off. To save documents and return to the PicoCalc loader, use Ctrl+Q."
+  },
+  "OffWithImage": {
+    "category": "System and libraries",
+    "text": "Request engine power-off with its off-image behavior. Ctrl+Q is the safe save-and-return-to-loader workflow."
+  },
+  "SystemSetup": {
+    "category": "System and libraries",
+    "text": "Open PicoCalc Settings, the same screen as the System action in Advanced RPL settings."
+  },
+  "Edit": {
+    "category": "System and libraries",
+    "text": "Edit the top stack object in calculator command entry. To edit an SD RPL or Lua file, open it through Programming instead."
+  },
+  "StackEditor": {
+    "category": "System and libraries",
+    "text": "Open the interactive stack. Arrows select a stack level; Tab chooses the action row; F1-F5 and Ctrl+F5 run the displayed action."
+  },
+  "LastMenu": {
+    "category": "System and libraries",
+    "text": "Return to the previous calculator soft menu. Pressing Esc now does this directly; at the top level Esc clears the menu."
+  },
+  "UILeftShift": {
+    "category": "Calculator entry",
+    "text": "Select the engine's left-shift command plane for virtual-key automation. For ordinary PicoCalc soft menus, press Tab to select the row you can see."
+  },
+  "UIRightShift": {
+    "category": "Calculator entry",
+    "text": "Select the engine's right-shift command plane for virtual-key automation. Use Tab for everyday menu-row selection; numerical bit shifts are different commands."
+  },
+  "UINoShift": {
+    "category": "Calculator entry",
+    "text": "Select the engine's unshifted command plane. It does not change physical Caps Lock. Tab selects the displayed normal menu row."
+  },
+  "UIAlpha": {
+    "category": "Calculator entry",
+    "text": "Enable uppercase letters on the engine virtual keypad. You can already type letters directly on PicoCalc; use physical Shift/Caps Lock to change their case."
+  },
+  "UILowercase": {
+    "category": "Calculator entry",
+    "text": "Enable lowercase letters on the engine virtual keypad. For normal PicoCalc typing, use physical Shift/Caps Lock."
+  },
+  "UINoAlpha": {
+    "category": "Calculator entry",
+    "text": "Leave the engine virtual keypad's alphabetic mode. Physical QWERTY letters remain available."
+  },
+  "UIAlgebraic": {
+    "category": "Calculator entry",
+    "text": "Invoke the engine algebraic-entry key. Normally type an expression in single quotes, such as 'X^2+1'."
+  },
+  "UIExit": {
+    "category": "Calculator entry",
+    "text": "Invoke the calculator-entry cancel operation. Physical Esc also handles PicoCalc menu Back navigation."
+  },
+  "UIDecimal": {
+    "category": "Calculator entry",
+    "text": "Insert the decimal separator chosen in calculator settings at the calculator-entry cursor."
+  },
+  "UIText": {
+    "category": "Calculator entry",
+    "text": "Invoke the calculator text-entry key. Normally type RPL text inside double quotes, such as \"Hello\"."
+  },
+  "UIEnter": {
+    "category": "Calculator entry",
+    "text": "Submit the current calculator entry through the engine. The physical Enter key is the ordinary way to do this."
+  },
+  "UILeft": {
+    "category": "Calculator entry",
+    "text": "Move left in calculator entry, or open the interactive stack when the entry state calls for it."
+  },
+  "UIRight": {
+    "category": "Calculator entry",
+    "text": "Move right in calculator entry, or begin object editing when the entry state calls for it."
+  },
+  "UIUp": {
+    "category": "Calculator entry",
+    "text": "Move up in calculator entry or recall entry history, depending on the current entry state."
+  },
+  "UIDown": {
+    "category": "Calculator entry",
+    "text": "Move down in calculator entry or open its editor menu, depending on the current entry state."
+  },
+  "UIBackspace": {
+    "category": "Calculator entry",
+    "text": "Delete to the left of the calculator-entry cursor."
+  },
+  "UIDelete": {
+    "category": "Calculator entry",
+    "text": "Delete to the right of the calculator-entry cursor."
+  },
+  "EditorSelect": {
+    "category": "Calculator entry",
+    "text": "Mark a selection anchor in calculator entry. Moving the cursor then changes the selection. In an SD source file, use Ctrl+K to mark text instead."
+  },
+  "EditorWordLeft": {
+    "category": "Calculator entry",
+    "text": "Move the calculator-entry cursor one word left."
+  },
+  "EditorWordRight": {
+    "category": "Calculator entry",
+    "text": "Move the calculator-entry cursor one word right."
+  },
+  "EditorBegin": {
+    "category": "Calculator entry",
+    "text": "Move to the start of calculator entry."
+  },
+  "EditorEnd": {
+    "category": "Calculator entry",
+    "text": "Move to the end of calculator entry."
+  },
+  "EditorCut": {
+    "category": "Calculator entry",
+    "text": "Cut selected calculator-entry text to the calculator clipboard."
+  },
+  "EditorCopy": {
+    "category": "Calculator entry",
+    "text": "Copy selected calculator-entry text to the calculator clipboard."
+  },
+  "EditorPaste": {
+    "category": "Calculator entry",
+    "text": "Insert the calculator clipboard contents into calculator entry."
+  },
+  "EditorSearch": {
+    "category": "Calculator entry",
+    "text": "Start or repeat a search within calculator entry. In an SD source file, use Ctrl+F."
+  },
+  "EditorReplace": {
+    "category": "Calculator entry",
+    "text": "Replace the active calculator search selection with clipboard text and continue searching. An active search, selection and clipboard are needed. For an SD source file, use Ctrl+R."
+  },
+  "EditorClear": {
+    "category": "Calculator entry",
+    "text": "Delete selected calculator-entry text. With no selection, nothing is deleted."
+  },
+  "EditorFlip": {
+    "category": "Calculator entry",
+    "text": "Exchange the calculator selection anchor and cursor so you can extend the other end of the selection."
+  },
+  "EditorHistory": {
+    "category": "Calculator entry",
+    "text": "Recall an entry from calculator command history."
+  },
+  "EditorHistoryBack": {
+    "category": "Calculator entry",
+    "text": "Move through calculator command history in the opposite direction."
+  },
+  "atan2": {
+    "category": "Functions",
+    "text": "Find the angle of a two-component direction using the engine two-argument arctangent; the result follows the current angle mode."
+  },
+  "Show": {
+    "category": "Graphics",
+    "text": "Show an enlarged rendering of the supplied calculator object. This is separate from plotting a native saved graph."
+  }
+}

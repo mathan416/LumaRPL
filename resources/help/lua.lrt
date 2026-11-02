@@ -1,0 +1,353 @@
+Make a tiny script first, then run it from the editor. You can come back and change it as often as you like.
+
+1. Press Ctrl+P and choose Lua scripts.
+2. Press F3 New and name the script HELLO. Type the code below.
+3. Press F2 Save & run. Read the output, then Esc returns to the editor.
+
+Example script
+print(2+3)
+
+Prints 5.Use the console when you want an answer without creating a file. Its variables are temporary.
+
+1. Press Ctrl+P and choose Lua console.
+2. Type the example and press Enter.
+3. Press Esc at an empty prompt to return.
+
+Example script
+print(12*12)
+
+You should see 144.Save a script on SD when you want it after a restart. The console does not save your code as a file.
+
+1. In Lua scripts, press F3 New and name it SAVETEST.
+2. Type the example. F1 saves it; F5 returns to the file list.
+3. Select SAVETEST.lua and press F1 Open to check it. F2 runs it.
+
+Example script
+print("Saved script")
+
+Running the saved script prints Saved script.A function lets you name a calculation and use it with different inputs. Here square takes a number and returns its square.
+
+Example script
+local function square(x)
+  return x*x
+end
+print(square(12))
+
+Prints 144.Use a for loop to repeat a calculation. This one adds the numbers 1 through 5. The if line checks the answer before printing a message.
+
+Example script
+local total=0
+for i=1,5 do total=total+i end
+if total==15 then print("Correct") end
+
+Prints Correct.Use a table for a list; the first item is number 1. Use .. to join pieces of text. Change the names below and run it again.
+
+Example script
+local names={"Iain","LumaRPL"}
+print(names[1]..": "..names[2])
+
+Prints Iain: LumaRPL.Use math.sqrt for a square root. Lua sine and cosine take radians; math.rad converts degrees before the calculation. Calculator angle settings do not change Lua math functions.
+
+Example script
+print(math.sqrt(81))
+print(math.sin(math.rad(90)))
+
+Prints 9.0 and 1.0 on separate lines.Show an answer in the output reader. Each call starts a new line; multiple arguments are separated by tabs. For text placed on the drawing canvas, use screen.text instead.
+
+Usage
+print(value, ...)
+
+Example script
+print("Answer",6*7)
+
+Prints Answer followed by a tab and 42.Ask the calculator to evaluate an expression and return the answer as text. Write the expression in calculator syntax, without surrounding single quotes. Calculator angle and precision settings apply. Your stack is kept as it was.
+
+Usage
+answer = calc.eval(expression)
+
+Example script
+print(calc.eval("2+3"))
+
+Prints 5. It returns text, so use tonumber only when a plain Lua number is suitable.Clear the canvas, add your message, then show the frame. You can change the position and colour and run it again.
+
+1. Create a Lua script named GREETING.
+2. Type the three lines below and press F2 Save & run.
+
+Example script
+screen.clear("black")
+screen.text(10,10,"Hello!","cyan")
+screen.show()
+
+You should see Hello! near the upper-left corner. Esc returns to your script.The upper-left pixel is (0,0). Increase x to move right and y to move down. Choose a named colour, or use a value such as "#FF8000". The screen uses the nearest available RGB332 colour.
+
+Example script
+screen.clear("black")
+screen.pixel(20,20,"yellow")
+screen.show()
+
+Shows a yellow pixel on black. Available names: black, white, red, green, blue, cyan, magenta, yellow, orange, gray.Start a fresh drawing by filling the canvas. Omit the colour for black. Draw your objects next, then call screen.show to display the frame.
+
+Usage
+screen.clear([colour])
+
+Example script
+screen.clear("blue")
+screen.show()
+
+Shows a blue canvas.Draw one pixel at a chosen position. Omit the colour for white. Positions outside the canvas are clipped.
+
+Usage
+screen.pixel(x, y [,colour])
+
+Example script
+screen.clear()
+screen.pixel(100,100,"red")
+screen.show()
+
+Shows one red pixel at (100,100).Draw a straight line between two positions. The example joins (20,20) to (280,280).
+
+Usage
+screen.line(x1, y1, x2, y2 [,colour])
+
+Example script
+screen.clear()
+screen.line(20,20,280,280,"cyan")
+screen.show()
+
+Shows a cyan diagonal.Draw a rectangle by giving its top-left position, width and height. Add false for an outline; leave it out for a filled rectangle.
+
+Usage
+screen.rect(x, y, width, height [,colour [,filled]])
+
+Example script
+screen.clear()
+screen.rect(20,30,120,60,"green",false)
+screen.show()
+
+Shows a green rectangle outline.Draw a circle around a centre point. Give its radius, and add true if you want it filled. Without that final argument it draws an outline.
+
+Usage
+screen.circle(x, y, radius [,colour [,filled]])
+
+Example script
+screen.clear()
+screen.circle(160,160,50,"orange",true)
+screen.show()
+
+Shows a filled orange circle.Place a message on the canvas. Give its top-left position and the text in quotes. Add a colour if you want one; otherwise the text is white. Use \n inside the string for a new line.
+
+Usage
+screen.text(x, y, text [,colour])
+
+Example script
+screen.clear()
+screen.text(10,10,"Hello, Iain!","white")
+screen.show()
+
+Shows the greeting near the upper-left corner.Choose compact for ordinary text or mono for aligned columns. Use legacy when an older script needs its previous font. With no argument, screen.font() tells you the current choice. Changing it returns the previous choice and lasts until this Lua session closes.
+
+Usage
+screen.font() or screen.font("compact" | "mono" | "legacy")
+
+Example script
+print(screen.font())
+screen.font("mono")
+print(screen.font())
+
+Prints compact, then mono in a new session.
+
+New sessions start with compact. The choice does not change the calculator stack font.Measure text before placing it. The two returned values are its width and height in pixels, using the active font. Select the font first so measurement and drawing agree.
+
+Usage
+width, height = screen.measure(text)
+
+Example script
+local w,h=screen.measure("Hello")
+print(w>0,h>=13)
+
+Prints true and true. Width depends on the selected font.Display the frame you have drawn. Make all the changes for one frame, then show it once. When a drawing script finishes, Esc leaves its canvas.
+
+Usage
+screen.show()
+
+Example script
+screen.clear()
+screen.text(10,10,"One frame")
+screen.show()
+
+Shows One frame.Draw a colour sprite you saved in Sprite editor. Give the .sprite filename and a position. Transparent pixels leave the canvas visible. If the file cannot be read, the function returns nil and an error you can print.
+
+Usage
+ok, error = screen.sprite(filename, x, y)
+
+Example script
+local ok,err=screen.sprite("DEMO.sprite",20,30)
+if ok then screen.show() else print(err) end
+
+Draws DEMO.sprite if present; otherwise prints a readable error. Replace the name with your saved sprite.
+
+Save sprites under /db48x/sprites. Use a filename from that folder, not a path to another directory.Give each curve its own function and label. Lua trigonometric functions use radians.
+
+1. Save this as a Lua script, then press F2 Save & run.
+
+Example script
+plot.clear()
+plot.window(-4,4,-2,2)
+plot.function2d(function(x) return math.sin(x) end,
+  {colour="cyan",label="Sine"})
+plot.function2d(function(x) return math.cos(x) end,
+  {colour="orange",label="Cosine"})
+plot.show()
+
+The native viewer shows sine and cosine together. Use its labelled graph controls; Esc returns.Start a new Lua plot. This removes the Lua curves you previously added and restores the default window. It leaves saved calculator graphs alone.
+
+Usage
+plot.clear()
+
+Example script
+plot.clear()
+plot.function2d(function(x) return x*x end)
+plot.show()
+
+Opens the native view with one parabola. Esc returns to Lua.Choose the visible x and y ranges for a 2D plot: xmin, xmax, ymin, ymax. Each minimum must be smaller than its maximum. Add a curve, then show the plot.
+
+Usage
+plot.window(xmin, xmax, ymin, ymax)
+
+Example script
+plot.clear()
+plot.window(-4,4,-1,16)
+plot.function2d(function(x) return x*x end)
+plot.show()
+
+Shows the parabola in the selected window.Add a curve to a 2D plot. Your function receives x and returns y; return nil to leave a gap. You can add up to three curves. The optional table chooses the colour and a short label.
+
+Usage
+plot.function2d(function, [options])
+
+Example script
+plot.clear()
+plot.window(-4,4,-2,2)
+plot.function2d(function(x) return math.sin(x) end,
+  {colour="cyan",label="Sine"})
+plot.show()
+
+Shows a cyan sine curve. Lua math.sin uses radians.
+
+Labels use printable ASCII and at most 79 bytes. Keep drawing and plot changes outside the sampling function.Make a 3D surface from a function of x and y. Return the height z at each position, or nil for a gap. The options below choose the horizontal bounds.
+
+Usage
+plot.surface(function, [options])
+
+Example script
+plot.clear()
+plot.surface(function(x,y) return x*x-y*y end,
+  {xmin=-2,xmax=2,ymin=-2,ymax=2})
+plot.show()
+
+Opens a saddle surface in the native 3D viewer.
+
+Optional camera settings: yaw, pitch and zoom. Angles are radians; pitch is -1.4 to 1.4 and zoom is 0.4 to 2.5.Open the native graph viewer with the curves or surface you added. Use its labelled controls to explore. Returning to Lua continues the script after plot.show().
+
+Usage
+plot.show()
+
+Example script
+plot.clear()
+plot.function2d(function(x) return x end)
+plot.show()
+print("Back from plot")
+
+Shows y=x, then prints Back from plot when you leave the viewer.Check for a key without waiting. It returns a key name, or nil when no key is queued. Arrow keys return names such as "left"; ordinary letter keys return a single character. Esc interrupts the script.
+
+Usage
+key = keyboard.poll()
+
+Example script
+local key=keyboard.poll()
+print(key or "No key")
+
+Prints a queued key, or No key.Wait for a key, optionally with a timeout in milliseconds. With no timeout it waits until a key arrives. A timed-out wait returns nil. Esc cancels the script.
+
+Usage
+key = keyboard.wait([timeout_ms])
+
+Example script
+local key=keyboard.wait(1000)
+print(key or "Timed out")
+
+Waits up to one second, then prints a key or Timed out.Check whether a key is currently held. Give an arrow name such as "left", f1 through f5, or one printable character. The answer is true or false.
+
+Usage
+held = keyboard.down(key)
+
+Example script
+print(keyboard.down("left"))
+
+Prints true while Left is held, otherwise false.Pause for a number of milliseconds. For example, 100 means a tenth of a second. Esc can still interrupt the pause.
+
+Usage
+system.sleep(milliseconds)
+
+Example script
+print("Wait")
+system.sleep(100)
+print("Done")
+
+Prints Wait, pauses about a tenth of a second, then prints Done.Measure how long something takes. Save the counter before an operation, then subtract it from the counter afterward. This counter measures elapsed milliseconds, not the date or clock time.
+
+Usage
+milliseconds = system.millis()
+
+Example script
+local start=system.millis()
+system.sleep(20)
+print(system.millis()-start>=20)
+
+Prints true.Play a tone by giving its frequency in hertz and its length in milliseconds. The example makes a short, high note.
+
+Usage
+sound.beep(frequency_hz, duration_ms)
+
+Example script
+sound.beep(880,100)
+
+Plays a short 880 Hz tone when sound is available.
+
+Use 20 to 16000 Hz and up to 10000 ms. A frequency of 0 is silence.Turn off the current tone. You can use this when leaving a sound-producing part of your script.
+
+Usage
+sound.stop()
+
+Example script
+sound.beep(440,50)
+sound.stop()
+
+Plays a short tone and stops sound.Use math for numerical functions, string for text, and table for lists. utf8 and coroutine are also available. Files are opened and saved through the calculator editor; desktop examples using io, os, require or loadfile will not work here.
+
+Example script
+print(type(math),type(io),type(os),type(package))
+
+Prints table, nil, nil, nil separated by tabs.Read the line number in the error message, return to the editor and check that line. A missing quote or end is often the cause. When you expect a function to fail, pcall lets you handle the error and continue.
+
+Example script
+local ok,err=pcall(function() error("Try again") end)
+print(ok,type(err))
+
+Prints false and string. The script continues.If a script reports a memory error, save the source and make its tables or strings smaller. Keep only the values you need. This small list is a useful starting point; it stores ten squares.
+
+Example script
+local values={}
+for i=1,10 do values[i]=i*i end
+print(values[10])
+
+Prints 100. Start with small tables before increasing their size.
+
+The Lua allocation budget is 48 KiB. Save before closing the editor; console variables disappear when you close the console.Check that your script calls screen.show() after drawing. White text on a white background is also easy to miss. Start with this high-contrast example.
+
+Example script
+screen.clear("black")
+screen.text(10,10,"Visible","white")
+screen.show()
+
+You should see Visible. If this works, add your own drawing commands back one at a time.

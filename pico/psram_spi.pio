@@ -1,0 +1,17 @@
+; Original PicoCalc PSRAM SPI transport, GPL-3.0.
+; CS=GPIO20 (side bit 0), SCK=GPIO21 (side bit 1). All TX/RX words fit the FIFOs before starting.
+.program picocalc_psram
+.side_set 2
+.wrap_target
+bytes:
+    set y, 7        side 0
+bits:
+    out pins, 1     side 0
+    in pins, 1      side 2
+    jmp y-- bits    side 0
+    jmp x-- bytes   side 0
+    nop             side 0 [1] ; Read-termination hold > tACLK + one SPI cycle
+    push noblock    side 1
+public idle:
+    jmp idle        side 1
+.wrap

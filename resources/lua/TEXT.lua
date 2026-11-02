@@ -1,0 +1,16 @@
+-- LumaRPL port 19 typography demonstration.
+screen.clear("black")
+screen.text(8, 16, "Compact proportional text", "white")
+local previous = screen.font("mono")
+screen.text(8, 48, "X     Y\n1     2\n10    20", "cyan")
+screen.font(previous)
+local title = "Measured and centred"
+local width, height = screen.measure(title)
+screen.text((screen.width-width)/2, 128, title, "yellow")
+screen.font("legacy")
+screen.text(8, 168, "Legacy metrics", "white")
+screen.font("compact")
+screen.text(8, 208, "Esc or F5 returns", "white")
+screen.show()
+print("Compact, mono and legacy profiles tested")
+print("Measured title", width, height)

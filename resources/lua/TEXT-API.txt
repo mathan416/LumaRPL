@@ -1,0 +1,10 @@
+LumaRPL Lua text
+
+New sessions use compact proportional text (13 pixels, line spacing 16).
+screen.font() returns compact, mono or legacy.
+screen.font("mono") selects compact fixed cells and returns the previous profile.
+screen.font("legacy") restores the old header-font layout for existing scripts.
+screen.measure(text) returns width,height using the drawing profile and layout.
+Profiles last for the Lua session, including console commands; calculator settings are unchanged.
+Coordinates and existing screen.text arguments are unchanged. See TEXT.lua and DRAW.lua.
+Lua printed output: F3 Columns / Normal. Editors: F1 Save, F2 Save+run, F4 Tools, F5 Back.

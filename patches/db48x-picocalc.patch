@@ -1,0 +1,1569 @@
+diff --git a/sim/sim-screen.cpp b/sim/sim-screen.cpp
+index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183e086aef6 100644
+--- a/sim/sim-screen.cpp
++++ b/sim/sim-screen.cpp
+@@ -183,24 +183,24 @@ void SimScreen::updatePixmap()
+     // On Android, set clip rect to only allow drawing in the LCD content area
+     pt.setClipRect(contentXOffset, 0, SIM_LCD_W, SIM_LCD_H);
+ #endif
+-    pixword mask = ~(~0U << color::BPP);
++    pixword mask = ~(~0U << surface::color::BPP);
+     surface s(lcd_buffer, LCD_W, LCD_H, LCD_SCANLINE, LCD_W);
+     uint    drawn   = 0;
+     uint    skipped = 0;
+     uint    help_y  = 0;
+     for (int y = 0; y < SIM_LCD_H; y++)
+     {
+-        for (int xw = 0; xw < SIM_LCD_SCANLINE*color::BPP/32; xw++)
++        for (int xw = 0; xw < SIM_LCD_SCANLINE*surface::color::BPP/32; xw++)
+         {
+-            unsigned woffs = y * (SIM_LCD_SCANLINE*color::BPP/32) + xw;
++            unsigned woffs = y * (SIM_LCD_SCANLINE*surface::color::BPP/32) + xw;
+             if (uint32_t diffs = lcd_copy[woffs] ^ lcd_buffer[woffs])
+             {
+-                for (int bit = 0; bit < 32; bit += color::BPP)
++                for (int bit = 0; bit < 32; bit += surface::color::BPP)
+                 {
+                     if ((diffs >> bit) & mask)
+                     {
+                         pixword bits = (lcd_buffer[woffs] >> bit) & mask;
+-                        color col(bits);
++                        surface::color col(bits);
+ #ifdef CONFIG_COLOR
+                         QColor qcol(col.red(), col.green(), col.blue());
+ #else
+@@ -208,7 +208,7 @@ void SimScreen::updatePixmap()
+ #endif
+                         pt.setPen(qcol);
+ 
+-                        coord xx = (xw * 32 + bit) / color::BPP;
++                        coord xx = (xw * 32 + bit) / surface::color::BPP;
+                         if (xx >= LCD_W)
+                         {
+                             if (y >= 23 && y < 217)
+diff --git a/src/array.cc b/src/array.cc
+index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497161ca7a1 100644
+--- a/src/array.cc
++++ b/src/array.cc
+@@ -27,6 +27,7 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#include "scoped_array.h"
+ #include "array.h"
+ 
+ #include "arithmetic.h"
+@@ -1033,7 +1034,13 @@ echelon_result array::row_echelon(array_r m, echelon_options opt)
+         return result;
+     }
+ 
+-    size_t pivot_col[rows];
++    scoped_array<size_t> pivot_col(rows);
++    if (!pivot_col)
++    {
++        rt.out_of_memory_error();
++        rt.drop(rt.depth()-depth);
++        return result;
++    }
+     for (size_t i = 0; i < rows; i++)
+         pivot_col[i] = SIZE_MAX;
+ 
+@@ -1334,7 +1341,13 @@ lu_result array::lu_factorization(array_r m)
+         return result;
+     }
+ 
+-    size_t row_perm[n];
++    scoped_array<size_t> row_perm(n);
++    if (!row_perm)
++    {
++        rt.out_of_memory_error();
++        rt.drop(rt.depth()-depth);
++        return result;
++    }
+     for (size_t i = 0; i < n; i++)
+         row_perm[i] = i;
+ 
+@@ -1434,13 +1447,13 @@ lu_result array::lu_factorization(array_r m)
+         }
+     }
+ 
+-    result.L = lu_pack_matrix(n, base, atype, lu_matrix_part::L, row_perm);
++    result.L = lu_pack_matrix(n, base, atype, lu_matrix_part::L, row_perm.get());
+     if (!result.L)
+         goto err;
+-    result.U = lu_pack_matrix(n, base, atype, lu_matrix_part::U, row_perm);
++    result.U = lu_pack_matrix(n, base, atype, lu_matrix_part::U, row_perm.get());
+     if (!result.U)
+         goto err;
+-    result.P = lu_pack_matrix(n, base, atype, lu_matrix_part::P, row_perm);
++    result.P = lu_pack_matrix(n, base, atype, lu_matrix_part::P, row_perm.get());
+     if (!result.P)
+         goto err;
+ 
+diff --git a/src/blitter.h b/src/blitter.h
+index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482ee5de8078 100644
+--- a/src/blitter.h
++++ b/src/blitter.h
+@@ -78,6 +78,7 @@ struct blitter
+         MONOCHROME_REVERSE, // Monochrome bitmap, reverse X axis (DM42)
+         GRAY_4BPP,          // Gray, 4 bits per pixel (HP50G and related)
+         RGB_16BPP,          // RGB16 (HP Prime)
++        RGB_8BPP,           // Fixed RGB332 screen palette; pixmaps remain RGB565
+     };
+ 
+ 
+@@ -863,6 +864,8 @@ struct blitter
+             BIT_SIZE = sizeof(bits) * 8
+         };
+         shift %= BIT_SIZE;
++        if (!shift)
++            return bits;
+         bits = ((bits >> shift) | (bits << (BIT_SIZE - shift)));
+         return bits;
+     }
+@@ -1085,6 +1088,18 @@ union blitter::color<blitter::mode::GRAY_4BPP>
+ };
+ 
+ 
++template <>
++union blitter::color<blitter::mode::RGB_8BPP>
++{
++    uint8_t value;
++    enum {BPP=8};
++    color(uint8_t r,uint8_t g,uint8_t b):value((r&0xe0)|((g>>3)&0x1c)|(b>>6)){}
++    color(pixword bits):value(uint8_t(bits)){}
++    uint8_t red(){return ((value>>5)*255+3)/7;}
++    uint8_t green(){return (((value>>2)&7)*255+3)/7;}
++    uint8_t blue(){return (value&3)*85;}
++};
++
+ template <>
+ union blitter::color<blitter::mode::RGB_16BPP>
+ // ------------------------------------------------------------------------
+@@ -1106,6 +1121,7 @@ union blitter::color<blitter::mode::RGB_16BPP>
+         : value(((red >> 3) << 11) | ((green >> 2) << 5) | (blue >> 3))
+     {}
+     color(pixword pix): value(pix & 0xFFFF) {}
++    color(blitter::color<RGB_8BPP> c):color(c.red(),c.green(),c.blue()){}
+ 
+     uint8_t red()
+     {
+@@ -1397,6 +1413,26 @@ union blitter::pattern<blitter::mode::RGB_16BPP>
+ };
+ 
+ 
++template <>
++union blitter::pattern<blitter::mode::RGB_8BPP>
++{
++    uint64_t bits;
++    enum {BPP=8,SIZE=2};
++    enum:uint64_t {SOLID=0x0101010101010101ull};
++    using color=blitter::color<RGB_8BPP>;
++    pattern(color c):bits(uint64_t(c.value)*SOLID){}
++    pattern(uint8_t r,uint8_t g,uint8_t b):pattern(color(r,g,b)){}
++    // Calculator colour settings and serialized patterns remain RGB565.
++    pattern(uint64_t value=0):pattern(blitter::pattern<RGB_16BPP>(value)){}
++    pattern(blitter::pattern<RGB_16BPP> source):bits(0)
++    {
++        for(unsigned i=0;i<4;++i){blitter::color<RGB_16BPP> c(pixword(source.bits>>(16*i)));color q(c.red(),c.green(),c.blue());bits|=uint64_t(q.value)<<(8*i);}
++        bits|=bits<<32;
++    }
++    static const pattern black,gray10,gray25,gray50,gray75,gray90,white,invert;
++};
++
++
+ template <blitter::clipping Clip,
+           typename Dst,
+           typename Src,
+@@ -1453,6 +1489,132 @@ void blitter::blit(Dst           &dst,
+     const mode DMode    = Dst::blitmode;
+     const mode SMode    = Src::blitmode;
+ 
++    // Byte-packed glyphs can be unaligned or end before a complete word.
++    // Use exact pixel bytes for these and indexed conversions. Aligned,
++    // word-padded surfaces retain the optimized packed path.
++    const bool packed_destination =
++        uintptr_t(dst.pixels) % alignof(pixword)
++        || (offset(dst.scanline) * dst.h * DBPP) % BPW;
++    const bool packed_source = !skip_src &&
++        (!clip_src || uintptr_t(src.pixels) % alignof(pixword)
++         || (offset(src.scanline) * src.h * SBPP) % BPW);
++    if (DMode == RGB_8BPP || SMode == RGB_8BPP
++        || overlap || packed_source || packed_destination)
++    {
++        if (!skip_src || DMode != SMode || packed_destination)
++        {
++            const bool aliases = overlap || dst.pixels == src.pixels;
++            const bool xb = aliases && spos.x < drect.x1;
++            const bool yb = aliases && spos.y < drect.y1;
++            const pixword mask = (pixword(1) << DBPP) - 1;
++            const bool same_order = dst.horizontal_swap() == src.horizontal_swap();
++            x1 = drect.x1; x2 = drect.x2;
++            y1 = drect.y1; y2 = drect.y2;
++            auto intersect = [](coord &first, coord &last,
++                                int64_t low, int64_t high)
++            {
++                if (first > last || low > last || high < first)
++                    return false;
++                if (first < low) first = coord(low);
++                if (last > high) last = coord(high);
++                return first <= last;
++            };
++            if (clip_dst)
++            {
++                const rect &r = dst.drawable;
++                if (!intersect(x1, x2, r.x1, r.x2)
++                    || !intersect(y1, y2, r.y1, r.y2))
++                    return;
++            }
++            if (clip_src)
++            {
++                const rect &r = src.drawable;
++                int64_t low = same_order ? int64_t(drect.x1)+r.x1-spos.x
++                                        : int64_t(drect.x2)+spos.x-r.x2;
++                int64_t high = same_order ? int64_t(drect.x1)+r.x2-spos.x
++                                         : int64_t(drect.x2)+spos.x-r.x1;
++                if (!intersect(x1, x2, low, high)
++                    || !intersect(y1, y2, int64_t(drect.y1)+r.y1-spos.y,
++                                         int64_t(drect.y1)+r.y2-spos.y))
++                    return;
++            }
++            for (coord row = 0; row <= y2 - y1; ++row)
++            {
++                for (coord column = 0; column <= x2 - x1; ++column)
++                {
++                    coord ix = xb ? x2 - column : x1 + column;
++                    coord iy = yb ? y2 - row : y1 + row;
++                    coord sx = coord(int64_t(spos.x)
++                              + (same_order ? int64_t(ix) - drect.x1
++                                            : int64_t(drect.x2) - ix));
++                    coord sy = coord(int64_t(spos.y) + iy - drect.y1);
++                    coord dx = ix, dy = iy;
++                    dst.horizontal_adjust(dx, dx);
++                    dst.vertical_adjust(dy, dy);
++                    offset at = dst.pixel_offset(dx, dy);
++                    uint8_t *bytes_out =
++                        reinterpret_cast<uint8_t *>(dst.pixels) + at / 8;
++                    unsigned shift = at % 8;
++                    pixword destination = bytes_out[0];
++                    if constexpr (DBPP == 16)
++                        destination |= pixword(bytes_out[1]) << 8;
++                    pixword source = 0;
++                    if (!skip_src)
++                    {
++                        // CLIP_DST permits glyph coordinates beyond drawable:
++                        // aligning the bitmap back to a word adds a prefix.
++                        src.horizontal_adjust(sx, sx);
++                        src.vertical_adjust(sy, sy);
++                        offset so = src.pixel_offset(sx, sy);
++                        // Font bitmaps may start at any byte alignment and
++                        // end before the next word. Read only this pixel's
++                        // bytes, never dereference a packed pixword pointer.
++                        const uint8_t *bytes =
++                            reinterpret_cast<const uint8_t *>(src.pixels);
++                        pixword raw = bytes[so / 8];
++                        if constexpr (SBPP == 16)
++                            raw |= pixword(bytes[so / 8 + 1]) << 8;
++                        raw = (raw >> (so % 8))
++                            & ((pixword(1) << SBPP) - 1);
++                        if constexpr (DMode == RGB_8BPP || SMode == RGB_8BPP)
++                        {
++                            blitter::color<SMode> c(raw);
++                            blitter::color<DMode> cv(c.red(), c.green(), c.blue());
++                            source = cv.value;
++                            if constexpr (SMode == MONOCHROME)
++                                source ^= mask;
++                        }
++                        else
++                            source = convert<DMode, SMode>(raw) & mask;
++                    }
++                    unsigned cbit = unsigned(dx * CBPP
++                                      + dy * (CBPP == 16 ? 48 : CBPP == 8 ? 24
++                                                  : CBPP == 4 ? 20 : 9)) % 64;
++                    pixword col = mask;
++                    if (!skip_col)
++                    {
++                        pixword raw = pixword(rotate(colors.bits, cbit));
++                        if constexpr (DMode == RGB_8BPP || SMode == RGB_8BPP)
++                        {
++                            blitter::color<CMode> pc(raw);
++                            blitter::color<DMode> cv(pc.red(), pc.green(), pc.blue());
++                            col = cv.value;
++                        }
++                        else
++                            col = convert<DMode, CMode>(raw) & mask;
++                    }
++                    pixword value = op((destination >> shift) & mask,
++                                       source, col) & mask;
++                    destination = (destination & ~(mask << shift))
++                                | (value << shift);
++                    bytes_out[0] = uint8_t(destination);
++                    if constexpr (DBPP == 16)
++                        bytes_out[1] = uint8_t(destination >> 8);
++                }
++            }
++            return;
++        }
++    }
+     if (clip_src)
+     {
+         coord sx1 = src.drawable.x1;
+@@ -1543,6 +1705,7 @@ void blitter::blit(Dst           &dst,
+ 
+     // X1 and x2 pixel shift
+     unsigned cshift = surface<CMode>::BPP == 16 ? 48
++                    : surface<CMode>::BPP == 8  ? 24
+                     : surface<CMode>::BPP == 4  ? 20
+                     : surface<CMode>::BPP == 1  ? 9
+                                                 : 0;
+@@ -1577,9 +1740,20 @@ void blitter::blit(Dst           &dst,
+         pixword  cdata = 0;
+         pixword *dp1   = dst.pixel_address(do1);
+         pixword *dp2   = dst.pixel_address(do2);
+-        pixword *sp    = skip_src ? dp1 : src.pixel_address(so);
++        // The packed loop prefetches a following word even when its bits
++        // will be masked out. Exact-length rasters have no padding word.
++        intptr_t source_index = intptr_t(so / BPW);
++        const offset source_words = offset(src.scanline) * src.h * SBPP / BPW;
++        auto source_word = [&](intptr_t index)
++        {
++            pixword value = 0;
++            if (index >= 0 && offset(index) < source_words)
++                memcpy(&value, reinterpret_cast<const uint8_t *>(src.pixels)
++                               + offset(index) * sizeof(value), sizeof(value));
++            return value;
++        };
+         pixword *dp    = dp1;
+-        pixword  smem  = sp[0];
++        pixword  smem  = skip_src ? dp1[0] : source_word(source_index);
+         pixword  snew  = smem;
+ 
+         if (xback)
+@@ -1599,10 +1773,9 @@ void blitter::blit(Dst           &dst,
+                 int      skip     = nextsadj >= BPW;
+                 if (skip)
+                 {
+-                    sp += xdir;
++                    source_index += xdir;
+                     smem = snew;
+-                    ASSERT(sp >= src.pixels);
+-                    snew = sp[0];
++                    snew = source_word(source_index);
+                 }
+ 
+                 nextsadj %= BPW;
+@@ -1631,7 +1804,8 @@ void blitter::blit(Dst           &dst,
+             pixword tdata = op(ddata, sdc, cdc);
+             *dp           = (tdata & dmask) | (ddata & ~dmask);
+ 
+-            dp += xdir;
++            if (!xdone)
++                dp += xdir;
+             dmask = ~0U;
+             smem  = snew;
+         } while (!xdone);
+@@ -1713,6 +1887,10 @@ inline bool blitter::surface<blitter::RGB_16BPP>::horizontal_swap()
+ 
+ 
+ 
++template<>inline void blitter::surface<blitter::RGB_8BPP>::horizontal_adjust(coord &x1,coord &x2)const
++{coord old=swapsize-x2;x2=swapsize-x1;x1=old;}
++template<>inline bool blitter::surface<blitter::RGB_8BPP>::horizontal_swap(){return true;}
++
+ // ============================================================================
+ //
+ //   Template specializations for blitops
+@@ -1804,6 +1982,11 @@ CONVERT(RGB_16BPP, MONOCHROME_REVERSE)
+     return cvt;
+ }
+ 
++CONVERT(RGB_8BPP, MONOCHROME)
++{pixword out=0;for(unsigned i=0;i<4;++i)if(!(data&(1u<<i)))out|=0xffu<<(8*i);return out;}
++CONVERT(RGB_8BPP, MONOCHROME_REVERSE)
++{pixword out=0;for(unsigned i=0;i<4;++i)if(data&(1u<<i))out|=0xffu<<(8*i);return out;}
++
+ #undef CONVERT
+ 
+ 
+diff --git a/src/dmcp/main.cc b/src/dmcp/main.cc
+index 782ddb794d56426863fb0a31f42a2eb40b99503f..869ff1abacc4aca947b9973b81ed68a3bb834b18 100644
+--- a/src/dmcp/main.cc
++++ b/src/dmcp/main.cc
+@@ -78,6 +78,11 @@ const pattern pattern::gray75  = pattern(192, 192, 192);
+ const pattern pattern::gray90  = pattern(224, 224, 224);
+ const pattern pattern::white   = pattern(255, 255, 255);
+ const pattern pattern::invert  = pattern(~0ULL);
++#ifdef PICOCALC_RGB332
++using palette_pattern=blitter::pattern<blitter::RGB_8BPP>;
++const palette_pattern palette_pattern::black(0,0,0),palette_pattern::gray10(32,32,32),palette_pattern::gray25(64,64,64),palette_pattern::gray50(128,128,128),palette_pattern::gray75(192,192,192),palette_pattern::gray90(224,224,224),palette_pattern::white(255,255,255),palette_pattern::invert(UINT64_MAX);
++#endif
++
+ 
+ // Settings depend on patterns
+ settings Settings;
+diff --git a/src/dmcp/target.h b/src/dmcp/target.h
+index 7092c46efc87761050747ab2689ca1af42053d51..efbc995cb8c3af5e33e48c6d8f1a861693ba4eab 100644
+--- a/src/dmcp/target.h
++++ b/src/dmcp/target.h
+@@ -42,8 +42,12 @@ enum target
+ #ifndef CONFIG_COLOR
+     BITS_PER_PIXEL = 1,
+     LCD_SCANLINE   = 416,
++#else
++#ifdef PICOCALC_RGB332
++    BITS_PER_PIXEL = 8,
+ #else
+     BITS_PER_PIXEL = 16,
++#endif
+     LCD_SCANLINE   = 400,
+ #endif
+ 
+@@ -53,7 +57,11 @@ enum target
+ #define REVERSE_GROBS
+ 
+ #ifdef CONFIG_COLOR
++#ifdef PICOCALC_RGB332
++using surface = blitter::surface<blitter::mode::RGB_8BPP>;
++#else
+ using surface = blitter::surface<blitter::mode::RGB_16BPP>;
++#endif
+ using color   = blitter::color  <blitter::mode::RGB_16BPP>;
+ using pattern = blitter::pattern<blitter::mode::RGB_16BPP>;
+ #else
+diff --git a/src/expression.cc b/src/expression.cc
+index ed63e4fe8777fd0f2b1684af32e8e25849591735..046555d688e0df5ac5f79f3a9e6a9cd988f0dd3d 100644
+--- a/src/expression.cc
++++ b/src/expression.cc
+@@ -27,6 +27,7 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#include "scoped_array.h"
+ #include "expression.h"
+ 
+ #include "algebraic.h"
+@@ -3668,7 +3669,12 @@ algebraic_p like_terms::to_expression(polynomial_r poly)
+ // ----------------------------------------------------------------------------
+ {
+     size_t      nvars = poly->variables();
+-    algebraic_g vars[nvars];
++    scoped_array<algebraic_g> vars(nvars);
++    if (!vars)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+     for (size_t v = 0; v < nvars; v++)
+     {
+         size_t len  = 0;
+diff --git a/src/functions.cc b/src/functions.cc
+index 613e5015214cbf17263ee32a9281024e58937b63..ae8cba64e2d4df5c449fec0fc7df8ccb6922afea 100644
+--- a/src/functions.cc
++++ b/src/functions.cc
+@@ -27,6 +27,7 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#include "scoped_array.h"
+ #include "functions.h"
+ 
+ #include "arithmetic.h"
+@@ -409,7 +410,12 @@ object::result function::evaluate(id           op,
+     if (!rt.args(arity))
+         return ERROR;
+ 
+-    algebraic_g args[arity];
++    scoped_array<algebraic_g> args(arity);
++    if (!args)
++    {
++        rt.out_of_memory_error();
++        return ERROR;
++    }
+     for (uint a = 0; a < arity; a++)
+     {
+         object_g oarg = rt.stack(a);
+@@ -424,7 +430,7 @@ object::result function::evaluate(id           op,
+         args[a] = arg;
+     }
+ 
+-    algebraic_g result = fn(op, args, arity);
++    algebraic_g result = fn(op, args.get(), arity);
+     if (result && rt.drop(arity) && rt.push(+result))
+         return OK;
+     return ERROR;
+diff --git a/src/graphics.cc b/src/graphics.cc
+index 666a957d495507c70aad510bba97b7a358279504..f1df4b24cf167aff45caa5d8901ad9366e617f44 100644
+--- a/src/graphics.cc
++++ b/src/graphics.cc
+@@ -1263,6 +1263,10 @@ void show_grob(grob_p graph)
+ //   Show a graphical object at the
+ // ----------------------------------------------------------------------------
+ {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    rect saved_clip = Screen.clip();
++    Screen.clip(Screen.area());
++#endif
+     size    width  = graph->width();
+     size    height = graph->height();
+ 
+@@ -1285,6 +1289,9 @@ void show_grob(grob_p graph)
+         Screen.copy(s, r, point(show_x,show_y));
+     }
+     draw_show_arrows(width, height);
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    Screen.clip(saved_clip);
++#endif
+     mark_dirty(0, 0, LCD_W-1, LCD_H-1);
+     refresh_dirty();
+ }
+diff --git a/src/graphics.h b/src/graphics.h
+index 4485ad8e23a545541c783b07449d58b46a03d188..06a24cd69afb1eacd250ce2917801069a85b8520 100644
+--- a/src/graphics.h
++++ b/src/graphics.h
+@@ -145,8 +145,8 @@ do                                                                      \
+     }                                                                   \
+     else                                                                \
+     {                                                                   \
+-        surface display = pict ? pixmap_p(pict)->pixels() : Screen;     \
+-        op;                                                             \
++        if(pict){auto display=pixmap_p(pict)->pixels();op;}            \
++        else {auto display=Screen;op;}                                                             \
+     }                                                                   \
+ }                                                                       \
+ while(0)
+diff --git a/src/list.cc b/src/list.cc
+index fcd9903499c3591ea29d158b301e5231d4be29e1..42200c3c6002a1533aed1e74a608b2ba573b852e 100644
+--- a/src/list.cc
++++ b/src/list.cc
+@@ -27,6 +27,7 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#include "scoped_array.h"
+ #include "list.h"
+ 
+ #include "algebraic.h"
+@@ -2155,7 +2156,12 @@ bool list::names_enumerate(size_t depth, bool units, list_g &forbidden) const
+     {
+         list_g   lst = this;
+         size_t   max = items();
+-        size_t   pos[max];
++        scoped_array<size_t> pos(max);
++        if (!pos)
++        {
++            rt.out_of_memory_error();
++            return false;
++        }
+         size_t   local = 0;
+         size_t   arg   = 0;
+         size_t   nargs = 0;
+@@ -2900,8 +2906,12 @@ list_p list::extract(object_r &first, object_r &last) const
+         return nullptr;
+     }
+ 
+-    size_t fidx[fnum];
+-    size_t lidx[fnum];
++    scoped_array<size_t> fidx(fnum),lidx(fnum);
++    if (!fidx||!lidx)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+     for (size_t i = 0; i < fnum; i++)
+     {
+         int idx = (flst ? flst->at(i) : +first)->as_int32(1, true);
+@@ -2918,7 +2928,7 @@ list_p list::extract(object_r &first, object_r &last) const
+             return nullptr;
+     }
+ 
+-    return extract_sublist(data, 0, fnum, fidx, lidx);
++    return extract_sublist(data, 0, fnum, fidx.get(), lidx.get());
+ }
+ 
+ 
+diff --git a/src/locals.cc b/src/locals.cc
+index 7a9e592f50e29457f8ea3990da263121cd9fc5d4..ac181b1ac211c39dfbbed6e4aab5eb59dee8a262 100644
+--- a/src/locals.cc
++++ b/src/locals.cc
+@@ -175,7 +175,9 @@ PARSE_BODY(locals)
+     p.out = rt.make<locals>(ID_locals, scratch, alloc);
+ 
+     // Adjust size of parsed text for what we parsed before program
+-    p.source += -decls;
++    // Subtract within the source buffer, rather than converting -decls
++    // to the unsigned offset accepted by the GC pointer wrapper.
++    p.source = utf8(p.source) - decls;
+     p.length += decls;
+ 
+     return OK;
+diff --git a/src/menu.cc b/src/menu.cc
+index 365400baf970fb412e4c141da7a21222bad63bac..189bb46758c2583b9e47b2f583e2290024a7b0fc 100644
+--- a/src/menu.cc
++++ b/src/menu.cc
+@@ -1435,6 +1435,12 @@ MENU(ClearThingsMenu,
+      "Error",   ID_err0,
+      "LCD",     ID_ClLCD);
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++static constexpr cstring modes_snapshot_label = "→Prog";
++#else
++static constexpr cstring modes_snapshot_label = "Modes";
++#endif
++
+ MENU(ModesMenu,
+ // ----------------------------------------------------------------------------
+ //   Mode settings
+@@ -1453,7 +1459,7 @@ MENU(ModesMenu,
+      "Display", ID_DisplayModesMenu,
+      "Seps",    ID_SeparatorModesMenu,
+ 
+-     "Modes",   ID_Modes,
++     modes_snapshot_label, ID_Modes,
+      "Reset",   ID_ResetModes,
+      "System",  ID_SystemSetup);
+ 
+@@ -1543,7 +1549,9 @@ MENU(UserInterfaceModesMenu,
+      "Fixed0",                                  ID_FixedWidthDigits,
+      "VProg",                                   ID_VerticalProgramRendering,
+      BusyIndicatorRefresh::label,               ID_BusyIndicatorRefresh,
++#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
+      "ExitMenu",                                ID_ExitClearsMenu,
++#endif
+      "ListEval",                                ID_ListAsProgram,
+ 
+      "Units",                                   ID_ShowBuiltinUnits,
+@@ -1556,7 +1564,9 @@ MENU(UserInterfaceModesMenu,
+      StackGraphingTimeLimit::label,             ID_StackGraphingTimeLimit,
+      GraphingTimeLimit::label,                  ID_GraphingTimeLimit,
+      ShowTimeLimit::label,                      ID_ShowTimeLimit,
++#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
+      MinimumBatteryVoltage::label,              ID_MinimumBatteryVoltage,
++#endif
+ 
+      TextRenderingSizeLimit::label,             ID_TextRenderingSizeLimit,
+      GraphRenderingSizeLimit::label,            ID_GraphRenderingSizeLimit,
+diff --git a/src/polynomial.cc b/src/polynomial.cc
+index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b36eb4c9d 100644
+--- a/src/polynomial.cc
++++ b/src/polynomial.cc
+@@ -27,6 +27,7 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#include "scoped_array.h"
+ #include "polynomial.h"
+ 
+ #include "arithmetic.h"
+@@ -521,10 +522,13 @@ polynomial_p polynomial::addsub(polynomial_r x, polynomial_r y, bool sub)
+     size_t nvars = leb128<size_t>(p);
+     size_t xvars = x->variables();
+     size_t yvars = y->variables();
+-    ularge xexp[nvars];
+-    ularge yexp[nvars];
+-    size_t xvar[xvars];
+-    size_t yvar[yvars];
++    scoped_array<ularge> xexp(nvars),yexp(nvars);
++    scoped_array<size_t> xvar(xvars),yvar(yvars);
++    if (!xexp||!yexp||!xvar||!yvar)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+ 
+     // Map variables in x and y to variables in the result
+     for (size_t v = 0; v < nvars; v++)
+@@ -687,10 +691,13 @@ polynomial_p polynomial::mul(polynomial_r x, polynomial_r y)
+     size_t nvars = leb128<size_t>(p);
+     size_t xvars = x->variables();
+     size_t yvars = y->variables();
+-    ularge xexp[nvars];
+-    ularge yexp[nvars];
+-    size_t xvar[xvars];
+-    size_t yvar[yvars];
++    scoped_array<ularge> xexp(nvars),yexp(nvars);
++    scoped_array<size_t> xvar(xvars),yvar(yvars);
++    if (!xexp||!yexp||!xvar||!yvar)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+ 
+     // Map variables in x and y to variables in the result
+     for (size_t v = 0; v < nvars; v++)
+@@ -863,7 +870,12 @@ bool polynomial::quorem(polynomial_r  x,
+     ularge       rorder = ri.rank(rvar);
+     ularge       yorder = yi.rank(yvar);
+ 
+-    symbol_g rvars[ri.variables];
++    scoped_array<symbol_g> rvars(ri.variables);
++    if (!rvars)
++    {
++        rt.out_of_memory_error();
++        return false;
++    }
+     for (size_t rv = 0; rv < ri.variables; rv++)
+         rvars[rv] = r->variable(rv);
+ 
+@@ -1214,7 +1226,12 @@ EVAL_BODY(polynomial)
+ 
+     polynomial_g poly  = o;
+     size_t       nvars = poly->variables();
+-    algebraic_g  vars[nvars];
++    scoped_array<algebraic_g> vars(nvars);
++    if (!vars)
++    {
++        rt.out_of_memory_error();
++        return ERROR;
++    }
+ 
+     // Evaluate each of the variables exactly once (this is where we save time)
+     for (size_t v = 0; v < nvars; v++)
+@@ -1271,7 +1288,12 @@ RENDER_BODY(polynomial)
+ {
+     polynomial_g poly  = o;
+     size_t       nvars = poly->variables();
+-    symbol_g     vars[nvars];
++    scoped_array<symbol_g> vars(nvars);
++    if (!vars)
++    {
++        rt.out_of_memory_error();
++        return 0;
++    }
+ 
+     // Get each of the variables
+     for (size_t v = 0; v < nvars; v++)
+@@ -1343,7 +1365,12 @@ GRAPH_BODY(polynomial)
+ {
+     polynomial_g poly  = o;
+     size_t       nvars = poly->variables();
+-    grob_g       vars[nvars];
++    scoped_array<grob_g> vars(nvars);
++    if (!vars)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+     save<bool>   su(symbol::unambiguous, true);
+ 
+     // Get each of the variables and render it graphically
+@@ -1464,7 +1491,12 @@ algebraic_p polynomial::as_expression() const
+ {
+     polynomial_g poly  = this;
+     size_t       nvars = poly->variables();
+-    algebraic_g  vars[nvars];
++    scoped_array<algebraic_g> vars(nvars);
++    if (!vars)
++    {
++        rt.out_of_memory_error();
++        return nullptr;
++    }
+ 
+     // Evaluate each of the variables exactly once (this is where we save time)
+     for (size_t v = 0; v < nvars; v++)
+diff --git a/src/program.cc b/src/program.cc
+index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7206cc736 100644
+--- a/src/program.cc
++++ b/src/program.cc
+@@ -304,9 +304,13 @@ bool program::low_battery()
+     uint now = program::read_time();
+     if (now - last_power_check >= Settings.BatteryRefresh())
+         read_battery();
++#ifdef PICOCALC
++    return !animated() && battery_low;
++#else
+     uint vlow = Settings.MinimumBatteryVoltage();
+     return !animated() &&
+         (battery_low || battery_voltage < vlow || power_voltage < vlow);
++#endif
+ }
+ 
+ 
+@@ -330,6 +334,9 @@ uint program::read_time()
+ // ----------------------------------------------------------------------------
+ //   The sys_current_ms() function stops running when timers are off.
+ {
++#ifdef PICOCALC
++    return sys_current_ms();
++#else
+     dt_t date;
+     tm_t time;
+     rtc_read(&time, &date);
+@@ -339,6 +346,7 @@ uint program::read_time()
+              time.hour * 3600 +
+               jd * 86400) * 100 + time.csec) * 10;
+     return ticks;
++#endif
+ }
+ 
+ 
+diff --git a/src/runtime.cc b/src/runtime.cc
+index ea88a32d0b7b5c13503772e42e42a5d69ee111a6..6c19b235011af638336502b32f2a9ad0347a1732 100644
+--- a/src/runtime.cc
++++ b/src/runtime.cc
+@@ -433,15 +433,18 @@ void runtime::uncache(object_p start, size_t sz)
+ //   Drop the whole cache
+ // ----------------------------------------------------------------------------
+ {
+-    object_p end = start + sz;
+-    record(cache, "Clear cache %p-%p sz %u", start, end, sz);
++    // uncache() uses nullptr/SIZE_MAX to clear all entries. These are
++    // address bounds, not an object range on which pointer arithmetic is valid.
++    uintptr_t first = uintptr_t(start);
++    record(cache, "Clear cache %p sz %u", start, sz);
+     for (uint l = 0; l < 2; l++)
+     {
+         const uint max = sizeof(Cache[0]) / sizeof(Cache[0][0]);
+         for (uint i = 0; i < max; i++)
+         {
+             object_p &ptr = Cache[l][i];
+-            if (ptr >= start && ptr < end)
++            uintptr_t address = uintptr_t(ptr);
++            if (address >= first && address - first < sz)
+                 ptr = nullptr;
+         }
+     }
+@@ -2168,7 +2171,7 @@ bool runtime::run_select_case(bool condition)
+     if (condition)
+     {
+         object_p obj = command::static_object(object::ID_case_skip_conditional);
+-        ASSERT(Returns[0] == nullptr && Returns[1] + 1 == nullptr);
++        ASSERT(Returns[0] == nullptr && uintptr_t(Returns[1]) == uintptr_t(-1));
+         Returns[0] = Returns[2];
+         Returns[1] = Returns[3];
+         Returns[2] = obj;
+diff --git a/src/runtime.h b/src/runtime.h
+index 37fab88c9ffa6ee7043198dd8c17679ffd417441..67f4df416999c37e023666796b70180884e9e957 100644
+--- a/src/runtime.h
++++ b/src/runtime.h
+@@ -596,8 +596,10 @@ struct runtime
+         runtime_invariants check;
+         if (next < end || !next)    // Can be nullptr for conditionals
+         {
+-            end = object_p(byte_p(end) - 1);
+-            run_push_data(next, end);
++            // A null conditional is encoded as an all-bits-one endpoint.
++            // Encode as an integer: subtracting from nullptr is undefined.
++            end = object_p(uintptr_t(end) - 1);
++            return run_push_data(next, end);
+         }
+         return true;
+     }
+@@ -615,20 +617,26 @@ struct runtime
+         while (Returns < high)
+         {
+             object_p next = Returns[0];
+-            object_p end  = Returns[1] + 1;
++            if (!next)
++            {
++                // Null entries represent either an empty conditional or a
++                // local-variable count, not a range of object pointers.
++                uintptr_t count = uintptr_t(Returns[1]);
++                if (count != uintptr_t(-1))
++                    unlocals(size_t(count));
++                call_stack_drop(2);
++                continue;
++            }
++            object_p end = Returns[1] + 1;
+             if (next < end)
+             {
+-                if (next)
+-                {
+-                    object_p nnext = next->skip();
+-                    Returns[0] = nnext;
+-                    if (nnext >= end)
+-                        // Note that call_stack_drop() cannot and MUST NOT GC
+-                        // so that the value of next cannot change
+-                        call_stack_drop(2);
+-                    return next;
+-                }
+-                unlocals(size_t(end) - 1);
++                object_p nnext = next->skip();
++                Returns[0] = nnext;
++                if (nnext >= end)
++                    // call_stack_drop() cannot and MUST NOT GC, so next
++                    // cannot change while the frame is removed.
++                    call_stack_drop(2);
++                return next;
+             }
+ 
+             call_stack_drop(2);
+diff --git a/src/settings.cc b/src/settings.cc
+index e7495d116b7418334bea75903a48c619f87f0ab8..7e7eceac499de1b05101ce139ec2e3f45cd18339 100644
+--- a/src/settings.cc
++++ b/src/settings.cc
+@@ -400,12 +400,20 @@ object::id setting_value<object::id>(object_p obj, object::id UNUSED init)
+ }
+ 
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++#include "base_settings.h"
++#endif
++
+ EVAL_BODY(value_setting)
+ // ----------------------------------------------------------------------------
+ //   Evaluate a value setting by invoking the base command
+ // ----------------------------------------------------------------------------
+ {
+     id ty   = o->type();
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    if (!pico_prepare_base_display(ty))
++        return ERROR;
++#endif
+ 
+     if (ty >= ID_Sig && ty <= ID_Eng)
+     {
+diff --git a/src/settings.h b/src/settings.h
+index 9a5068de4e294c802adc8426e3796f4cb35bdc16..7b8d20dc0e1add87cbc57c47a0902f07761a55ed 100644
+--- a/src/settings.h
++++ b/src/settings.h
+@@ -186,7 +186,15 @@ public:
+     font_p stack_font()         { return font(StackFont()); }
+     font_p editor_font(bool ml) { return font(ml ? MultilineEditorFont() : EditorFont()); }
+     font_p cursor_font(bool ml) { return cursor_font(ml ? MultilineCursorFont() : CursorFont()); }
+-    font_p header_font()        { return font(HeaderFont()); }
++    font_p header_font()
++    {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        extern font_p picocalc_header_font();
++        return picocalc_header_font();
++#else
++        return font(HeaderFont());
++#endif
++    }
+ 
+     static unicode digit_separator(uint index);
+ 
+diff --git a/src/user_interface.cc b/src/user_interface.cc
+index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f5966304ea79 100644
+--- a/src/user_interface.cc
++++ b/src/user_interface.cc
+@@ -27,6 +27,15 @@
+ //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ // ****************************************************************************
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++#include "battery.h"
++#endif
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++#include "ui/legacy.h"
++#include "ui/typography.h"
++#include "ui/reference_font.h"
++#include "ui/softmenu.h"
++#endif
+ #include "user_interface.h"
+ 
+ #include "arithmetic.h"
+@@ -675,6 +684,17 @@ bool user_interface::key(int key, bool repeating, bool talpha)
+         }
+     }
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    // Errors, Help and interactive stack controls get Esc first.
++    if (key == KEY_EXIT && menu() && !Stack.interactive &&
++        !showing_help() && !showing_graphics())
++    {
++        if (!repeating)
++            menu_back();
++        return true;
++    }
++#endif
++
+     // Handle keys
+     bool result =
+         handle_shifts(key, talpha)      ||
+@@ -1301,6 +1321,44 @@ void user_interface::menu_pop()
+ }
+ 
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++void user_interface::menu_root()
++// ----------------------------------------------------------------------------
++//   Start a new calculator menu tree using the existing bounded history storage
++// ----------------------------------------------------------------------------
++{
++    clear_menu();
++    memset(menuStack, 0, sizeof(menuStack));
++    memset(pageStack, 0, sizeof(pageStack));
++    menuPage = 0;
++    clear_shift();
++    dirtyMenu = dirtyStack = dirtyEditor = true;
++}
++
++void user_interface::menu_back()
++// ----------------------------------------------------------------------------
++//   Consume one parent entry; unlike LastMenu this never cycles old menus
++// ----------------------------------------------------------------------------
++{
++    if (menuStack[1] == menu::ID_object)
++    {
++        menu_root();
++        return;
++    }
++    transient_object(nullptr);
++    memmove(menuStack, menuStack + 1, sizeof(menuStack) - sizeof(*menuStack));
++    memmove(pageStack, pageStack + 1, sizeof(pageStack) - sizeof(*pageStack));
++    menuStack[HISTORY-1] = menu::ID_object;
++    pageStack[HISTORY-1] = 0;
++    menuPage = pageStack[0];
++    menu_p parent = menu_p(menu::static_object(menuStack[0]));
++    parent->update(menuPage);
++    clear_shift();
++    dirtyMenu = dirtyStack = dirtyEditor = true;
++}
++#endif
++
++
+ uint user_interface::page()
+ // ----------------------------------------------------------------------------
+ //   Return the currently displayed page
+@@ -1652,6 +1710,19 @@ bool user_interface::draw_menus()
+     bool   flat          = menuStyle == object::ID_FlatMenus;
+     int    visiblePlanes = single ? 1 : planes;
+     uint   newMenuHeight = visiblePlanes * mh;
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    bool modes_hint = !help && menu() && menu()->type() == object::ID_ModesMenu;
++    int hintHeight=!help&&planes?(modes_hint?28:14):0;
++    newMenuHeight += hintHeight;
++    if(planes && shplane>=planes)shplane=0;
++    if(force||dirtyMenu||shplane!=lastShiftPlane||newMenuHeight!=menuHeight)
++    {
++        auto previous=Screen.clip();Screen.clip(Screen.area());
++        int top=LCD_H-int(std::max(newMenuHeight,menuHeight));
++        Screen.fill(0,top,LCD_W-1,LCD_H-1,Settings.Background());
++        draw_dirty(0,top,LCD_W-1,LCD_H-1);Screen.clip(previous);
++    }
++#endif
+     if (newMenuHeight != menuHeight)
+     {
+         menuHeight = newMenuHeight;
+@@ -1686,14 +1757,22 @@ bool user_interface::draw_menus()
+     }
+ 
+     settings::SaveTabWidth stw(0);
+-    for (int plane = 0; plane < visiblePlanes; plane++)
++    int renderedPlanes=visiblePlanes;
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    if(single)renderedPlanes=planes; // Draw the selected plane in the single row.
++#endif
++    for (int plane = 0; plane < renderedPlanes; plane++)
+     {
+         cstring *labels = menuLabel[plane];
+         if (help)
+         {
+             static cstring helpMenu[] =
+             {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++                "Index", "Pg up", "Pg dn", "Prev", "Next", "Back"
++#else
+                 "Home", "Page▲", "Page▼", "Link▲", "Link▼", "← Topic"
++#endif
+             };
+             labels = helpMenu;
+         }
+@@ -1796,6 +1875,10 @@ bool user_interface::draw_menus()
+                     len = strlen(cstring(label));
+                 }
+ 
++                font_p labelFont = font;
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++                labelFont = pico_ui::softmenu_font(label, len, font);
++#endif
+                 // Check if we have a marker from VariablesMenu
+                 rect trect = mrect;
+                 if (!help && !Stack.interactive)
+@@ -1816,22 +1899,50 @@ bool user_interface::draw_menus()
+                             marker         = mark;
+                             mkw            = (marker == '/'
+                                               ? 0
+-                                              : font->width(marker));
++                                              : labelFont->width(marker));
+                             mkx            = alignLeft ? x - mw / 2 + 2
+                                                        : x + mw / 2 - mkw - 2;
+                             mcw -= mkw;
+                             if (alignLeft)
+                                 trect.x1 += mkw;
+-                            else if (marker != U'◥')
++                            else
++#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
++                                if (marker != U'◥')
++#endif
+                                 trect.x2 -= mkw;
+                         }
+                     }
+                 }
+ 
+                 Screen.clip(trect);
+-                size tw = font->width(label, len);
++#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
++                size tw = labelFont->width(label, len);
+                 if (marker == '/')
+-                    tw += font->width(utf8("⁻¹"));
++                    tw += labelFont->width(utf8("⁻¹"));
++#else
++                size tw = 0;
++#endif
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++                // Fit actual ink, including bearings, inside the visible cell.
++                trect.x1++;trect.x2--;
++                mcw = std::max(1, int(trect.x2 - trect.x1 + 1));
++                pico_ui::MenuInk ink;
++                pico_ui::menu_ink(ink,labelFont,label,len);
++                if(marker=='/')pico_ui::menu_ink(ink,labelFont,utf8("⁻¹"),sizeof("⁻¹")-1);
++                tw=ink.width();
++                bool scrolling=int(tw)>int(mcw);
++                if(scrolling)
++                {
++                    menuAnimate |= animask;
++                    x=trect.x1-int(time/SPEED%(tw-mcw+5))-ink.left;
++                }
++                else x=trect.x1+(int(mcw)-int(tw))/2-ink.left;
++                coord ty=mrect.y1+std::max(0,(int(mrect.y2-mrect.y1+1)-int(labelFont->height()))/2);
++                Screen.clip(trect);
++#ifdef PICOCALC_UI_HOST
++                if(pico_ui::softmenu_observer)pico_ui::softmenu_observer(label,len,labelFont,trect.x1,trect.x2,x+ink.left,x+ink.right-1,scrolling);
++#endif
++#else
+                 if (tw + 2 >= mcw)
+                 {
+                     menuAnimate |= animask;
+@@ -1842,7 +1953,8 @@ bool user_interface::draw_menus()
+                     x = (mrect.x1 + mrect.x2 - tw) / 2;
+                 }
+                 coord ty = mrect.y1 - 1;
+-                x = Screen.text(x, ty, label, len, font, color);
++#endif
++                x = Screen.text(x, ty, label, len, labelFont, color);
+                 if (marker)
+                 {
+                     Screen.clip(mrect);
+@@ -1851,26 +1963,32 @@ bool user_interface::draw_menus()
+                     {
+                         pattern fldcol = Settings.FolderCornerForeground();
+                         if (alt || square)
+-                            Screen.glyph(mkx+3, ty-3, marker, font, color);
++                            Screen.glyph(mkx+3, ty-3, marker, labelFont, color);
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++                        rect corner = mrect;
++                        corner.inset(-2,-2);
++                        Screen.clip(corner);
++#else
+                         trect.inset(-2,-2);
+                         Screen.clip(trect);
+-                        Screen.glyph(mkx+4, ty-4, marker, font, fldcol);
++#endif
++                        Screen.glyph(mkx+4, ty-4, marker, labelFont, fldcol);
+                     }
+                     else if (marker == '/')
+                     {
+                         Screen.text(x, ty,
+-                                    utf8("⁻¹"), sizeof("⁻¹")-1, font, color);
++                                    utf8("⁻¹"), sizeof("⁻¹")-1, labelFont, color);
+                     }
+                     else
+                     {
+-                        Screen.glyph(mkx, ty, marker, font, color);
++                        Screen.glyph(mkx, ty, marker, labelFont, color);
+                     }
+                 }
+                 Screen.clip(clip);
+             }
+         }
+     }
+-    if (square && shplane < visiblePlanes)
++    if (square && shplane < renderedPlanes)
+     {
+         int my = LCD_H - (shplane * !single + 1) * mh;
+         pattern sel = Settings.SelectedMenuForeground();
+@@ -1882,6 +2000,21 @@ bool user_interface::draw_menus()
+     if (!animating)
+         draw_dirty(0, LCD_H - 1 - menuHeight, LCD_W, LCD_H-1);
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    if (hintHeight)
++    {
++        int y = LCD_H - visiblePlanes * mh - hintHeight;
++        Screen.clip(Screen.area());
++        Screen.fill(0, y, LCD_W - 1, y + hintHeight - 1,
++                    Settings.Background());
++        cstring hints[] = { "Tab: row   Ctrl+F5: sixth entry",
++                            "→Prog: settings to stack; Reset: defaults" };
++        for (int line = 0; line < hintHeight / 14; ++line)
++            Screen.text(5, y + line * 14, utf8(hints[line]),
++                        Settings.header_font(), Settings.StackForeground());
++        Screen.clip(clip);
++    }
++#endif
+     lastShiftPlane = shplane;
+     menuDrawn = time;
+     dirtyMenu = false;
+@@ -2152,6 +2285,9 @@ bool user_interface::draw_battery(bool now)
+     bool        usb        = program::on_usb;
+     uint        delay      = time - program::last_power_check;
+     uint        refresh    = Settings.BatteryRefresh();
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    refresh = std::min(refresh, 1000u);
++#endif
+     const uint  usb_period = 1024;
+ 
+     if (now || delay >= refresh)
+@@ -2169,7 +2305,11 @@ bool user_interface::draw_battery(bool now)
+ 
+     // Experimentally, battery voltage below 2.6V cause calculator flakiness
+     const uint vmax  = BATTERY_VMAX;
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    const uint vmin = 0;
++#else
+     const uint vmin  = Settings.MinimumBatteryVoltage();
++#endif
+     const uint vlow  = (vmax + 7 * vmin) / 8;
+     const uint vhalf = (vmax + 3 * vmin) / 4;
+ 
+@@ -2191,7 +2331,12 @@ bool user_interface::draw_battery(bool now)
+     if (Settings.ShowVoltage())
+     {
+         char buffer[16];
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        if (vdd > 100) snprintf(buffer, sizeof(buffer), "--%%");
++        else snprintf(buffer, sizeof(buffer), "%u%%", vdd);
++#else
+         snprintf(buffer, sizeof(buffer), "%d.%03dV", vdd / 1000, vdd % 1000);
++#endif
+         pattern vcol = Settings.VoltageForeground();
+         if (vcol.bits == Settings.HeaderBackground())
+             vcol = vpat;
+@@ -2231,6 +2376,9 @@ bool user_interface::draw_battery(bool now)
+     }
+ 
+     size batw = bat_body.width();
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    size w = pico_battery_icon_fill(vdd, batw);
++#else
+     float ratio = float(vdd - vmin) / (vmax - vmin);
+     ratio = 1-ratio;
+     ratio = ratio * ratio;
+@@ -2240,16 +2388,36 @@ bool user_interface::draw_battery(bool now)
+         w = batw;
+     else if (w < 1)
+         w = 1;
++#endif
+     bat_body.x1 = bat_body.x2 - w;
+     if (usb)
+     {
+         bat_body.inset(-time / usb_period % 4);
+         refresh = std::min(refresh, usb_period);
+     }
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    if (!blink)
++    {
++        if (vdd > 100)
++        {
++            utf8 mark = utf8("?");
++            coord centre = x + bat_tipw +
++                (bat_width - bat_tipw - hdr_font->width(mark)) / 2;
++            Screen.text(centre, 0, mark, hdr_font, bfg);
++        }
++        else if (w)
++            Screen.fill(bat_body, vpat);
++    }
++#else
+     if (!blink)
+         Screen.fill(bat_body, vpat);
++#endif
+ 
+-    if (!usb && !blink)
++    if (!usb && !blink
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        && vdd <= 100
++#endif
++        )
+     {
+         bat_body.x2 += 1;
+         while (bat_body.x2 > x + 8)
+@@ -2962,6 +3130,16 @@ bool user_interface::draw_error()
+ //   Draw the error message if there is one
+ // ----------------------------------------------------------------------------
+ {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    if(utf8 error=rt.error())
++    {
++        char command[160]{};object_g cmd=rt.command();if(cmd){cmd->render(command,sizeof command);command[sizeof command-1]=0;}
++        const char *lines[]={reinterpret_cast<const char *>(error),*command?command:nullptr};
++        pico_ui_draw_message("Calculation error",lines,2,true);
++        if(uint frequency=Settings.ErrorBeepFrequency())if(uint duration=Settings.ErrorBeepDuration())beep(frequency,duration);
++    }
++    return true;
++#else
+     if (utf8 err = rt.error())
+     {
+         const int border = 4;
+@@ -3003,6 +3181,7 @@ bool user_interface::draw_error()
+                 beep(freq, dur);
+     }
+     return true;
++#endif
+ }
+ 
+ 
+@@ -3014,6 +3193,9 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
+     if (freezeStack)
+         return false;
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    pico_ui_draw_message(reinterpret_cast<const char *>(header),reinterpret_cast<const char *const *>(msgs),count,false);return true;
++#else
+     font_p font   = LibMonoFont10x17;
+     size   h      = font->height();
+     size   ch     = h * 5 / 2 + h * count + 10;
+@@ -3051,6 +3233,7 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
+     refresh_dirty();
+ 
+     return true;
++#endif
+ }
+ 
+ 
+@@ -3168,6 +3351,11 @@ void user_interface::load_help(utf8 topic, size_t len)
+ //   Find the help message associated with the topic
+ // ----------------------------------------------------------------------------
+ {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    extern void pico_show_command_reference(const char *, size_t);
++    pico_show_command_reference(cstring(topic),len);
++    return;
++#endif
+     record(help, "Loading help topic %.*s", len, topic);
+ 
+     if (!len)
+@@ -4121,7 +4309,7 @@ restart:
+         return false;
+ 
+     using p                                    = pattern;
+-    const style_description styles[NUM_STYLES] =
++    style_description styles[NUM_STYLES] =
+     // -------------------------------------------------------------------------
+     //  Table of styles
+     // -------------------------------------------------------------------------
+@@ -4129,18 +4317,40 @@ restart:
+         { HelpTitleFont,    p::black,  p::white,  false, false, false, false },
+         { HelpSubTitleFont, p::black,  p::gray50,  true, false, true,  false },
+         { HelpSubTitleFont, p::black,  p::white,   true,  true, false, false },
+-        { HelpFont,         p::black,  p::white,  false, false, false, false },
++        {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++          pico_ui::reference_font(),
++#else
++          HelpFont,
++#endif
++                          p::black,  p::white,  false, false, false, false },
+         { HelpBoldFont,     p::black,  p::white,   true, false, false, false },
+         { HelpItalicFont,   p::black,  p::white,  false, true,  false, false },
+         { HelpCodeFont,     p::black,  p::gray50, false, false, false, true  },
+         { HelpCodeFont,     p::black,  p::gray90, false, false, false, false },
+-        { HelpFont,         p::white,  p::black,  false, false, false, false },
++        {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++          pico_ui::reference_font(),
++#else
++          HelpFont,
++#endif
++                          p::white,  p::black,  false, false, false, false },
+         { HelpFont,         p::black,  p::gray50, false, false, true,  false },
+         { HelpFont,         p::white,  p::gray10, false, false, false, false },
+         { HelpCodeFont,     p::white,  p::gray10, false, false,  true,  true },
+     };
+ 
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    for(unsigned i=0;i<NUM_STYLES;++i)
++    {
++        if(i>=NORMAL)styles[i].font=pico_ui::reference_font();
++        if(i==CODE||i==HIGHLIGHTED_CODE)styles[i].box=false;
++        styles[i].color=pico_ui::text_colour();styles[i].background=pattern(Settings.Background());
++        if(i==KEY||i==HIGHLIGHTED_TOPIC||i==HIGHLIGHTED_CODE)std::swap(styles[i].color,styles[i].background);
++    }
++#endif
++
+     // Compute the size for the help display
+     coord      ytop   = stackTop + 1;
+     coord      ybot   = LCD_H - (MenuFont->height() + 5);
+@@ -4158,7 +4368,11 @@ restart:
+     r.inset(2);
+     Screen.fill(r, pattern::black);
+     r.inset(2);
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    Screen.fill(r, pattern(Settings.Background()));
++#else
+     Screen.fill(r, pattern::white);
++#endif
+ 
+     // Clip drawing area in case some text does not really fit
+     r.inset(1);
+@@ -4760,6 +4974,7 @@ restart:
+         font              = styles[style].font;
+         height            = font->height();
+ 
++#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
+         // If we are rendering a command name, follow user preferences
+         if (style == SUBTITLE || style == CODE || style == HIGHLIGHTED_CODE)
+         {
+@@ -4816,8 +5031,22 @@ restart:
+             }
+         }
+ 
++#endif
+         // Compute width of word (or words in the case of titles)
+         coord width = font->width(buffer, widx);
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        bool fixed_code = style == CODE || style == VERBATIM ||
++                          style == HIGHLIGHTED_CODE;
++        if (fixed_code)
++        {
++            width = 0;
++            for (size_t position = 0; position < widx;
++                 position = utf8_next(buffer, position, widx))
++                if (unicode cp = utf8_codepoint(buffer, position, widx);
++                    cp != 0x200b && cp != 0xfe0f)
++                    width += 8;
++        }
++#endif
+         size kwidth = 0;
+         if (style == KEY)
+         {
+@@ -4825,6 +5054,25 @@ restart:
+             width += 2*kwidth;
+         }
+ 
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        if (style <= SUBSUBTITLE)
++        {
++            bool fallback = width > xright - xleft;
++            for (size_t position = 0; !fallback && position < widx;
++                 position = utf8_next(buffer, position, widx))
++            {
++                font::glyph_info glyph;
++                fallback = !font->glyph(utf8_codepoint(buffer, position, widx),
++                                        glyph);
++            }
++            if (fallback)
++            {
++                font = pico_ui::reference_font();
++                height = font->height();
++                width = font->width(buffer, widx);
++            }
++        }
++#endif
+         if (style <= SUBSUBTITLE)
+         {
+             // Center titles
+@@ -4921,6 +5169,40 @@ restart:
+         // Draw next word
+         for (int i = 0; i < 1 + 3 * italic; i++)
+         {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++            if (fixed_code)
++            {
++                x = xl;
++                for (size_t position = 0; position < widx;)
++                {
++                    size_t next = utf8_next(buffer, position, widx);
++                    unicode cp = utf8_codepoint(buffer, position, widx);
++                    if (cp == 0x200b || cp == 0xfe0f)
++                    {
++                        position = next;
++                        continue;
++                    }
++                    char glyph[5] = {};
++                    if (next - position < sizeof(glyph))
++                        memcpy(glyph, buffer + position, next - position);
++                    else
++                        glyph[0] = '?';
++                    if (x + 8 > xright)
++                    {
++                        x = xleft;
++                        y += height * 5 / 4;
++                    }
++                    if (y + height > ytop)
++                    {
++                        Screen.fill(x, y, x + 7, y + height - 1, bg);
++                        Screen.text(x, y, utf8(glyph), font, color);
++                    }
++                    x += 8;
++                    position = next;
++                }
++            }
++            else
++#endif
+             if (draw)
+             {
+                 x = xl + kwidth;
+@@ -5220,6 +5502,14 @@ bool user_interface::handle_help(int &key)
+                     {
+                         rt.command(command::static_object(object::ID_Help));
+                         load_help(htopic);
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++                        // The native reader returns after Back. Consume the
++                        // original held key so its release cannot run it.
++                        key = last = 0;
++                        repeat = false;
++                        command = nullptr;
++                        dirty_all();
++#endif
+                         if (rt.error())
+                         {
+                             key  = 0; // Do not execute a function if no help
+diff --git a/src/user_interface.h b/src/user_interface.h
+index 34e7a7d728c901ca62d1a780658ca84b59dff640..183b8c595adfac147c11bb81d88d563c14d9cff6 100644
+--- a/src/user_interface.h
++++ b/src/user_interface.h
+@@ -100,6 +100,10 @@ struct user_interface
+     void        menu(menu_p menu, uint page = 0);
+     menu_p      menu();
+     void        menu_pop();
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    void        menu_root();
++    void        menu_back();
++#endif
+     uint        page();
+     void        page(uint p);
+     uint        pages();
+diff --git a/src/scoped_array.h b/src/scoped_array.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..fbd86550cd8a979072483f3f60b3ed5c4332e62a
+--- /dev/null
++++ b/src/scoped_array.h
+@@ -0,0 +1,35 @@
++#ifndef DB48X_SCOPED_ARRAY_H
++#define DB48X_SCOPED_ARRAY_H
++// Fallible scratch storage outside the C stack. Construct GC roots in order
++// and destroy them in reverse order, just like an automatic array.
++#include <cstdlib>
++#include <new>
++#include <stdint.h>
++template<class T> class scoped_array
++{
++    T *data=nullptr;
++    size_t count=0;
++public:
++    explicit scoped_array(size_t n):count(n)
++    {
++        if(n && n<=SIZE_MAX/sizeof(T))
++            data=static_cast<T *>(std::malloc(n*sizeof(T)));
++        if(data)
++            for(size_t i=0;i<n;++i) ::new(static_cast<void *>(data+i)) T();
++    }
++    ~scoped_array()
++    {
++        if(data)
++        {
++            for(size_t i=count;i;--i) data[i-1].~T();
++            std::free(data);
++        }
++    }
++    scoped_array(const scoped_array &)=delete;
++    scoped_array &operator=(const scoped_array &)=delete;
++    bool operator!() const {return count&&!data;}
++    T *get() {return data;}
++    const T *get() const {return data;}
++    T &operator[](size_t i) {return data[i];}
++};
++#endif

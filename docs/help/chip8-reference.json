@@ -1,0 +1,462 @@
+[
+  {
+    "name": "Start with CHIP-8",
+    "category": "Start here",
+    "text": "Start by drawing a digit. This complete program shows 5 and waits for a keypad key before returning.",
+    "source": "CLS\nLD V0, 5\nLD F, V0\nLD V1, 10\nLD V2, 8\nDRW V1, V2, 5\nLD V3, K\nEXIT",
+    "expected": "You should see 5 near the upper-left of the CHIP-8 display. Press and release X to return.",
+    "example_kind": "program",
+    "steps": [
+      "Press Ctrl+P > CHIP-8 / assembly. Press F3 New and name it FIRST.",
+      "Type the program below, one instruction per line. Press F1 Save, then F5 Back.",
+      "With FIRST.asm selected, choose F4 Actions > Compatibility profile > SUPER-CHIP modern.",
+      "Press F2 Run. This profile supports the EXIT instruction at the end."
+    ],
+    "title": "Run your first CHIP-8 program"
+  },
+  {
+    "name": "CHIP-8 examples",
+    "title": "How to use these examples",
+    "category": "Start here",
+    "text": "Begin with Run your first CHIP-8 program. Its picture and key wait make the result visible. Instruction reference pages show smaller fragments so you can see one operation at a time.",
+    "source": "LD V0, 7\nADD V0, 2",
+    "expected": "In this fragment V0 becomes 9. It does not display a number and is not a complete ROM. Add fragments to a complete program before running them.",
+    "example_kind": "snippet",
+    "steps": []
+  },
+  {
+    "name": "Save CHIP-8 source",
+    "title": "Save and reopen your assembly",
+    "category": "Start here",
+    "text": "Keep the .asm file: it is the text you can edit. Running assembles a separate .ch8 ROM. Opening a .ch8 file does not turn it back into editable assembly.",
+    "source": "CLS\nLD V0, 5\nLD F, V0\nLD V1, 10\nLD V2, 8\nDRW V1, V2, 5\nLD V3, K\nEXIT",
+    "expected": "After reopening, the same source is there. Running it in SUPER-CHIP modern displays 5 and waits for a keypad key.",
+    "example_kind": "program",
+    "steps": [
+      "Create an assembly file named SAVETEST and enter the program.",
+      "Press F1 Save, then F5 Back.",
+      "Select SAVETEST.asm and press F1 Open. F2 saves and builds/runs it."
+    ]
+  },
+  {
+    "name": "Registers and numbers",
+    "category": "Write assembly",
+    "text": "Use V0 through VF to keep small numbers. Each holds 0 to 255; arithmetic wraps around when it goes past that range. VF also carries arithmetic and drawing flags. I holds a memory address.",
+    "source": "LD V0, 0x0A\nADD V0, 2",
+    "expected": "V0 becomes 12.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "Store and change a number",
+    "after": "This instruction fragment changes registers; it does not print their values. Use Run your first CHIP-8 program for a complete visible example."
+  },
+  {
+    "name": "Labels and comments",
+    "category": "Write assembly",
+    "text": "Give a jump target a label ending in a colon. Keep its spelling the same wherever you use it. Add a semicolon comment to explain a line. Instructions ignore case; labels do not.",
+    "source": "JP start\nstart:\nLD V0, 7 ; seven",
+    "expected": "Jumps to start and sets V0 to 7.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "Name a place in your program"
+  },
+  {
+    "name": "Draw a digit",
+    "category": "Draw sprites",
+    "text": "Point I at the built-in font with LD F,V0. The next DRW reads five rows of that glyph. Change the first number below to choose another hexadecimal digit, from 0 to 15.",
+    "source": "CLS\nLD V0, 9\nLD F, V0\nLD V1, 10\nLD V2, 8\nDRW V1, V2, 5\nLD V3, K\nEXIT",
+    "expected": "This complete SUPER-CHIP program displays 9. Press and release a keypad key to return.",
+    "example_kind": "program",
+    "steps": [
+      "Create or open an .asm file and select SUPER-CHIP modern.",
+      "Type the example and press F2 Save & run."
+    ],
+    "title": "Choose the digit to draw"
+  },
+  {
+    "name": "Fonts and BCD",
+    "category": "Draw sprites",
+    "text": "LD F,Vx chooses the small font glyph for a hexadecimal digit. For a decimal number with several digits, LD B,Vx writes its hundreds, tens and ones to three memory bytes. The fragment below splits 123 into 1, 2 and 3.",
+    "source": "LD V0, 123\nLD I, 0x300\nLD B, V0",
+    "expected": "Memory 0x300..0x302 contains 1, 2, 3.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "Work with fonts and digits"
+  },
+  {
+    "name": "Keypad",
+    "category": "Keys and timers",
+    "text": "CHIP-8 expects sixteen hexadecimal keys. These PicoCalc keys provide them:\n\n1 2 3 4   =   1 2 3 C\nQ W E R   =   4 5 6 D\nA S D F   =   7 8 9 E\nZ X C V   =   A 0 B F\n\nLD Vx,K waits for a press and release. Esc stops a running program.",
+    "source": "LD V0, K",
+    "expected": "Press and release X: V0 receives the CHIP-8 key value 0. This fragment does not draw the value.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "Use the PicoCalc keypad"
+  },
+  {
+    "name": "Delay and sound timers",
+    "category": "Keys and timers",
+    "text": "Put a duration into ST to play a tone. The sound and delay timers count down at 60 ticks per second, so 30 ticks is about half a second. This complete program waits for the delay, then exits.",
+    "source": "LD V0, 30\nLD DT, V0\nLD ST, V0\nwait:\nLD V1, DT\nSE V1, 0\nJP wait\nEXIT",
+    "expected": "In SCHIP, plays for roughly half a second, waits for the delay and exits.",
+    "example_kind": "program",
+    "steps": [
+      "Use SUPER-CHIP modern for this program.",
+      "Save the source and run it with F2."
+    ],
+    "title": "Make a short sound"
+  },
+  {
+    "name": "Assembly error",
+    "title": "Fix an assembly error",
+    "category": "Solve a problem",
+    "text": "Read the line number in the assembler message and check that line. For example, LD V0,256 is out of range: a byte must be 0 to 255. Correct it to the example below, then save and build again.",
+    "source": "LD V0, 7\nEXIT",
+    "expected": "In SUPER-CHIP modern the corrected program builds and returns. It changes V0 without drawing anything.",
+    "example_kind": "program",
+    "steps": [
+      "Return to the editor and use F4 Tools > Go to line if needed.",
+      "Fix the instruction, then press F2 Save & run."
+    ]
+  },
+  {
+    "name": "Blank CHIP-8 screen",
+    "title": "A program shows a blank screen",
+    "category": "Solve a problem",
+    "text": "Loading registers does not draw them. A visible picture needs I to point at sprite data and DRW to draw it. Check the selected profile as well. Try this complete program first.",
+    "source": "CLS\nLD V0, 5\nLD F, V0\nLD V1, 10\nLD V2, 8\nDRW V1, V2, 5\nLD V3, K\nEXIT",
+    "expected": "You should see 5. If it appears, compare your own font/sprite address and draw instruction with this example. Press and release X to return.",
+    "example_kind": "program",
+    "steps": []
+  },
+  {
+    "name": "Profiles and compatibility",
+    "category": "Solve a problem",
+    "text": "If a ROM draws or responds differently than expected, check its profile. From the assembly/ROM list, choose F4 Actions > Compatibility profile. Match the ROM first; changing its code should come later.",
+    "source": "LD V0, 8\nLD V1, 2\nSHR V0, V1",
+    "expected": "VIP shifts V1 into V0, giving 1. SCHIP shifts V0, giving 4. VF receives the bit shifted out.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "A ROM behaves differently",
+    "after": "CHIP-8 (VIP), CHIP-48 (HP48), SUPER-CHIP modern and SUPER-CHIP HP48 differ in shifts, memory transfers and drawing. Use SUPER-CHIP modern for the complete programs in this guide. Their EXIT instruction is not part of classic CHIP-8."
+  },
+  {
+    "name": "CLS",
+    "category": "Instruction reference",
+    "text": "Clear the display. Call it before drawing a new picture.",
+    "source": "CLS",
+    "expected": "The display is blank.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "CLS"
+  },
+  {
+    "name": "RET",
+    "category": "Instruction reference",
+    "text": "Return to the instruction after the matching CALL. A RET without a call causes a return-stack error.",
+    "source": "CALL twice\nJP done\ntwice:\nADD V0, V0\nRET\ndone:\nJP done",
+    "expected": "Calls a subroutine, doubles V0 and returns. The final jump keeps it from falling into subroutine data.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "RET"
+  },
+  {
+    "name": "JP",
+    "category": "Instruction reference",
+    "text": "Jump to an address or label. A jump back to the same loop repeats until Esc stops the program.",
+    "source": "loop:\nLD V0, 5\nJP loop",
+    "expected": "Repeatedly sets V0 to 5. Esc stops the program.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "JP"
+  },
+  {
+    "name": "CALL",
+    "category": "Instruction reference",
+    "text": "Run a subroutine at a label, then use RET to come back. Calls can nest up to sixteen levels.",
+    "source": "LD V0, 3\nCALL twice\nJP done\ntwice:\nADD V0, V0\nRET\ndone:\nJP done",
+    "expected": "V0 becomes 6, then waits in the done loop.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "CALL"
+  },
+  {
+    "name": "JPOFF",
+    "category": "Instruction reference",
+    "text": "Jump to the given address plus V0. Profile differences matter when you are adapting a ROM.",
+    "source": "LD V0, 2\nJPOFF 0x204\nLD V1, 1\nLD V1, 9",
+    "expected": "Jumps to 0x206, skipping the instruction that sets V1 to 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "JPOFF"
+  },
+  {
+    "name": "LD",
+    "category": "Instruction reference",
+    "text": "Copy a value into a register, or move a value to or from a special register. V0 through VF hold bytes; I holds an address.",
+    "source": "LD V0, 12\nLD V1, V0",
+    "expected": "Both V0 and V1 contain 12.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "LD"
+  },
+  {
+    "name": "ADD",
+    "category": "Instruction reference",
+    "text": "Add a byte or another register. ADD Vx,byte wraps without changing VF; ADD Vx,Vy sets VF when there is a carry. ADD I,Vx changes the address in I.",
+    "source": "LD V0, 250\nLD V1, 10\nADD V0, V1",
+    "expected": "V0 becomes 4 and VF becomes 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "ADD"
+  },
+  {
+    "name": "SUB",
+    "category": "Instruction reference",
+    "text": "Subtract Vy from Vx. A result below zero wraps around; VF is 1 when no borrow was needed.",
+    "source": "LD V0, 9\nLD V1, 4\nSUB V0, V1",
+    "expected": "V0 becomes 5 and VF becomes 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SUB"
+  },
+  {
+    "name": "SUBN",
+    "category": "Instruction reference",
+    "text": "Subtract Vx from Vy and leave the answer in Vx. VF is 1 when no borrow was needed.",
+    "source": "LD V0, 3\nLD V1, 8\nSUBN V0, V1",
+    "expected": "V0 becomes 5 and VF becomes 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SUBN"
+  },
+  {
+    "name": "OR",
+    "category": "Instruction reference",
+    "text": "Set a bit when it is set in either register. The answer replaces Vx.",
+    "source": "LD V0, 0x0A\nLD V1, 0x05\nOR V0, V1",
+    "expected": "V0 becomes 15.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "OR"
+  },
+  {
+    "name": "AND",
+    "category": "Instruction reference",
+    "text": "Keep only the bits set in both registers. The answer replaces Vx.",
+    "source": "LD V0, 0x0F\nLD V1, 0x03\nAND V0, V1",
+    "expected": "V0 becomes 3.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "AND"
+  },
+  {
+    "name": "XOR",
+    "category": "Instruction reference",
+    "text": "Toggle the bits in Vx that are set in Vy. The answer replaces Vx.",
+    "source": "LD V0, 0x0F\nLD V1, 0x03\nXOR V0, V1",
+    "expected": "V0 becomes 12.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "XOR"
+  },
+  {
+    "name": "SHR",
+    "category": "Instruction reference",
+    "text": "Shift right one bit and put the bit shifted out into VF. With one register operand, that register is both the source and destination. The two-register form depends on the profile.",
+    "source": "LD V0, 9\nSHR V0",
+    "expected": "V0 becomes 4 and VF becomes 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SHR"
+  },
+  {
+    "name": "SHL",
+    "category": "Instruction reference",
+    "text": "Shift left one bit and put the high bit into VF. The two-register form depends on the profile: VIP reads Vy; the other profiles read Vx.",
+    "source": "LD V0, 0x81\nSHL V0",
+    "expected": "V0 becomes 2 and VF becomes 1.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SHL"
+  },
+  {
+    "name": "SE",
+    "category": "Instruction reference",
+    "text": "Skip the next instruction when Vx equals the supplied byte or register. Otherwise continue normally.",
+    "source": "LD V0, 5\nSE V0, 5\nLD V1, 1\nLD V2, 9",
+    "expected": "Skips LD V1,1; V2 becomes 9.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SE"
+  },
+  {
+    "name": "SNE",
+    "category": "Instruction reference",
+    "text": "Skip the next instruction when Vx differs from the supplied byte or register. Otherwise continue normally.",
+    "source": "LD V0, 5\nSNE V0, 6\nLD V1, 1\nLD V2, 9",
+    "expected": "Skips LD V1,1; V2 becomes 9.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SNE"
+  },
+  {
+    "name": "RND",
+    "category": "Instruction reference",
+    "text": "Generate a random byte, then keep only the bits allowed by the mask. A mask of 0x0F gives a value from 0 to 15.",
+    "source": "RND V0, 0x0F",
+    "expected": "V0 is between 0 and 15.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "RND"
+  },
+  {
+    "name": "DRW",
+    "category": "Instruction reference",
+    "text": "Draw sprite bytes from memory at I, using Vx and Vy as the position. Drawing uses XOR: set pixels toggle. VF reports a collision. Height 1 to 15 draws that many eight-pixel rows; Super-CHIP height 0 uses a 16x16 sprite. DRAW is another spelling.",
+    "source": "CLS\nLD V0, 10\nLD V1, 8\nLD I, dot\nDRW V0, V1, 1\nJP done\ndot:\nDB 0x80, 0\ndone:\nJP done",
+    "expected": "Draws one pixel at logical (10,8). SCHIP low-resolution mode scales logical pixels on its 128x64 backing display.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "DRW"
+  },
+  {
+    "name": "SKP",
+    "category": "Instruction reference",
+    "text": "Skip the next instruction if the hexadecimal key named by Vx is held. See Use the PicoCalc keypad for the physical keys.",
+    "source": "LD V0, 1\nSKP V0\nJP 0x202",
+    "expected": "Waits here while key 1 is not held; pressing 1 skips the jump.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SKP"
+  },
+  {
+    "name": "SKNP",
+    "category": "Instruction reference",
+    "text": "Skip the next instruction if the hexadecimal key named by Vx is not held.",
+    "source": "LD V0, 1\nSKNP V0\nJP 0x202",
+    "expected": "Skips the jump when key 1 is released.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SKNP"
+  },
+  {
+    "name": "SAVE",
+    "category": "Instruction reference",
+    "text": "Store V0 through Vx in memory starting at I. This is CHIP-8 memory, not an SD save. Reset I explicitly before a later load if you want code to work across profiles.",
+    "source": "LD I, 0x300\nLD V0, 7\nLD V1, 9\nSAVE V1",
+    "expected": "Memory 0x300 contains 7 and 0x301 contains 9.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SAVE"
+  },
+  {
+    "name": "LOAD",
+    "category": "Instruction reference",
+    "text": "Read V0 through Vx from memory starting at I. LD Vx,[I] is another spelling. Reset I between a SAVE and LOAD for portable code.",
+    "source": "LD I, 0x300\nLD V0, 7\nSAVE V0\nLD I, 0x300\nLD V0, 0\nLOAD V0",
+    "expected": "V0 returns to 7.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "LOAD"
+  },
+  {
+    "name": "DB",
+    "category": "Instruction reference",
+    "text": "Put bytes into the program, usually for a sprite. Jump over the data so the machine does not try to execute it. Pad an odd byte count before the next instruction.",
+    "source": "JP start\nimage:\nDB 0xF0, 0x90, 0xF0, 0\nstart:\nLD I, image",
+    "expected": "Defines three image rows and one padding byte; I points to them.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "DB"
+  },
+  {
+    "name": "DW",
+    "category": "Instruction reference",
+    "text": "Put a 16-bit word into the program, high byte first. Prefer instruction names when writing code; words are useful when you need exact bytes.",
+    "source": "DW 0x6007",
+    "expected": "Emits bytes 0x60,0x07: the opcode for LD V0,7.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "DW"
+  },
+  {
+    "name": "EXIT",
+    "category": "Instruction reference",
+    "text": "Stop the program and return to the calculator. Choose a Super-CHIP profile; classic CHIP-8 does not have this instruction.",
+    "source": "LD V0, 7\nEXIT",
+    "expected": "Returns after setting V0 to 7.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "EXIT"
+  },
+  {
+    "name": "HIGH",
+    "category": "Instruction reference",
+    "text": "Choose the Super-CHIP 128x64 display and clear it. Use a Super-CHIP profile.",
+    "source": "HIGH\nCLS",
+    "expected": "Selects the higher-resolution display.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "HIGH"
+  },
+  {
+    "name": "LOW",
+    "category": "Instruction reference",
+    "text": "Choose the classic 64x32 logical display and clear it. This mode-switch instruction needs a Super-CHIP profile.",
+    "source": "LOW\nCLS",
+    "expected": "Selects the classic logical display.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "LOW"
+  },
+  {
+    "name": "SCR",
+    "category": "Instruction reference",
+    "text": "Scroll the display right. In high resolution it moves four pixels; low-resolution behaviour depends on the Super-CHIP profile.",
+    "source": "HIGH\nSCR",
+    "expected": "Moves existing high-resolution pixels right by four.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SCR"
+  },
+  {
+    "name": "SCL",
+    "category": "Instruction reference",
+    "text": "Scroll the display left. In high resolution it moves four pixels; low-resolution behaviour depends on the Super-CHIP profile.",
+    "source": "HIGH\nSCL",
+    "expected": "Moves existing high-resolution pixels left by four.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SCL"
+  },
+  {
+    "name": "SCD",
+    "category": "Instruction reference",
+    "text": "Scroll down by a number from 0 to 15. Use a Super-CHIP profile. Modern and HP48 profiles scale low-resolution scrolling differently.",
+    "source": "HIGH\nSCD 2",
+    "expected": "Moves high-resolution pixels down two rows.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "SCD"
+  },
+  {
+    "name": "FLAGSAVE",
+    "category": "Instruction reference",
+    "text": "Keep V0 through Vx in the temporary Super-CHIP flag registers. Choose V0 through V7. These are not saved SD files.",
+    "source": "LD V0, 42\nFLAGSAVE V0\nLD V0, 0\nFLAGLOAD V0",
+    "expected": "V0 returns to 42.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "FLAGSAVE"
+  },
+  {
+    "name": "FLAGLOAD",
+    "category": "Instruction reference",
+    "text": "Restore V0 through Vx from the temporary Super-CHIP flags. Choose V0 through V7.",
+    "source": "LD V0, 42\nFLAGSAVE V0\nLD V0, 0\nFLAGLOAD V0",
+    "expected": "V0 returns to 42.",
+    "example_kind": "snippet",
+    "steps": [],
+    "title": "FLAGLOAD"
+  }
+]

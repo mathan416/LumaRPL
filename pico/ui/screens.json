@@ -1,0 +1,2602 @@
+[
+  {
+    "id": "desktop.formula_preview.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Formula preview",
+    "source": "pico/desktop.cc",
+    "entrypoint": "formula_preview"
+  },
+  {
+    "id": "desktop.formula_entry.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "formula entry",
+    "source": "pico/desktop.cc",
+    "entrypoint": "formula_entry"
+  },
+  {
+    "id": "desktop.formula_entry.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Insert function",
+    "source": "pico/desktop.cc",
+    "entrypoint": "formula_entry"
+  },
+  {
+    "id": "desktop.formula_entry.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Templates / calculus",
+    "source": "pico/desktop.cc",
+    "entrypoint": "formula_entry"
+  },
+  {
+    "id": "desktop.assemble_file.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Assembler error",
+    "source": "pico/desktop.cc",
+    "entrypoint": "assemble_file"
+  },
+  {
+    "id": "desktop.edit_file.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Editor tools",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "desktop.edit_file.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Replace",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "desktop.edit_file.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Editor shortcuts",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "desktop.pico_load_startup_session.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Programs: /db48x/data",
+    "source": "pico/desktop.cc",
+    "entrypoint": "file_browser"
+  },
+  {
+    "id": "desktop.home_browser.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "HOME programs",
+    "source": "pico/desktop.cc",
+    "entrypoint": "home_browser"
+  },
+  {
+    "id": "desktop.home_browser.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "HOME program",
+    "source": "pico/desktop.cc",
+    "entrypoint": "home_browser"
+  },
+  {
+    "id": "desktop.variable_browser.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "HOME variables",
+    "source": "pico/desktop.cc",
+    "entrypoint": "variable_browser"
+  },
+  {
+    "id": "desktop.variable_browser.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Variable value",
+    "source": "pico/desktop.cc",
+    "entrypoint": "variable_browser"
+  },
+  {
+    "id": "desktop.debug_program.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "RPL debugger",
+    "source": "pico/desktop.cc",
+    "entrypoint": "debug_program"
+  },
+  {
+    "id": "desktop.chip_display.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "chip display",
+    "source": "pico/desktop.cc",
+    "entrypoint": "chip_display"
+  },
+  {
+    "id": "desktop.run_chip_file.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "CHIP-8 stopped",
+    "source": "pico/desktop.cc",
+    "entrypoint": "run_chip_file"
+  },
+  {
+    "id": "desktop.lua_console.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Lua console help",
+    "source": "pico/desktop.cc",
+    "entrypoint": "lua_console"
+  },
+  {
+    "id": "desktop.show_lua_file.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Lua running",
+    "source": "pico/desktop.cc",
+    "entrypoint": "show_lua_file"
+  },
+  {
+    "id": "desktop.development_files.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "development files",
+    "source": "pico/desktop.cc",
+    "entrypoint": "development_files"
+  },
+  {
+    "id": "desktop.development_files.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Compatibility profile",
+    "source": "pico/desktop.cc",
+    "entrypoint": "development_files"
+  },
+  {
+    "id": "desktop.sprite_editor.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Colour / CHIP-8 sprite editor",
+    "source": "pico/sprite_ui.inc",
+    "entrypoint": "sprite_editor"
+  },
+  {
+    "id": "desktop.pico_program_browser.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Programming",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_program_browser"
+  },
+  {
+    "id": "desktop.sampling_poll.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "3D surface",
+    "source": "pico/desktop.cc",
+    "entrypoint": "sampling_poll"
+  },
+  {
+    "id": "desktop.analysis_number.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Analyse selected curve",
+    "source": "pico/desktop.cc",
+    "entrypoint": "analyse_curve"
+  },
+  {
+    "id": "desktop.analysis_number.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "analysis number",
+    "source": "pico/desktop.cc",
+    "entrypoint": "analyse_curve"
+  },
+  {
+    "id": "desktop.analysis_number.choose3",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Analysis bounds",
+    "source": "pico/desktop.cc",
+    "entrypoint": "analyse_curve"
+  },
+  {
+    "id": "desktop.analysis_number.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Analysing curve",
+    "source": "pico/desktop.cc",
+    "entrypoint": "analyse_curve"
+  },
+  {
+    "id": "desktop.analysis_number.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Analysis result",
+    "source": "pico/desktop.cc",
+    "entrypoint": "analyse_curve"
+  },
+  {
+    "id": "desktop.plot_curves.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Sampling curves",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.page2",
+    "family": "desktop",
+    "kind": "page",
+    "title": "plot curves",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "ODE solution",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Graph actions",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "ODE controls",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.choose3",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Explore path",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.plot_curves.choose4",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Explore graph",
+    "source": "pico/desktop.cc",
+    "entrypoint": "plot_curves"
+  },
+  {
+    "id": "desktop.multi_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "2D functions",
+    "source": "pico/desktop.cc",
+    "entrypoint": "multi_menu"
+  },
+  {
+    "id": "desktop.scene_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Graph scenes",
+    "source": "pico/desktop.cc",
+    "entrypoint": "scene_menu"
+  },
+  {
+    "id": "desktop.scene_menu.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Load graph scene",
+    "source": "pico/desktop.cc",
+    "entrypoint": "scene_menu"
+  },
+  {
+    "id": "desktop.draw_surface.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "3D wireframe: Z=f(X,Y)",
+    "source": "pico/desktop.cc",
+    "entrypoint": "draw_surface"
+  },
+  {
+    "id": "desktop.surface_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "3D surfaces",
+    "source": "pico/desktop.cc",
+    "entrypoint": "surface_menu"
+  },
+  {
+    "id": "desktop.use_calculus_result.value_result1",
+    "family": "desktop",
+    "kind": "result",
+    "title": "use calculus result",
+    "source": "pico/desktop.cc",
+    "entrypoint": "use_calculus_result"
+  },
+  {
+    "id": "desktop.calculus_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Calculus in X",
+    "source": "pico/desktop.cc",
+    "entrypoint": "calculus_menu"
+  },
+  {
+    "id": "desktop.calculus_menu.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Calculating",
+    "source": "pico/desktop.cc",
+    "entrypoint": "calculus_menu"
+  },
+  {
+    "id": "desktop.calculus_menu.value_result1",
+    "family": "desktop",
+    "kind": "result",
+    "title": "calculus menu",
+    "source": "pico/desktop.cc",
+    "entrypoint": "calculus_menu"
+  },
+  {
+    "id": "desktop.pico_graph_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Graphs",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_graph_menu"
+  },
+  {
+    "id": "desktop.battery_status.page1",
+    "family": "desktop",
+    "kind": "page",
+    "title": "Battery status",
+    "source": "pico/desktop.cc",
+    "entrypoint": "battery_status"
+  },
+  {
+    "id": "desktop.memory_status.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Memory / PSRAM",
+    "source": "pico/desktop.cc",
+    "entrypoint": "memory_status"
+  },
+  {
+    "id": "desktop.about_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "About / credits",
+    "source": "pico/desktop.cc",
+    "entrypoint": "about_menu"
+  },
+  {
+    "id": "desktop.about_menu.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "About calculator",
+    "source": "pico/desktop.cc",
+    "entrypoint": "about_menu"
+  },
+  {
+    "id": "desktop.about_menu.view_text2",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Credits",
+    "source": "pico/desktop.cc",
+    "entrypoint": "about_menu"
+  },
+  {
+    "id": "desktop.native_settings.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Settings",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_settings"
+  },
+  {
+    "id": "desktop.native_settings.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Display",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_settings"
+  },
+  {
+    "id": "desktop.native_settings.choose3",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Calculation",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_settings"
+  },
+  {
+    "id": "desktop.native_settings.choose4",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Angle mode",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_settings"
+  },
+  {
+    "id": "desktop.native_settings.choose5",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Device status",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_settings"
+  },
+  {
+    "id": "desktop.native_help.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Help & about",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_help"
+  },
+  {
+    "id": "desktop.native_help.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Keyboard shortcuts",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_help"
+  },
+  {
+    "id": "desktop.native_help.view_text2",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Credits / licenses",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_help"
+  },
+  {
+    "id": "desktop.native_files.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Files & session",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_files"
+  },
+  {
+    "id": "desktop.native_files.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Graph documents",
+    "source": "pico/desktop.cc",
+    "entrypoint": "native_files"
+  },
+  {
+    "id": "desktop.pico_setup_menu.choose1",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "LumaRPL Home",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_setup_menu"
+  },
+  {
+    "id": "desktop.pico_setup_menu.choose2",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Math & graphs",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_setup_menu"
+  },
+  {
+    "id": "desktop.pico_setup_menu.choose3",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "Data & notebooks",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_setup_menu"
+  },
+  {
+    "id": "desktop.pico_prepare_exit.view_text1",
+    "family": "desktop",
+    "kind": "reader",
+    "title": "Return to loader",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_prepare_exit"
+  },
+  {
+    "id": "form_ui.form_field_edit.choose1",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "form field edit",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "form_field_edit"
+  },
+  {
+    "id": "form_ui.form_fields.choose1",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "Form inputs (maximum six)",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "form_fields"
+  },
+  {
+    "id": "form_ui.form_graph.choose1",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "Choose input for horizontal axis",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "form_graph"
+  },
+  {
+    "id": "form_ui.form_files.choose1",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "Form files",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "form_files"
+  },
+  {
+    "id": "form_ui.pico_forms_menu.choose1",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "pico forms menu",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "pico_forms_menu"
+  },
+  {
+    "id": "form_ui.pico_forms_menu.page1",
+    "family": "form_ui",
+    "kind": "page",
+    "title": "Calculating form",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "pico_forms_menu"
+  },
+  {
+    "id": "form_ui.pico_forms_menu.choose2",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "Form examples",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "pico_forms_menu"
+  },
+  {
+    "id": "form_ui.pico_forms_menu.view_text1",
+    "family": "form_ui",
+    "kind": "reader",
+    "title": "Formula form help",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "pico_forms_menu"
+  },
+  {
+    "id": "workbench_ui.workbench_use.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Use verified result",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_use"
+  },
+  {
+    "id": "workbench_ui.workbench_use.choose2",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Choose variable",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_use"
+  },
+  {
+    "id": "workbench_ui.workbench_numerical.page1",
+    "family": "workbench_ui",
+    "kind": "page",
+    "title": "Solving equations",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_numerical"
+  },
+  {
+    "id": "workbench_ui.workbench_numerical.view_text1",
+    "family": "workbench_ui",
+    "kind": "reader",
+    "title": "Solver result",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_numerical"
+  },
+  {
+    "id": "workbench_ui.workbench_interval.page1",
+    "family": "workbench_ui",
+    "kind": "page",
+    "title": "Searching interval",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_interval"
+  },
+  {
+    "id": "workbench_ui.workbench_interval.view_text1",
+    "family": "workbench_ui",
+    "kind": "reader",
+    "title": "Interval results",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_interval"
+  },
+  {
+    "id": "workbench_ui.workbench_symbolic.value_result1",
+    "family": "workbench_ui",
+    "kind": "result",
+    "title": "workbench symbolic",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_symbolic"
+  },
+  {
+    "id": "workbench_ui.workbench_single.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Single equation",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_single"
+  },
+  {
+    "id": "workbench_ui.workbench_system.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "System: X,Y or X,Y,Z",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_system"
+  },
+  {
+    "id": "workbench_ui.workbench_system.choose2",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "System size",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_system"
+  },
+  {
+    "id": "workbench_ui.workbench_parameters.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Parameter plot",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_parameters"
+  },
+  {
+    "id": "workbench_ui.workbench_parameters.choose2",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Store parameter",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_parameters"
+  },
+  {
+    "id": "workbench_ui.workbench_saved.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "Saved workbenches",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_saved"
+  },
+  {
+    "id": "workbench_ui.workbench_saved.page1",
+    "family": "workbench_ui",
+    "kind": "page",
+    "title": "Load workbench",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_saved"
+  },
+  {
+    "id": "workbench_ui.workbench_saved.view_text1",
+    "family": "workbench_ui",
+    "kind": "reader",
+    "title": "Workbench load diagnostics",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_saved"
+  },
+  {
+    "id": "workbench_ui.pico_workbench_menu.choose1",
+    "family": "workbench_ui",
+    "kind": "menu",
+    "title": "pico workbench menu",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "pico_workbench_menu"
+  },
+  {
+    "id": "workbench_ui.pico_workbench_menu.view_text1",
+    "family": "workbench_ui",
+    "kind": "reader",
+    "title": "Workbench help",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "pico_workbench_menu"
+  },
+  {
+    "id": "path_ui.path_files.choose1",
+    "family": "path_ui",
+    "kind": "menu",
+    "title": "Parametric / polar files",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "path_files"
+  },
+  {
+    "id": "path_ui.pico_path_menu.choose1",
+    "family": "path_ui",
+    "kind": "menu",
+    "title": "Parametric / polar",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "pico_path_menu"
+  },
+  {
+    "id": "path_ui.pico_path_menu.choose2",
+    "family": "path_ui",
+    "kind": "menu",
+    "title": "Path mode",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "pico_path_menu"
+  },
+  {
+    "id": "path_ui.pico_path_menu.choose3",
+    "family": "path_ui",
+    "kind": "menu",
+    "title": "Path examples",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "pico_path_menu"
+  },
+  {
+    "id": "path_ui.pico_path_menu.view_text1",
+    "family": "path_ui",
+    "kind": "reader",
+    "title": "Parametric / polar help",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "pico_path_menu"
+  },
+  {
+    "id": "conversion_ui.conversion_pick_unit.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Unit category",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "conversion_pick_unit"
+  },
+  {
+    "id": "conversion_ui.conversion_pick_unit.choose2",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "conversion pick unit",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "conversion_pick_unit"
+  },
+  {
+    "id": "conversion_ui.conversion_result.value_result1",
+    "family": "conversion_ui",
+    "kind": "result",
+    "title": "conversion result",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "conversion_result"
+  },
+  {
+    "id": "conversion_ui.unit_conversion_menu.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Unit conversion",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "unit_conversion_menu"
+  },
+  {
+    "id": "conversion_ui.unit_conversion_menu.view_text1",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Unit conversion help",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "unit_conversion_menu"
+  },
+  {
+    "id": "conversion_ui.currency_pick.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "currency pick",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_pick"
+  },
+  {
+    "id": "conversion_ui.wifi_status.page1",
+    "family": "conversion_ui",
+    "kind": "page",
+    "title": "Radio / connection status",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "wifi_status"
+  },
+  {
+    "id": "conversion_ui.timezone_menu.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Clock timezone",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "timezone_menu"
+  },
+  {
+    "id": "conversion_ui.currency_options.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Exchange-rate update options",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_options"
+  },
+  {
+    "id": "conversion_ui.currency_options.choose2",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Clock source",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_options"
+  },
+  {
+    "id": "conversion_ui.currency_options.choose3",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Rate observation date",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_options"
+  },
+  {
+    "id": "conversion_ui.currency_options.view_text1",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Time and rate-date help",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_options"
+  },
+  {
+    "id": "conversion_ui.wifi_setup.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Wi-Fi setup",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "wifi_setup"
+  },
+  {
+    "id": "conversion_ui.wifi_setup.view_text1",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Wi-Fi help",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "wifi_setup"
+  },
+  {
+    "id": "conversion_ui.network_progress.page1",
+    "family": "conversion_ui",
+    "kind": "page",
+    "title": "Currency HTTPS update",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "network_progress"
+  },
+  {
+    "id": "conversion_ui.currency_refresh.view_text1",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "currency refresh",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_refresh"
+  },
+  {
+    "id": "conversion_ui.currency_menu.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Currency (cached rates)",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_menu"
+  },
+  {
+    "id": "conversion_ui.currency_menu.view_text1",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Cached currency rates",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_menu"
+  },
+  {
+    "id": "conversion_ui.pico_conversions_menu.choose1",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Conversions",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "pico_conversions_menu"
+  },
+  {
+    "id": "ode_ui.ode_files.choose1",
+    "family": "ode_ui",
+    "kind": "menu",
+    "title": "Differential equation files",
+    "source": "pico/ode_ui.inc",
+    "entrypoint": "ode_files"
+  },
+  {
+    "id": "ode_ui.pico_ode_menu.choose1",
+    "family": "ode_ui",
+    "kind": "menu",
+    "title": "Differential equations",
+    "source": "pico/ode_ui.inc",
+    "entrypoint": "pico_ode_menu"
+  },
+  {
+    "id": "ode_ui.pico_ode_menu.choose2",
+    "family": "ode_ui",
+    "kind": "menu",
+    "title": "ODE examples",
+    "source": "pico/ode_ui.inc",
+    "entrypoint": "pico_ode_menu"
+  },
+  {
+    "id": "ode_ui.pico_ode_menu.view_text1",
+    "family": "ode_ui",
+    "kind": "reader",
+    "title": "Differential equation help",
+    "source": "pico/ode_ui.inc",
+    "entrypoint": "pico_ode_menu"
+  },
+  {
+    "id": "notebook_ui.notebook_run.page1",
+    "family": "notebook_ui",
+    "kind": "page",
+    "title": "Running notebook",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_run"
+  },
+  {
+    "id": "notebook_ui.notebook_run.view_text1",
+    "family": "notebook_ui",
+    "kind": "reader",
+    "title": "notebook run",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_run"
+  },
+  {
+    "id": "notebook_ui.notebook_files.choose1",
+    "family": "notebook_ui",
+    "kind": "menu",
+    "title": "Notebook files",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_files"
+  },
+  {
+    "id": "notebook_ui.notebook_cell.choose1",
+    "family": "notebook_ui",
+    "kind": "menu",
+    "title": "notebook cell",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_cell"
+  },
+  {
+    "id": "notebook_ui.notebook_cell.view_text1",
+    "family": "notebook_ui",
+    "kind": "reader",
+    "title": "notebook cell",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_cell"
+  },
+  {
+    "id": "notebook_ui.notebook_cells.choose1",
+    "family": "notebook_ui",
+    "kind": "menu",
+    "title": "Notebook cells",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "notebook_cells"
+  },
+  {
+    "id": "notebook_ui.pico_notebooks_menu.choose1",
+    "family": "notebook_ui",
+    "kind": "menu",
+    "title": "pico notebooks menu",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "pico_notebooks_menu"
+  },
+  {
+    "id": "notebook_ui.pico_notebooks_menu.view_text1",
+    "family": "notebook_ui",
+    "kind": "reader",
+    "title": "Notebook help",
+    "source": "pico/notebook_ui.inc",
+    "entrypoint": "pico_notebooks_menu"
+  },
+  {
+    "id": "data_ui.data_edit.page1",
+    "family": "data_ui",
+    "kind": "page",
+    "title": "data edit",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_edit"
+  },
+  {
+    "id": "data_ui.data_summary.page1",
+    "family": "data_ui",
+    "kind": "page",
+    "title": "Statistics",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_summary"
+  },
+  {
+    "id": "data_ui.data_summary.view_text1",
+    "family": "data_ui",
+    "kind": "reader",
+    "title": "Data summary",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_summary"
+  },
+  {
+    "id": "data_ui.data_summary.choose1",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Use statistics",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_summary"
+  },
+  {
+    "id": "data_ui.data_summary.choose2",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Statistic column",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_summary"
+  },
+  {
+    "id": "data_ui.data_summary.choose3",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Copy which statistic?",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_summary"
+  },
+  {
+    "id": "data_ui.data_regression.choose1",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Regression model",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_regression"
+  },
+  {
+    "id": "data_ui.data_regression.page1",
+    "family": "data_ui",
+    "kind": "page",
+    "title": "Fitting data",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_regression"
+  },
+  {
+    "id": "data_ui.data_regression.view_text1",
+    "family": "data_ui",
+    "kind": "reader",
+    "title": "Regression",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_regression"
+  },
+  {
+    "id": "data_ui.data_regression.choose2",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Use fitted curve",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_regression"
+  },
+  {
+    "id": "data_ui.data_files.choose1",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Data files",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "data_files"
+  },
+  {
+    "id": "data_ui.pico_data_menu.choose1",
+    "family": "data_ui",
+    "kind": "menu",
+    "title": "Data / statistics",
+    "source": "pico/data_ui.inc",
+    "entrypoint": "pico_data_menu"
+  },
+  {
+    "id": "document_browser.document_file.page1",
+    "family": "document_browser",
+    "kind": "page",
+    "title": "document file",
+    "source": "pico/document_browser.inc",
+    "entrypoint": "document_file"
+  },
+  {
+    "id": "document_browser.document_result.value_result1",
+    "family": "document_browser",
+    "kind": "result",
+    "title": "document result",
+    "source": "pico/document_browser.inc",
+    "entrypoint": "document_result"
+  },
+  {
+    "id": "calculator.stack",
+    "family": "calculator",
+    "kind": "special",
+    "title": "Calculator stack",
+    "source": "db48x/src/stack.cc",
+    "entrypoint": "user_interface::draw_stack"
+  },
+  {
+    "id": "calculator.softmenus",
+    "family": "calculator",
+    "kind": "special",
+    "title": "RPL soft menus",
+    "source": "db48x/src/user_interface.cc",
+    "entrypoint": "user_interface::draw_menus"
+  },
+  {
+    "id": "calculator.entry",
+    "family": "calculator",
+    "kind": "special",
+    "title": "Calculator entry",
+    "source": "db48x/src/user_interface.cc",
+    "entrypoint": "user_interface::draw_editor"
+  },
+  {
+    "id": "calculator.help",
+    "family": "calculator",
+    "kind": "reader",
+    "title": "Command reference",
+    "source": "pico/reference_ui.inc",
+    "entrypoint": "command_reference_topic"
+  },
+  {
+    "id": "legacy.message",
+    "family": "legacy",
+    "kind": "special",
+    "title": "System message",
+    "source": "pico/ui/legacy.inc",
+    "entrypoint": "legacy_message / user_interface::draw_message"
+  },
+  {
+    "id": "legacy.error",
+    "family": "legacy",
+    "kind": "special",
+    "title": "Calculation error",
+    "source": "pico/ui/legacy.inc",
+    "entrypoint": "legacy_message / user_interface::draw_error"
+  },
+  {
+    "id": "editor.source",
+    "family": "editor",
+    "kind": "special",
+    "title": "Source editor",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "editor.unsaved",
+    "family": "editor",
+    "kind": "special",
+    "title": "Unsaved source",
+    "source": "pico/ui/dialogs.inc",
+    "entrypoint": "unsaved_source"
+  },
+  {
+    "id": "dialog.confirm",
+    "family": "dialog",
+    "kind": "special",
+    "title": "Confirm action",
+    "source": "pico/ui/dialogs.inc",
+    "entrypoint": "confirm"
+  },
+  {
+    "id": "dialog.prompt",
+    "family": "dialog",
+    "kind": "special",
+    "title": "Input",
+    "source": "pico/ui/dialogs.inc",
+    "entrypoint": "prompt"
+  },
+  {
+    "id": "lua.output",
+    "family": "lua",
+    "kind": "special",
+    "title": "Lua output",
+    "source": "pico/ui/lua_output.inc",
+    "entrypoint": "lua_output_view"
+  },
+  {
+    "id": "lua.canvas",
+    "family": "lua",
+    "kind": "special",
+    "title": "Lua canvas",
+    "source": "pico/lua_devices.cc",
+    "entrypoint": "pico_lua_draw"
+  },
+  {
+    "id": "dialog.notice",
+    "family": "dialog",
+    "kind": "special",
+    "title": "Notice",
+    "source": "pico/ui/dialogs.inc",
+    "entrypoint": "notice"
+  },
+  {
+    "id": "files.details",
+    "family": "files",
+    "kind": "reader",
+    "title": "File details",
+    "source": "pico/desktop.cc",
+    "entrypoint": "file_browser"
+  },
+  {
+    "id": "files.binary_rpl",
+    "family": "files",
+    "kind": "reader",
+    "title": "Binary RPL program",
+    "source": "pico/desktop.cc",
+    "entrypoint": "file_browser"
+  },
+  {
+    "id": "files.binary_chip8",
+    "family": "files",
+    "kind": "reader",
+    "title": "CHIP-8 ROM",
+    "source": "pico/desktop.cc",
+    "entrypoint": "development_files"
+  },
+  {
+    "id": "desktop.development_files.actions",
+    "family": "desktop",
+    "kind": "menu",
+    "title": "File actions",
+    "source": "pico/desktop.cc",
+    "entrypoint": "development_files"
+  },
+  {
+    "id": "lua.completion",
+    "family": "lua",
+    "kind": "special",
+    "title": "Lua completion",
+    "source": "pico/desktop.cc",
+    "entrypoint": "lua_result_view"
+  },
+  {
+    "id": "conversion_ui.currency_refresh.details",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Connection details",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_refresh"
+  },
+  {
+    "id": "workbench_ui.load_details",
+    "family": "workbench_ui",
+    "kind": "reader",
+    "title": "Workbench load details",
+    "source": "pico/workbench_ui.inc",
+    "entrypoint": "workbench_saved"
+  },
+  {
+    "id": "calculator.graphics",
+    "family": "calculator",
+    "kind": "special",
+    "title": "RPL graphics",
+    "source": "db48x/src/graphics.cc",
+    "entrypoint": "CLLCD / DrawAxes / DRAW"
+  },
+  {
+    "id": "sprite.palette",
+    "title": "Sprite colour",
+    "kind": "page",
+    "family": "sprite",
+    "source": "pico/sprite_ui.inc",
+    "entrypoint": "sprite_palette"
+  },
+  {
+    "id": "sprite.tools",
+    "title": "Sprite tools",
+    "kind": "menu",
+    "family": "sprite",
+    "source": "pico/sprite_ui.inc",
+    "entrypoint": "sprite_editor"
+  },
+  {
+    "id": "sprite.help",
+    "title": "Sprite editor",
+    "kind": "reader",
+    "family": "sprite",
+    "source": "pico/sprite_ui.inc",
+    "entrypoint": "sprite_editor"
+  },
+  {
+    "id": "reference.topics",
+    "family": "reference",
+    "kind": "menu",
+    "title": "PicoCalc calculator reference",
+    "source": "pico/desktop.cc",
+    "entrypoint": "calculator_reference"
+  },
+  {
+    "id": "reference.topic",
+    "family": "reference",
+    "kind": "reader",
+    "title": "PicoCalc reference",
+    "source": "pico/desktop.cc",
+    "entrypoint": "calculator_reference"
+  },
+  {
+    "id": "dialog.details",
+    "family": "dialog",
+    "kind": "reader",
+    "title": "Details",
+    "source": "pico/ui/dialogs.inc",
+    "entrypoint": "menu_details"
+  },
+  {
+    "id": "conversion_ui.currency_tools",
+    "family": "conversion_ui",
+    "kind": "menu",
+    "title": "Manage rates / settings",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "currency_menu"
+  },
+  {
+    "id": "form_ui.examples_help",
+    "family": "form_ui",
+    "kind": "menu",
+    "title": "Form examples / help",
+    "source": "pico/form_ui.inc",
+    "entrypoint": "pico_forms_menu"
+  },
+  {
+    "id": "path_ui.examples_help",
+    "family": "path_ui",
+    "kind": "menu",
+    "title": "Path examples / help",
+    "source": "pico/path_ui.inc",
+    "entrypoint": "pico_path_menu"
+  },
+  {
+    "id": "editor.help_details",
+    "family": "editor",
+    "kind": "menu",
+    "title": "Editor help / details",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "conversion_ui.wifi_status.details",
+    "family": "conversion_ui",
+    "kind": "reader",
+    "title": "Recent network attempts",
+    "source": "pico/conversion_ui.inc",
+    "entrypoint": "wifi_status"
+  },
+  {
+    "id": "math.matrix.grid",
+    "family": "math_tools",
+    "kind": "page",
+    "title": "grid",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.result",
+    "family": "math_tools",
+    "kind": "result",
+    "title": "result",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.menu",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "menu",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.busy",
+    "family": "math_tools",
+    "kind": "page",
+    "title": "busy",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.help",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "help",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.finance.inputs",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "inputs",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.finance.flows",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "flows",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.finance.menu",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "menu",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.finance.result",
+    "family": "math_tools",
+    "kind": "result",
+    "title": "result",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.finance.cashmenu",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "cashmenu",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.finance.help",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "help",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.graph.table",
+    "family": "math_tools",
+    "kind": "page",
+    "title": "table",
+    "source": "pico/desktop.cc",
+    "entrypoint": "linked_plot_table"
+  },
+  {
+    "id": "math.matrix.files",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "Matrix files",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.finance.busy",
+    "family": "math_tools",
+    "kind": "page",
+    "title": "Amortizing payments",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "finance_menu"
+  },
+  {
+    "id": "math.graph.point",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "Point details",
+    "source": "pico/desktop.cc",
+    "entrypoint": "linked_plot_table"
+  },
+  {
+    "id": "math.result.stack",
+    "family": "math_tools",
+    "kind": "result",
+    "title": "Value / approximation",
+    "source": "pico/desktop.cc",
+    "entrypoint": "pico_setup_menu"
+  },
+  {
+    "id": "math.matrix.arithmetic",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "arithmetic",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.scalar",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "scalar",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.operations",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "operations",
+    "source": "pico/math_tools_ui.inc",
+    "entrypoint": "matrix_menu"
+  },
+  {
+    "id": "math.matrix.registers",
+    "family": "math_tools",
+    "kind": "page",
+    "title": "registers",
+    "source": "pico/register_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.matrix.register_actions",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "register_actions",
+    "source": "pico/register_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.matrix.register_help",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "register_help",
+    "source": "pico/register_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.matrix.reduction",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "reduction",
+    "source": "pico/register_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.form",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "form",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.menu",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "menu",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.result",
+    "family": "math_tools",
+    "kind": "result",
+    "title": "result",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.files",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "files",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.help",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "help",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.measurements",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "measurements",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.menu",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "menu",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.points",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "points",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.layers",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "layers",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.files",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "files",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.help",
+    "family": "math_tools",
+    "kind": "reader",
+    "title": "help",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.finance.more",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "more",
+    "source": "pico/finance_extended_ui.inc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.geometry.explore",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "explore",
+    "source": "pico/desktop.cc",
+    "entrypoint": "exploration_tools"
+  },
+  {
+    "id": "math.complex.operations",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "Complex operations",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "complex_menu"
+  },
+  {
+    "id": "math.complex.arithmetic",
+    "family": "math_tools",
+    "kind": "menu",
+    "title": "Complex operations",
+    "source": "pico/exploration_ui.inc",
+    "entrypoint": "complex_menu"
+  },
+  {
+    "id": "reference.commands",
+    "family": "reference",
+    "kind": "special",
+    "title": "Commands",
+    "source": "pico/reference_ui.inc",
+    "entrypoint": "native_command_reference"
+  },
+  {
+    "id": "reference.subjects",
+    "family": "reference",
+    "kind": "menu",
+    "title": "Command reference",
+    "source": "pico/reference_ui.inc",
+    "entrypoint": "native_command_reference"
+  },
+  {
+    "id": "editor.examples",
+    "family": "editor",
+    "kind": "menu",
+    "title": "Open example",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "editor.example_preview",
+    "family": "editor",
+    "kind": "reader",
+    "title": "Example preview",
+    "source": "pico/desktop.cc",
+    "entrypoint": "edit_file"
+  },
+  {
+    "id": "editor.commands",
+    "family": "editor",
+    "kind": "page",
+    "title": "Insert command",
+    "source": "pico/ui/editor_actions.inc",
+    "entrypoint": "editor_insert_command"
+  },
+  {
+    "id": "editor.command_preview",
+    "family": "editor",
+    "kind": "reader",
+    "title": "Insert preview",
+    "source": "pico/ui/editor_actions.inc",
+    "entrypoint": "editor_insert_command"
+  },
+  {
+    "id": "editor.error",
+    "family": "editor",
+    "kind": "reader",
+    "title": "Source error",
+    "source": "pico/ui/editor_actions.inc",
+    "entrypoint": "editor_error"
+  },
+  {
+    "id": "math.lab.result",
+    "family": "math",
+    "kind": "result",
+    "title": "Result",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vector_help",
+    "family": "math",
+    "kind": "reader",
+    "title": "Vector Help",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.probability_help",
+    "family": "math",
+    "kind": "reader",
+    "title": "Probability Help",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.region_help",
+    "family": "math",
+    "kind": "reader",
+    "title": "Region Help",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.multivariable_help",
+    "family": "math",
+    "kind": "reader",
+    "title": "Multivariable Help",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.algebra_help",
+    "family": "math",
+    "kind": "reader",
+    "title": "Algebra Help",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.files",
+    "family": "math",
+    "kind": "menu",
+    "title": "Files",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.angle",
+    "family": "math",
+    "kind": "menu",
+    "title": "Angle",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vector_plane",
+    "family": "math",
+    "kind": "menu",
+    "title": "Vector Plane",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vectors",
+    "family": "math",
+    "kind": "menu",
+    "title": "Vectors",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vector_dimension",
+    "family": "math",
+    "kind": "menu",
+    "title": "Vector Dimension",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vector_operations",
+    "family": "math",
+    "kind": "menu",
+    "title": "Vector Operations",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.probability",
+    "family": "math",
+    "kind": "menu",
+    "title": "Probability",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.distribution",
+    "family": "math",
+    "kind": "menu",
+    "title": "Distribution",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.probability_operations",
+    "family": "math",
+    "kind": "menu",
+    "title": "Probability Operations",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.regions",
+    "family": "math",
+    "kind": "menu",
+    "title": "Regions",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.relation",
+    "family": "math",
+    "kind": "menu",
+    "title": "Relation",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.multivariable",
+    "family": "math",
+    "kind": "menu",
+    "title": "Multivariable",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.multivariable_operations",
+    "family": "math",
+    "kind": "menu",
+    "title": "Multivariable Operations",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.busy",
+    "family": "math",
+    "kind": "page",
+    "title": "Busy",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.algebra",
+    "family": "math",
+    "kind": "menu",
+    "title": "Algebra",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.variable",
+    "family": "math",
+    "kind": "menu",
+    "title": "Variable",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.algebra_operations",
+    "family": "math",
+    "kind": "menu",
+    "title": "Algebra Operations",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.calculus_route",
+    "family": "math",
+    "kind": "menu",
+    "title": "Calculus Route",
+    "source": "pico/desktop.cc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.matrix_route",
+    "family": "math",
+    "kind": "menu",
+    "title": "Matrix Route",
+    "source": "pico/desktop.cc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.vector_arithmetic",
+    "family": "math",
+    "kind": "menu",
+    "title": "Vector Arithmetic",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "math.lab.bounds",
+    "family": "math",
+    "kind": "menu",
+    "title": "Bounds",
+    "source": "pico/math_lab_ui.inc",
+    "entrypoint": "lab_launch"
+  },
+  {
+    "id": "advanced.files",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Files / help",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.polynomial",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Guided polynomials",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.polynomial_operations",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Polynomial calculations",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.ode",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Systems / second-order ODE",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.ode_mode",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Equation mode",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.engineering",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Engineering: RLC / RC filters",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.statistics",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Data inference / distributions",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.sample",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Select data sample",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.finance_route",
+    "family": "advanced_math",
+    "kind": "menu",
+    "title": "Finance / engineering",
+    "source": "pico/desktop.cc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.table",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Solution table",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.engineering_result",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Circuit response",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.statistics_result",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Statistical inference",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.polynomial_help",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Polynomial help",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.ode_help",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "System ODE help",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.engineering_help",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Engineering help",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.statistics_help",
+    "family": "advanced_math",
+    "kind": "reader",
+    "title": "Statistics help",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "advanced.busy",
+    "family": "advanced_math",
+    "kind": "page",
+    "title": "Calculating",
+    "source": "pico/advanced_math_ui.inc",
+    "entrypoint": "advanced_launch"
+  },
+  {
+    "id": "science.route",
+    "family": "science",
+    "kind": "menu",
+    "title": "More mathematics",
+    "source": "pico/desktop.cc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.files",
+    "family": "science",
+    "kind": "menu",
+    "title": "Files / help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.data_units",
+    "family": "science",
+    "kind": "menu",
+    "title": "Data units",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.units",
+    "family": "science",
+    "kind": "menu",
+    "title": "Units and dimensions",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.uncertainty",
+    "family": "science",
+    "kind": "menu",
+    "title": "Measurement uncertainty",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.fitting",
+    "family": "science",
+    "kind": "menu",
+    "title": "Interpolation / curve fitting",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.fit_actions",
+    "family": "science",
+    "kind": "menu",
+    "title": "Converged nonlinear fit",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.discrete",
+    "family": "science",
+    "kind": "menu",
+    "title": "Discrete mathematics",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.integer_operations",
+    "family": "science",
+    "kind": "menu",
+    "title": "Exact integer calculations",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.sequence_actions",
+    "family": "science",
+    "kind": "menu",
+    "title": "Generated sequence",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.spectrum",
+    "family": "science",
+    "kind": "menu",
+    "title": "One-sided FFT",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.signal_settings",
+    "family": "science",
+    "kind": "menu",
+    "title": "FFT settings",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.filter",
+    "family": "science",
+    "kind": "menu",
+    "title": "Time-domain filters",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.filter_actions",
+    "family": "science",
+    "kind": "menu",
+    "title": "Filtered data",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.signals",
+    "family": "science",
+    "kind": "menu",
+    "title": "Signal analysis",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.uncertainty_result",
+    "family": "science",
+    "kind": "reader",
+    "title": "Propagated uncertainty",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.fit_result",
+    "family": "science",
+    "kind": "reader",
+    "title": "Fit coefficients",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.sequence_result",
+    "family": "science",
+    "kind": "reader",
+    "title": "Recurrence values",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.spectrum_table",
+    "family": "science",
+    "kind": "reader",
+    "title": "FFT bins",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.units_help",
+    "family": "science",
+    "kind": "reader",
+    "title": "Units help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.uncertainty_help",
+    "family": "science",
+    "kind": "reader",
+    "title": "Uncertainty help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.fitting_help",
+    "family": "science",
+    "kind": "reader",
+    "title": "Fitting help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.discrete_help",
+    "family": "science",
+    "kind": "reader",
+    "title": "Discrete help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.signal_help",
+    "family": "science",
+    "kind": "reader",
+    "title": "Signal help",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.quantity_result",
+    "family": "science",
+    "kind": "result",
+    "title": "Unit result",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.interpolation_result",
+    "family": "science",
+    "kind": "result",
+    "title": "Interpolated Y",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "science.busy",
+    "family": "science",
+    "kind": "page",
+    "title": "Calculating",
+    "source": "pico/science_ui.inc",
+    "entrypoint": "science_launch"
+  },
+  {
+    "id": "research.files",
+    "family": "research",
+    "kind": "menu",
+    "title": "Files",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.matrix_result",
+    "family": "research",
+    "kind": "result",
+    "title": "Matrix Result",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.implicit",
+    "family": "research",
+    "kind": "menu",
+    "title": "Implicit",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.optimize",
+    "family": "research",
+    "kind": "menu",
+    "title": "Optimize",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.busy",
+    "family": "research",
+    "kind": "page",
+    "title": "Busy",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.linear",
+    "family": "research",
+    "kind": "menu",
+    "title": "Linear",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.qr",
+    "family": "research",
+    "kind": "menu",
+    "title": "Qr",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.eigen",
+    "family": "research",
+    "kind": "menu",
+    "title": "Eigen",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.svd",
+    "family": "research",
+    "kind": "menu",
+    "title": "Svd",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.calculus",
+    "family": "research",
+    "kind": "menu",
+    "title": "Calculus",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.limit",
+    "family": "research",
+    "kind": "menu",
+    "title": "Limit",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.sum",
+    "family": "research",
+    "kind": "menu",
+    "title": "Sum",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.integral",
+    "family": "research",
+    "kind": "menu",
+    "title": "Integral",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.taylor",
+    "family": "research",
+    "kind": "menu",
+    "title": "Taylor",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.uncertainty",
+    "family": "research",
+    "kind": "menu",
+    "title": "Uncertainty",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.statistics",
+    "family": "research",
+    "kind": "menu",
+    "title": "Statistics",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.distribution",
+    "family": "research",
+    "kind": "menu",
+    "title": "Distribution",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.distribution_actions",
+    "family": "research",
+    "kind": "menu",
+    "title": "Distribution Actions",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.signals",
+    "family": "research",
+    "kind": "menu",
+    "title": "Signals",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.convolution",
+    "family": "research",
+    "kind": "menu",
+    "title": "Convolution",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.psd",
+    "family": "research",
+    "kind": "menu",
+    "title": "Psd",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.poles",
+    "family": "research",
+    "kind": "menu",
+    "title": "Poles",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.roots",
+    "family": "research",
+    "kind": "result",
+    "title": "Roots",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.bode",
+    "family": "research",
+    "kind": "menu",
+    "title": "Bode",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.response",
+    "family": "research",
+    "kind": "menu",
+    "title": "Response",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.documents",
+    "family": "research",
+    "kind": "menu",
+    "title": "Documents",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.diagnostics",
+    "family": "research",
+    "kind": "reader",
+    "title": "Diagnostics",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.home",
+    "family": "research",
+    "kind": "menu",
+    "title": "Home",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.contour_levels",
+    "family": "research",
+    "kind": "menu",
+    "title": "Contour Levels",
+    "source": "pico/desktop.cc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.contour_probe",
+    "family": "research",
+    "kind": "reader",
+    "title": "Contour Probe",
+    "source": "pico/desktop.cc",
+    "entrypoint": "research_launch"
+  },
+  {
+    "id": "research.overview",
+    "family": "research",
+    "kind": "reader",
+    "title": "Advanced studies",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.contour_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Implicit graphs and optimization",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.linear_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Advanced linear algebra",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.calculus_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Limits, series and improper integrals",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.statistics_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Statistics and correlated uncertainty",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.signal_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Signals and control systems",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.document_help",
+    "family": "research",
+    "kind": "reader",
+    "title": "Connected studies",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_help"
+  },
+  {
+    "id": "research.result",
+    "family": "research",
+    "kind": "reader",
+    "title": "Research result",
+    "source": "pico/research_ui.inc",
+    "entrypoint": "research_values"
+  }
+]

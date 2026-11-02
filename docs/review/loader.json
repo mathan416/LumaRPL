@@ -1,0 +1,13 @@
+{
+  "firmware": "db48x-picocalc-pico2w.uf2",
+  "application_name": "LumaRPL",
+  "sha256": "29fbbd8308d6a1655f1f931ccde6da9a24e94b63f69645b368a3df1a3d456f45",
+  "family": "rp2350-arm-s",
+  "blocks": 8879,
+  "sdk_e10_workaround_blocks": 1,
+  "application_payload_extent": 2273024,
+  "application_partition_bytes": 4186112,
+  "loader_sha256": "5a95d7404c968a4ba78bfeeffd6273e7acea4a03d4ca1e0d8b4679e722c5f5fc",
+  "loader_contract": "UF2 Loader v2.4.1; standard SDK logical addresses remapped into App at physical offset 8192",
+  "hardware_boot_tested": false
+}

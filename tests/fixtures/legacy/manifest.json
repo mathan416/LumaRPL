@@ -1,0 +1,14 @@
+{
+  "exploration_documents.h": {
+    "source_port": "24",
+    "sha256": "1e898c4e4e3d1612cc9bcff049b6e928ac006086544c55a1a5ccf9afd82f4028"
+  },
+  "advanced_math.h": {
+    "source_port": "23",
+    "sha256": "4a4a86c8b470933c6c08779a55163f84482264e8c9165fb1a645a349a4f7412c"
+  },
+  "math_lab.h": {
+    "source_port": "23",
+    "sha256": "6f94e9bfda34d82a22b6c15391f8132a5b8d8644654bd189f04e02fe8bf0a534"
+  }
+}

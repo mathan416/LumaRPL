@@ -1,0 +1,18 @@
+{
+  "lua": [
+    "Start here",
+    "Write Lua",
+    "Draw on screen",
+    "Plot graphs",
+    "Use keys and sound",
+    "Solve a problem"
+  ],
+  "chip8": [
+    "Start here",
+    "Write assembly",
+    "Draw sprites",
+    "Keys and timers",
+    "Instruction reference",
+    "Solve a problem"
+  ]
+}

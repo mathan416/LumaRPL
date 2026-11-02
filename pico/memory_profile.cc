@@ -1,0 +1,15 @@
+#include "memory_profile.h"
+#include "editor_tools.h"
+#include "notebook.h"
+#include "form_document.h"
+#include "data_table.h"
+#include "path_scene.h"
+#include "ode.h"
+#include "math_documents.h"
+#include "exploration_documents.h"
+#include "math_lab.h"
+#include "advanced_math.h"
+#include "science_document.h"
+#include "research_document.h"
+// Referenced by the status UI and read directly from the ELF by release checks.
+const uint32_t pico_memory_profile[16]={sizeof(pico_notebook),sizeof(pico_form_document),sizeof(pico_data_table),sizeof(pico_path_scene),sizeof(pico_ode_scene),sizeof(pico_editor_tools),sizeof(pico_editor_tools::change)*pico_editor_tools::depth,sizeof(pico_matrix_document),sizeof(pico_finance_document),sizeof(pico_matrix_document),sizeof(pico_complex_document),sizeof(pico_geometry_document),sizeof(pico_math_lab),sizeof(pico_advanced_math),sizeof(pico_science_document),sizeof(pico_research_document)};

@@ -1,0 +1,8 @@
+{
+  "reviewed_capture_count": 48,
+  "themes": 8,
+  "scope": "Numerical diagnostics, implicit contour sampling/plot/probe, bounded optimization menu/results. Three native-resolution contact sheets inspected. No complete-UI re-review claimed.",
+  "device_verified": false,
+  "port305_pixels_unchanged": true,
+  "pixel_comparison": "48 production PPM captures compared with reviewed port30.5 PNGs using QImage RGB888 equality. PNG encoding bytes differ; decoded pixels match."
+}

@@ -1,0 +1,1007 @@
+{
+  "scope": "Pico platform text drawing; upstream calculator stack and reference renderer remain explicit legacy adapters, covered by 320x320 host captures and full simulator comparison. All new platform calls require review.",
+  "sites": [
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "cae6987f677439ab335d7a777ff150ef08c2ab9c8ef7f3a39c31d516f9049c0a",
+      "call": "grapher graph(300,210,Settings.ResultFont(),grob::pattern::black,grob::pattern::white,false,true);",
+      "purpose": "Bounded mathematical typesetting or formula entry",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "e59f75ce738fffb5b5829c808eb4eecaf4167e1d3e97836d8fe021ae14d936b9",
+      "call": "do{image=display->graph(graph);}while(!image&&!rt.error()&&graph.reduce_font());",
+      "purpose": "Bounded mathematical typesetting or formula entry",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "2ca0a50bc6c8bd3fc059cfdca858fd656d4b0e51abde2e0a8f60f76d577b0a2c",
+      "call": "Screen.draw(pixels,x,y,pico_ui::text_colour());",
+      "purpose": "Bounded mathematical typesetting or formula entry",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "1e73078a0b1f1a58216f0994cd44879c2063e8e85ca3206debb6b55501bd1dda",
+      "call": "Screen.text(8+c*10,68+(r-scroll)*23,utf8(glyph),LibMonoFont10x17,replace?pattern(255,255,255):pico_ui::text_colour());",
+      "purpose": "Bounded mathematical typesetting or formula entry",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "0bc70020cc5643b70d3286a73bde15f5ae7976a815ab83f4cb2cc6248da791d6",
+      "call": "if(exporting){char caption[180];snprintf(caption,sizeof caption,\"X=%.8g Y=%.8g\",x,y);exporting->svg.text(5,265,scene.label[selected],export_rgb(pico_ui::readable(pico_themes::colour(scene.colour[selected]),pattern(Settings.Background()))));exporting->svg.text(5,285,caption,export_rgb(pico_ui::text_colour()));bool ok=exporting->svg.finish();export_done(*exporting,ok);delete exporting;exporting=nullptr;continue;}",
+      "purpose": "SVG export labels; not LCD text. Bounded export viewport.; exported caption matches quantized on-screen theme contrast",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log",
+        "port193-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "de2b758fc574723e314fe24bef96d0df5289b90415faa60222339cd99df45ea7",
+      "call": "if(exporting){exporting->svg.text(5,280,\"3D surface: sampled mesh, auto Z scale\",export_rgb(pico_ui::text_colour()));}",
+      "purpose": "SVG export labels; not LCD text. Bounded export viewport.; exported caption matches quantized on-screen theme contrast",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log",
+        "port193-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/information_text.h",
+      "sha256": "1510dbe65b61f126f0d85de11907916e84f61dea25bc2b2bd012cc669ec82590",
+      "call": "pico_native_layout::draw(screen,x+column,y+int(row-scroll)*step,std::min(advance,width-column),step,text,font,font,foreground);",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/lua_devices.cc",
+      "sha256": "1157e166e78e5a3bb659e14e2b96999fac71bd24ccba6c95a4391ef5a9521ee1",
+      "call": "case PICO_LUA_TEXT:pico_ui::canvas_text(Screen,true,a[5],a[0],a[1],text,length,c,Settings.header_font());break;",
+      "purpose": "Legacy calculator-font compatibility only; new canvas defaults compact",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/lua_devices.cc",
+      "sha256": "6a5cc052bed9c08c1426aac08a13f3dc71c6c70e74f61b2e8f3015e870e188c3",
+      "call": "{auto size=pico_ui::canvas_text(Screen,false,profile,0,0,text,length,pattern::black,Settings.header_font());*width=size.width;*height=size.height;}",
+      "purpose": "Legacy calculator-font compatibility only; new canvas defaults compact",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/native_layout.h",
+      "sha256": "f4e12ae630330354aa7cf7d4317fd985b0c5098cb93431ecad468b5d9311eb19",
+      "call": "auto previous=screen.clip();screen.clip(blitter::rect(x,y,x+width-1,y+height-1));screen.text(x,y,utf8(fitted),used,foreground);screen.clip(previous);",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/canvas_text.h",
+      "sha256": "6572b261f56f62257b6adc00bf4febb6809cce14a293bda9730032ddb36e1fab",
+      "call": "if(paint)screen.text(x,y,utf8(glyph),face,colour);x+=width;advance+=width;",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/dialogs.inc",
+      "sha256": "da9f5cfdaae90692f678f428236d13b2a984b60b77b995c3eac659c317406789",
+      "call": "pico_information_text::draw(Screen,native_compact_font(),question,strlen(question),0,8,45,304,16,10,0,pico_ui::text_colour());",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/dialogs.inc",
+      "sha256": "a4dae174ab02441f7d22e66fe982032d939f02d4a13e218f0c820f9fb84ff695",
+      "call": "{char glyph[5]={};size_t count=editor.next(n)-n;if(secret)strcpy(glyph,\"*\");else memcpy(glyph,out+n,count);Screen.text(8+draw_column*10,55+(r-scroll)*24,utf8(glyph),LibMonoFont10x17,pico_ui::text_colour());}",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/editor.inc",
+      "sha256": "d82a3d1b35e84994c34f3d9060e806970058e484204c592a490dbb8eab68b4d6",
+      "call": "{char number[12];snprintf(number,sizeof number,\"%u\",unsigned(line));Screen.text(2,40+(r-scroll)*source_layout::line,utf8(number),native_compact_font(),pico_ui::readable(pattern(100,110,130),pattern(Settings.Background())));}",
+      "purpose": "Aligned source editing/gutter and caret geometry",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/editor.inc",
+      "sha256": "0b494e97463c40151f5268c74e789cf4e45a01408edcfae44a84ce140806beca",
+      "call": "Screen.text(source_layout::x+c*source_layout::cell,source_layout::y+(r-scroll)*source_layout::line,utf8(glyph),source_layout::font(),colour);",
+      "purpose": "Fixed 7x12 source glyphs in the shared 40-column RPL/Lua/assembly editor.",
+      "tests": "port215 production editor pixel restoration, wrapping, selection and theme captures"
+    },
+    {
+      "source": "pico/ui/legacy.inc",
+      "sha256": "fccdb8e74b9c1d533cd11cfbe535625e6feff73a76c7e83ac0266832f4cbaa3b",
+      "call": "pico_information_text::draw(Screen,native_compact_font(),text,used,0,8,45,304,16,14,0,pico_ui::text_colour());",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/shell.inc",
+      "sha256": "0d83444c7ec181115738f74d8e356122afdc77a259a9b9abb5cfc21da6d42616",
+      "call": "pico_native_layout::draw(Screen,x,y,width,height,text,pico_ui::font(role),native_compact_font(),foreground);",
+      "purpose": "Shared role-based word wrap, clipping and result layout",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "pico/ui/typography.h",
+      "sha256": "6e39522ce77fab256a5e89104d49ad3920e4013888f2c108b6cf4ea0e2b6f663",
+      "call": "return role==TextRole::title||role==TextRole::menu?HelpFont:role==TextRole::result?Settings.result_font():role==TextRole::code?LibMonoFont10x17:compact();",
+      "purpose": "Explicit title/menu, mathematical result, fixed source and compact prose roles; source editor retains 10x17 face.",
+      "tests": [
+        "port19-widget-tests.log",
+        "port19-controllers.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "2ea1ce67c2d967d9f5610c6e4f7adc7e3867dd325adbe1413aa9fb460ca7c3fb",
+      "call": "x = Screen.text(x, ty, label, len, labelFont, color);",
+      "purpose": "Calculator six-column labels: compact face and actual ink bounds, including variable markers; row geometry and input mappings preserved",
+      "tests": [
+        "port199-controllers.log",
+        "port199-visual-review.json"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "d96ef89548b3186eaa6e58be529329e5db0ee4c7990b62583511f17703fed869",
+      "call": "Screen.text(x, ty,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "2354ab0262dc1d15938318c9a53e6181d1608bfa4197b5e97c19f543358e6d09",
+      "call": "Screen.text(5, y + line * 14, utf8(hints[line]),",
+      "purpose": "Calculator menu row/sixth-key hint and Modes nondefault-settings program explanation",
+      "tests": [
+        "port196-controllers.log",
+        "port196-advanced-actions.tsv"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "71d039b9badd8cfc4c0d2164c7e1e661ff2265dc32b21ec67de77a15f69fd554",
+      "call": "const font_p hdr_font = Settings.header_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "eeff07b92ea8322708101f45223e63d0d6885b63567117ebfd5acb33350e4ac3",
+      "call": "auto fid = Settings.HeaderFont();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "d6966c3c21e9ca4c1c5f7e346d48439436b7cffb3b4fe793874f53bd65894f73",
+      "call": "if (grob_p gr = eval->graph(g))",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "cdeeba54e4ed1f3c7fcefc40b2718a10e9258451b8b87f83a03fbbac56b04245",
+      "call": "Screen.draw(s, 0, 0, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "4b3215cc3075591d59f9f00a850188a80a0b462eed019a01eaed1a6258defeeb",
+      "call": "x = Screen.text(x, 0, r.text(), r.size(), hdr_font, datecol);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "a78c64f097fae50593396dfcaee8269a05f77122db59f78f663ca9cbf550abf3",
+      "call": "x = Screen.text(x, 0, r.text(), r.size(), hdr_font, timecol);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "388aeaa5e544ec69d63b6d3c31604127853a5f3f954933b5f1bda094223e155e",
+      "call": "x = Screen.text(x, 0, r.text(), r.size(), hdr_font, namecol);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "67fd23f6e77214da877c528ded556698d017a91d06b0471c0ea434658cb04f42",
+      "call": "font_p hdr_font = Settings.header_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "b575c2a9fbb78bc248a983bd031d7f85a2cf6d2affd7500b34edcb83fa0f4e42",
+      "call": "Screen.text(x, 0, utf8(buffer), hdr_font,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "be4631f9bd7a8210b2f81cce0355f15634a9f3c71b461553eaee04246bc62af5",
+      "call": "Screen.text(centre, 0, mark, hdr_font, bfg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "67fd23f6e77214da877c528ded556698d017a91d06b0471c0ea434658cb04f42",
+      "call": "font_p hdr_font = Settings.header_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "d91043cde0e576a10f7e6bc150e82eeae611811c2823c3216a475f96d86b3549",
+      "call": "Screen.draw(s, ann_x, ann_y, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "71d039b9badd8cfc4c0d2164c7e1e661ff2265dc32b21ec67de77a15f69fd554",
+      "call": "const font_p hdr_font = Settings.header_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "67fd23f6e77214da877c528ded556698d017a91d06b0471c0ea434658cb04f42",
+      "call": "font_p hdr_font = Settings.header_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "3998af033504688acd9ed8584f1cce0a2e80f265bbc1da76057cc5bf114d9dae",
+      "call": "font_p font = Settings.editor_font(false);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "457d7c42231132cc9fce50406e28864ddfcfc7bc95f8aed78d72f3825ef8b979",
+      "call": "font = Settings.editor_font(rows > 2);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "457d7c42231132cc9fce50406e28864ddfcfc7bc95f8aed78d72f3825ef8b979",
+      "call": "font = Settings.editor_font(rows > 2);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "7b3b030935916a892c6ad6b5290035f0796c746f941024a7946bf570b6b0a755",
+      "call": "font_p edFont = Settings.editor_font(ml);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "16fc416448744bcaf9d8e4a6cfd425b1c240d95281e4dac7cb593874a173331f",
+      "call": "font_p cursorFont = Settings.cursor_font(ml);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "be0bceea43845e16cafd4462a9e20bc6b9f2a43ee0637245c932aa4d5e785763",
+      "call": "Screen.text(x, y, command, font, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "310798979126320e018b6d456754b88bf59b7c59cdbf31768387924967075521",
+      "call": "Screen.text(x, y, cmd, len, font, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "129d02ab60bf7b3c9dcc4a7a89eea84ca5b65acdd9a8c479c8c079fed95102e3",
+      "call": "coord x = Screen.text(r.x1, r.y1, cmdt, sz, ErrorFont, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "7d7f552b2e695efee36df2e209f29bbffdc7d8935bc74902dff944f33904053e",
+      "call": "Screen.text(x, r.y1, utf8(\" error:\"), ErrorFont);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "4e6bfb688e23077f81e0b843f2d3c069691f070e779b88834d89835350baf51b",
+      "call": "Screen.text(r.x1, r.y1, utf8(\"Error:\"), ErrorFont, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "c6d631a770c9b602846bde99bef9793d184af79688ce46215d319746a9c34ab7",
+      "call": "Screen.text(r.x1, r.y1, err, ErrorFont, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "850aa2c04ab1709fb3cf41d12ab2a10ef5d5ff7b720855fb5f7697c03e534b6e",
+      "call": "Screen.text(x+0, y, header, font);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "23b09c2ed7ff10cc40b80dd2e8981e2136047cbfdfa799ab5004dc184c623a15",
+      "call": "Screen.text(x+1, y, header, font);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "a4d2bcf217ab8418666229fc9e1147ffd14ac70d241cc0a6ba5384344d0561eb",
+      "call": "Screen.text(x, y + i * h, msgs[i], font);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "ded484f5823497b2dfbb1ff406a755c22179133928b760c15b55b9ef956c9189",
+      "call": "auto fid = Settings.ResultFont();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "5ce3efbbfbea955c422eb7b83c4349fed3146af283c3ffaaf2c3b2a6becca98a",
+      "call": "graph = obj->graph(g);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "55bf77fa9b6e94bb469bad2047749449ba1893c216dcd0296b3c8f50e62d16cb",
+      "call": "Screen.draw(s, x, y, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "d91043cde0e576a10f7e6bc150e82eeae611811c2823c3216a475f96d86b3549",
+      "call": "Screen.draw(s, ann_x, ann_y, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "b16ff981b88f0648884d080ad841e0b4d0c4393da2c7ff4f3034f87f20a20fe3",
+      "call": "Screen.text(ax, ay, utf8(name), af);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "966886ac73ca24c3745d1cb852751e5da01157aeecb7fc4846ed1721384e8ca1",
+      "call": "x = Screen.text(x0+b, y, buffer, widx, font, color);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "d91043cde0e576a10f7e6bc150e82eeae611811c2823c3216a475f96d86b3549",
+      "call": "Screen.draw(s, ann_x, ann_y, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "cee71560fcac7bc5649e06a1c41afbc4ee93bf6595fd40cceb80cfc217ec114d",
+      "call": "font_p edFont = Settings.editor_font(edRows > 2);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "cee71560fcac7bc5649e06a1c41afbc4ee93bf6595fd40cceb80cfc217ec114d",
+      "call": "font_p edFont = Settings.editor_font(edRows > 2);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "9aacc4b4e5b3005c4da810f2b7f8eb73b8716722c65c5da296d77128cbfe0004",
+      "call": "coord x = Screen.text(0, y, utf8(buffer), HelpFont,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "9aacc4b4e5b3005c4da810f2b7f8eb73b8716722c65c5da296d77128cbfe0004",
+      "call": "coord x = Screen.text(0, y, utf8(buffer), HelpFont,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "be4a8322330151a410c146b0e5588b39fe4fdf9f6d3dbebc58092132bb1ea5c7",
+      "call": "font_p font = interactive ? Settings.stack_font() : Settings.result_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "3427f4bd033628147df3427c6f55e5ed3a213f50723d4e11e7e86b579f98afba",
+      "call": "auto rfont = Settings.ResultFont();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "80579d7a0df960c459ac86ac5f8b5ce5140c8c1f088390dcbe9033bda2738c80",
+      "call": "auto sfont = Settings.StackFont();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "6107067682f8b0dc211b4b3c7249c4da34f09caaf8c7ffbab2eea3d6bc6ac396",
+      "call": "font = (interactive || level != 0) ? Settings.stack_font() : Settings.result_font();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "5ce3efbbfbea955c422eb7b83c4349fed3146af283c3ffaaf2c3b2a6becca98a",
+      "call": "graph = obj->graph(g);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "ea9e05b5062fc1c05304ff0e1b17ade8a9caed96b166eb16893b32ddc827c230",
+      "call": "Screen.draw(s, LCD_W - 2 - w, y, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "dc1e5d56ec2d4840005277f6844695e19739ef988b0f12594c728990cbab8b62",
+      "call": "Screen.text(LCD_W - 2 - rx,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "1415eea1a6cfa14f5dd07904d273c468caf547c606c9c4a8d1900516b2dd5c15",
+      "call": "Screen.text(x, y, out, len, font, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "936dc4824b40a68ec7497724f5c9b3171b061f959f4658e6f82687cf68bd59bb",
+      "call": "Screen.text(LCD_W - 2 - w, y, out, len, font, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "936dc4824b40a68ec7497724f5c9b3171b061f959f4658e6f82687cf68bd59bb",
+      "call": "Screen.text(LCD_W - 2 - w, y, out, len, font, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "13e66b9e9b6fa1d0f5dab50fbc1d8644537e24b91f1897d0b0871d9159a20a60",
+      "call": "Screen.text(hdrx + 2, ytop, errmsg, HelpFont, bg, fg);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "0cfc03039401561d9a51b66af7a515ea1a0e75c197bfc2d591d73ad03037a85b",
+      "call": "Screen.text(hdrx - hw, y + idxOffset, utf8(buf), idxfont,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/stack.cc",
+      "sha256": "0cfc03039401561d9a51b66af7a515ea1a0e75c197bfc2d591d73ad03037a85b",
+      "call": "Screen.text(hdrx - hw, y + idxOffset, utf8(buf), idxfont,",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "757721630cde82514949b6a7b14ecd259971f65d5858eae936edb7ab04e2123b",
+      "call": "font_p font = settings::font(Settings.StackFont());",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "757721630cde82514949b6a7b14ecd259971f65d5858eae936edb7ab04e2123b",
+      "call": "font_p font = settings::font(Settings.StackFont());",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "7927576a0cd80b19997144154df909b409b6f93ca2e66e4e6a2fdc6787ea0672",
+      "call": "grob_g graph = obj->graph(true);",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "7dd491715a3d6ff7ed1b8f10bd8705a47f3a16daf81cf2a25cae49c8d971363c",
+      "call": ": Settings.StackFont();",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "3abd4450933a32795553a9ed8c0c5560e5ead738d6c78a7f3e3f79c5fc058d30",
+      "call": "if (grob_p gr = obj->graph(g))",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "caf2adf70204885229499e060d9fba0ef06ef85f9f7c572e6c881aa0a3839104",
+      "call": "Settings.ResultFont(),",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/graphics.cc",
+      "sha256": "39a7e59b23d3895f7f7484661c857a395101adc0b983de6e78c6757dec32b858",
+      "call": "if (grob_p r = obj->graph(g))",
+      "purpose": "Preserved configurable RPL stack, soft-menu, entry, mathematical typesetting or user-program graphics font; Pico messages/help use reviewed compact adapters.",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/dmcp/sysmenu.cc",
+      "sha256": "b37eee64117bc4e37d7a54533462b957e78a3b609a1ef40c5f9fbed0b8718cde",
+      "call": "x2 = Screen.text(x+i, y, utf8(PROGRAM_NAME \" \"), font, pattern::black);",
+      "purpose": "Original DM42 system menu is not linked on Pico; replaced by pico/sysmenu.cc",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/dmcp/sysmenu.cc",
+      "sha256": "142c8be53db7692dd407bacfffc7c3cb9447b825bf2b0b2facf0327e3986e146",
+      "call": "Screen.text(x2, y, utf8(\"v\" PROGRAM_VERSION \" \u00a92025 C. de Dinechin\"), font);",
+      "purpose": "Original DM42 system menu is not linked on Pico; replaced by pico/sysmenu.cc",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/dmcp/sysmenu.cc",
+      "sha256": "7afea59a1aa8bded4a033a037f6474b35b7a16a32e61a06af760447835ace48c",
+      "call": "Screen.text(x, y, utf8(\"A modern implementation of RPL, and\"), font);",
+      "purpose": "Original DM42 system menu is not linked on Pico; replaced by pico/sysmenu.cc",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/dmcp/sysmenu.cc",
+      "sha256": "c01d516ca85cfdd6b9ebc21bd0ada0b4237d0e585888e7587f590c632d6f9cbc",
+      "call": "Screen.text(x, y, utf8(\"a tribute to Bill Hewlett and Dave Packard\"), font);",
+      "purpose": "Original DM42 system menu is not linked on Pico; replaced by pico/sysmenu.cc",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/dmcp/sysmenu.cc",
+      "sha256": "a627bcdc170178fc246848fb6aeaab4d12311606bb7e1abdd9cc9bf2bf3bb155",
+      "call": "Screen.text(x, y, utf8(\" Press EXIT key to continue...\"), font);",
+      "purpose": "Original DM42 system menu is not linked on Pico; replaced by pico/sysmenu.cc",
+      "tests": [
+        "port19-full-comparison.json",
+        "port19-controllers.log",
+        "port19-widget-tests.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "9406de42d98ae68fb99f8ea9f50ad66ecc3671e938b396f9e4c3dd0737f1ee4d",
+      "call": "Settings.header_font(), Settings.StackForeground());",
+      "purpose": "Compact calculator row/program hint typography",
+      "tests": [
+        "port196-controllers.log"
+      ]
+    },
+    {
+      "source": "db48x/src/user_interface.cc",
+      "sha256": "bd0f6ca26ee3fb560445ac961f3dae1e7aa9e0a664d55412d5f39b1d92d57534",
+      "call": "Screen.text(x, y, utf8(glyph), font, color);",
+      "purpose": "PicoCalc command-reference compact fixed cells with UTF-8 wrapping",
+      "tests": [
+        "port197-controllers.log",
+        "port197-reference-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "d10d12f17e73c2b824ae5164065f8ecdae076a5ad4cbfdaaa8ceb0eb65edcffc",
+      "call": "total=pico_information_text::draw(Screen,native_compact_font(),body,length,scroll,6,pico_native_layout::information_top,308,pico_native_layout::information_row_step,visible,cell,pico_ui::text_colour());",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "3f997f299d5fd181e3c7f6b4b46e9b52aee71280d96791b6d16043713320de82",
+      "call": "grapher graph(300,128,Settings.ResultFont(),grob::pattern::black,grob::pattern::white,false,true);",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "1c12d16d832914802b3efe6ef53010251db4d86ca8f6364ce36303580120fdbb",
+      "call": "do{image=value->graph(graph);}while(!image&&!rt.error()&&graph.reduce_font());",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "2ca0a50bc6c8bd3fc059cfdca858fd656d4b0e51abde2e0a8f60f76d577b0a2c",
+      "call": "Screen.draw(pixels,x,y,pico_ui::text_colour());",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "d086e42e091267196ea53b8f06abb6abc504a6e988cf7607345449677f7cca93",
+      "call": "pico_information_text::draw(Screen,native_compact_font(),text,n,0,8,52,304,16,6,0,pico_ui::text_colour());",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/ui/results.inc",
+      "sha256": "33e56a42b39f2328a84947354fa16a3ebb5db23c69c0335d3bd447cceb673e8b",
+      "call": "size_t total=pico_information_text::draw(Screen,native_compact_font(),context,strlen(context),scroll,8,212,304,16,3,0,pico_ui::text_colour());",
+      "purpose": "Bounded typeset original value, compact numerical approximation and scrolling context; explicit copy variant preserves stack/settings.",
+      "tests": [
+        "port20-controllers.log",
+        "port20-finance-tests.log"
+      ]
+    },
+    {
+      "source": "pico/desktop.cc",
+      "sha256": "a1b30150bfa28803d28e039039bf57640d965ae32ba99d5f4ddd1086d68157bc",
+      "call": "for(unsigned i=0;i<6;++i){double a=pico_wireframe::normalize(doc.points[i][0],scene.window[0],scene.window[1]),b=pico_wireframe::normalize(doc.points[i][1],scene.window[2],scene.window[3]);if(fabs(a)>1||fabs(b)>1)continue;int px=int(159.5+149.5*a),py=int(135.5-100.5*b);plot_line(px-3,py,px+3,py,2,pico_ui::text_colour());plot_line(px,py-3,px,py+3,2,pico_ui::text_colour());char label[]={char('A'+i),0};ui_line(std::max(10,std::min(291,px+5)),std::max(35,std::min(219,py-15)),18,16,label,pico_ui::TextRole::plot_label,pico_ui::text_colour());if(exporting)exporting->svg.text(px+5,py-4,label,export_rgb(pico_ui::text_colour()));}",
+      "purpose": "Native geometry point labels and SVG annotations share the plot coordinate mapping and clipped compact typography.",
+      "tests": [
+        "port21-controllers.log"
+      ]
+    }
+  ]
+}

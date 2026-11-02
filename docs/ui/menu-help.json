@@ -1,0 +1,1488 @@
+{
+  "desktop.pico_setup_menu.choose1": {
+    "overview": "Choose what you want to work on. Returning to Home keeps your open documents in memory; save them before switching the calculator off.",
+    "items": {
+      "0": "Go back to the calculator stack.",
+      "1": "Open graphs, equation solving, calculus and the mathematical workbenches.",
+      "2": "Work with X,Y tables or a notebook of expressions and notes.",
+      "3": "Find RPL, Lua, CHIP-8 and sprite tools, or inspect stored variables.",
+      "4": "Convert a measurement or an amount of money.",
+      "5": "Save and load your work, or save and return to the loader.",
+      "6": "Change display, calculation, clock and network settings.",
+      "7": "Read help, find a command or view the credits."
+    }
+  },
+  "desktop.pico_setup_menu.choose2": {
+    "overview": "Choose a mathematical tool. Answers stay in the tool until you explicitly copy or store them, so exploring does not clutter the stack.",
+    "items": {
+      "0": "Choose a graph type, edit formulas and plot them.",
+      "1": "Solve an equation or system, or adjust parameters in a plot.",
+      "2": "Open Calculus in X, Multivariable calculus, Symbolic algebra, or Value / approximation.",
+      "3": "Keep a reusable formula with named inputs and optional units.",
+      "4": "Choose Matrix workbench or Vector workbench.",
+      "5": "Choose the financial calculator or the engineering RLC / RC-filter workbench.",
+      "6": "Open guided normal, binomial and Poisson probability calculations and plots.",
+      "7": "Open complex numbers or the applied-math tools: units, uncertainty, interpolation/fitting, discrete mathematics and signal analysis."
+    }
+  },
+  "desktop.pico_setup_menu.choose3": {
+    "overview": "Tables and notebooks each have their own Files menu. Save the document there; saving the calculator session alone does not save it.",
+    "items": {
+      "0": "Enter paired data and explore statistics, regression or plots.",
+      "1": "Keep calculations and notes in cells, then run them when ready.",
+      "2": "Open the shared probability workbench for normal, binomial and Poisson calculations and plots.",
+      "3": "Calculate confidence intervals, mean tests and fitted distributions from the current data table.",
+      "4": "Interpolate current data or fit a nonlinear model with explicit starting guesses.",
+      "5": "Analyze uniformly sampled Y data using FFTs and bounded filters."
+    }
+  },
+  "desktop.pico_program_browser.choose1": {
+    "overview": "Choose the kind of program or drawing you want to use. RPL programs take arguments from the calculator stack and leave results there.",
+    "items": {
+      "0": "Find programs stored in HOME. F2 runs the selected body.",
+      "1": "Open RPL source/binary files from /db48x/data.",
+      "2": "Run a CHIP-8 ROM or edit and assemble its source.",
+      "3": "Run or edit scripts from /db48x/lua.",
+      "4": "Draw a colour sprite or a CHIP-8 mask.",
+      "5": "Look through calculator variables without replacing them.",
+      "6": "Try Lua a line at a time; its variables last until the console closes."
+    }
+  },
+  "desktop.native_settings.choose1": {
+    "overview": "Most changes apply as soon as you choose them. Save the calculator session to keep calculator display and calculation settings after restart.",
+    "items": {
+      "0": "Choose the colours used throughout the interface.",
+      "1": "Set angles and precision, or open the advanced calculator menus.",
+      "2": "Choose the timezone used for displayed time.",
+      "3": "Set up Wi-Fi and check its connection.",
+      "4": "Check battery, memory and radio information."
+    }
+  },
+  "desktop.native_settings.choose2": {
+    "overview": "Choose a palette that is comfortable on your display. Enter applies it immediately; save your calculator session to keep it after restart.",
+    "items": {
+      "0": "Light paper with dark text and blue controls.",
+      "1": "Dark blue with cool text and mint results.",
+      "2": "Black with warm amber text.",
+      "3": "Dark green with mint text.",
+      "4": "Warm paper with brown text.",
+      "5": "Deep teal with pale cyan text.",
+      "6": "Black and grey with white text.",
+      "7": "Purple with pale lilac text."
+    }
+  },
+  "desktop.native_settings.choose3": {
+    "overview": "Angle mode and precision also affect formulas and graphs. Displayed decimal places are a separate setting from calculation precision.",
+    "items": {
+      "0": "Choose degrees, radians, grads or multiples of pi. Choosing the active mode leaves it active.",
+      "1": "Set significant calculation digits. For comparison, 3 Fix changes only displayed decimal places.",
+      "2": "Open calculator soft menus. Tab selects a row; Ctrl+F5 reaches column six. Beep toggles; numeric settings need a stack value. Esc goes back."
+    }
+  },
+  "desktop.native_settings.choose4": {
+    "overview": "Choose the angle unit for trigonometric calculations and graph formulas. This changes future evaluations, not results already calculated.",
+    "items": {}
+  },
+  "desktop.native_settings.choose5": {
+    "overview": "These pages report what the hardware can actually supply. An unavailable value is not a full battery or a successful network connection.",
+    "items": {
+      "0": "Read percentage and charging state from the keyboard controller.",
+      "1": "See internal memory budgets and PSRAM status; both RAM types lose work at power-off.",
+      "2": "Check the connection. F4 shows recent attempts and any pending startup retry."
+    }
+  },
+  "desktop.native_help.choose1": {
+    "overview": "Choose a guide for the task you are doing. Lua and CHIP-8 start with a first program; their command details and Find are in the same section. About and credits are at the bottom.",
+    "items": {
+      "0": "Read the built-in guide; its last entry opens Command reference.",
+      "1": "Insert a calculator command from the catalogue. Supply its arguments before running it.",
+      "2": "Find the Ctrl shortcuts and menu keys.",
+      "3": "Browse Lua language and PicoCalc API examples, including drawing, plots, keys and sound.",
+      "4": "Learn CHIP-8 assembly, keypad mapping and profiles with short programs and expected results.",
+      "5": "See the installed release and calculator credits.",
+      "6": "Read the open-source acknowledgements and license information."
+    }
+  },
+  "desktop.about_menu.choose1": {
+    "overview": "LumaRPL uses the DB48X engine with PicoCalc controls and tools. Credits name the people and open-source software that make it possible.",
+    "items": {
+      "0": "Check the installed release and calculator credits.",
+      "1": "Read acknowledgements; full license texts are on SD under /db48x/licenses."
+    }
+  },
+  "desktop.native_files.choose1": {
+    "overview": "A session contains stack, variables and settings. The other choices open the file menu for each document type, so you can save that work separately.",
+    "items": {
+      "0": "Save the current calculator session.",
+      "1": "Load the saved session, replacing current calculator state.",
+      "2": "Save or load equations and parameter definitions.",
+      "3": "Open saved graph, path or differential-equation files.",
+      "4": "Save or load a reusable form and its input values.",
+      "5": "Save or load notebook expressions and notes; run again after loading.",
+      "6": "Import or export an X,Y table as CSV.",
+      "7": "Save and return to the loader. Cancel or a required save failure keeps LumaRPL open."
+    }
+  },
+  "desktop.native_files.choose2": {
+    "overview": "Choose the kind of graph you saved. Loading checks the file first and asks before applying its stored angle mode.",
+    "items": {
+      "0": "Open the files menu for 2D function scenes.",
+      "1": "Open saved parametric or polar paths.",
+      "2": "Open saved differential-equation problems."
+    }
+  },
+  "conversion_ui.pico_conversions_menu.choose1": {
+    "overview": "Choose a physical-unit conversion or currency conversion. An answer reaches the calculator stack only when you choose Copy.",
+    "items": {
+      "0": "Set a value and compatible source/destination units.",
+      "1": "Set Amount, From and To, then Convert. Refresh is on the same page.",
+      "2": "Enter the Wi-Fi name and password used for time and rate updates."
+    }
+  },
+  "conversion_ui.currency_menu.choose1": {
+    "overview": "Set Amount, From and To, then Convert. From/To changes save automatically. Manage rates / settings has import, manual rates and network/date options.",
+    "items": {
+      "0": "Convert using the active rates; the answer includes its observation date.",
+      "1": "Enter an amount or scalar expression.",
+      "2": "Choose the source currency, such as CAD. Esc keeps the previous choice.",
+      "3": "Choose the destination currency. It is remembered automatically.",
+      "4": "Exchange the two currencies without changing the amount.",
+      "5": "Connect, get time, download and validate rates. New rates work immediately, then save to SD.",
+      "6": "Open import, manual rates, cache saving, Wi-Fi and date options.",
+      "7": "Read where rates come from and what their dates mean."
+    }
+  },
+  "conversion_ui.currency_pick.choose1": {
+    "overview": "Choose a three-letter currency code with Enter. Left/Right changes pages; Esc keeps the old choice. This selects a currency without converting yet.",
+    "items": {}
+  },
+  "conversion_ui.unit_conversion_menu.choose1": {
+    "overview": "Set the value and both units before converting. Units need compatible dimensions; absolute temperatures differ from temperature differences.",
+    "items": {
+      "0": "Show the converted answer. F1 on that answer copies it.",
+      "1": "Enter a number, fraction or ordinary scalar expression.",
+      "2": "Choose the unit of the value you are starting with.",
+      "3": "Choose a compatible unit for the answer.",
+      "4": "Exchange From and To without changing the number.",
+      "5": "Read conversion examples and custom-unit syntax."
+    }
+  },
+  "conversion_ui.conversion_pick_unit.choose1": {
+    "overview": "Choose a quantity, then its unit. For example, a length must convert to another length, rather than to a mass or temperature.",
+    "items": {}
+  },
+  "conversion_ui.conversion_pick_unit.choose2": {
+    "overview": "Enter selects the unit shown above. The full name is available here even when the list shortens it. Esc leaves the previous unit selected.",
+    "items": {}
+  },
+  "conversion_ui.timezone_menu.choose1": {
+    "overview": "This changes displayed local time, not UTC or the date of exchange-rate observations. Toronto/Eastern follows daylight saving; fixed offsets do not.",
+    "items": {}
+  },
+  "conversion_ui.currency_options.choose1": {
+    "overview": "These choices apply to the next currency refresh. The clock needs actual current time; the observation date can be historical.",
+    "items": {
+      "0": "Use NTP, or enter actual current UTC if NTP is blocked.",
+      "1": "Request latest observations or a historical date.",
+      "2": "Choose the displayed local timezone.",
+      "3": "Read how the clock and observation date work together."
+    }
+  },
+  "conversion_ui.currency_options.choose2": {
+    "overview": "Automatic NTP obtains current UTC before HTTPS. For Manual UTC, enter actual current UTC time, not your local time or the historical rate date.",
+    "items": {}
+  },
+  "conversion_ui.currency_options.choose3": {
+    "overview": "Latest asks for the newest provider observations. A historical date can return an earlier business day; check the date shown with the answer.",
+    "items": {}
+  },
+  "conversion_ui.wifi_setup.choose1": {
+    "overview": "Use a 2.4 GHz WPA2 personal network. Saving credentials allows quiet clock updates at startup; currency Refresh explicitly gets time and rates.",
+    "items": {
+      "0": "Enter the exact network name.",
+      "1": "Enter the network password; the dialog masks it.",
+      "2": "Choose this only for a network with no password.",
+      "3": "Keep credentials on SD for future starts. The password and backups are readable on the card.",
+      "4": "Delete saved credentials and recovery copies.",
+      "5": "Check the connection; F4 shows attempt details.",
+      "6": "Read connection, retry and refresh guidance.",
+      "7": "Choose the local timezone for displayed time."
+    }
+  },
+  "desktop.pico_graph_menu.choose1": {
+    "overview": "Choose a plot type. The views share tracing, panning and zooming controls, but each type has its own formulas and saved documents.",
+    "items": {
+      "0": "Enter up to three functions in X.",
+      "1": "Use X(T),Y(T), or a polar radius r(T).",
+      "2": "Draw a surface in X,Y; arrows rotate it.",
+      "3": "Solve a first-order initial-value problem and show its direction field.",
+      "4": "Choose saved graph files by their type.",
+      "5": "Move six points defining two lines and a circle.",
+      "6": "Plot the intersection of up to three Y-versus-f(X) inequalities with strict/inclusive boundaries.",
+      "7": "Plot an implicit equation such as X^2+Y^2=25, or contour levels of a scalar field, through Advanced studies."
+    }
+  },
+  "desktop.multi_menu.choose1": {
+    "overview": "Enter expressions in X without Y=. Clear a formula to disable that curve. All enabled curves share one window and the same analysis tools.",
+    "items": {
+      "0": "Sample the enabled functions and open the graph.",
+      "1": "Change Y1; try X^2.",
+      "2": "Change Y2; try SIN(X) in radians.",
+      "3": "Change Y3, or clear it to disable it.",
+      "4": "Set ordered X and Y window bounds.",
+      "5": "Choose different curve colours."
+    }
+  },
+  "desktop.formula_entry.choose1": {
+    "overview": "Choose a function or symbol to insert at the cursor. Function templates include punctuation; fill in their arguments before plotting or calculating.",
+    "items": {}
+  },
+  "desktop.formula_entry.choose2": {
+    "overview": "Insert a larger template or apply calculus to the current expression. F3 checks syntax; F4 previews the mathematical layout.",
+    "items": {}
+  },
+  "desktop.analysis_number.choose1": {
+    "overview": "Analysis works on the selected function over a chosen interval. Numerical searches can miss narrow or tangent features; they do not prove all solutions.",
+    "items": {
+      "0": "Look for resolved zeros within the bounds.",
+      "1": "Choose another curve and look for a crossing.",
+      "2": "Estimate a minimum within the bounds.",
+      "3": "Estimate a maximum within the bounds.",
+      "4": "Estimate the derivative at a specified X.",
+      "5": "Integrate with sign, so positive and negative parts can cancel.",
+      "6": "Integrate the absolute function value.",
+      "7": "Choose another curve and integrate their absolute difference."
+    }
+  },
+  "desktop.analysis_number.choose2": {
+    "overview": "Choose the other enabled function for intersections or area between curves. The currently traced function remains the first one.",
+    "items": {}
+  },
+  "desktop.analysis_number.choose3": {
+    "overview": "Choose where to search or integrate. Bounds limit the calculation; they do not guarantee that every feature inside them will be resolved.",
+    "items": {
+      "0": "Use the two X positions marked in the plot.",
+      "1": "Type the lower and upper X bounds."
+    }
+  },
+  "desktop.plot_curves.choose1": {
+    "overview": "Return from these choices with Esc to keep tracing the same graph. Export needs a writable SD card and writes under /db48x/exports.",
+    "items": {
+      "0": "Open controls for this kind of plot.",
+      "1": "Save a vector SVG of the graph.",
+      "2": "Save sampled coordinates as CSV; these are points, not an exact formula."
+    }
+  },
+  "desktop.plot_curves.choose2": {
+    "overview": "These controls change the differential-equation view. Editing the initial point resamples the solution; visibility changes keep the equation.",
+    "items": {
+      "0": "Show or hide the tangent at the trace point.",
+      "1": "Change X0,Y0 and solve again.",
+      "2": "Show or hide the direction-field arrows.",
+      "3": "Show or hide the solution curve."
+    }
+  },
+  "desktop.plot_curves.choose3": {
+    "overview": "Explore a parametric or polar path using T. Equal scaling gives both axes the same physical scale, so circles look round.",
+    "items": {
+      "0": "Show or hide the numerical tangent.",
+      "1": "Move to a T value inside its bounds.",
+      "2": "Give X and Y equal screen scale."
+    }
+  },
+  "desktop.plot_curves.choose4": {
+    "overview": "These controls act on the selected 2D curve. In the graph itself, F4 switches pan/trace and +/- zooms. Esc returns to tracing.",
+    "items": {
+      "0": "Show or hide its tangent.",
+      "1": "Mark this X as a bound; mark another to make an interval.",
+      "2": "Remove the marked interval.",
+      "3": "Type an X within the visible window.",
+      "4": "Adjust the workbench parameters without overwriting shared variables."
+    }
+  },
+  "desktop.surface_menu.choose1": {
+    "overview": "Enter an expression in X,Y without Z=. Arrows rotate the rendered surface, +/- zooms, and Esc stops sampling or returns.",
+    "items": {
+      "0": "Draw the surface using its current formula.",
+      "1": "Change the expression in X,Y.",
+      "2": "Use the saddle X^2-Y^2.",
+      "3": "Use SIN(X^2+Y^2); radians gives the usual ripple.",
+      "4": "Set the sampling bounds in X and Y."
+    }
+  },
+  "desktop.calculus_menu.choose1": {
+    "overview": "Calculus uses X as its variable. Use radians with trigonometric expressions. Unsupported symbolic operations report an error rather than inventing a result.",
+    "items": {
+      "0": "Find the symbolic derivative.",
+      "1": "Find an antiderivative; the arbitrary constant is implicit.",
+      "2": "Estimate the derivative at a numerical X.",
+      "3": "Calculate a numerical signed definite integral.",
+      "4": "Calculate numerical area using absolute values.",
+      "5": "Try a symbolic definite integral."
+    }
+  },
+  "desktop.scene_menu.choose1": {
+    "overview": "Function scenes keep formulas and graph settings under /db48x/graphs. Loading validates the document before replacing the current scene.",
+    "items": {
+      "0": "Name and save this scene.",
+      "1": "Choose a scene to load; Esc keeps the current one."
+    }
+  },
+  "desktop.edit_file.choose1": {
+    "overview": "These tools edit the open source document. Saving is separate; failed saves and cancelled Save & run keep the source available.",
+    "items": {
+      "0": "Open the matching language reference. Returning preserves your source, selection and unsaved changes.",
+      "1": "Browse complete examples and open one as a separate named document. Your original source and undo history stay intact.",
+      "3": "Search for text.",
+      "4": "Replace a match or all matches.",
+      "5": "Jump to a source line.",
+      "6": "Undo the last grouped edit.",
+      "7": "Redo an undone edit.",
+      "8": "Select all source text.",
+      "9": "Read shortcuts or the complete file path.",
+      "10": "Debug the current RPL program.",
+      "2": "Choose a language command, inspect its template, then insert at the cursor or replace the selection. Ctrl+Z undoes this edit."
+    }
+  },
+  "desktop.edit_file.choose2": {
+    "overview": "Replacement changes the open source and marks it unsaved. Esc cancels this choice without replacing text.",
+    "items": {
+      "0": "Replace the next match.",
+      "1": "Replace all matches in the source."
+    }
+  },
+  "desktop.development_files.actions": {
+    "overview": "Choose information about the selected CHIP-8 file or the interpreter behavior it needs. Changing a profile does not alter calculator mathematics.",
+    "items": {
+      "0": "Read the complete filename, path and type.",
+      "1": "Choose the interpreter profile expected by the ROM."
+    }
+  },
+  "desktop.development_files.choose1": {
+    "overview": "Use the compatibility profile the ROM was written for. CHIP-8 display pixels remain monochrome in every profile.",
+    "items": {
+      "0": "Use classic COSMAC VIP behavior.",
+      "1": "Use CHIP-48 behavior from the HP48 lineage.",
+      "2": "Use modern SUPER-CHIP behavior.",
+      "3": "Use HP48 SUPER-CHIP behavior."
+    }
+  },
+  "sprite.tools": {
+    "overview": "Colour mode keeps RGB332 pixels and transparency. CHIP-8 mode keeps a one-bit mask, with colour used only for preview. Save before replacing work.",
+    "items": {
+      "0": "Open a saved .sprite after checking unsaved work.",
+      "1": "Start a fresh colour drawing.",
+      "2": "Convert to a one-bit mask; a populated colour drawing asks first.",
+      "3": "Switch to full colour drawing.",
+      "4": "Clear pixels after confirmation.",
+      "5": "Export opaque pixels as set bits and transparent pixels as clear bits.",
+      "6": "Read painting, saving and Lua drawing instructions."
+    }
+  },
+  "workbench_ui.pico_workbench_menu.choose1": {
+    "overview": "Keep equations and parameters together without changing shared calculator variables. Save the workbench separately when you want it after restart.",
+    "items": {
+      "0": "Work with one equation in X.",
+      "1": "Solve two or three equations together.",
+      "2": "Plot with adjustable A,B,C.",
+      "3": "Save or load a workbench.",
+      "4": "Read solver and parameter controls."
+    }
+  },
+  "workbench_ui.workbench_single.choose1": {
+    "overview": "A local solve starts from your guess; an interval search examines a bounded region. Symbolic isolation is a separate action and can be unsupported.",
+    "items": {
+      "0": "Edit the equation or residual expression.",
+      "1": "Set the starting guess for X.",
+      "2": "Find one solution from that guess.",
+      "3": "Search between two bounds.",
+      "4": "Try to isolate X symbolically.",
+      "5": "Plot the equation residual."
+    }
+  },
+  "workbench_ui.workbench_system.choose1": {
+    "overview": "Use X,Y for two equations or X,Y,Z for three. Each unknown needs a guess; singular or inconsistent systems may not converge.",
+    "items": {
+      "0": "Choose two or three unknowns.",
+      "1": "Edit the first equation.",
+      "2": "Edit the second equation.",
+      "3": "Edit the third equation in a three-variable system.",
+      "4": "Set the initial guesses.",
+      "5": "Solve and inspect each residual."
+    }
+  },
+  "workbench_ui.workbench_system.choose2": {
+    "overview": "Choose two unknowns X,Y or three unknowns X,Y,Z. Then enter the matching equations and one starting guess for each variable.",
+    "items": {}
+  },
+  "workbench_ui.workbench_parameters.choose1": {
+    "overview": "The workbench owns A,B,C and their bounds. Sliders change these local values; Store parameters is the explicit way to update shared variables.",
+    "items": {
+      "0": "Open the parameter plot and adjust A,B,C in its F3 controls.",
+      "1": "Change the expression in X,A,B,C.",
+      "2": "Set A and its slider bounds and step.",
+      "3": "Set B and its slider bounds and step.",
+      "4": "Set C and its slider bounds and step.",
+      "5": "Set the X,Y window bounds.",
+      "6": "Copy one chosen parameter into its shared calculator variable."
+    }
+  },
+  "workbench_ui.workbench_parameters.choose2": {
+    "overview": "Choose which local parameter to store in the matching calculator variable A, B or C. This is the explicit step that changes a shared variable.",
+    "items": {}
+  },
+  "workbench_ui.workbench_use.choose1": {
+    "overview": "Viewing a result leaves your stack and variables alone. Choose how you want to use it, or go back without applying it.",
+    "items": {
+      "1": "Copy the result to the stack.",
+      "2": "Store the solved value or values in calculator variables."
+    }
+  },
+  "workbench_ui.workbench_use.choose2": {
+    "overview": "Choose the result you want to copy. The solver results remain available here; selecting one is the explicit stack-copy action.",
+    "items": {}
+  },
+  "workbench_ui.workbench_saved.choose1": {
+    "overview": "Workbench files keep equations, guesses, parameters, angle mode and graph settings. Results are temporary and are recalculated after loading.",
+    "items": {
+      "0": "Save this workbench under /db48x/workbenches.",
+      "1": "Load a workbench after validation; protect unsaved changes first."
+    }
+  },
+  "path_ui.pico_path_menu.choose1": {
+    "overview": "Parametric plots use X(T),Y(T); polar plots use r(T). T follows the calculator angle mode, and the same graph controls work in both modes.",
+    "items": {
+      "0": "Draw the current path.",
+      "1": "Choose parametric or polar mode.",
+      "2": "Edit X(T), or r(T) in polar mode.",
+      "3": "Edit Y(T) when using parametric mode.",
+      "4": "Set the first and last T.",
+      "5": "Set the graph window.",
+      "6": "Choose a worked example or read Help.",
+      "7": "Save or load a .path file."
+    }
+  },
+  "path_ui.pico_path_menu.choose2": {
+    "overview": "Parametric mode uses two expressions in T. Polar mode uses a radius expression in T. The current angle mode determines the angular unit.",
+    "items": {}
+  },
+  "path_ui.pico_path_menu.choose3": {
+    "overview": "These examples replace the current path and use radians. Save important changes before choosing one; replacement asks first.",
+    "items": {}
+  },
+  "path_ui.path_files.choose1": {
+    "overview": "Path files keep expressions, T bounds, angle mode and window under /db48x/paths. Loading asks before applying the saved angle mode.",
+    "items": {
+      "0": "Save the current path.",
+      "1": "Choose and load a path file."
+    }
+  },
+  "ode_ui.pico_ode_menu.choose1": {
+    "overview": "Enter a first-order slope expression in X,Y and an initial point. The solution is numerical and may stop at a domain error or its work budget.",
+    "items": {
+      "0": "Draw the solution and direction field.",
+      "1": "Edit the slope expression without dy/dX=.",
+      "2": "Set the initial X0,Y0.",
+      "3": "Set the visible window.",
+      "4": "Start from an example.",
+      "5": "Save or load an equation file.",
+      "6": "Read the method, controls and limitations.",
+      "7": "Solve coupled first-order systems or second-order initial-value problems, with phase portraits and tables."
+    }
+  },
+  "ode_ui.pico_ode_menu.choose2": {
+    "overview": "Choose an example differential equation. The expression and initial conditions are replaced so you can explore a complete problem.",
+    "items": {}
+  },
+  "ode_ui.ode_files.choose1": {
+    "overview": "Equation files under /db48x/odes keep the slope, initial point and graph settings. A load is checked before it replaces current work.",
+    "items": {
+      "0": "Save this differential-equation problem.",
+      "1": "Load a saved problem and confirm its angle mode."
+    }
+  },
+  "form_ui.pico_forms_menu.choose1": {
+    "overview": "A form keeps a reusable formula and named inputs. Calculate when ready; saving the form is separate from saving the calculator session.",
+    "items": {
+      "0": "Give the form a title.",
+      "1": "Change the formula using its input names.",
+      "2": "Add or edit named inputs, values and units.",
+      "3": "Calculate with the current inputs.",
+      "4": "Vary one input along a graph.",
+      "5": "Save or load this form.",
+      "6": "Choose a worked example or read Help.",
+      "7": "Choose optional result units with compatible dimensions."
+    }
+  },
+  "form_ui.form_field_edit.choose1": {
+    "overview": "Edit the input definition. Names must match the formula, and a later input may use the value of an earlier one.",
+    "items": {
+      "0": "Change the value or expression.",
+      "1": "Rename this input; update its name in the formula too.",
+      "2": "Delete this input and check the formula afterward.",
+      "3": "Choose its optional declared unit."
+    }
+  },
+  "form_ui.form_fields.choose1": {
+    "overview": "Choose an existing input to edit it, or add one while fewer than six exist. Use the same names in the formula and input definitions.",
+    "items": {}
+  },
+  "form_ui.form_graph.choose1": {
+    "overview": "Choose the input to vary along the horizontal axis. Other definitions stay in place; shared calculator variables are not overwritten.",
+    "items": {}
+  },
+  "form_ui.form_files.choose1": {
+    "overview": "Saved forms keep the formula, named inputs, units and values under /db48x/forms. A failed load leaves the current form in place.",
+    "items": {
+      "0": "Save this form.",
+      "1": "Open a saved form after validation."
+    }
+  },
+  "form_ui.pico_forms_menu.choose2": {
+    "overview": "Choose a formula to start from. Save current changes before replacing the form, especially if you want to keep its input values.",
+    "items": {}
+  },
+  "notebook_ui.pico_notebooks_menu.choose1": {
+    "overview": "A notebook holds expressions and notes. Nothing runs while editing or loading; choose Run when you want results refreshed.",
+    "items": {
+      "0": "Choose a cell.",
+      "1": "Run cells from the start in order.",
+      "2": "Add a cell, up to twelve.",
+      "3": "Save or load expressions and notes.",
+      "4": "Change the notebook title.",
+      "5": "Replace current content with demo cells.",
+      "6": "Read cell references and saving behavior."
+    }
+  },
+  "notebook_ui.notebook_cells.choose1": {
+    "overview": "Open a cell to edit, run through it, inspect it or delete it. Merely selecting a cell does not evaluate the notebook.",
+    "items": {}
+  },
+  "notebook_ui.notebook_cell.choose1": {
+    "overview": "Run through starts at cell one and stops here. Moving or deleting cells changes their numbers, so check later R1..R12 references afterward.",
+    "items": {
+      "0": "Edit this expression.",
+      "1": "Edit its note without executing anything.",
+      "2": "Read the note and most recent result.",
+      "3": "Run from cell one through this cell.",
+      "4": "Move the cell one place earlier.",
+      "5": "Delete this cell."
+    }
+  },
+  "notebook_ui.notebook_files.choose1": {
+    "overview": "Notebook files keep expressions and notes under /db48x/notebooks. Results are refreshed by an explicit Run after loading.",
+    "items": {
+      "0": "Save this notebook.",
+      "1": "Load a saved notebook after checking unsaved changes."
+    }
+  },
+  "data_ui.pico_data_menu.choose1": {
+    "overview": "Enter paired X,Y observations, then inspect statistics, fit a model or plot them. Use Files to save or import a CSV table.",
+    "items": {
+      "0": "Edit the table: F1 adds, F2 deletes, F3 shows statistics and F4 plots.",
+      "1": "Read column statistics.",
+      "2": "Choose a regression model.",
+      "3": "Plot observations and the fitted curve.",
+      "4": "Plot Y minus its fitted value.",
+      "5": "Import or export paired CSV data.",
+      "6": "Replace the table with demo data after confirmation."
+    }
+  },
+  "data_ui.data_summary.choose1": {
+    "overview": "These statistics use the current table. Choose a column and measure when you want to copy a value to the calculator stack.",
+    "items": {}
+  },
+  "data_ui.data_summary.choose2": {
+    "overview": "Choose whether the statistic should use the X column or Y column. This does not change or rearrange the table.",
+    "items": {}
+  },
+  "data_ui.data_summary.choose3": {
+    "overview": "Choose a statistic to copy from the selected column. Sample variance and deviation need at least two observations.",
+    "items": {
+      "0": "Copy the minimum.",
+      "1": "Copy the maximum.",
+      "2": "Copy the mean.",
+      "3": "Copy the median.",
+      "4": "Copy the total.",
+      "5": "Copy population variance, using n.",
+      "6": "Copy sample variance, using n-1.",
+      "7": "Copy sample standard deviation."
+    }
+  },
+  "data_ui.data_regression.choose1": {
+    "overview": "Choose a least-squares model suited to your data. Logarithmic transformations require positive values in the affected columns.",
+    "items": {
+      "0": "Fit Y=a+bX.",
+      "1": "Fit Y=a+b*ln(X), requiring X>0.",
+      "2": "Fit Y=a*exp(bX), requiring Y>0.",
+      "3": "Fit Y=a*X^b, requiring X,Y>0."
+    }
+  },
+  "data_ui.data_regression.choose2": {
+    "overview": "Choose how to use the fitted result. Using Y1 replaces the 2D curve set; copying adds the selected object to the stack.",
+    "items": {
+      "0": "Copy coefficient a.",
+      "1": "Copy coefficient b.",
+      "2": "Copy the expression in X.",
+      "3": "Use the fit as Y1 in a new active curve set.",
+      "4": "Save the fit as a graph scene.",
+      "5": "Copy correlation where defined; nonlinear fits use transformed data.",
+      "6": "Copy squared correlation where defined."
+    }
+  },
+  "data_ui.data_files.choose1": {
+    "overview": "CSV tables live under /db48x/data. Imports are checked before replacing the current paired table; failed loading keeps it.",
+    "items": {
+      "0": "Save the table as CSV.",
+      "1": "Import a supported two-column CSV file."
+    }
+  },
+  "conversion_ui.currency_tools": {
+    "overview": "Manage the rates used by Currency conversion. Return with F5 to see Amount, From and To; imported/manual rates need a cache save for restart.",
+    "items": {
+      "0": "Import a validated .rates table.",
+      "1": "Edit a rate quoted as units per EUR and its date.",
+      "2": "Save the active table for offline use after restart.",
+      "3": "Set up the network name and password.",
+      "4": "Choose time, observation-date and timezone options."
+    }
+  },
+  "editor.help_details": {
+    "overview": "Read the editor controls or the complete source-file path. Returning keeps the source, cursor and unsaved state unchanged.",
+    "items": {
+      "0": "Read the source-editor shortcuts.",
+      "1": "Read the entire file path."
+    }
+  },
+  "math.matrix.menu": {
+    "overview": "Work on A and B without changing the calculator stack. Results offer Copy, and matrix results can be used as A for another operation.",
+    "items": {
+      "0": "Edit matrix A.",
+      "1": "Set up B and combine it with A.",
+      "2": "Use determinant, inverse, transpose or solving.",
+      "3": "Save/load A or import the top stack matrix.",
+      "4": "Read the matrix controls and examples.",
+      "5": "Keep matrices in named HOME variables.",
+      "6": "Use powers, echelon forms, rank and system classification."
+    }
+  },
+  "math.finance.menu": {
+    "overview": "Rates for loans are nominal annual percentages divided by periods/year. Cash-flow discount rates are per interval. Read Help before comparing a lender quote.",
+    "items": {
+      "0": "Set principal, rates, periods, timing and other inputs.",
+      "1": "Find the payment magnitude that amortizes the loan.",
+      "2": "Calculate growth, savings, rate or term.",
+      "3": "Read balance, principal and interest after payments.",
+      "4": "Enter signed cash flows and calculate NPV/IRR.",
+      "5": "Save inputs and cash flows.",
+      "6": "Load a finance file after validation.",
+      "7": "Read examples and finance conventions."
+    }
+  },
+  "math.finance.inputs": {
+    "overview": "Enter percentages as 5 for 5%, not 0.05. Periods are counts, not years. Changing these fields leaves engine TVM variables alone.",
+    "items": {
+      "0": "Set loan principal or initial investment.",
+      "1": "Set nominal annual interest percentage.",
+      "2": "Set the total count of periods, from 1 to 100000.",
+      "3": "Set periods per year, from 1 to 366; monthly is 12.",
+      "4": "Choose beginning or end payment/deposit timing.",
+      "5": "Set the discount percentage per cash-flow interval.",
+      "6": "Set the payment used for rate/term solving.",
+      "7": "Set the deposit used for regular savings."
+    }
+  },
+  "math.finance.cashmenu": {
+    "overview": "CF0 happens now. Later flows are equally spaced. Negative amounts are outflows and positive amounts are inflows; discount/IRR percentages are per interval.",
+    "items": {
+      "0": "Edit the signed amounts.",
+      "1": "Set the count including CF0, from 1 to 17.",
+      "2": "Calculate net present value.",
+      "3": "Set the discount percentage per interval.",
+      "4": "Search for IRR within its configured interval.",
+      "5": "Set -100 < first < last <= 10000 percent."
+    }
+  },
+  "math.matrix.files": {
+    "overview": "Matrix files keep dimensions and cell expressions under /db48x/matrices. Loading validates the complete file before replacing the working grid.",
+    "items": {
+      "0": "Save this matrix under a chosen name.",
+      "1": "Open a .matrix file.",
+      "2": "Read level 1 without consuming it. The matrix must fit 6x6 and 31-byte cells."
+    }
+  },
+  "math.matrix.arithmetic": {
+    "overview": "A and B are separate working matrices. Calculations keep both inputs; Copy or Use in A applies a result explicitly.",
+    "items": {
+      "0": "Edit B without changing A.",
+      "1": "Save/load B or import a stack matrix into it.",
+      "2": "Add equal-sized matrices.",
+      "3": "Subtract B from A; sizes must match.",
+      "4": "Multiply A by B; columns(A)=rows(B).",
+      "5": "Calculate A*inverse(B); B must be square and invertible.",
+      "6": "Scale A, divide it by a nonzero scalar or negate it.",
+      "7": "Exchange A and B, keeping both; they become unsaved."
+    }
+  },
+  "math.matrix.scalar": {
+    "overview": "Enter an ordinary real expression such as 1/3 for the scalar. The answer does not replace A unless you choose Use in A.",
+    "items": {
+      "0": "Multiply every entry by k.",
+      "1": "Divide every entry by nonzero k.",
+      "2": "Change the sign of every entry."
+    }
+  },
+  "math.matrix.operations": {
+    "overview": "These operations use matrix A. A matrix result can become A for chaining; copying a result to the calculator stack is always explicit.",
+    "items": {
+      "0": "Find the determinant of square A.",
+      "1": "Find the inverse of square, nonsingular A.",
+      "2": "Exchange rows and columns.",
+      "3": "Solve the augmented matrix with b last, with b in the last column.",
+      "4": "Find characteristic roots of a 2x2 matrix."
+    }
+  },
+  "math.matrix.register_actions": {
+    "overview": "A register is a named HOME variable. Loading a register keeps the stored matrix and calculator stack intact; overwriting a variable asks first.",
+    "items": {
+      "0": "Read or copy the selected matrix.",
+      "1": "Store B under a name.",
+      "2": "Read register controls and persistence."
+    }
+  },
+  "math.matrix.reduction": {
+    "overview": "Reduction keeps A unchanged until you apply the result. For system classification, the last column is the right-hand side.",
+    "items": {
+      "0": "Raise A to an integer power from -32 to 32; negative powers need an inverse.",
+      "1": "Find row echelon form.",
+      "2": "Find reduced row echelon form.",
+      "3": "Find rank from the reduced rows.",
+      "4": "Compare coefficient/augmented ranks to classify solutions."
+    }
+  },
+  "math.complex.menu": {
+    "overview": "Z and W can each be rectangular or polar. The phase unit belongs to this workbench, so calculator angle settings are restored after calculations.",
+    "items": {
+      "0": "Enter both parts of Z.",
+      "1": "Enter both parts of W.",
+      "2": "Convert Z, inspect it or find its roots.",
+      "3": "Combine Z with W.",
+      "4": "Choose degrees or radians for local phase inputs.",
+      "5": "Save or load Z, W and phase unit.",
+      "6": "Read complex examples and conventions."
+    }
+  },
+  "math.complex.form": {
+    "overview": "Choose rectangular or polar entry. Both component prompts must succeed before the old value is replaced; Esc keeps it.",
+    "items": {
+      "0": "Enter the real part, then imaginary part.",
+      "1": "Enter a nonnegative magnitude, then phase."
+    }
+  },
+  "math.complex.operations": {
+    "overview": "These choices use Z. Phase uses the local angle unit; zero has no defined phase. Roots include multiplicities.",
+    "items": {
+      "0": "Show rectangular Z.",
+      "1": "Show polar Z.",
+      "2": "Find its magnitude.",
+      "3": "Find the phase of nonzero Z.",
+      "4": "Conjugate Z.",
+      "5": "Find all n-th roots for n from 2 to 16."
+    }
+  },
+  "math.complex.arithmetic": {
+    "overview": "These operations retain Z and W. Fractions stay exact where supported; dividing by zero reports an error without changing inputs.",
+    "items": {
+      "0": "Add Z and W.",
+      "1": "Subtract W from Z.",
+      "2": "Multiply Z by W.",
+      "3": "Divide Z by nonzero W."
+    }
+  },
+  "math.complex.files": {
+    "overview": "Files under /db48x/complex keep both values, their entry forms and phase unit. Loading checks the file and protects unsaved work first.",
+    "items": {
+      "0": "Save this complex workbench.",
+      "1": "Load a saved workbench, recovering a backup where possible."
+    }
+  },
+  "math.geometry.menu": {
+    "overview": "Six points define infinite lines AB/CD and a circle centred at E through F. Explore them in the shared graph or edit their coordinates.",
+    "items": {
+      "0": "Open the graph and move points.",
+      "1": "Choose a point to edit numerically.",
+      "2": "Read lengths, radius and intersections.",
+      "3": "Show or hide construction layers.",
+      "4": "Restore the demo after checking unsaved changes.",
+      "5": "Save or load a construction.",
+      "6": "Read movement and measurement guidance.",
+      "7": "Declare coordinate units, rescale existing coordinates/window into compatible units, or explicitly remove units while retaining magnitudes. New coordinate entries accept quantities."
+    }
+  },
+  "math.geometry.points": {
+    "overview": "A/B define the first line and C/D the second. E is the circle centre; F lies on its circumference. Changing a point updates the construction.",
+    "items": {
+      "0": "Change point A.",
+      "1": "Change point B.",
+      "2": "Change point C.",
+      "3": "Change point D.",
+      "4": "Move the circle centre E.",
+      "5": "Move F to change the circle radius."
+    }
+  },
+  "math.geometry.layers": {
+    "overview": "Visibility changes only what is drawn. All six points keep their coordinates and remain available for selection and editing.",
+    "items": {
+      "0": "Show or hide infinite line AB.",
+      "1": "Show or hide infinite line CD.",
+      "2": "Show or hide the circle through F, centred at E."
+    }
+  },
+  "math.geometry.files": {
+    "overview": "Geometry files retain the six points, visible layers, selected point and window. Save before restart to keep changes.",
+    "items": {
+      "0": "Save under /db48x/geometry.",
+      "1": "Load a checked construction or recover its valid backup."
+    }
+  },
+  "math.geometry.explore": {
+    "overview": "In move mode, arrows change the selected point by one percent of the visible span. Esc returns to tracing; pan and zoom remain available.",
+    "items": {
+      "0": "Start moving the selected point.",
+      "1": "Type its X and Y coordinates.",
+      "2": "Read the construction measurements."
+    }
+  },
+  "math.finance.more": {
+    "overview": "Growth uses nominal annual rate divided by periods/year. Rate/term solving uses Payment, while regular-deposit savings uses Deposit.",
+    "items": {
+      "0": "Calculate future value without added deposits.",
+      "1": "Include regular deposits using the selected timing.",
+      "2": "Solve nominal annual interest from principal, payment and term.",
+      "3": "Solve a possibly fractional payment count."
+    }
+  },
+  "form_ui.examples_help": {
+    "overview": "Start from a supplied example or read the tool instructions. Reading Help leaves the document alone; choosing an example can replace it.",
+    "items": {
+      "0": "Choose an example after protecting current changes.",
+      "1": "Read controls, examples and limits."
+    }
+  },
+  "path_ui.examples_help": {
+    "overview": "Start from a supplied example or read the tool instructions. Reading Help leaves the document alone; choosing an example can replace it.",
+    "items": {
+      "0": "Choose an example after protecting current changes.",
+      "1": "Read controls, examples and limits."
+    }
+  },
+  "math.finance.flows": {
+    "overview": "Edit the amount for the selected cash-flow period. CF0 is now; later periods are equally spaced. The parent menu changes how many flows are included.",
+    "items": {
+      "0": "Set the signed amount for CF0.",
+      "1": "Set the signed amount for CF1.",
+      "2": "Set the signed amount for CF2.",
+      "3": "Set the signed amount for CF3.",
+      "4": "Set the signed amount for CF4.",
+      "5": "Set the signed amount for CF5.",
+      "6": "Set the signed amount for CF6.",
+      "7": "Set the signed amount for CF7.",
+      "8": "Set the signed amount for CF8.",
+      "9": "Set the signed amount for CF9.",
+      "10": "Set the signed amount for CF10.",
+      "11": "Set the signed amount for CF11.",
+      "12": "Set the signed amount for CF12.",
+      "13": "Set the signed amount for CF13.",
+      "14": "Set the signed amount for CF14.",
+      "15": "Set the signed amount for CF15.",
+      "16": "Set the signed amount for CF16."
+    }
+  },
+  "reference.topics": {
+    "overview": "Choose a guide topic and read it with arrows. F5 returns here. Command reference opens the same style of reader, with browsing and Find.",
+    "items": {
+      "0": "Get started with calculations, tools and saving.",
+      "1": "Find your way around lists and calculator soft menus.",
+      "2": "Use the stack, store a value and run a small program.",
+      "3": "Enter a graph, explore it and use calculus.",
+      "4": "Solve equations and adjust plot parameters.",
+      "5": "Work with tables, reusable forms and notebooks.",
+      "6": "Run programs, edit source and draw sprites.",
+      "7": "Convert units and currencies, online or offline.",
+      "8": "Save work, recover from errors and return to the loader.",
+      "9": "Connect Wi-Fi and choose clock/rate dates.",
+      "10": "Choose colours, mathematical fonts and calculator settings.",
+      "11": "Browse or find a command, then read its page. Arrows scroll or page; F5 returns to the list."
+    }
+  },
+  "reference.subjects": {
+    "overview": "Find a command by name or browse a subject. Each entry opens a normal help page; F5 brings you back to the same list.",
+    "items": {}
+  },
+  "editor.examples": {
+    "overview": "Choose an example to read its source and expected result. Open creates a separate unsaved document; returning restores your original editor.",
+    "items": {}
+  },
+  "math.lab.files": {
+    "overview": "Save or load the inputs for all five math workbenches together. The workbench angle mode is scoped to these tools; your calculator angle setting is restored when you leave.",
+    "items": {
+      "0": "Save all five workbenches, their formulas, inputs, bounds and angle mode in one .mathlab file.",
+      "1": "Load a validated .mathlab document; unsaved replacements require confirmation. A valid backup can recover a failed replacement.",
+      "2": "Choose the saved workbench angle mode.",
+      "3": "Read help and a worked example for the current workbench."
+    }
+  },
+  "math.lab.angle": {
+    "overview": "Choose the angle mode used by formulas in these workbenches. Normal/binomial/Poisson probabilities and vector angles labelled degrees are independent of this choice.",
+    "items": {}
+  },
+  "math.lab.vector_plane": {
+    "overview": "Choose which two coordinates to draw. The native path traces A and B from the origin; 3D vectors are shown as projections, not a perspective 3D arrow view.",
+    "items": {}
+  },
+  "math.lab.vectors": {
+    "overview": "Enter real scalar expressions for A and B, then choose a calculation or plot. The inputs remain available when you return. Results are copied to the stack only when you choose Copy.",
+    "items": {}
+  },
+  "math.lab.vector_dimension": {
+    "overview": "Choose two or three components. The hidden third components are retained when you switch to 2D.",
+    "items": {}
+  },
+  "math.lab.vector_operations": {
+    "overview": "Choose an operation on the current A and B. The 2D cross result is its signed Z component. Projection requires nonzero B; an angle requires both vectors to be nonzero.",
+    "items": {}
+  },
+  "math.lab.probability": {
+    "overview": "Choose a distribution and parameters, then enter a point, an interval or a percentile probability. Calculate gives density, mass, cumulative/tail probability, interval probability or an inverse lookup.",
+    "items": {}
+  },
+  "math.lab.distribution": {
+    "overview": "Normal uses mean and standard deviation. Binomial uses integer trials n and success probability p. Poisson uses its mean lambda. Choosing a distribution starts it with valid default parameters.",
+    "items": {
+      "3": "Declare measurement units for the normal distribution. Mean, SD, point and interval entries accept compatible quantities; CDF probabilities remain dimensionless."
+    }
+  },
+  "math.lab.probability_operations": {
+    "overview": "Use the stored point/interval/percentile. Density is not point probability. Discrete intervals include both integer endpoints. Inverse CDF returns the smallest integer meeting the cumulative probability.",
+    "items": {
+      "5": "Use data-table observations for inference or fit a normal distribution; returning keeps this calculation menu open."
+    }
+  },
+  "math.lab.regions": {
+    "overview": "Each enabled boundary compares Y with a function of X. The shaded area satisfies all enabled conditions together. Strict inequalities use dashed boundary lines. Missing-domain columns are not shaded.",
+    "items": {}
+  },
+  "math.lab.relation": {
+    "overview": "Choose above/below and whether equality is included, then edit f(X). Disabled boundaries retain their formulas for later use.",
+    "items": {}
+  },
+  "math.lab.multivariable": {
+    "overview": "F and G are formulas in X and Y. Use Calculate for derivatives, gradient, Jacobian, Hessian, values and a rectangular numerical double integral. Plot F or a numerical tangent plane using the native surface view.",
+    "items": {}
+  },
+  "math.lab.multivariable_operations": {
+    "overview": "Gradient order is X,Y. Jacobian rows are F,G and columns X,Y. Hessian rows/columns are X,Y. The double integral uses the stored increasing X/Y bounds and bounded refinement; domain errors or failed convergence are reported.",
+    "items": {}
+  },
+  "math.lab.algebra": {
+    "overview": "Transform an expression with upstream DB48X rules. Replacement and variable are used by Substitute. Viewing results preserves the expression; Use result explicitly replaces it after confirmation.",
+    "items": {}
+  },
+  "math.lab.variable": {
+    "overview": "Choose the symbol to replace. Substitute changes that symbol in the expression without storing a calculator variable.",
+    "items": {}
+  },
+  "math.lab.algebra_operations": {
+    "overview": "Simplify, Expand, Collect, Partial fractions and Substitute use DB48X. Collect can factor supported patterns; unsupported forms are retained or reported by the engine without a numerical fallback.",
+    "items": {}
+  },
+  "math.lab.calculus_route": {
+    "overview": "Choose one-variable calculus, two-variable calculus, symbolic algebra or the existing stack value/approximation view.",
+    "items": {
+      "4": "Enter polynomial coefficients, solve for roots, evaluate, multiply, divide and plot."
+    }
+  },
+  "math.lab.matrix_route": {
+    "overview": "Use the matrix grid for matrix arithmetic and linear algebra. Use the vector workbench for 2D/3D real vectors, projection, angle and endpoint distance.",
+    "items": {}
+  },
+  "math.lab.vector_arithmetic": {
+    "overview": "Add/subtract A and B, scale A with the stored real k, divide A by nonzero k, or normalize nonzero A. Operations use DB48X arithmetic; the input vectors remain unchanged.",
+    "items": {
+      "5": "Edit the scale k as a real expression, such as 2 or 1/3."
+    }
+  },
+  "math.lab.bounds": {
+    "overview": "The integration rectangle and surface display window are separate. Enter increasing X and Y bounds. Changing either leaves the other unchanged.",
+    "items": {
+      "0": "Set the rectangle used by the numerical double integral.",
+      "1": "Set X and Y limits for Plot F and the tangent-plane view."
+    }
+  },
+  "advanced.files": {
+    "overview": "Files / help. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Save all advanced workbench inputs together in a named .advanced file. Results are not saved.",
+      "1": "Load a checked document; unsaved inputs require confirmation before replacement.",
+      "2": "Read worked examples and the assumptions behind the calculations."
+    }
+  },
+  "advanced.polynomial": {
+    "overview": "Guided polynomials. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Enter degree 1–8 and real coefficients from the highest power down to the constant. A zero leading coefficient is rejected.",
+      "1": "Enter polynomial B for multiplication and division. This does not replace A.",
+      "2": "Solve, evaluate, multiply or divide. The calculation menu stays open when you close a result.",
+      "3": "Plot A with the native graph controls. Long expressions may exceed the graph editor limit.",
+      "4": "Save or load inputs, or read the polynomial guide.",
+      "5": "Declare X and output units for A and B. Bare coefficients are magnitudes in the implied output/X^power units."
+    }
+  },
+  "advanced.polynomial_operations": {
+    "overview": "Polynomial calculations. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "View the expression represented by A.",
+      "1": "Find real and complex roots through DB48X. Repeated roots appear repeatedly; numerical roots can be approximate.",
+      "2": "Enter a real X and evaluate A using the engine.",
+      "3": "Multiply A and B, preserving the input coefficients.",
+      "4": "Return the polynomial quotient of A divided by B. Use Remainder separately for the remaining term.",
+      "5": "Return the remainder after polynomial division of A by B."
+    }
+  },
+  "advanced.ode": {
+    "overview": "Systems / second-order ODE. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Choose a coupled system or a second-order equation. Both use Y and Z as dependent variables.",
+      "1": "Coupled mode uses Y'=F(X,Y,Z), Z'=G(X,Y,Z). Second order uses Y'=Z and Z'=G.",
+      "2": "Set initial X,Y,Z and a distinct final X. In second-order mode, initial Z is the initial derivative.",
+      "3": "Solve with bounded adaptive RK4 refinement, then plot Y and Z against X.",
+      "4": "Plot Y horizontally and Z vertically. In second-order mode this is position versus derivative.",
+      "5": "Read 21 rows from the 201-point solution. Values are numerical estimates.",
+      "6": "Save the equations and initial conditions or read the guide.",
+      "7": "Declare X,Y,Z units. Right-hand sides must have the corresponding derivative dimensions. Second-order Z means Y'."
+    }
+  },
+  "advanced.ode_mode": {
+    "overview": "Equation mode. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Enter two first-order right-hand sides in X,Y,Z.",
+      "1": "Enter Y''=G(X,Y,Z), where Z stands for Y'."
+    }
+  },
+  "advanced.engineering": {
+    "overview": "Engineering: RLC / RC filters. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Enter ohms, henries, farads and hertz. For a microfarad enter 1e-6.",
+      "1": "Compute ideal series and parallel RLC complex impedance.",
+      "2": "Calculate ideal unloaded RC low-pass and high-pass gain and phase. Inductance is not used here.",
+      "3": "Plot both RC filters in dB against log10(frequency in Hz).",
+      "4": "Plot filter phase in degrees against log10(frequency in Hz).",
+      "5": "Choose increasing positive frequencies in hertz for the sweep.",
+      "6": "Save circuit inputs or read the guide."
+    }
+  },
+  "advanced.statistics": {
+    "overview": "Data inference / distributions. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Choose X, Y or paired X-Y differences from the current data table.",
+      "1": "Set confidence as a fraction, the null mean and the null proportion.",
+      "2": "Use sample standard deviation and Student t to estimate the population mean.",
+      "3": "Calculate a two-sided one-sample Student t p-value. Paired differences give a paired t test.",
+      "4": "Explicitly set the Probability normal distribution to the sample mean and sample standard deviation. This is a fit, not a normality test.",
+      "5": "Enter successes and trials for a Wilson interval and approximate two-sided score test. Small expected counts need an exact method.",
+      "6": "Save inference settings or read assumptions and examples."
+    }
+  },
+  "advanced.sample": {
+    "overview": "Select data sample. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Use the X observations in the current table.",
+      "1": "Use the Y observations in the current table.",
+      "2": "Subtract each row's Y from X. Rows are matched pairs; pairs must be independent."
+    }
+  },
+  "advanced.finance_route": {
+    "overview": "Finance / engineering. Use arrows / Enter or visible row numbers. F5 / Esc goes back one level.",
+    "items": {
+      "0": "Open the existing financial calculator.",
+      "1": "Open ideal RLC impedance and RC filter responses, including Bode plots."
+    }
+  },
+  "science.route": {
+    "overview": "More mathematics. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Open the existing complex-number workbench.",
+      "1": "Evaluate expressions with physical units and convert results.",
+      "2": "Propagate independent standard uncertainties through a formula.",
+      "3": "Interpolate between observations or fit a nonlinear model.",
+      "4": "Work with exact integers and bounded recurrence tables.",
+      "5": "Analyze uniformly sampled Y data with FFTs and filters.",
+      "6": "Open the consolidated advanced studies: implicit graphs, linear algebra, calculus, statistics, signals and connected documents."
+    }
+  },
+  "science.files": {
+    "overview": "Files / help. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Save all applied-math settings in one checked .science file; data tables are saved separately as CSV.",
+      "1": "Load a checked file; replacing unsaved settings needs confirmation.",
+      "2": "Read worked examples, units and numerical limits for this tool."
+    }
+  },
+  "science.data_units": {
+    "overview": "Data units. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Declare the units represented by the current CSV X magnitudes. This labels the numbers, not a conversion of the table.",
+      "1": "Declare Y magnitude units for interpolation, signal amplitude and data inference. Save declarations in a .science document."
+    }
+  },
+  "science.units": {
+    "overview": "Units and dimensions. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Enter an expression such as (12_V)/(4_ohm) or (2_m)+(30_cm).",
+      "1": "Choose desired result units, such as A or cm. Empty retains the result units.",
+      "2": "Evaluate with DB48X dimensional checking. F1 Copy explicitly adds the result to the stack.",
+      "3": "Use the existing six-input formula forms, with units declared for each input and output.",
+      "4": "Open the existing unit conversion tool, including compound units.",
+      "5": "Declare units for numerical data columns. Bare CSV values are interpreted in these units.",
+      "6": "Save inputs or read the guide."
+    }
+  },
+  "science.uncertainty": {
+    "overview": "Measurement uncertainty. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Enter a smooth expression in independent measurements A, B and C. Trigonometric functions use radians.",
+      "1": "Enter A, its nonnegative standard uncertainty and optional unit declaration.",
+      "2": "Enter B, its nonnegative standard uncertainty and optional unit declaration.",
+      "3": "Enter C and its uncertainty. Use zero uncertainty for a fixed input.",
+      "4": "Choose compatible output units, or leave empty to infer them.",
+      "5": "Combine first-order independent contributions in quadrature. This is not a confidence interval or correlated-error calculation.",
+      "6": "Save measurements and formula, or read assumptions and examples."
+    }
+  },
+  "science.fitting": {
+    "overview": "Interpolation / curve fitting. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Toggle linear or shape-preserving cubic interpolation.",
+      "1": "Evaluate inside the sampled range. X must be strictly increasing without duplicates; no extrapolation is performed.",
+      "2": "Plot interpolated values and original observations through the native engine.",
+      "3": "Enter a numerical F(X,A,B,C) model and three starting guesses. Coefficients refer to declared X,Y magnitudes.",
+      "4": "Run bounded unweighted local least squares. A singular model or failed convergence is reported; guesses are not silently replaced.",
+      "5": "Create samples of 2*EXP(0.5*X)+1 after confirming replacement of the current data table.",
+      "6": "Declare units represented by the X,Y magnitudes.",
+      "7": "Save model/guesses/settings; save the source table separately as CSV."
+    }
+  },
+  "science.fit_actions": {
+    "overview": "Converged nonlinear fit. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Read A,B,C and residual sum of squares. Copy adds a coefficient vector explicitly.",
+      "1": "Plot the fitted model with the original observations and interpolation.",
+      "2": "Plot observed Y minus fitted Y at each source X.",
+      "3": "Explicitly adopt the converged values as the next starting guesses."
+    }
+  },
+  "science.discrete": {
+    "overview": "Discrete mathematics. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Enter unsigned decimal integers up to 1e12. Fractional values are rejected rather than rounded.",
+      "1": "Choose exact integer operations. Each operation returns to this submenu.",
+      "2": "Enter F(N,U), initial U at N=0 and a row count up to 128.",
+      "3": "Evaluate numerical recurrence values with cancellation and range checks. Installing the generated table needs confirmation.",
+      "4": "Save integer and recurrence inputs, or read the guide."
+    }
+  },
+  "science.integer_operations": {
+    "overview": "Exact integer calculations. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Euclidean greatest common divisor of A and B. GCD(0,0)=0.",
+      "1": "Exact least common multiple; a zero operand gives zero.",
+      "2": "Return A modulo positive B.",
+      "3": "Compute A^B modulo positive M without constructing A^B.",
+      "4": "Factor A from 2 through 1e9 by interruptible bounded trial division. Repeated factors are retained.",
+      "5": "Exact A choose B, requiring 0<=B<=A<=1000.",
+      "6": "Exact ordered selections A pick B, requiring 0<=B<=A<=1000."
+    }
+  },
+  "science.sequence_actions": {
+    "overview": "Generated sequence. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Read the recurrence rows. A truncation notice directs you to CSV if the reader buffer fills.",
+      "1": "Plot N against U(N) using the native graph engine.",
+      "2": "Export every generated row without replacing the current table.",
+      "3": "Confirm replacement of the current X,Y table with the generated sequence."
+    }
+  },
+  "science.spectrum": {
+    "overview": "One-sided FFT. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Plot one-sided peak amplitudes with coherent-window-gain correction. Joined bins are a display interpolation.",
+      "1": "Plot wrapped phase in degrees; very weak bins are omitted.",
+      "2": "Read bin frequencies in hertz and peak amplitudes in declared Y units.",
+      "3": "Export frequency/amplitude rows. Phase is not included in this CSV."
+    }
+  },
+  "science.signal_settings": {
+    "overview": "FFT settings. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Set the uniform sample rate in hertz; unit quantities such as 2_kHz are accepted.",
+      "1": "Cycle rectangular, Hann and Hamming windows.",
+      "2": "Toggle mean removal before windowing. DC is removed when enabled."
+    }
+  },
+  "science.filter": {
+    "overview": "Time-domain filters. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Cycle centered moving average, one-pole low-pass and one-pole high-pass.",
+      "1": "Set cutoff below Nyquist and an odd average span from 3 through 31.",
+      "2": "Filter a snapshot of Y. Source data remain unchanged until explicit replacement."
+    }
+  },
+  "science.filter_actions": {
+    "overview": "Filtered data. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Plot filtered Y at the original X coordinates.",
+      "1": "Export filtered samples to a new CSV.",
+      "2": "Confirm replacement of the current table. Save the original CSV first if needed."
+    }
+  },
+  "science.signals": {
+    "overview": "Signal analysis. Arrows/Enter choose; F5/Esc returns one level.",
+    "items": {
+      "0": "Require exactly 8,16,32,64 or128 finite Y samples, uniformly sampled at the declared rate. No rows are silently dropped.",
+      "1": "Set sample rate, window and mean removal.",
+      "2": "Check increasing uniform X spacing and convert declared X time units to seconds. Empty units mean seconds for this action.",
+      "3": "Open bounded time-domain filters using the same sample rate.",
+      "4": "After confirmation, create a 16 Hz unit-amplitude sine sampled at 128 Hz for 32 rows.",
+      "5": "Declare data units; this does not rescale existing CSV magnitudes.",
+      "6": "Save settings or read FFT/filter scaling and limitations."
+    }
+  },
+  "research.home": {
+    "overview": "Advanced studies keep their own inputs, two data tables and matrix. Save them together as a .study document. Nothing recalculates until you request it.",
+    "items": {
+      "0": "Implicit curves, contour maps and local optimization inside rectangular bounds.",
+      "1": "QR, SVD, pseudoinverse, symmetric eigenvectors and least squares for square matrices up to 6 by 6.",
+      "2": "One-sided limits, Taylor approximations, finite sums/products and selected improper integrals.",
+      "3": "Additional distributions, exact binomial tests, weighted fits, Welch tests and correlated uncertainty.",
+      "4": "Convolution, correlation, power spectra and low-order continuous-time transfer functions.",
+      "5": "Capture data, inspect both saved tables and send a table to the existing statistics workbench.",
+      "6": "Read actual device memory watermarks and benchmark expression evaluation / PSRAM transfers.",
+      "7": "Read worked examples and the numerical limits before choosing a calculation."
+    }
+  },
+  "research.files": {
+    "overview": "A study contains equations, both data tables, units, the numerical matrix, transfer coefficients, measurement inputs and settings. Results remain transient.",
+    "items": {
+      "0": "Write a named .study under /db48x/studies using temporary-file replacement and backup recovery.",
+      "1": "Validate the whole file before replacing the current study. Opening never runs its equations.",
+      "2": "Change the saved title and notes. These do not affect calculations.",
+      "3": "Read how to capture data, save, reopen and explicitly rerun a study."
+    }
+  },
+  "research.implicit": {
+    "overview": "Equation entry accepts left=right or a field F(X,Y). An equation is plotted as its left-minus-right residual; level zero is its solution set.",
+    "items": {
+      "0": "Edit the equation or scalar field. Try X^2+Y^2=25 for a circle.",
+      "1": "Set the visible X/Y window. This does not change optimization bounds.",
+      "2": "Choose one to three residual/field levels; level zero solves an entered equation.",
+      "3": "Draw bounded marching-square contours in the unified native graph. Undefined samples leave holes.",
+      "4": "Enter a separate objective F(X,Y) for optimization.",
+      "5": "Set rectangular search bounds and the initial point; values are clamped into the box when solving.",
+      "6": "Choose a local numerical minimum or maximum. No global optimum is promised.",
+      "7": "Save/open the connected study or read help."
+    }
+  },
+  "research.optimize": {
+    "overview": "Pattern search is limited to 400 iterations and 4096 evaluations. Stopping means the search step became small, not a proof of a global optimum.",
+    "items": {
+      "0": "Search for a local minimum inside the configured X/Y box.",
+      "1": "Search for a local maximum inside the configured X/Y box."
+    }
+  },
+  "research.contour_levels": {
+    "overview": "Select which plotted level is highlighted. This changes the active level, not the equation or crosshair position.",
+    "items": {
+      "0": "Select contour level one.",
+      "1": "Select contour level two, if enabled.",
+      "2": "Select contour level three, if enabled."
+    }
+  },
+  "research.linear": {
+    "overview": "Study matrices are real, numerical and dimensionless, with 1..6 rows and columns. Original Matrix workbench arithmetic remains available for exact and unit-bearing calculations.",
+    "items": {
+      "0": "Copy the current square matrix A after confirmation. Fractions are evaluated numerically; physical units are rejected.",
+      "1": "Show Q and R with A=QR; rank-deficient columns are reported.",
+      "2": "Show singular values and the U,V factors of A=U diag(s) V^T.",
+      "3": "Show the pseudoinverse, numerical rank and condition diagnostic.",
+      "4": "Compute eigenvalues/vectors for a real symmetric matrix. General nonsymmetric eigenvectors are outside this tool.",
+      "5": "Use the first N Y values of study table B as b; solve with the SVD pseudoinverse.",
+      "6": "Save/open the study or read help."
+    }
+  },
+  "research.qr": {
+    "overview": "QR uses two orthogonalization passes. Rank-deficient columns are retained as zeros; use SVD for rank and a pseudoinverse.",
+    "items": {
+      "0": "View/copy Q; its nonzero columns are orthonormal.",
+      "1": "View/copy upper-triangular R."
+    }
+  },
+  "research.svd": {
+    "overview": "A=U diag(s) V^T. Singular values <= largest*1e-12 are treated as zero for rank and pseudoinverse. Large condition numbers indicate sensitivity.",
+    "items": {
+      "0": "View/copy singular values, numerical rank and condition.",
+      "1": "View/copy U, including an orthonormal completion for zero singular values.",
+      "2": "View/copy V; use its transpose in the reconstruction."
+    }
+  },
+  "research.eigen": {
+    "overview": "This numerical eigensolver accepts real symmetric matrices only. Eigenvector signs are arbitrary and repeated eigenvalues need not have a unique basis.",
+    "items": {
+      "0": "View/copy eigenvalues in the same order as the vector columns.",
+      "1": "View/copy eigenvectors; each column corresponds to one listed eigenvalue."
+    }
+  },
+  "research.calculus": {
+    "overview": "These guided tools use radians and preserve stored calculator variables. A numerical limit or refinement test is not a symbolic proof.",
+    "items": {
+      "0": "Edit the real scalar function F(X).",
+      "1": "Set the limit/expansion point, finite sequence bounds and Taylor degree.",
+      "2": "Estimate a left, right or two-sided finite limit. Divergent/unresolved sequences fail.",
+      "3": "Use supported symbolic derivatives, evaluated numerically, to form a local Taylor approximation through degree four.",
+      "4": "Sum or multiply up to 1000 real numerical terms at integer X.",
+      "5": "Estimate a selected infinite-interval integral by transformed, bounded midpoint refinement.",
+      "6": "Save/open the study or read help."
+    }
+  },
+  "research.limit": {
+    "overview": "Nearby samples must stabilize. Oscillatory functions or behavior between samples can evade this numerical test.",
+    "items": {
+      "0": "Require the sampled left/right sequences to agree.",
+      "1": "Approach the configured point from smaller X.",
+      "2": "Approach the configured point from larger X."
+    }
+  },
+  "research.sum": {
+    "overview": "First/last indices are inclusive integers, within +/-1e6, with at most 1000 terms. Results are numerical; RPL summation/product commands remain separate.",
+    "items": {
+      "0": "Add F(X) over the integer range.",
+      "1": "Multiply F(X) over the integer range."
+    }
+  },
+  "research.integral": {
+    "overview": "Uses transformed midpoint refinement with at most 4064 evaluations. A small refinement change is not a rigorous error bound or proof of convergence.",
+    "items": {
+      "0": "Integrate from the configured first bound to positive infinity.",
+      "1": "Integrate from negative infinity to the configured first bound.",
+      "2": "Integrate over the whole real line; the finite bounds are unused."
+    }
+  },
+  "research.taylor": {
+    "overview": "Coefficients are evaluated symbolic derivatives divided by k!. The polynomial is local; no remainder bound is inferred.",
+    "items": {
+      "0": "View/copy coefficients in ascending powers of (X-X0).",
+      "1": "Plot the approximation across X0 +/- 1 using the native graph."
+    }
+  },
+  "research.statistics": {
+    "overview": "Study tables A/B hold independent snapshots. Check their units before combining samples. Confidence intervals depend on the stated statistical assumptions.",
+    "items": {
+      "0": "Choose uniform, exponential, Student t or chi-square parameters.",
+      "1": "Evaluate a cumulative probability, inverse percentile or CDF plot.",
+      "2": "Run a two-sided probability-ordering binomial test for up to 200 trials.",
+      "3": "Fit a weighted line/quadratic to table A; estimate common residual variance and Student t coefficient intervals.",
+      "4": "Compare mean Y of independent tables A and B without assuming equal variances.",
+      "5": "Set correlated measurements and run first-order or seeded Gaussian Monte Carlo propagation.",
+      "6": "Save/open the study or read help."
+    }
+  },
+  "research.distribution": {
+    "overview": "These are additional numerical distributions; the existing normal, binomial and Poisson workbench is unchanged.",
+    "items": {
+      "0": "Uniform between increasing a and b.",
+      "1": "Exponential with positive rate a.",
+      "2": "Student t with positive degrees of freedom a.",
+      "3": "Chi-square with positive degrees of freedom a."
+    }
+  },
+  "research.distribution_actions": {
+    "overview": "CDF means P(X <= point). A percentile p must be strictly between 0 and 1.",
+    "items": {
+      "0": "Evaluate the cumulative probability at the configured point X.",
+      "1": "Find a numerical inverse CDF at p after bracketing.",
+      "2": "Plot a representative CDF interval in the native engine."
+    }
+  },
+  "research.uncertainty": {
+    "overview": "Measurements follow the supplied correlated Gaussian model for Monte Carlo. First-order propagation needs a smooth function. Neither result automatically establishes a confidence interval.",
+    "items": {
+      "0": "Edit F(A,B,C).",
+      "1": "Enter unit declarations, nominal values and nonnegative standard uncertainties for A,B,C, then output units.",
+      "2": "Enter correlations AB,AC,BC. The matrix must be positive definite; perfect correlations are rejected.",
+      "3": "Compute the nominal value and correlated first-order standard uncertainty.",
+      "4": "Set 128..2048 draws and a nonzero 32-bit seed for repeatable simulation.",
+      "5": "Simulate correlated Gaussian inputs. Invalid-domain draws stop the run rather than being discarded.",
+      "6": "Save/open the study or read help."
+    }
+  },
+  "research.signals": {
+    "overview": "Y observations are treated as uniform samples at the declared rate. Continuous-time transfer functions use descending powers of Laplace s, up to degree three.",
+    "items": {
+      "0": "Set positive sample rate, response duration and Bode frequency bounds.",
+      "1": "Compute the complete discrete convolution or cross-correlation when output length is <=128.",
+      "2": "Estimate a one-sided Welch PSD with Hann windows, mean removal and 50% overlap.",
+      "3": "Edit numerator and denominator coefficients, highest power first.",
+      "4": "Calculate finite numerator/denominator roots.",
+      "5": "Plot gain in dB or phase in degrees against log10(frequency in Hz).",
+      "6": "Integrate a unit step/impulse response for a strictly proper transfer function.",
+      "7": "Save/open the study or read help."
+    }
+  },
+  "research.convolution": {
+    "overview": "The complete output must fit 128 rows. X is index/sample_rate (or lag/sample_rate). No input or output tail is silently discarded.",
+    "items": {
+      "0": "Compute sum A[i]*B[n-i], without a sample-time multiplier.",
+      "1": "Compute sum A[i]*B[i+lag] over valid overlapping indices, without normalization."
+    }
+  },
+  "research.psd": {
+    "overview": "Uses 64-sample segments when possible, otherwise 32; Hann window, mean removal and 50% overlap. PSD units are input Y squared per Hz.",
+    "items": {
+      "0": "Plot one-sided power per hertz. This differs from the port 24 peak-amplitude FFT.",
+      "1": "Export frequency/PSD observations as CSV; preserve the unit convention when using them elsewhere."
+    }
+  },
+  "research.poles": {
+    "overview": "Roots are in the continuous-time Laplace s-plane (1/s). Numerical roots can fail; right-half-plane poles imply instability.",
+    "items": {
+      "0": "Find denominator roots, retaining multiplicity.",
+      "1": "Find finite numerator roots; a constant numerator has none."
+    }
+  },
+  "research.bode": {
+    "overview": "The horizontal graph coordinate is log10(frequency in Hz): X=3 means 1000 Hz. Phase uses the principal angle; wrapping is not unwrapped.",
+    "items": {
+      "0": "Plot 20*log10(abs(H(j*2*pi*f))).",
+      "1": "Plot the principal phase of H(j*2*pi*f) in degrees."
+    }
+  },
+  "research.response": {
+    "overview": "Strictly proper functions only: numerator degree must be smaller than denominator degree. Numerical response is not a stability proof; fast/stiff dynamics may be unresolved.",
+    "items": {
+      "0": "Apply a unit step at t=0 with zero initial state.",
+      "1": "Apply a unit impulse at t=0; the initial state accounts for its jump."
+    }
+  },
+  "research.documents": {
+    "overview": "Tables and inputs are copied, not live references. Reopening a study runs nothing; choose a calculation explicitly to rerun it.",
+    "items": {
+      "0": "Copy current Data / statistics observations into study A after confirmation.",
+      "1": "Copy current observations into study B after confirmation.",
+      "2": "Inspect/plot study A.",
+      "3": "Inspect/plot study B.",
+      "4": "Replace current Data / statistics observations with A after confirmation.",
+      "5": "Replace current observations with B after confirmation.",
+      "6": "Save/open the self-contained study, or edit its title and notes.",
+      "7": "Read the complete capture/save/reopen/rerun workflow."
+    }
+  }
+}
