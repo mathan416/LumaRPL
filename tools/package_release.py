@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """Create a current-only bundle and corresponding source; never deploy."""
-import hashlib,json,shutil,subprocess,tarfile
+import argparse,hashlib,json,shutil,subprocess,tarfile
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 version=(root/'VERSION').read_text().strip()
-subprocess.run(['python3',str(root/'tools/verify_release.py')],check=True)
+parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--loader',type=Path);args=parser.parse_args()
+if subprocess.check_output(['git','status','--porcelain'],cwd=root):raise SystemExit('Commit candidate source changes before packaging')
+verify=['python3',str(root/'tools/verify_release.py')]
+if args.loader:verify+=['--loader',str(args.loader.resolve())]
+subprocess.run(verify,check=True)
 firmware=root/'build/pico/db48x-picocalc-pico2w.uf2'
-metadata=json.loads(subprocess.check_output(['python3',str(root/'tools/validate_uf2.py'),str(firmware)],text=True))
+command=['python3',str(root/'tools/validate_uf2.py'),str(firmware)]
+if args.loader:command+=['--loader',str(args.loader.resolve())]
+metadata=json.loads(subprocess.check_output(command,text=True))
 output=root/'dist'/version
 if output.exists():
     raise SystemExit(f'{output} exists; archive or remove it explicitly before repackaging')
@@ -22,7 +28,9 @@ for name in ('README.md','BUILDING.md','NOTICE.md','LICENSE','CHANGELOG.md','VER
     shutil.copy2(root/name,output/name)
 shutil.copytree(root/'licenses',output/'licenses')
 shutil.copytree(root/'docs',output/'docs')
-shutil.copy2(root/'build/pico/db48x-picocalc-pico2w.elf.map',output/'firmware.map') if (root/'build/pico/db48x-picocalc-pico2w.elf.map').exists() else None
+linker_map=root/'build/pico/db48x-picocalc-pico2w.elf.map'
+if linker_map.exists():(output/'firmware.map').write_text(linker_map.read_text().replace(str(root)+'/', ''))
+(output/'SOURCE.json').write_text(json.dumps({'version':version,'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'firmware_sha256':metadata['sha256'],'tracked_source_clean':True},indent=2)+'\n')
 (output/'UF2.json').write_text(json.dumps(metadata,indent=2)+'\n')
 (output/'MEMORY.json').write_bytes(subprocess.check_output(['python3',str(root/'tools/report_memory.py')]))
 # Include complete pinned dependency working trees and the patched upstream source.

@@ -62,6 +62,8 @@ changing expected images.
 python3 tools/package_release.py
 ```
 
+Commit candidate source changes before packaging. For validation against an
+actual installed loader, add `--loader /path/to/bootloader_pico2.uf2`.
 Packaging requires passing firmware memory/loader checks. Outputs are under
 `dist/`; dependency source is included with the source archive. Packaging never
 copies to an SD card. See docs/RELEASE-CHECKLIST.md before distributing a release.
