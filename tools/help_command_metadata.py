@@ -36,7 +36,7 @@ def command_metadata():
   except json.JSONDecodeError:raise ValueError(raw[:220])
   rows.append(row);raw=raw[end:]
  ids=list(dict.fromkeys(r[0] for r in rows if r[1]!='alias'));at={id:n for n,id in enumerate(ids)}
- def parseable(id):return at['Drop']<=at[id]<=at['ToQuotient'] or at['ToList']<=at[id]<=at['LastMenu']
+ def parseable(id):return at['Drop']<=at[id]<=at['ToQuotient'] or at['ToList']<=at[id]<=at['LastMenu'] or id=='Termial'
  commands={}
  for id,kind,spelling,group,high,initial in rows:
   if kind=='alias':continue

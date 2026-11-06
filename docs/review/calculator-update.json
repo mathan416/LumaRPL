@@ -1,0 +1,68 @@
+{
+  "fixes": [
+    "Operators insert rather than execute at the start or middle of an edited entry.",
+    "Grouped formula errors restore original user input, cursor and source coordinates; missing closing parentheses position the cursor at the end.",
+    "The first minus key subtracts immediately when two stack operands are ready; fewer operands retain signed literal entry."
+  ],
+  "tests": {
+    "themes": 8,
+    "normal": "passed",
+    "address_and_undefined_behavior_sanitizers": "passed",
+    "cursor_operators": "!?^+-*/ at start and middle, preserving stack",
+    "error_cases": [
+      "unclosed parentheses",
+      "divide by zero",
+      "variable-dependent execution error",
+      "invalid operator",
+      "extra closing parenthesis",
+      "leading/trailing spaces",
+      "repeated errors",
+      "Enter/Esc dismissal",
+      "successful repair and re-evaluation"
+    ],
+    "regressions": [
+      "grouped formulas",
+      "complex literals",
+      "partial redraw pixel comparison",
+      "immediate postfix",
+      "power entry",
+      "Termial menu"
+    ],
+    "signed_entry_and_subtraction": "passed in 8 themes with address and undefined-behaviour sanitizers",
+    "complex_gamma_checks": 30,
+    "termial_checks": 38
+  },
+  "firmware": {
+    "firmware": "db48x-picocalc-pico2w.uf2",
+    "application_name": "LumaRPL",
+    "sha256": "9c2418cb016e711d9512d43ba4f47f77749f7e0939a498abcac8d115b8e7b896",
+    "family": "rp2350-arm-s",
+    "blocks": 8903,
+    "sdk_e10_workaround_blocks": 1,
+    "application_payload_extent": 2279168,
+    "application_partition_bytes": 4186112,
+    "loader_sha256": "5a95d7404c968a4ba78bfeeffd6273e7acea4a03d4ca1e0d8b4679e722c5f5fc",
+    "loader_contract": "UF2 Loader v2.4.1; standard SDK logical addresses remapped into App at physical offset 8192",
+    "hardware_boot_tested": false
+  },
+  "source_sha256": {
+    "pico/stack_menu.h": "b1725f91b11516266b98112568b86512422c4507bfd4d158e3e2392d48f19b52",
+    "tests/port305_controller_test.cc": "b7c2c096c33a4eae1db76624a2e55ec3cf950ae6d125534b79fdae4b7d7e819d",
+    "pico/main.cc": "85f55efcffd531c7063bfd0b10f5104ae3a1bdf6aea7953038b7b27a0f9b8b2c",
+    "pico/platform.cc": "ac1e72c39bf383bf338333b7f2d94b28a0c4e4cb4b4a7e03bf321520d3496aab",
+    "pico/calculator_shortcuts.h": "0371b7c07135b8a30777f7e05c892d8ca9324dbc6e2ef035c6e756177aa7e371",
+    "patches/db48x-picocalc.patch": "ca1b362f5fb058a8c59420e2a9098994945b5679f8e18cfe308ca6b80c197d1f"
+  },
+  "upstream_suite": {
+    "before": {
+      "tests": 8447,
+      "failures": 0
+    },
+    "after": {
+      "tests": 8458,
+      "failures": 1
+    },
+    "explanation": "The added ? catalogue entry shifted a fixed-position expected selection from cosh\u207b\u00b9 to cos\u207b\u00b9. The expectation was corrected; all six catalogue tests passed on rerun. A fresh complete clean run remains a candidate acceptance step."
+  },
+  "physical_acceptance": "Prior recovery firmware was copied to SD and verified. This newer subtraction build is host-validated; the SD card is disconnected and it has not been copied. Device boot and mixed-use acceptance remain pending."
+}

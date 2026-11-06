@@ -859,6 +859,7 @@ inline constexpr Command entries[]={
 {0,"tan","tan ",4,0},
 {0,"tanh","tanh ",5,0},
 {0,"TemporaryMenu","TemporaryMenu ",14,0},
+{0,"Termial","Termial ",8,0},
 {0,"TestEQ","TestEQ ",7,0},
 {0,"TestFlagClear","TestFlagClear ",14,0},
 {0,"TestFlagClearThenClear","TestFlagClearThenClear ",23,0},

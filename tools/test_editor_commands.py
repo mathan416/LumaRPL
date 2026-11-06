@@ -2,6 +2,7 @@
 """Compile every insertion template with the supported Lua parser/CHIP-8 assembler."""
 from pathlib import Path
 import subprocess,json,hashlib,argparse
+from help_command_metadata import command_metadata
 p=argparse.ArgumentParser();p.add_argument('--release',default='port217');args=p.parse_args()
 root=Path(__file__).resolve().parents[1];out=root/'build/editor-command-tests';out.mkdir(exist_ok=True)
 source=r'''#include "ui/editor_commands.h"
@@ -21,5 +22,5 @@ lua_close(L);assert(lua==24&&chip==32);puts("PASS: 24 Lua call templates compile
 subprocess.run(['clang++','-std=c++17','-O1','-g','-fsanitize=address,undefined','-fno-omit-frame-pointer','-Ipico','-Idependencies/lua-5.4.9/src',str(out/'templates.cc'),'build/simulator-rgb332/lua-probe.a','-o',str(out/'templates')],cwd=root,check=True)
 subprocess.run([str(out/'templates')],cwd=root,check=True)
 paths=['pico/ui/editor_commands.h','pico/chip8_assembler.h','tools/generate_editor_commands.py','tools/test_editor_commands.py']
-report=dict(lua_templates=24,chip8_templates=32,rpl_command_lookup_checks=1026,scope='Production metadata/assembler and pinned Lua compiler. RPL lookup is separately exercised by production controllers. Host shim and assembler sanitizer-instrumented; linked pinned Lua compiler objects are not all instrumented.',source_sha256={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths})
+report=dict(lua_templates=24,chip8_templates=32,rpl_command_lookup_checks=sum(c['parseable'] for c in command_metadata().values()),scope='Production metadata/assembler and pinned Lua compiler. RPL lookup is separately exercised by production controllers. Host shim and assembler sanitizer-instrumented; linked pinned Lua compiler objects are not all instrumented.',source_sha256={p:hashlib.sha256((root/p).read_bytes()).hexdigest() for p in paths})
 (root/'reports'/(args.release+'-command-templates.json')).write_text(json.dumps(report,indent=2)+'\n')

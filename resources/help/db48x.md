@@ -5924,7 +5924,7 @@ You should get: 0.
 
 ## fact
 
-Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported.
+Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported. On the calculator stack, press ! with an empty editor to apply factorial immediately. Typing 6! also calculates immediately, without Enter. Inside programs and quoted algebra, ! remains notation.
 
 You can also enter: x!, factorial, !.
 
@@ -6057,6 +6057,18 @@ Try it
 0 TANH
 
 You should get: 0.
+
+## Termial
+
+Sum the integers from 1 through n. Accepts nonnegative whole numbers, including zero. Uses n*(n+1)/2 and returns an exact integer; negative or fractional inputs report a domain error. Enter 6? or 6 Termial to get 21. With no entry being edited, press ? to apply Termial immediately to the top stack value. Typing 6? also calculates immediately without Enter; inside programs and quoted algebra, ? remains notation. In algebraic expressions, N? is postfix Termial(N). In RPL, use N ? or N Termial after a variable; question marks in ordinary RPL identifiers remain valid. Explicit names such as ⓋREADY? and the constant Ⓒ? keep their existing meanings.
+
+You can also enter: ?.
+
+Try it
+6?
+
+You should get: 21
+Sum 1+2+3+4+5+6.
 
 ## tgamma
 
@@ -7467,7 +7479,7 @@ You can also enter: π.
 
 ## pow
 
-Raise the second value to the power on top. Example: 2 3 ^ gives 8.
+Raise the second value to the power on top. Example: 2 3 ^ gives 8. On the calculator stack, a complete numeric entry such as 2^3 also gives 8 on Enter. 0^0 gives 1 by default; the advanced ZeroPowerZeroIsUndefined setting explicitly selects undefined behavior.
 
 You can also enter: ↑, Power, ^.
 
@@ -11157,7 +11169,7 @@ You should get: 0.
 
 ## x!
 
-Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported.
+Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported. On the calculator stack, press ! with an empty editor to apply factorial immediately. Typing 6! also calculates immediately, without Enter. Inside programs and quoted algebra, ! remains notation.
 
 You can also enter: x!, factorial, !.
 
@@ -11168,7 +11180,7 @@ You should get: 120
 
 ## factorial
 
-Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported.
+Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported. On the calculator stack, press ! with an empty editor to apply factorial immediately. Typing 6! also calculates immediately, without Enter. Inside programs and quoted algebra, ! remains notation.
 
 You can also enter: x!, factorial, !.
 
@@ -11179,7 +11191,7 @@ You should get: 120
 
 ## !
 
-Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported.
+Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported. On the calculator stack, press ! with an empty editor to apply factorial immediately. Typing 6! also calculates immediately, without Enter. Inside programs and quoted algebra, ! remains notation.
 
 You can also enter: x!, factorial, !.
 
@@ -11242,6 +11254,18 @@ Try it
 5 2 PERM
 
 You should get: 20
+
+## ?
+
+Sum the integers from 1 through n. Accepts nonnegative whole numbers, including zero. Uses n*(n+1)/2 and returns an exact integer; negative or fractional inputs report a domain error. Enter 6? or 6 Termial to get 21. With no entry being edited, press ? to apply Termial immediately to the top stack value. Typing 6? also calculates immediately without Enter; inside programs and quoted algebra, ? remains notation. In algebraic expressions, N? is postfix Termial(N). In RPL, use N ? or N Termial after a variable; question marks in ordinary RPL identifiers remain valid. Explicit names such as ⓋREADY? and the constant Ⓒ? keep their existing meanings.
+
+You can also enter: ?.
+
+Try it
+6?
+
+You should get: 21
+Sum 1+2+3+4+5+6.
 
 ## Γ
 
@@ -12566,7 +12590,7 @@ You can also enter: π.
 
 ## ↑
 
-Raise the second value to the power on top. Example: 2 3 ^ gives 8.
+Raise the second value to the power on top. Example: 2 3 ^ gives 8. On the calculator stack, a complete numeric entry such as 2^3 also gives 8 on Enter. 0^0 gives 1 by default; the advanced ZeroPowerZeroIsUndefined setting explicitly selects undefined behavior.
 
 You can also enter: ↑, Power, ^.
 
@@ -12577,7 +12601,7 @@ You should get: 256
 
 ## Power
 
-Raise the second value to the power on top. Example: 2 3 ^ gives 8.
+Raise the second value to the power on top. Example: 2 3 ^ gives 8. On the calculator stack, a complete numeric entry such as 2^3 also gives 8 on Enter. 0^0 gives 1 by default; the advanced ZeroPowerZeroIsUndefined setting explicitly selects undefined behavior.
 
 You can also enter: ↑, Power, ^.
 
@@ -12588,7 +12612,7 @@ You should get: 256
 
 ## ^
 
-Raise the second value to the power on top. Example: 2 3 ^ gives 8.
+Raise the second value to the power on top. Example: 2 3 ^ gives 8. On the calculator stack, a complete numeric entry such as 2^3 also gives 8 on Enter. 0^0 gives 1 by default; the advanced ZeroPowerZeroIsUndefined setting explicitly selects undefined behavior.
 
 You can also enter: ↑, Power, ^.
 

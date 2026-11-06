@@ -3450,7 +3450,7 @@ You can also enter: expm.
 Try it
 0 EXPM
 
-You should get: 0.Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported.
+You should get: 0.Find the factorial. Noninteger arguments follow the engine's gamma-function extension where supported. On the calculator stack, press ! with an empty editor to apply factorial immediately. Typing 6! also calculates immediately, without Enter. Inside programs and quoted algebra, ! remains notation.
 
 You can also enter: x!, factorial, !.
 
@@ -3530,7 +3530,15 @@ You should get: 0Calculate the hyperbolic tangent for the top stack value. Its r
 Try it
 0 TANH
 
-You should get: 0.Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+You should get: 0.Sum the integers from 1 through n. Accepts nonnegative whole numbers, including zero. Uses n*(n+1)/2 and returns an exact integer; negative or fractional inputs report a domain error. Enter 6? or 6 Termial to get 21. With no entry being edited, press ? to apply Termial immediately to the top stack value. Typing 6? also calculates immediately without Enter; inside programs and quoted algebra, ? remains notation. In algebraic expressions, N? is postfix Termial(N). In RPL, use N ? or N Termial after a variable; question marks in ordinary RPL identifiers remain valid. Explicit names such as ⓋREADY? and the constant Ⓒ? keep their existing meanings.
+
+You can also enter: ?.
+
+Try it
+6?
+
+You should get: 21
+Sum 1+2+3+4+5+6.Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
 
 You can also enter: Γ, Gamma.
 
@@ -4185,7 +4193,7 @@ Try it
 
 You should get: 25Put the mathematical constant pi on the stack. Symbolic/numerical constant settings affect its form.
 
-You can also enter: π.Raise the second value to the power on top. Example: 2 3 ^ gives 8.
+You can also enter: π.Raise the second value to the power on top. Example: 2 3 ^ gives 8. On the calculator stack, a complete numeric entry such as 2^3 also gives 8 on Enter. 0^0 gives 1 by default; the advanced ZeroPowerZeroIsUndefined setting explicitly selects undefined behavior.
 
 You can also enter: ↑, Power, ^.
 

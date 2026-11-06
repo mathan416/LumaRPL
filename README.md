@@ -9,6 +9,7 @@ workbenches and a QWERTY programming environment. It runs on an official
 [Download firmware](https://github.com/mathan416/LumaRPL/releases) ·
 [User Guide](docs/manuals/pdf/LumaRPL-User-Guide.pdf) ·
 [Programming Guide](docs/manuals/pdf/LumaRPL-Programming-Guide.pdf) ·
+[API & Assembly Reference](docs/manuals/pdf/LumaRPL-API-Assembly-Reference.pdf) ·
 [Build from source](BUILDING.md)
 
 <p align="center">
@@ -112,7 +113,11 @@ The illustrated **[User Guide](docs/manuals/pdf/LumaRPL-User-Guide.pdf)** teache
 stack calculation, graphs, mathematical workbenches, conversions, saving and
 troubleshooting through worked examples. The **[Programming Guide](docs/manuals/pdf/LumaRPL-Programming-Guide.pdf)**
 introduces RPL, Lua, CHIP-8, the editors and debugging, with language examples and
-reference sections. Both include contents, bookmarks, indexes and credits.
+reference sections. Both include contents, bookmarks, indexes and credits. The companion
+**[API & Assembly Reference](docs/manuals/pdf/LumaRPL-API-Assembly-Reference.pdf)**
+gives exact Lua call contracts, CHIP-8/SUPER-CHIP instruction details and reusable
+ROM routines with register contracts. [Downloadable example source](docs/manuals/examples/api)
+accompanies it; native Arm development is outside its scope.
 
 Readable source: [User Guide](docs/manuals/user-guide.md) and
 [Programming Guide](docs/manuals/programming-guide.md).

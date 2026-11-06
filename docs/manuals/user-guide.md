@@ -53,6 +53,10 @@ The answer is **7**, because subtraction takes the earlier value minus the top v
 | DUP Enter | 7, 7 | Copy the top value |
 | * Enter | 49 | Multiply the two copies |
 
+## Enter negative numbers
+
+Type `-1` and press Enter. A leading `-` starts a signed number even when other values are already on the stack. To subtract two values already on the stack, type `-` by itself and press Enter. Subtraction after a number retains the usual operator behavior.
+
 ## A calculation in stages
 
 To calculate `(3+4)*(5+6)`, complete each parenthesis on the stack:
@@ -97,9 +101,35 @@ A rectangular complex literal can be entered as `(1;2)`, meaning real part 1 and
 
 The result is **4+6i**. The display may typeset the imaginary unit differently from this printed notation. The Complex workbench in chapter 16 offers guided rectangular/polar entry and operations.
 
+For the imaginary unit alone, enter `i`. To calculate its factorial, type `i!` and press Enter; `i Factorial` is equivalent. The result is approximately `0.498015668118-0.154949828302i`. The calculator recognizes `i`, `i!` and `i Factorial` as convenient entries for an unassigned imaginary unit. A stored variable named `i` still takes precedence. RPL program source, iterator names and quoted algebra retain their normal symbol semantics.
+
+`Gamma` accepts complex numbers, for example `(1;1) Gamma` gives the same result as `(0;1)!`. Complex Gamma uses the selected calculation precision and works independently of degree/radian mode. Zero and negative integer arguments are poles and report a domain error. Complex `LnGamma` remains unsupported.
+
+## Mathematical constants and functions
+
+Press **Ctrl+O** at the calculator to open the existing **Math** soft menu. You can also enter `MathMenu`. Choose **Const** for mathematical constants (enable `ShowBuiltinConstants` if the Mathematics category is hidden), **Cmplx** for the imaginary-unit symbol, and **Powers** or **Trig** for functions. Constants inserted through these menus remain distinct from variable names in expressions and programs.
+
+Use Tab to select a soft-menu row, F1-F5 for columns 1-5, and Ctrl+F5 for column 6. Esc goes back. The existing menus keep their normal RPN and algebraic editing behavior; function keys may calculate when used with stack operands. Ctrl+A still opens the complete Command Catalogue for command insertion. Source editors keep their own shortcuts and insertion tools.
+
 ## Scientific functions
 
 Functions take their input from the stack. `81 SQRT` gives 9; `1 LN` gives 0; `0 EXP` gives 1. For trigonometry, choose the intended angle mode first: `Deg 30 SIN` gives a result equivalent to 0.5. A decimal/approximate marker may appear with a numerical result.
+
+## Grouped calculator entries
+
+Type `((2^3+4)-2)` and press Enter to get **10**. Entries beginning with parentheses use algebraic grouping and precedence; `(2+3)!` gives **120** and `(2+4)?` gives **21** on Enter. Classic complex literals such as `(1;3)` and `(1 3)` remain complex numbers.
+
+Use Left/Right to move the formula cursor. Cursor navigation updates the editor without clearing the whole display. When the cursor is inside an entry, operator keys insert text instead of calculating. Immediate numeric shortcuts apply at the end of the entry. If a formula has an error, the editor retains your original formula and maps the error cursor back into it; dismiss the error, correct the input, and press Enter again. Quoted algebra and RPL programs keep their existing syntax.
+
+## Triangular sums with Termial
+
+Type `6?` or `6 Termial` and press Enter to sum `1+2+3+4+5+6`, giving **21**. `0?` gives zero. Counts must be nonnegative whole numbers; fractions and negative counts report a domain error. Whole-valued decimals such as `6.0` are accepted. The calculation uses `n*(n+1)/2` and keeps integer results exact, including large counts.
+
+In quoted algebra, `'N?'` means `Termial(N)`, and `'(2+4)?'` gives 21 when evaluated. In RPL, put a space before `?` after a variable (`N ?`), or use `N Termial`. Ordinary RPL names ending in `?` remain valid. Use the explicit name prefix `Ⓥ` when quoting such a literal name, for example `'ⓋREADY?'`. The explicit undefined constant `Ⓒ?` is unchanged.
+
+With the editor empty, pressing `?` immediately applies Termial to the top stack value: `6 Enter ?` gives **21**. Similarly, `6 Enter !` immediately gives **720**. Typing `6?` or `6!` also calculates immediately, without Enter. In programs and quoted algebra, these characters remain mathematical notation.
+
+Termial is also in the Command Catalogue and at the end of Math > Proba. It follows the same postfix editing convention as factorial.
 
 ## Quoted algebra
 
@@ -739,6 +769,7 @@ The calculator reserves 208 KiB arena, 96 KiB heap, 32 KiB stack, a 100 KiB RGB3
 | Ctrl+N | Notebooks |
 | Ctrl+P | Programming |
 | Ctrl+U | Conversions |
+| Ctrl+O | Math soft menu: constants, complex numbers and functions |
 | Ctrl+A | Command Catalogue |
 | Ctrl+R | Advanced RPL settings |
 | Ctrl+Y | Bases |

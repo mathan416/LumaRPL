@@ -35,7 +35,7 @@ index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183
 @@ -208,7 +208,7 @@ void SimScreen::updatePixmap()
  #endif
                          pt.setPen(qcol);
- 
+
 -                        coord xx = (xw * 32 + bit) / color::BPP;
 +                        coord xx = (xw * 32 + bit) / surface::color::BPP;
                          if (xx >= LCD_W)
@@ -48,15 +48,15 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
 @@ -27,6 +27,7 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#include "scoped_array.h"
  #include "array.h"
- 
+
  #include "arithmetic.h"
 @@ -1033,7 +1034,13 @@ echelon_result array::row_echelon(array_r m, echelon_options opt)
          return result;
      }
- 
+
 -    size_t pivot_col[rows];
 +    scoped_array<size_t> pivot_col(rows);
 +    if (!pivot_col)
@@ -67,11 +67,11 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
 +    }
      for (size_t i = 0; i < rows; i++)
          pivot_col[i] = SIZE_MAX;
- 
+
 @@ -1334,7 +1341,13 @@ lu_result array::lu_factorization(array_r m)
          return result;
      }
- 
+
 -    size_t row_perm[n];
 +    scoped_array<size_t> row_perm(n);
 +    if (!row_perm)
@@ -82,11 +82,11 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
 +    }
      for (size_t i = 0; i < n; i++)
          row_perm[i] = i;
- 
+
 @@ -1434,13 +1447,13 @@ lu_result array::lu_factorization(array_r m)
          }
      }
- 
+
 -    result.L = lu_pack_matrix(n, base, atype, lu_matrix_part::L, row_perm);
 +    result.L = lu_pack_matrix(n, base, atype, lu_matrix_part::L, row_perm.get());
      if (!result.L)
@@ -99,7 +99,7 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
 +    result.P = lu_pack_matrix(n, base, atype, lu_matrix_part::P, row_perm.get());
      if (!result.P)
          goto err;
- 
+
 diff --git a/src/blitter.h b/src/blitter.h
 index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482ee5de8078 100644
 --- a/src/blitter.h
@@ -110,8 +110,8 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
          RGB_16BPP,          // RGB16 (HP Prime)
 +        RGB_8BPP,           // Fixed RGB332 screen palette; pixmaps remain RGB565
      };
- 
- 
+
+
 @@ -863,6 +864,8 @@ struct blitter
              BIT_SIZE = sizeof(bits) * 8
          };
@@ -123,8 +123,8 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
      }
 @@ -1085,6 +1088,18 @@ union blitter::color<blitter::mode::GRAY_4BPP>
  };
- 
- 
+
+
 +template <>
 +union blitter::color<blitter::mode::RGB_8BPP>
 +{
@@ -145,13 +145,13 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
      {}
      color(pixword pix): value(pix & 0xFFFF) {}
 +    color(blitter::color<RGB_8BPP> c):color(c.red(),c.green(),c.blue()){}
- 
+
      uint8_t red()
      {
 @@ -1397,6 +1413,26 @@ union blitter::pattern<blitter::mode::RGB_16BPP>
  };
- 
- 
+
+
 +template <>
 +union blitter::pattern<blitter::mode::RGB_8BPP>
 +{
@@ -178,7 +178,7 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
 @@ -1453,6 +1489,132 @@ void blitter::blit(Dst           &dst,
      const mode DMode    = Dst::blitmode;
      const mode SMode    = Src::blitmode;
- 
+
 +    // Byte-packed glyphs can be unaligned or end before a complete word.
 +    // Use exact pixel bytes for these and indexed conversions. Aligned,
 +    // word-padded surfaces retain the optimized packed path.
@@ -309,7 +309,7 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
      {
          coord sx1 = src.drawable.x1;
 @@ -1543,6 +1705,7 @@ void blitter::blit(Dst           &dst,
- 
+
      // X1 and x2 pixel shift
      unsigned cshift = surface<CMode>::BPP == 16 ? 48
 +                    : surface<CMode>::BPP == 8  ? 24
@@ -337,7 +337,7 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
 -        pixword  smem  = sp[0];
 +        pixword  smem  = skip_src ? dp1[0] : source_word(source_index);
          pixword  snew  = smem;
- 
+
          if (xback)
 @@ -1599,10 +1773,9 @@ void blitter::blit(Dst           &dst,
                  int      skip     = nextsadj >= BPW;
@@ -350,12 +350,12 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
 -                    snew = sp[0];
 +                    snew = source_word(source_index);
                  }
- 
+
                  nextsadj %= BPW;
 @@ -1631,7 +1804,8 @@ void blitter::blit(Dst           &dst,
              pixword tdata = op(ddata, sdc, cdc);
              *dp           = (tdata & dmask) | (ddata & ~dmask);
- 
+
 -            dp += xdir;
 +            if (!xdone)
 +                dp += xdir;
@@ -363,9 +363,9 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
              smem  = snew;
          } while (!xdone);
 @@ -1713,6 +1887,10 @@ inline bool blitter::surface<blitter::RGB_16BPP>::horizontal_swap()
- 
- 
- 
+
+
+
 +template<>inline void blitter::surface<blitter::RGB_8BPP>::horizontal_adjust(coord &x1,coord &x2)const
 +{coord old=swapsize-x2;x2=swapsize-x1;x1=old;}
 +template<>inline bool blitter::surface<blitter::RGB_8BPP>::horizontal_swap(){return true;}
@@ -376,15 +376,15 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
 @@ -1804,6 +1982,11 @@ CONVERT(RGB_16BPP, MONOCHROME_REVERSE)
      return cvt;
  }
- 
+
 +CONVERT(RGB_8BPP, MONOCHROME)
 +{pixword out=0;for(unsigned i=0;i<4;++i)if(!(data&(1u<<i)))out|=0xffu<<(8*i);return out;}
 +CONVERT(RGB_8BPP, MONOCHROME_REVERSE)
 +{pixword out=0;for(unsigned i=0;i<4;++i)if(data&(1u<<i))out|=0xffu<<(8*i);return out;}
 +
  #undef CONVERT
- 
- 
+
+
 diff --git a/src/dmcp/main.cc b/src/dmcp/main.cc
 index 782ddb794d56426863fb0a31f42a2eb40b99503f..869ff1abacc4aca947b9973b81ed68a3bb834b18 100644
 --- a/src/dmcp/main.cc
@@ -398,7 +398,7 @@ index 782ddb794d56426863fb0a31f42a2eb40b99503f..869ff1abacc4aca947b9973b81ed68a3
 +const palette_pattern palette_pattern::black(0,0,0),palette_pattern::gray10(32,32,32),palette_pattern::gray25(64,64,64),palette_pattern::gray50(128,128,128),palette_pattern::gray75(192,192,192),palette_pattern::gray90(224,224,224),palette_pattern::white(255,255,255),palette_pattern::invert(UINT64_MAX);
 +#endif
 +
- 
+
  // Settings depend on patterns
  settings Settings;
 diff --git a/src/dmcp/target.h b/src/dmcp/target.h
@@ -417,10 +417,10 @@ index 7092c46efc87761050747ab2689ca1af42053d51..efbc995cb8c3af5e33e48c6d8f1a8616
 +#endif
      LCD_SCANLINE   = 400,
  #endif
- 
+
 @@ -53,7 +57,11 @@ enum target
  #define REVERSE_GROBS
- 
+
  #ifdef CONFIG_COLOR
 +#ifdef PICOCALC_RGB332
 +using surface = blitter::surface<blitter::mode::RGB_8BPP>;
@@ -431,18 +431,54 @@ index 7092c46efc87761050747ab2689ca1af42053d51..efbc995cb8c3af5e33e48c6d8f1a8616
  using pattern = blitter::pattern<blitter::mode::RGB_16BPP>;
  #else
 diff --git a/src/expression.cc b/src/expression.cc
-index ed63e4fe8777fd0f2b1684af32e8e25849591735..046555d688e0df5ac5f79f3a9e6a9cd988f0dd3d 100644
+index ed63e4fe8777fd0f2b1684af32e8e25849591735..c23966beb92d7f2a621ce49d31d6e68bc869923e 100644
 --- a/src/expression.cc
 +++ b/src/expression.cc
 @@ -27,6 +27,7 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#include "scoped_array.h"
  #include "expression.h"
- 
+
  #include "algebraic.h"
-@@ -3668,7 +3669,12 @@ algebraic_p like_terms::to_expression(polynomial_r poly)
+@@ -183,7 +184,14 @@ symbol_p expression::render(uint depth, int &precedence, bool editing)
+                 (!editing && obj->type() == ID_unit))
+                 precedence = precedence::SYMBOL;
+             if (obj->type() == ID_symbol && !editing)
+-                return symbol_p(object_p(obj));
++            {
++                size_t size = 0;
++                utf8 name = symbol_p(+obj)->value(&size);
++                // Preserve literal question-mark names when algebraic text
++                // is copied, saved, or reparsed now that ? is postfix.
++                if (!memchr(name, '?', size))
++                    return symbol_p(object_p(obj));
++            }
+             if (expression_p expr = obj->as<expression>())
+             {
+                 if (!expr->expand_without_size())
+@@ -214,6 +222,9 @@ symbol_p expression::render(uint depth, int &precedence, bool editing)
+             case ID_neg:
+                 precedence = precedence::ADDITIVE;
+                 return symbol::make('-') + arg;
++            case ID_Termial:
++                precedence = precedence::SYMBOL;
++                return arg + symbol::make("?");
+             case ID_fact:
+                 precedence = precedence::SYMBOL;
+                 return arg + symbol::make("!");
+@@ -2329,6 +2340,9 @@ grob_p expression::graph(grapher &g, uint depth, int &precedence)
+             case ID_neg:
+                 precedence = precedence::ADDITIVE;
+                 return prefix(g, 0, "-", va, arg);
++            case ID_Termial:
++                precedence = precedence::SYMBOL;
++                return suscript(g, va, arg, 0, "?", 0);
+             case ID_fact:
+                 precedence = precedence::SYMBOL;
+                 return suscript(g, va, arg, 0, "!", 0);
+@@ -3668,7 +3682,12 @@ algebraic_p like_terms::to_expression(polynomial_r poly)
  // ----------------------------------------------------------------------------
  {
      size_t      nvars = poly->variables();
@@ -457,21 +493,21 @@ index ed63e4fe8777fd0f2b1684af32e8e25849591735..046555d688e0df5ac5f79f3a9e6a9cd9
      {
          size_t len  = 0;
 diff --git a/src/functions.cc b/src/functions.cc
-index 613e5015214cbf17263ee32a9281024e58937b63..ae8cba64e2d4df5c449fec0fc7df8ccb6922afea 100644
+index 613e5015214cbf17263ee32a9281024e58937b63..bdcc57fd77ddcd6f5e62df1a78e8e799b2b3bbe5 100644
 --- a/src/functions.cc
 +++ b/src/functions.cc
 @@ -27,6 +27,7 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#include "scoped_array.h"
  #include "functions.h"
- 
+
  #include "arithmetic.h"
 @@ -409,7 +410,12 @@ object::result function::evaluate(id           op,
      if (!rt.args(arity))
          return ERROR;
- 
+
 -    algebraic_g args[arity];
 +    scoped_array<algebraic_g> args(arity);
 +    if (!args)
@@ -485,12 +521,78 @@ index 613e5015214cbf17263ee32a9281024e58937b63..ae8cba64e2d4df5c449fec0fc7df8ccb
 @@ -424,7 +430,7 @@ object::result function::evaluate(id           op,
          args[a] = arg;
      }
- 
+
 -    algebraic_g result = fn(op, args, arity);
 +    algebraic_g result = fn(op, args.get(), arity);
      if (result && rt.drop(arity) && rt.push(+result))
          return OK;
      return ERROR;
+@@ -1409,6 +1415,65 @@ INSERT_BODY(fact)
+ }
+
+
++FUNCTION_BODY(Termial)
++// ----------------------------------------------------------------------------
++//   The triangular sum 0 + 1 + ... + n, using exact integer arithmetic.
++// ----------------------------------------------------------------------------
++{
++    if (!x)
++        return nullptr;
++    if (x->is_symbolic())
++        return symbolic(ID_Termial, x);
++    if (!(x->is_real() || x->is_integer() || x->is_fraction()))
++    {
++        rt.type_error();
++        return nullptr;
++    }
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults exact(false);
++    algebraic_g value = x;
++    if (value->is_based())
++    {
++        id target = value->is_bignum() ? ID_bignum : ID_integer;
++        object_g unbased = rt.clone(value);
++        if (!unbased)
++            return nullptr;
++        ASSERT(leb128size(value->type()) == leb128size(target));
++        byte *data = (byte *) +unbased;
++        leb128(data, target);
++        value = algebraic_p(+unbased);
++    }
++    algebraic_g n = IntPart::run(value);
++    int cmp = 0;
++    if (!n || !comparison::compare(&cmp, n, value))
++        return nullptr;
++    if (cmp || n->is_negative(false))
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    if (!algebraic::to_integer(n) || !n || !n->is_integer())
++    {
++        if (!rt.error())
++            rt.domain_error();
++        return nullptr;
++    }
++    algebraic_g one = integer::make(1), two = integer::make(2);
++    return (n * (n + one)) / two;
++}
++
++INSERT_BODY(Termial)
++// ----------------------------------------------------------------------------
++//   Use the same postfix insertion rules as factorial.
++// ----------------------------------------------------------------------------
++{
++    auto mode = ui.editing_mode();
++    if (mode == ui.ALGEBRAIC || mode == ui.PARENTHESES)
++        return ui.insert(utf8("x?"), 2, ui.POSTFIX);
++    return ui.insert(utf8("Termial"), ui.POSTFIX);
++}
++
++
+ NFUNCTION_BODY(comb)
+ // ----------------------------------------------------------------------------
+ //   Compute number of combinations (n! / (n! * (n-m)!))
 diff --git a/src/graphics.cc b/src/graphics.cc
 index 666a957d495507c70aad510bba97b7a358279504..f1df4b24cf167aff45caa5d8901ad9366e617f44 100644
 --- a/src/graphics.cc
@@ -505,7 +607,7 @@ index 666a957d495507c70aad510bba97b7a358279504..f1df4b24cf167aff45caa5d8901ad936
 +#endif
      size    width  = graph->width();
      size    height = graph->height();
- 
+
 @@ -1285,6 +1289,9 @@ void show_grob(grob_p graph)
          Screen.copy(s, r, point(show_x,show_y));
      }
@@ -532,18 +634,37 @@ index 4485ad8e23a545541c783b07449d58b46a03d188..06a24cd69afb1eacd250ce2917801069
  }                                                                       \
  while(0)
 diff --git a/src/list.cc b/src/list.cc
-index fcd9903499c3591ea29d158b301e5231d4be29e1..42200c3c6002a1533aed1e74a608b2ba573b852e 100644
+index fcd9903499c3591ea29d158b301e5231d4be29e1..87d2c3225d5f06a1e514181ea3a68c598ee016f0 100644
 --- a/src/list.cc
 +++ b/src/list.cc
 @@ -27,6 +27,7 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#include "scoped_array.h"
  #include "list.h"
- 
+
  #include "algebraic.h"
-@@ -2155,7 +2156,12 @@ bool list::names_enumerate(size_t depth, bool units, list_g &forbidden) const
+@@ -147,7 +148,7 @@ object::result list::list_parse(id      type,
+         {
+             // Implicit multiplication
+             if (!infix && precedence < 0 &&
+-                (cp == '(' || is_valid_as_name_initial(cp)))
++                (cp == '(' || (cp != '?' && is_valid_as_name_initial(cp))))
+             {
+                 infix = static_object(ID_multiply);
+                 if (is_valid_as_name_initial(cp))
+@@ -311,6 +312,9 @@ object::result list::list_parse(id      type,
+                 case U'³':
+                     postfix_cmd = ID_cubed;
+                     break;
++                case '?':
++                    postfix_cmd = ID_Termial;
++                    break;
+                 case '!':
+                     postfix_cmd = ID_fact;
+                     break;
+@@ -2155,7 +2159,12 @@ bool list::names_enumerate(size_t depth, bool units, list_g &forbidden) const
      {
          list_g   lst = this;
          size_t   max = items();
@@ -557,10 +678,10 @@ index fcd9903499c3591ea29d158b301e5231d4be29e1..42200c3c6002a1533aed1e74a608b2ba
          size_t   local = 0;
          size_t   arg   = 0;
          size_t   nargs = 0;
-@@ -2900,8 +2906,12 @@ list_p list::extract(object_r &first, object_r &last) const
+@@ -2900,8 +2909,12 @@ list_p list::extract(object_r &first, object_r &last) const
          return nullptr;
      }
- 
+
 -    size_t fidx[fnum];
 -    size_t lidx[fnum];
 +    scoped_array<size_t> fidx(fnum),lidx(fnum);
@@ -572,38 +693,48 @@ index fcd9903499c3591ea29d158b301e5231d4be29e1..42200c3c6002a1533aed1e74a608b2ba
      for (size_t i = 0; i < fnum; i++)
      {
          int idx = (flst ? flst->at(i) : +first)->as_int32(1, true);
-@@ -2918,7 +2928,7 @@ list_p list::extract(object_r &first, object_r &last) const
+@@ -2918,7 +2931,7 @@ list_p list::extract(object_r &first, object_r &last) const
              return nullptr;
      }
- 
+
 -    return extract_sublist(data, 0, fnum, fidx, lidx);
 +    return extract_sublist(data, 0, fnum, fidx.get(), lidx.get());
  }
- 
- 
+
+
 diff --git a/src/locals.cc b/src/locals.cc
 index 7a9e592f50e29457f8ea3990da263121cd9fc5d4..ac181b1ac211c39dfbbed6e4aab5eb59dee8a262 100644
 --- a/src/locals.cc
 +++ b/src/locals.cc
 @@ -175,7 +175,9 @@ PARSE_BODY(locals)
      p.out = rt.make<locals>(ID_locals, scratch, alloc);
- 
+
      // Adjust size of parsed text for what we parsed before program
 -    p.source += -decls;
 +    // Subtract within the source buffer, rather than converting -decls
 +    // to the unsigned offset accepted by the GC pointer wrapper.
 +    p.source = utf8(p.source) - decls;
      p.length += decls;
- 
+
      return OK;
 diff --git a/src/menu.cc b/src/menu.cc
-index 365400baf970fb412e4c141da7a21222bad63bac..189bb46758c2583b9e47b2f583e2290024a7b0fc 100644
+index 365400baf970fb412e4c141da7a21222bad63bac..6a3889f60497adb8daa9dc4f7729461eaa33cd95 100644
 --- a/src/menu.cc
 +++ b/src/menu.cc
-@@ -1435,6 +1435,12 @@ MENU(ClearThingsMenu,
+@@ -772,7 +772,8 @@ MENU(ProbabilitiesMenu,
+      "FFT⁻¹",   ID_Unimplemented,
+
+      RandomGeneratorBits::label, ID_RandomGeneratorBits,
+-     RandomGeneratorOrder::label, ID_RandomGeneratorOrder
++     RandomGeneratorOrder::label, ID_RandomGeneratorOrder,
++     "n?", ID_Termial
+ );
+
+
+@@ -1435,6 +1436,12 @@ MENU(ClearThingsMenu,
       "Error",   ID_err0,
       "LCD",     ID_ClLCD);
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +static constexpr cstring modes_snapshot_label = "→Prog";
 +#else
@@ -613,16 +744,16 @@ index 365400baf970fb412e4c141da7a21222bad63bac..189bb46758c2583b9e47b2f583e22900
  MENU(ModesMenu,
  // ----------------------------------------------------------------------------
  //   Mode settings
-@@ -1453,7 +1459,7 @@ MENU(ModesMenu,
+@@ -1453,7 +1460,7 @@ MENU(ModesMenu,
       "Display", ID_DisplayModesMenu,
       "Seps",    ID_SeparatorModesMenu,
- 
+
 -     "Modes",   ID_Modes,
 +     modes_snapshot_label, ID_Modes,
       "Reset",   ID_ResetModes,
       "System",  ID_SystemSetup);
- 
-@@ -1543,7 +1549,9 @@ MENU(UserInterfaceModesMenu,
+
+@@ -1543,7 +1550,9 @@ MENU(UserInterfaceModesMenu,
       "Fixed0",                                  ID_FixedWidthDigits,
       "VProg",                                   ID_VerticalProgramRendering,
       BusyIndicatorRefresh::label,               ID_BusyIndicatorRefresh,
@@ -630,16 +761,16 @@ index 365400baf970fb412e4c141da7a21222bad63bac..189bb46758c2583b9e47b2f583e22900
       "ExitMenu",                                ID_ExitClearsMenu,
 +#endif
       "ListEval",                                ID_ListAsProgram,
- 
+
       "Units",                                   ID_ShowBuiltinUnits,
-@@ -1556,7 +1564,9 @@ MENU(UserInterfaceModesMenu,
+@@ -1556,7 +1565,9 @@ MENU(UserInterfaceModesMenu,
       StackGraphingTimeLimit::label,             ID_StackGraphingTimeLimit,
       GraphingTimeLimit::label,                  ID_GraphingTimeLimit,
       ShowTimeLimit::label,                      ID_ShowTimeLimit,
 +#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
       MinimumBatteryVoltage::label,              ID_MinimumBatteryVoltage,
 +#endif
- 
+
       TextRenderingSizeLimit::label,             ID_TextRenderingSizeLimit,
       GraphRenderingSizeLimit::label,            ID_GraphRenderingSizeLimit,
 diff --git a/src/polynomial.cc b/src/polynomial.cc
@@ -649,10 +780,10 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 @@ -27,6 +27,7 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#include "scoped_array.h"
  #include "polynomial.h"
- 
+
  #include "arithmetic.h"
 @@ -521,10 +522,13 @@ polynomial_p polynomial::addsub(polynomial_r x, polynomial_r y, bool sub)
      size_t nvars = leb128<size_t>(p);
@@ -669,7 +800,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        rt.out_of_memory_error();
 +        return nullptr;
 +    }
- 
+
      // Map variables in x and y to variables in the result
      for (size_t v = 0; v < nvars; v++)
 @@ -687,10 +691,13 @@ polynomial_p polynomial::mul(polynomial_r x, polynomial_r y)
@@ -687,13 +818,13 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        rt.out_of_memory_error();
 +        return nullptr;
 +    }
- 
+
      // Map variables in x and y to variables in the result
      for (size_t v = 0; v < nvars; v++)
 @@ -863,7 +870,12 @@ bool polynomial::quorem(polynomial_r  x,
      ularge       rorder = ri.rank(rvar);
      ularge       yorder = yi.rank(yvar);
- 
+
 -    symbol_g rvars[ri.variables];
 +    scoped_array<symbol_g> rvars(ri.variables);
 +    if (!rvars)
@@ -703,9 +834,9 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +    }
      for (size_t rv = 0; rv < ri.variables; rv++)
          rvars[rv] = r->variable(rv);
- 
+
 @@ -1214,7 +1226,12 @@ EVAL_BODY(polynomial)
- 
+
      polynomial_g poly  = o;
      size_t       nvars = poly->variables();
 -    algebraic_g  vars[nvars];
@@ -715,7 +846,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        rt.out_of_memory_error();
 +        return ERROR;
 +    }
- 
+
      // Evaluate each of the variables exactly once (this is where we save time)
      for (size_t v = 0; v < nvars; v++)
 @@ -1271,7 +1288,12 @@ RENDER_BODY(polynomial)
@@ -729,7 +860,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        rt.out_of_memory_error();
 +        return 0;
 +    }
- 
+
      // Get each of the variables
      for (size_t v = 0; v < nvars; v++)
 @@ -1343,7 +1365,12 @@ GRAPH_BODY(polynomial)
@@ -744,7 +875,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        return nullptr;
 +    }
      save<bool>   su(symbol::unambiguous, true);
- 
+
      // Get each of the variables and render it graphically
 @@ -1464,7 +1491,12 @@ algebraic_p polynomial::as_expression() const
  {
@@ -757,7 +888,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
 +        rt.out_of_memory_error();
 +        return nullptr;
 +    }
- 
+
      // Evaluate each of the variables exactly once (this is where we save time)
      for (size_t v = 0; v < nvars; v++)
 diff --git a/src/program.cc b/src/program.cc
@@ -776,8 +907,8 @@ index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7
          (battery_low || battery_voltage < vlow || power_voltage < vlow);
 +#endif
  }
- 
- 
+
+
 @@ -330,6 +334,9 @@ uint program::read_time()
  // ----------------------------------------------------------------------------
  //   The sys_current_ms() function stops running when timers are off.
@@ -794,8 +925,8 @@ index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7
      return ticks;
 +#endif
  }
- 
- 
+
+
 diff --git a/src/runtime.cc b/src/runtime.cc
 index ea88a32d0b7b5c13503772e42e42a5d69ee111a6..6c19b235011af638336502b32f2a9ad0347a1732 100644
 --- a/src/runtime.cc
@@ -885,7 +1016,7 @@ index 37fab88c9ffa6ee7043198dd8c17679ffd417441..67f4df416999c37e023666796b701808
 +                    call_stack_drop(2);
 +                return next;
              }
- 
+
              call_stack_drop(2);
 diff --git a/src/settings.cc b/src/settings.cc
 index e7495d116b7418334bea75903a48c619f87f0ab8..7e7eceac499de1b05101ce139ec2e3f45cd18339 100644
@@ -893,8 +1024,8 @@ index e7495d116b7418334bea75903a48c619f87f0ab8..7e7eceac499de1b05101ce139ec2e3f4
 +++ b/src/settings.cc
 @@ -400,12 +400,20 @@ object::id setting_value<object::id>(object_p obj, object::id UNUSED init)
  }
- 
- 
+
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +#include "base_settings.h"
 +#endif
@@ -909,7 +1040,7 @@ index e7495d116b7418334bea75903a48c619f87f0ab8..7e7eceac499de1b05101ce139ec2e3f4
 +    if (!pico_prepare_base_display(ty))
 +        return ERROR;
 +#endif
- 
+
      if (ty >= ID_Sig && ty <= ID_Eng)
      {
 diff --git a/src/settings.h b/src/settings.h
@@ -930,9 +1061,9 @@ index 9a5068de4e294c802adc8426e3796f4cb35bdc16..7b8d20dc0e1add87cbc57c47a0902f07
 +        return font(HeaderFont());
 +#endif
 +    }
- 
+
      static unicode digit_separator(uint index);
- 
+
 diff --git a/src/user_interface.cc b/src/user_interface.cc
 index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f5966304ea79 100644
 --- a/src/user_interface.cc
@@ -940,7 +1071,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 @@ -27,6 +27,15 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +#include "battery.h"
 +#endif
@@ -951,12 +1082,12 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +#include "ui/softmenu.h"
 +#endif
  #include "user_interface.h"
- 
+
  #include "arithmetic.h"
 @@ -675,6 +684,17 @@ bool user_interface::key(int key, bool repeating, bool talpha)
          }
      }
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +    // Errors, Help and interactive stack controls get Esc first.
 +    if (key == KEY_EXIT && menu() && !Stack.interactive &&
@@ -973,8 +1104,8 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          handle_shifts(key, talpha)      ||
 @@ -1301,6 +1321,44 @@ void user_interface::menu_pop()
  }
- 
- 
+
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +void user_interface::menu_root()
 +// ----------------------------------------------------------------------------
@@ -1038,7 +1169,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          menuHeight = newMenuHeight;
 @@ -1686,14 +1757,22 @@ bool user_interface::draw_menus()
      }
- 
+
      settings::SaveTabWidth stw(0);
 -    for (int plane = 0; plane < visiblePlanes; plane++)
 +    int renderedPlanes=visiblePlanes;
@@ -1063,7 +1194,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 @@ -1796,6 +1875,10 @@ bool user_interface::draw_menus()
                      len = strlen(cstring(label));
                  }
- 
+
 +                font_p labelFont = font;
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +                labelFont = pico_ui::softmenu_font(label, len, font);
@@ -1091,7 +1222,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
                          }
                      }
                  }
- 
+
                  Screen.clip(trect);
 -                size tw = font->width(label, len);
 +#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
@@ -1177,7 +1308,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 @@ -1882,6 +2000,21 @@ bool user_interface::draw_menus()
      if (!animating)
          draw_dirty(0, LCD_H - 1 - menuHeight, LCD_W, LCD_H-1);
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +    if (hintHeight)
 +    {
@@ -1204,10 +1335,10 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +    refresh = std::min(refresh, 1000u);
 +#endif
      const uint  usb_period = 1024;
- 
+
      if (now || delay >= refresh)
 @@ -2169,7 +2305,11 @@ bool user_interface::draw_battery(bool now)
- 
+
      // Experimentally, battery voltage below 2.6V cause calculator flakiness
      const uint vmax  = BATTERY_VMAX;
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
@@ -1217,7 +1348,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +#endif
      const uint vlow  = (vmax + 7 * vmin) / 8;
      const uint vhalf = (vmax + 3 * vmin) / 4;
- 
+
 @@ -2191,7 +2331,12 @@ bool user_interface::draw_battery(bool now)
      if (Settings.ShowVoltage())
      {
@@ -1233,7 +1364,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
              vcol = vpat;
 @@ -2231,6 +2376,9 @@ bool user_interface::draw_battery(bool now)
      }
- 
+
      size batw = bat_body.width();
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +    size w = pico_battery_icon_fill(vdd, batw);
@@ -1269,7 +1400,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      if (!blink)
          Screen.fill(bat_body, vpat);
 +#endif
- 
+
 -    if (!usb && !blink)
 +    if (!usb && !blink
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
@@ -1302,12 +1433,12 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      return true;
 +#endif
  }
- 
- 
+
+
 @@ -3014,6 +3193,9 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
      if (freezeStack)
          return false;
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +    pico_ui_draw_message(reinterpret_cast<const char *>(header),reinterpret_cast<const char *const *>(msgs),count,false);return true;
 +#else
@@ -1316,12 +1447,12 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      size   ch     = h * 5 / 2 + h * count + 10;
 @@ -3051,6 +3233,7 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
      refresh_dirty();
- 
+
      return true;
 +#endif
  }
- 
- 
+
+
 @@ -3168,6 +3351,11 @@ void user_interface::load_help(utf8 topic, size_t len)
  //   Find the help message associated with the topic
  // ----------------------------------------------------------------------------
@@ -1332,11 +1463,11 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +    return;
 +#endif
      record(help, "Loading help topic %.*s", len, topic);
- 
+
      if (!len)
 @@ -4121,7 +4309,7 @@ restart:
          return false;
- 
+
      using p                                    = pattern;
 -    const style_description styles[NUM_STYLES] =
 +    style_description styles[NUM_STYLES] =
@@ -1371,8 +1502,8 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          { HelpFont,         p::white,  p::gray10, false, false, false, false },
          { HelpCodeFont,     p::white,  p::gray10, false, false,  true,  true },
      };
- 
- 
+
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +    for(unsigned i=0;i<NUM_STYLES;++i)
 +    {
@@ -1395,13 +1526,13 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +#else
      Screen.fill(r, pattern::white);
 +#endif
- 
+
      // Clip drawing area in case some text does not really fit
      r.inset(1);
 @@ -4760,6 +4974,7 @@ restart:
          font              = styles[style].font;
          height            = font->height();
- 
+
 +#if !defined(PICOCALC) && !defined(PICOCALC_UI_HOST)
          // If we are rendering a command name, follow user preferences
          if (style == SUBTITLE || style == CODE || style == HIGHLIGHTED_CODE)
@@ -1409,7 +1540,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 @@ -4816,8 +5031,22 @@ restart:
              }
          }
- 
+
 +#endif
          // Compute width of word (or words in the case of titles)
          coord width = font->width(buffer, widx);
@@ -1432,7 +1563,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 @@ -4825,6 +5054,25 @@ restart:
              width += 2*kwidth;
          }
- 
+
 +#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
 +        if (style <= SUBSUBTITLE)
 +        {
@@ -1567,3 +1698,300 @@ index 0000000000000000000000000000000000000000..fbd86550cd8a979072483f3f60b3ed5c
 +    T &operator[](size_t i) {return data[i];}
 +};
 +#endif
+diff --git a/src/complex.cc b/src/complex.cc
+index 09fb12f0825cd0c9115f0f7edbd9e3943a315f70..2be4c9b299ab93828e68baa62df029e0f7d20eab 100644
+--- a/src/complex.cc
++++ b/src/complex.cc
+@@ -33,6 +33,8 @@
+ #include "arithmetic.h"
+ #include "array.h"
+ #include "compare.h"
++#include "decimal.h"
++#include "program.h"
+ #include "expression.h"
+ #include "fraction.h"
+ #include "functions.h"
+@@ -1836,13 +1838,109 @@ COMPLEX_BODY(erfc)
+
+ COMPLEX_BODY(tgamma)
+ // ----------------------------------------------------------------------------
+-//   Complex implementation of tgamma
++//   Spouge approximation, with reflection into the right half-plane.
++//   Compute coefficients at guard precision: their alternating sum cancels.
++//   No coefficient array or persistent cache is needed on the PicoCalc.
+ // ----------------------------------------------------------------------------
+ {
+-    rt.unimplemented_error();
+-    return z;
++    if (!z)
++        return nullptr;
++    uint digits = Settings.Precision();
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults numerical(true);
++    settings::SaveNumericalConstants constants(true);
++    settings::SaveAngleMode radians(ID_Rad);
++    settings::SavePrecision precision(digits + digits / 2 + 12);
++    algebraic_g real = z->re(), imag = z->im();
++    if (!real || !imag || !algebraic::to_decimal(real) ||
++        !algebraic::to_decimal(imag))
++        return nullptr;
++    complex_g input = rectangular::make(real, imag), result;
++    if (!input)
++        return nullptr;
++    if (imag->is_zero(false))
++    {
++        // Also handles poles at zero and negative integers consistently with
++        // real Gamma, without losing the complex argument's representation.
++        decimal_g value = decimal::tgamma(decimal_p(+real));
++        return value ? rectangular::make(value->precision(digits), imag) : nullptr;
++    }
++    complex_g one = complex::make(1), two = complex::make(2);
++    algebraic_g half = decimal::make(5, -1);
++    algebraic_g delta = real - half;
++    if (!delta || !one || !two)
++        return nullptr;
++    if (delta->is_negative(false))
++    {
++        // Gamma(z) = pi / (sin(pi*z) Gamma(1-z)).  The recursive call is
++        // always in Re(z) > 1/2; both calls use radian transcendental functions.
++        complex_g pi = complex::from_algebraic(decimal::pi());
++        // Evaluate sin(pi*z) by components. Pi-radian reduction keeps
++        // sin(pi*n) exactly zero, and decimal sinh retains tiny imaginary
++        // offsets near a pole instead of cancelling exp(y)-exp(-y).
++        decimal_g sine, cosine;
++        {
++            settings::SaveAngleMode pi_radians(ID_PiRadians);
++            sine = decimal::sin(decimal_g(decimal_p(+real)));
++            cosine = decimal::cos(decimal_g(decimal_p(+real)));
++        }
++        decimal_g y = decimal_g(decimal::pi()) * decimal_g(decimal_p(+imag));
++        decimal_g sr = sine * decimal_g(decimal::cosh(y));
++        decimal_g si = cosine * decimal_g(decimal::sinh(y));
++        complex_g sinpi = rectangular::make(algebraic_g(+sr), algebraic_g(+si));
++        complex_g reflected = complex::tgamma(one - input);
++        result = pi / (sinpi * reflected);
++    }
++    else
++    {
++        // Gamma(z) ~ (z+a-1)^(z-1/2) exp(-(z+a-1))
++        //             * (sqrt(2*pi) + sum c_k/(z+k-1)).
++        // a > 1.3*(digits+8) leaves margin beyond Spouge's error bound.
++        uint a = (13 * (digits + 8) + 9) / 10;
++        decimal_g factorial = decimal::make(1);
++        complex_g sum = complex::from_algebraic(algebraic_g(+decimal::constants().sqrt_2pi()));
++        complex_g denominator = input;
++        for (uint k = 1; k < a; ++k)
++        {
++            if (program::interrupted())
++                return nullptr;
++            decimal_g t = decimal::make(a - k);
++            decimal_g power = t, scale = decimal::exp(t);
++            uint exponent = k - 1;
++            while (exponent)
++            {
++                if (exponent & 1)
++                    scale = scale * power;
++                exponent >>= 1;
++                if (exponent)
++                    power = power * power;
++            }
++            decimal_g coefficient = decimal::sqrt(t) * scale / factorial;
++            complex_g term = complex::from_algebraic(algebraic_g(+coefficient)) / denominator;
++            sum = k & 1 ? sum + term : sum - term;
++            denominator = denominator + one;
++            factorial = factorial * decimal_g(decimal::make(k));
++            if (!sum || !denominator || !factorial)
++                return nullptr;
++        }
++        complex_g offset = complex::make(a - 1);
++        complex_g t = input + offset;
++        result = complex::exp((input - one / two) * complex::ln(t) - t
++                              + complex::ln(sum));
++    }
++    if (!result)
++        return nullptr;
++    real = result->re();
++    imag = result->im();
++    if (!real || !imag || !algebraic::to_decimal(real) ||
++        !algebraic::to_decimal(imag))
++        return nullptr;
++    real = decimal_p(+real)->precision(digits);
++    imag = decimal_p(+imag)->precision(digits);
++    return rectangular::make(real, imag);
+ }
+
++
+ COMPLEX_BODY(lgamma)
+ // ----------------------------------------------------------------------------
+ //   Complex implementation of lgamma
+diff --git a/src/ids.tbl b/src/ids.tbl
+index 4c7697414f999c99b7f56ddb3b37587dafc10799..ba1ae8fddea8dcef48e299d14f0904c466268021 100644
+--- a/src/ids.tbl
++++ b/src/ids.tbl
+@@ -133,8 +133,8 @@ ID_RANGE(is_complex,       rectangular,    polar)
+ ID_RANGE(is_range,         range,          uncertain)
+ ID_RANGE(is_strict_range,  range,          prange)
+ ID_RANGE(is_algebraic_num, unit,           neg_decimal,   range, uncertain)
+-ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse)
+-ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu)
++ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse, Termial, Termial)
++ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu, Termial, Termial)
+ ID_RANGE(is_symbolic,      expression,     xlib,
+                            polynomial,     relative_uncertainty)
+ ID_RANGE(is_immediate,     MainMenu,       SelfInsert)
+@@ -1684,6 +1684,9 @@ ID(solving_menu_store)
+ ID(solving_menu_solve)
+ ID(solving_menu_recall)
+
++// Appended to preserve every existing persisted object/command ID.
++NAMED(Termial, "Termial")        ALIAS(Termial, "?")
++
+ #undef ID
+ #undef OP
+ #undef CMD
+diff --git a/src/functions.h b/src/functions.h
+index 7390f7bf135442bd9c9f04e770435c007614ed0d..3608a05d7cae4062ac4a2c53ef539b075a3e2301 100644
+--- a/src/functions.h
++++ b/src/functions.h
+@@ -273,6 +273,7 @@ FUNCTION_EXT_PREC(neg,
+ FUNCTION_FANCY_MAT(sq);
+ FUNCTION_FANCY_MAT(cubed);
+ FUNCTION_FANCY(fact);
++FUNCTION_FANCY(Termial);
+
+ FUNCTION(re);
+ FUNCTION(im);
+diff --git a/src/command.cc b/src/command.cc
+index 68d83396b9029be8a9f9603a8bd815b9b5834816..b5968f0e12b79348fa9fa93e050a6b259e95ec54 100644
+--- a/src/command.cc
++++ b/src/command.cc
+@@ -74,6 +74,7 @@ static inline bool at_end(utf8 name, size_t max, utf8 cmd, size_t len, bool eq)
+ // ----------------------------------------------------------------------------
+ {
+     return len >= max
++        || (len == 1 && *cmd == '?')
+         || (eq && (!is_valid_as_name_initial(cmd) ||
+                    ((name[len] < '0' || name[len] > '9') &&
+                     !is_valid_in_function_name(name + len))))
+@@ -113,7 +114,7 @@ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
+
+         // Compute the maximum possible size for the command
+         size_t max = maxlen;
+-        if (is_valid_as_name_initial(name) ||
++        if ((is_valid_as_name_initial(name) && *name != '?') ||
+             (!eq && utf8_codepoint(name) == U'↑')) // e.g. ↑Match
+         {
+             for (max = utf8_size(name, max);
+diff --git a/src/expression.h b/src/expression.h
+index e8388c406b162fcf235d6dfadb1fe470740c8ed7..39837802ef5131946cefcd0a319bbd116d4a1c71 100644
+--- a/src/expression.h
++++ b/src/expression.h
+@@ -503,6 +503,7 @@ struct eq
+     EQ_FUNCTION(sq);
+     EQ_FUNCTION(cubed);
+     EQ_FUNCTION(fact);
++    EQ_FUNCTION(Termial);
+
+     EQ_FUNCTION(re);
+     EQ_FUNCTION(im);
+@@ -717,6 +718,7 @@ EQ_FUNCTION(neg);
+ EQ_FUNCTION(sq);
+ EQ_FUNCTION(cubed);
+ EQ_FUNCTION(fact);
++EQ_FUNCTION(Termial);
+
+ EQ_FUNCTION(re);
+ EQ_FUNCTION(im);
+diff --git a/src/symbol.cc b/src/symbol.cc
+index 600c55e86f5c51d64dc0d15b3f6f13fd8abc5c42..265623a94fed464bc164c0e04092050030fc4b3f 100644
+--- a/src/symbol.cc
++++ b/src/symbol.cc
+@@ -120,7 +120,13 @@ PARSE_BODY(symbol)
+
+     // Other characters must be alphabetic
+     while (parsed < max && is_valid_in_name(source + parsed))
++    {
++        // In algebraic expressions, ? is postfix; the explicit Ⓥ name
++        // escape and ordinary RPL identifiers retain question marks.
++        if (p.precedence && !skip && source[parsed] == '?')
++            break;
+         parsed = utf8_next(source, parsed, max);
++    }
+
+     // Build the resulting symbol
+     gcutf8 text   = source;
+@@ -137,10 +143,14 @@ RENDER_BODY(symbol)
+ // ----------------------------------------------------------------------------
+ {
+     size_t   len    = 0;
+-    utf8     txt    = o->value(&len);
++    gcutf8   txt    = o->value(&len);
+     size_t   cmdlen = len;
+     auto format = r.editing() ? ID_LongFormNames : Settings.NameDisplayMode();
+-    if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
++    // A literal question-mark name needs its escape in algebraic text.
++    bool postfix_name = (r.editing() || r.expression()) && memchr(+txt, '?', len);
++    if (postfix_name)
++        r.put(unicode(U'Ⓥ'));
++    else if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
+                                          (!r.graphing() || !r.expression()))))
+     {
+         if (command::lookup(+txt, cmdlen) && cmdlen == len)
+diff --git a/src/tests.cc b/src/tests.cc
+index 3dfaa9913b2a6b3f3ee6825d3137940cb599db50..e9544dcd4ae906e9e66d380042ba3be5faf9e1d3 100644
+--- a/src/tests.cc
++++ b/src/tests.cc
+@@ -11196,7 +11196,7 @@ void tests::catalog_test()
+         .test(B, U).editor("{ abs Background BU}")
+         .test(F1).editor("{ abs Background BusyIndicatorRefresh }");
+     step("Catalog with nothing entered")
+-        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh cosh⁻¹ }");
++        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh cos⁻¹ }");
+
+     step("Test the default menu")
+         .test(CLEAR, EXIT, A, RSHIFT, RUNSTOP).editor("{}")
+@@ -14422,6 +14422,33 @@ void tests::probabilities()
+ {
+     BEGIN(probabilities);
+
++    {
++        settings::SaveMantissaSpacing spacing(0);
++        step("Termial postfix and named command")
++            .test(CLEAR, "6?", ENTER).expect("21")
++            .test(CLEAR, "6 Termial", ENTER).expect("21");
++        step("Termial zero and one")
++            .test(CLEAR, "0?", ENTER).expect("0")
++            .test(CLEAR, "1?", ENTER).expect("1");
++        step("Termial exact whole decimal")
++            .test(CLEAR, "6.0?", ENTER).expect("21");
++        step("Termial exact large integer")
++            .test(CLEAR, "100000000000000000000?", ENTER)
++            .expect("5000000000000000000050000000000000000000");
++        step("Termial chained postfix operators")
++            .test(CLEAR, "6??", ENTER).expect("231")
++            .test(CLEAR, "4!?", ENTER).expect("300");
++        step("Termial in algebraic expressions")
++            .test(CLEAR, "'(2+4)?' ToDecimal", ENTER).expect("21")
++            .test(CLEAR, "'Termial(6)' ToDecimal", ENTER).expect("21");
++        step("Termial symbolic variable")
++            .test(CLEAR, "4 'TTN' STO 'TTN?' ToDecimal 'TTN' PURGE", ENTER)
++            .expect("10");
++        step("Termial rejects negative and fractional counts")
++            .test(CLEAR, "-1?", ENTER).error("Argument outside domain").clear_error()
++            .test(CLEAR, "2.5?", ENTER).error("Argument outside domain").clear_error();
++    }
++
+     step("Factorial in program")
+         .test(CLEAR, "37 FACT", ENTER)
+         .expect("13 763 753 091 226 345 046 315 979 581 580 902 400 000 000");
+diff --git a/doc/commands/termial.md b/doc/commands/termial.md
+new file mode 100644
+index 00000000..8d91eb16
+--- /dev/null
++++ b/doc/commands/termial.md
+@@ -0,0 +1,5 @@
++# Termial
++
++Compute the triangular sum `1+2+...+n` as `n*(n+1)/2`. The argument must be a nonnegative whole number; `0?` is zero. Fractional and negative arguments report a domain error.
++
++Use `6?` or `6 Termial` to get `21`. The algebraic forms `'N?'` and `'Termial(N)'` are equivalent. In RPL, separate a variable and the operator: `N ?` or `N Termial`. Ordinary RPL identifiers can still contain question marks; use the explicit name prefix `Ⓥ` when quoting such a name inside algebraic syntax. The explicit constant `Ⓒ?` is unchanged.

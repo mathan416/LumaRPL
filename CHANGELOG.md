@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Make the first minus key subtract immediately when two stack values are ready.
+
+- Support complex Gamma and factorial, including native imaginary-unit entry.
+- Add exact Termial sums through `?`, `Termial`, and the Probability menu.
+- Make numeric factorial/Termial and RPN power keys calculate immediately, with cursor-safe editing.
+- Evaluate parenthesized calculator entries and retain original formulas after errors.
+- Use partial redraws for formula cursor movement and add Ctrl+O for the Math menu.
+
+- Add an API & Assembly companion reference for Lua and CHIP-8/SUPER-CHIP, with downloadable and host-tested routines.
+
 ## 0.10.0-rc.2
 
 - Add illustrated User and Programming Guides, tested language examples and PDF build tools.

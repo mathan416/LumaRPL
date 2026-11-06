@@ -68,7 +68,7 @@ for name,c in meta.items():
  elif kind=='preset':
   body+='\n\nTry it\n'+('3 ' if name in ('Sig','Fix','Sci','Eng') else '')+name+'\n\n'+('Shows three digits using this display style.' if name in ('Sig','Fix','Sci','Eng') else 'Applies the display or angle choice described above.')
  rows.append(dict(name=name,category=category,text=body,spellings=list(dict.fromkeys([name]+aliases))))
-assert len(rows)==1026
+assert len(rows)==1027
 command_count=len(rows)
 for name,text in json.loads((root/'docs/help/topics.json').read_text()).items():rows.append(dict(name=name,category='Using RPL',text=text,spellings=[name]))
 categories=sorted({r['category'] for r in rows});assert len(categories)<=32

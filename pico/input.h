@@ -2,11 +2,12 @@
 #include <stdint.h>
 // Synthetic event ranges are disjoint from DB48X's 1..99 key identifiers.
 enum { PICO_TEXT=0x10000, PICO_SAVE=0x20001, PICO_LOAD,
-       PICO_EXIT, PICO_LEFT, PICO_RIGHT, PICO_SETUP, PICO_PROGRAMS, PICO_GRAPH, PICO_WORKBENCH, PICO_DATA, PICO_FORMS, PICO_NOTEBOOK, PICO_CONVERSIONS, PICO_REFERENCE_FIND, PICO_CATALOG, PICO_RPL_SETTINGS, PICO_BASES };
+       PICO_EXIT, PICO_LEFT, PICO_RIGHT, PICO_SETUP, PICO_PROGRAMS, PICO_GRAPH, PICO_WORKBENCH, PICO_DATA, PICO_FORMS, PICO_NOTEBOOK, PICO_CONVERSIONS, PICO_REFERENCE_FIND, PICO_CATALOG, PICO_RPL_SETTINGS, PICO_BASES, PICO_MATH_MENU };
 static inline int pico_translate_key(int code)
 {
     switch(code)
     {
+    case 15:return PICO_MATH_MENU; // Ctrl+O: existing Math menu
     case 1:return PICO_CATALOG; // Ctrl+A: command catalogue
     case 25:return PICO_BASES; // Ctrl+Y: bases (source editors retain Redo)
     case 18:return PICO_RPL_SETTINGS; // Ctrl+R: Advanced RPL settings

@@ -228,17 +228,7 @@ bool pico_handle_shortcut(int key)
 {
     if(pico_reference_input(ui,key,pico_reference_find))return true;
     if(pico_calculator_menu_shortcut(ui,key,pico_open_calculator_menu))return true;
-    if (key == PICO_LEFT || key == PICO_RIGHT)
-    {
-        if (rt.editing())
-        {
-            uint pos = ui.cursor_position();
-            pos = key == PICO_LEFT ? utf8_previous(rt.editor(), pos)
-                : utf8_next(rt.editor(), pos, rt.editing());
-            ui.cursor_position(pos);
-        }
-        return true;
-    }
+    if(pico_calculator_cursor_shortcut(ui,key))return true;
     if (key == PICO_SETUP) { pico_setup_menu(); return true; }
     if (key == PICO_PROGRAMS) { pico_program_browser(); return true; }
     if (key == PICO_CONVERSIONS) { pico_conversions_menu(); return true; }

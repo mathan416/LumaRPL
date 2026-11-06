@@ -2083,7 +2083,7 @@ void pico_open_calculator_menu(int menu)
     Stack.interactive=false;
     ui.clear_help();
     ui.menu_root();
-    object::static_object(menu==2?object::ID_BasesMenu:menu==1?object::ID_ModesMenu:object::ID_Catalog)->evaluate();
+    object::static_object(menu==3?object::ID_MathMenu:menu==2?object::ID_BasesMenu:menu==1?object::ID_ModesMenu:object::ID_Catalog)->evaluate();
     return_to_calculator=true;
 }
 void pico_setup_menu()

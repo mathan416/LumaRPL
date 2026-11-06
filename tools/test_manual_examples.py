@@ -56,6 +56,10 @@ for n,source in enumerate(manual_lua,1):
  exp={1:'Hello, LumaRPL\n5\n',2:'144\n',3:'Correct\n',4:'1\t1\n2\t4\n3\t9\n4\t16\n',5:'5\n',9:'Returned from graph\n',13:'false\tstring\n'}.get(n)
  # Native canvas and plot callbacks are asserted independently below.
  luacases.append(dict(name='Programming tutorial '+str(n),source=source,expected=exp))
+api=root/'docs/manuals/examples/api'
+for path in sorted(api.glob('*.lua')):
+ exp={'plot.lua':'Back from graph\n','bridge.lua':'¹/₃\nfalse\tstring\n','errors.lua':'false\tstring\ncompact\n320\t320\n'}.get(path.name)
+ luacases.append(dict(name='API '+path.name,source=path.read_text(),expected=exp))
 q=lambda s:json.dumps(s,ensure_ascii=False)
 inc=[]
 for c in luacases:
@@ -102,6 +106,7 @@ reports += [dict(language='Lua',name=c['name'],passed=True,checks='production ru
 assembly=json.loads((root/'docs/help/chip8-reference.json').read_text())
 asmcases=[dict(name=e['name'],source=e['source'],complete=e.get('example_kind')=='program') for e in assembly]
 asmcases += [dict(name='Programming tutorial '+str(i),source=s,complete=True) for i,s in enumerate(re.findall(r'```asm\n(.*?)\n```',manual,re.S),1)]
+asmcases += [dict(name='API '+p.name,source=p.read_text(),complete=True) for p in sorted(api.glob('*.asm'))]
 (work/'asm-cases.inc').write_text('\n'.join('{'+q(e['name'])+','+q(e['source'])+','+('true' if e['complete'] else 'false')+'},' for e in asmcases)+'\n')
 (work/'manual-asm.cc').write_text(r'''#include "chip8.h"
 #include "chip8_assembler.h"
@@ -117,6 +122,14 @@ printf("PASS manual CHIP-8: %s\n",c.name);}}
 subprocess.run(['clang++','-std=c++17','-O1','-g','-fsanitize=address,undefined','-I'+str(root/'pico'),str(work/'manual-asm.cc'),'-o',str(work/'manual-asm')],check=True)
 subprocess.run([str(work/'manual-asm')],check=True)
 reports += [dict(language='CHIP-8',name=c['name'],passed=True,checks='production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers') for c in asmcases]
-record=dict(version=(root/'VERSION').read_text().strip(),cases=reports,device_verified=False,source_sha256={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [root/'docs/manuals/user-guide.md',root/'docs/manuals/programming-guide.md',root/'docs/help/lua-reference.json',root/'docs/help/chip8-reference.json']})
+# The companion's downloadable files must be identical to its printed programs.
+api_text=(root/'docs/manuals/api-assembly-reference.md').read_text()
+for path in sorted(api.glob('*')):
+ if path.suffix not in ('.lua','.asm'):continue
+ assert ('```'+('asm' if path.suffix=='.asm' else 'lua')+'\n'+path.read_text().rstrip()+'\n```') in api_text,path.name
+subprocess.run(['clang++','-std=c++17','-O1','-g','-fsanitize=address,undefined','-I'+str(root/'pico'),str(root/'tests/api_reference_test.cc'),'-o',str(work/'api-reference-test')],check=True)
+subprocess.run([str(work/'api-reference-test'),str(api)],check=True)
+
+record=dict(version=(root/'VERSION').read_text().strip(),cases=reports,device_verified=False,api_routine_contracts_passed=True,source_sha256={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [root/'docs/manuals/user-guide.md',root/'docs/manuals/programming-guide.md',root/'docs/help/lua-reference.json',root/'docs/help/chip8-reference.json',root/'docs/manuals/api-assembly-reference.md',*sorted(api.glob('*'))]})
 (root/'output/pdf/manual-example-check.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
 print('PASS:',len(cases),'RPL,',len(luacases),'Lua,',len(asmcases),'CHIP-8 examples')

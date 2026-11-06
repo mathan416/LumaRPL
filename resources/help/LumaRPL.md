@@ -20,7 +20,9 @@ File browsers use F2 for Run and F3 for New, so use Left/Right to page through f
 
 The calculator's soft menus are different. They have six columns and several rows. Press Tab to choose a row, then F1-F5 for columns 1-5 or Ctrl+F5 for column 6. That row stays selected until you press Tab again. Esc goes up one menu level; at the top it closes the menu. If an error is showing, Esc dismisses that first.
 
-From the stack: Ctrl+A opens Command Catalogue, Ctrl+R opens Advanced RPL settings, Ctrl+Y opens Number bases, and Ctrl+K finds a command in Help. Catalogue inserts a name; it doesn't supply that command's arguments.
+From the stack: Ctrl+O opens the Math soft menu. Const has mathematical constants, Cmplx includes the imaginary unit, and Powers / Trig have functions. Ctrl+A opens Command Catalogue, Ctrl+R opens Advanced RPL settings, Ctrl+Y opens Number bases, and Ctrl+K finds a command in Help. Catalogue inserts a name; it doesn't supply that command's arguments.
+
+For a numeric power, type 2^3 and press Enter to get 8. 0^0 gives 1 by default. For RPN, 2 Enter 3 Enter ^ or 2 Enter 3 ^ calculates immediately, just like + and -. With no entry being edited, ! applies factorial and ? applies Termial to the top stack value immediately: 6 Enter ! gives 720, and 6 Enter ? gives 21. Typing a complete number followed by ! or ? also calculates immediately: 6! gives 720 and 6? gives 21. These characters remain text inside programs, quoted algebra, and names. Grouped calculator entries also work without quotes: ((2^3+4)-2) gives 10 on Enter. Left/Right moves the formula cursor using a partial redraw. With two values on the stack, - subtracts immediately; with fewer than two, a leading - starts a negative number. Immediate numeric shortcuts apply at the end of the entry; inside an entry, operator keys insert at the cursor. Formula errors retain your original input and position the cursor in that formula for correction. Quoted algebra and programs keep their usual syntax.
 
 Inside a source editor, use its shortcuts instead. For example, Ctrl+A selects all and Ctrl+R opens Replace. F4 Tools > Help has the full list.
 

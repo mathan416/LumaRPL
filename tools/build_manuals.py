@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build two illustrated, searchable LumaRPL manuals from maintained sources.
+"""Build illustrated, searchable LumaRPL manuals from maintained sources.
 
 Requires reportlab, Pillow and pypdf. Set LUMARPL_PDF_FONTS to a directory
 containing DejaVuSans{,-Bold,-Oblique}.ttf and DejaVuSansMono.ttf.
@@ -163,7 +163,7 @@ def code(lines,language=''):
 
 def table(rows):
     count=len(rows[0]);assert all(len(row)==count for row in rows),rows
-    if count==2:widths=[CW*.32,CW*.68]
+    if count==2:widths=[CW*.52,CW*.48] if rows[0][0]=='Signature' else [CW*.32,CW*.68]
     elif count==3:widths=[CW*.22,CW*.39,CW*.39]
     else:widths=[CW/count]*count
     cells=[[Paragraph(inline(v),ST['th' if i==0 else 'cell']) for v in row] for i,row in enumerate(rows)]
@@ -204,6 +204,8 @@ def markdown(text):
             blocks.append(Paragraph(html.escape(norm(line[2:])),ST['h1']));blocks.append(Rule());i+=1;continue
         if line.startswith('## '):blocks.append(Paragraph(html.escape(norm(line[3:])),ST['h2']));i+=1;continue
         if line.startswith('### '):blocks.append(Paragraph(html.escape(norm(line[4:])),ST['h3']));i+=1;continue
+        if line.startswith('- '):
+            blocks.append(Paragraph(inline(line[2:]),ParagraphStyle('bullet',parent=ST['body'],leftIndent=12,bulletFontName='Body',bulletFontSize=10),bulletText='•'));i+=1;continue
         if line.startswith('```'):
             language=line[3:];data=[];i+=1
             while i<len(lines) and not lines[i].startswith('```'):data.append(lines[i]);i+=1
@@ -225,7 +227,7 @@ def markdown(text):
         if line.startswith('> '):blocks.append(para(line[2:],'note'));i+=1;continue
         values=[line];i+=1
         numbered=bool(re.match(r'\d+\. ',line))
-        while i<len(lines) and lines[i].strip() and not re.match(r'^(#|\||```|!\[|@|>|\d+\. )',lines[i].strip()):
+        while i<len(lines) and lines[i].strip() and not re.match(r'^(#|\||```|!\[|@|>|- |\d+\. )',lines[i].strip()):
             values.append(lines[i].strip());i+=1
         blocks.append(para(' '.join(values)))
     return blocks
@@ -266,7 +268,7 @@ def lint_glyphs(text):
 
 def build(name,title,subtitle,accent,credit_letter,legal_letter):
     text=(SOURCE/(name+'.md')).read_text();lint_glyphs(text)
-    doc=Book(OUT/('LumaRPL-'+title.replace(' ','-')+'.pdf'),title)
+    doc=Book(OUT/('LumaRPL-'+title.replace(' & ',' ').replace(' ','-')+'.pdf'),title)
     toc=TableOfContents();toc.levelStyles=[ParagraphStyle('toc',fontName='Body',fontSize=9.5,leading=14,textColor=INK,leftIndent=0,firstLineIndent=0,spaceBefore=5,rightIndent=20)]
     toc.dotsMinLevel=0
     index=SimpleIndex(dot=' . ',headers=True);index.textStyle=ParagraphStyle('index',fontName='Body',fontSize=9,leading=12)
@@ -292,7 +294,13 @@ def build(name,title,subtitle,accent,credit_letter,legal_letter):
 
 if __name__=='__main__':
     OUT.mkdir(parents=True,exist_ok=True)
-    reports=[build('user-guide','User Guide','Learn the stack. Explore graphs. Keep your work.','#39C6DA','C','D'),
-      build('programming-guide','Programming Guide','RPL, Lua and CHIP-8 on the PicoCalc.','#E8B153','E','F')]
-    (OUT/'manual-build.json').write_text(json.dumps(dict(version=VERSION,books=reports),indent=2)+'\n')
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--book',choices=('all','user','programming','api'),default='all')
+    args=parser.parse_args()
+    specs=[('user','user-guide','User Guide','Learn the stack. Explore graphs. Keep your work.','#39C6DA','C','D'),
+      ('programming','programming-guide','Programming Guide','RPL, Lua and CHIP-8 on the PicoCalc.','#E8B153','E','F'),
+      ('api','api-assembly-reference','API & Assembly Reference','Lua APIs. CHIP-8 instructions. Reusable ROM routines.','#93C9AC','D','E')]
+    reports=[build(*spec[1:]) for spec in specs if args.book in ('all',spec[0])]
+    report_name='manual-build.json' if args.book=='all' else args.book+'-manual-build.json'
+    (OUT/report_name).write_text(json.dumps(dict(version=VERSION,books=reports),indent=2)+'\n')
     for book in reports:print(book['file'],book['pages'],'pages')

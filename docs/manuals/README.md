@@ -1,6 +1,6 @@
 # LumaRPL PDF manuals
 
-These are maintained, original User and Programming guides for LumaRPL on an
+These are maintained, original User and Programming guides and an API & Assembly Reference for LumaRPL on an
 official Pico 2 W / ClockworkPi PicoCalc, using the current release-candidate
 calculator behaviour. HP's classic manuals inspired the tutorial/reference split;
 HP prose, illustrations and page layouts were not copied.
@@ -9,6 +9,7 @@ HP prose, illustrations and page layouts were not copied.
 
 - user-guide.md: calculator operation and worked workflows.
 - programming-guide.md: editor, RPL, Lua and CHIP-8 tutorials.
+- api-assembly-reference.md: exact Lua contracts, CHIP-8 interfaces and reusable ROM routines.
 - docs/help/lua-reference.json and chip8-reference.json: the same reviewed language
   reference content used on device, included as book appendices.
 - credits.json: roles, project references and attribution summary for both books.
@@ -61,3 +62,17 @@ uses its current menu names. These descriptions match existing calculator code.
 Existing UF2/SD release archives and the mounted SD card are untouched. On-device
 credit/help text changes take effect in a subsequent firmware build/deployment;
 creating manuals does not silently replace an installed firmware.
+
+## API & Assembly companion
+
+The companion source is api-assembly-reference.md. It covers the shipped Lua APIs and the CHIP-8/SUPER-CHIP interface, plus six included assembly routines. It excludes native Arm development. Downloadable complete programs are in examples/api/ and are checked against the code printed in the book.
+
+To build and inspect only this companion:
+
+```sh
+python3 tools/build_manuals.py --book api
+python3 tools/test_manual_examples.py
+python3 tools/review_manuals.py --book api
+```
+
+The output is output/pdf/LumaRPL-API-Assembly-Reference.pdf. The example checker also compiles tests/api_reference_test.cc against the production assembler/VM under address and undefined-behaviour sanitizers. It asserts digit pixels, decimal digits and leading zeroes, keypad values, timers, nested-call depth, saturating-add boundaries and unsupported system calls. Lua I/O is simulated; this does not certify physical sound/LCD/key timing.

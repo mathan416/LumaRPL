@@ -40,6 +40,7 @@
 #include "recorder.h"
 #include "stack.h"
 #include "stack_menu.h"
+#include "calculator_shortcuts.h"
 #include "ui/calculator_frame.h"
 #include "sysmenu.h"
 #include "target.h"
@@ -218,14 +219,10 @@ static void handle_key(int key, bool repeating, bool talpha)
     if (key >= 0x10000)
     {
         unicode c = unicode(key - 0x10000);
-        int operation = c == '+' ? KB_ADD : c == '-' ? KB_SUB
-            : c == '*' ? KB_MUL : c == '/' ? KB_DIV : 0;
-        if (operation) pico_stack_menu_key(ui, Stack, operation, repeating, false);
-        else ui.insert(c, user_interface::DIRECT, false);
-        consumed = true;
+        consumed = pico_calculator_text_key(ui, Stack, c, repeating);
     }
     else
-        consumed = pico_stack_menu_key(ui, Stack, key, repeating, talpha);
+        consumed = pico_calculator_key(ui, Stack, key, repeating, talpha);
     if (!consumed)
         beep(1835, 125);
 
@@ -521,8 +518,9 @@ extern "C" void program_main()
             if (pico_handle_shortcut(key))
             {
                 if(key!=PICO_LEFT&&key!=PICO_RIGHT)key_pop_all();
+                bool full_redraw=pico_calculator_shortcut_full_redraw(key);
                 key = 0;
-                if (!ui.showing_graphics()) redraw_lcd(true);
+                if (!ui.showing_graphics()) redraw_lcd(full_redraw);
                 else ui.refresh();
                 continue;
             }
