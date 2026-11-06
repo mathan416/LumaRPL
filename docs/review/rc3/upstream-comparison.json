@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "tests": 8443,
+    "failures": 0,
+    "assertions": 7724
+  },
+  "post": {
+    "tests": 8507,
+    "failures": 0,
+    "assertions": 0
+  },
+  "expected_additional_tests": 64,
+  "additional_test_reason": "New calculator command/setting registrations and calculator regression checks extend the current suite; both full suites have zero failed checks.",
+  "known_baseline_assertions": 7724,
+  "baseline_assertion_reason": "The pristine upstream runtime.cc run_select_case predicate uses Returns[1] + 1 on the sentinel pointer. The existing calculator patch compares uintptr_t(Returns[1]) with uintptr_t(-1), avoiding that pointer arithmetic. Only that predicate and its recorder backtrace echoes appear in the pristine baseline. The patched suite has zero assertions.",
+  "scope": "Pristine pinned upstream monochrome simulator with its original fixtures; patched RGB332 simulator with variant-matched colour fixtures; same host compiler/Qt release configuration."
+}

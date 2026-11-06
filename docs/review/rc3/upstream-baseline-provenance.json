@@ -1,0 +1,12 @@
+{
+  "upstream_commit": "5d5a638a5b7f56bfdcdbae55dfa726dcbd18de4f",
+  "binary_sha256": "5d40f18b85a582b219c2a53c60854d18e3c86204456512eb37b899709d3d2626",
+  "scope": "Complete pristine upstream engine and tests; monochrome Qt simulator; generated recorder configuration and qrc/index metadata only",
+  "arguments": [
+    "-H",
+    "-m500",
+    "-Tall",
+    "-w180000",
+    "-r1"
+  ]
+}

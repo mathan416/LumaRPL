@@ -1,6 +1,6 @@
 # 1 Using this reference
 
-Keep this book beside the Programming Guide when you need an exact signature, a limit or the register contract for a subroutine. It describes the APIs shipped in LumaRPL **0.10.0-rc.2**. It does not introduce new firmware services.
+Keep this book beside the Programming Guide when you need an exact signature, a limit or the register contract for a subroutine. It describes the APIs shipped in LumaRPL **0.10.0-rc.3**. It does not introduce new firmware services.
 
 There are three distinct interfaces:
 

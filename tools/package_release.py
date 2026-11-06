@@ -2,7 +2,6 @@
 """Create a current-only bundle and corresponding source; never deploy."""
 import argparse,hashlib,json,shutil,subprocess,tarfile
 from pathlib import Path
-from license_bundle import copy_license_bundle
 root=Path(__file__).resolve().parents[1]
 version=(root/'VERSION').read_text().strip()
 parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--loader',type=Path);args=parser.parse_args()
@@ -22,15 +21,25 @@ card=output/'sd-card'
 (card/'pico2-apps').mkdir(parents=True)
 shutil.copy2(firmware,card/'pico2-apps/LumaRPL-Pico-2-W.uf2')
 shutil.copy2(firmware,output/'LumaRPL-Pico-2-W.uf2')
-for name in ('config','state','help','library'):
-    shutil.copytree(root/'db48x'/name,card/'db48x'/name,ignore=shutil.ignore_patterns('.DS_Store','bad','*.log'))
-shutil.copytree(root/'resources',card/'db48x',dirs_exist_ok=True,ignore=shutil.ignore_patterns('.DS_Store','__pycache__'))
-copy_license_bundle(root,card/'db48x/licenses')
-shutil.copytree(root/'docs/manuals/pdf',card/'db48x/manuals',dirs_exist_ok=True)
+def copy_tracked(repo, folders, destination, prefix=None):
+    names=subprocess.check_output(['git','ls-files','-z','--',*folders],cwd=repo).decode().split('\0')
+    for name in filter(None,names):
+        source=repo/name
+        if not source.is_file():continue
+        relative=Path(name).relative_to(prefix) if prefix else Path(name)
+        target=destination/relative
+        target.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(source,target)
+# Package versioned defaults only; local simulator states and credentials stay private.
+copy_tracked(root/'db48x',('config','state','help','library'),card/'db48x')
+copy_tracked(root,('resources',),card/'db48x',Path('resources'))
+copy_tracked(root,('licenses',),card/'db48x')
+shutil.copy2(root/'NOTICE.md',card/'db48x/licenses/PORT-NOTICES.md')
+shutil.copy2(root/'SOURCES.lock.json',card/'db48x/licenses/SOURCES.lock.json')
+copy_tracked(root,('docs/manuals/pdf',),card/'db48x/manuals',Path('docs/manuals/pdf'))
 for name in ('README.md','BUILDING.md','NOTICE.md','LICENSE','CHANGELOG.md','VERSION'):
     shutil.copy2(root/name,output/name)
-shutil.copytree(root/'licenses',output/'licenses')
-shutil.copytree(root/'docs',output/'docs')
+copy_tracked(root,('licenses','docs'),output)
 linker_map=root/'build/pico/db48x-picocalc-pico2w.elf.map'
 if linker_map.exists():(output/'firmware.map').write_text(linker_map.read_text().replace(str(root)+'/', ''))
 (output/'SOURCE.json').write_text(json.dumps({'version':version,'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'firmware_sha256':metadata['sha256'],'tracked_source_clean':True},indent=2)+'\n')

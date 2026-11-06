@@ -1,0 +1,1082 @@
+[
+  {
+    "name": "real Gamma 1000 at 50 digits",
+    "source": "50 Precision 1000 Gamma 4.02387260077093773543702433923003985719374864210714632543799910429938512398629020592044208486969404800479988610197196058631667E+2564 / 1 - ABS 1e-47 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "complex Gamma 1000 at 50 digits",
+    "source": "50 Precision (1000;1e-200) Gamma 4.02387260077093773543702433923003985719374864210714632543799910429938512398629020592044208486969404800479988610197196058631667E+2564 / 1 - ABS 1e-47 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "real Gamma 10000 at 50 digits",
+    "source": "50 Precision 10000 Gamma 2.84625968091705451890641321211986889014805140170279923079417999427441134000376444377299078675778477581588406214231752883004234E+35655 / 1 - ABS 1e-47 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "complex Gamma 10000 at 50 digits",
+    "source": "50 Precision (10000;1e-200) Gamma 2.84625968091705451890641321211986889014805140170279923079417999427441134000376444377299078675778477581588406214231752883004234E+35655 / 1 - ABS 1e-47 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "real Gamma 1000 at 100 digits",
+    "source": "100 Precision 1000 Gamma 4.02387260077093773543702433923003985719374864210714632543799910429938512398629020592044208486969404800479988610197196058631667E+2564 / 1 - ABS 1e-97 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "complex Gamma 1000 at 100 digits",
+    "source": "100 Precision (1000;1e-200) Gamma 4.02387260077093773543702433923003985719374864210714632543799910429938512398629020592044208486969404800479988610197196058631667E+2564 / 1 - ABS 1e-97 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "real Gamma 10000 at 100 digits",
+    "source": "100 Precision 10000 Gamma 2.84625968091705451890641321211986889014805140170279923079417999427441134000376444377299078675778477581588406214231752883004234E+35655 / 1 - ABS 1e-97 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "complex Gamma 10000 at 100 digits",
+    "source": "100 Precision (10000;1e-200) Gamma 2.84625968091705451890641321211986889014805140170279923079417999427441134000376444377299078675778477581588406214231752883004234E+35655 / 1 - ABS 1e-97 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT impulse",
+    "source": "[1 0 0 0] FFT [1 1 1 1] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT sign convention",
+    "source": "[0 1 0 0] FFT [(1;0) (0;-1) (-1;0) (0;1)] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT constant normalization",
+    "source": "[1 1 1 1] FFT [4 0 0 0] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Inverse normalization",
+    "source": "[1 1 1 1] InvFFT [1 0 0 0] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT complex round trip 1",
+    "source": "24 Precision [(-3;-2)] DUP FFT InvFFT - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT complex round trip 2",
+    "source": "24 Precision [(-3;-2) (-2;-1)] DUP FFT InvFFT - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT complex round trip 8",
+    "source": "24 Precision [(-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0)] DUP FFT InvFFT - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT complex round trip 32",
+    "source": "24 Precision [(-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0) (-2;1) (-1;2) (0;-2) (1;-1) (2;0) (3;1) (-3;2) (-2;-2) (-1;-1) (0;0) (1;1) (2;2) (3;-2) (-3;-1) (-2;0) (-1;1) (0;2) (1;-2) (2;-1) (3;0) (-3;1) (-2;2) (-1;-2) (0;-1)] DUP FFT InvFFT - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT complex round trip 128",
+    "source": "24 Precision [(-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0) (-2;1) (-1;2) (0;-2) (1;-1) (2;0) (3;1) (-3;2) (-2;-2) (-1;-1) (0;0) (1;1) (2;2) (3;-2) (-3;-1) (-2;0) (-1;1) (0;2) (1;-2) (2;-1) (3;0) (-3;1) (-2;2) (-1;-2) (0;-1) (1;0) (2;1) (3;2) (-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0) (-2;1) (-1;2) (0;-2) (1;-1) (2;0) (3;1) (-3;2) (-2;-2) (-1;-1) (0;0) (1;1) (2;2) (3;-2) (-3;-1) (-2;0) (-1;1) (0;2) (1;-2) (2;-1) (3;0) (-3;1) (-2;2) (-1;-2) (0;-1) (1;0) (2;1) (3;2) (-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0) (-2;1) (-1;2) (0;-2) (1;-1) (2;0) (3;1) (-3;2) (-2;-2) (-1;-1) (0;0) (1;1) (2;2) (3;-2) (-3;-1) (-2;0) (-1;1) (0;2) (1;-2) (2;-1) (3;0) (-3;1) (-2;2) (-1;-2) (0;-1) (1;0) (2;1) (3;2) (-3;-2) (-2;-1) (-1;0) (0;1) (1;2) (2;-2) (3;-1) (-3;0) (-2;1) (-1;2) (0;-2) (1;-1) (2;0) (3;1) (-3;2) (-2;-2) (-1;-1) (0;0) (1;1) (2;2) (3;-2) (-3;-1) (-2;0)] DUP FFT InvFFT - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT algebraic call",
+    "source": "'InvFFT(FFT([1;2;3;4]))' EVAL [1 2 3 4] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT matrix rejection",
+    "source": "[[1 2][3 4]] FFT",
+    "returncode": 0,
+    "stdout": "[[ 1 2 ]\n  [ 3 4 ]]",
+    "stderr": "[21228 0.188140] errors: Error [Invalid dimension]\nInvalid dimension\n[23096 0.199476] errors: Error [Invalid dimension]",
+    "passed": true
+  },
+  {
+    "name": "FFT non-power-of-two rejection",
+    "source": "[1 2 3] FFT",
+    "returncode": 0,
+    "stdout": "[ 1 2 3 ]",
+    "stderr": "[21196 0.195399] errors: Error [Invalid dimension]\nInvalid dimension\n[22894 0.206705] errors: Error [Invalid dimension]",
+    "passed": true
+  },
+  {
+    "name": "FFT scalar rejection",
+    "source": "42 FFT",
+    "returncode": 0,
+    "stdout": "42",
+    "stderr": "[21160 0.210692] errors: Error [Bad argument type]\nBad argument type\n[22683 0.223314] errors: Error [Bad argument type]",
+    "passed": true
+  },
+  {
+    "name": "Normal CDF center",
+    "source": "0 1 0 Normal 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Student CDF center",
+    "source": "10 0 Student 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Chi-square analytic CDF",
+    "source": "2 2 ChiSquare 1 1 EXP INV - - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "F-distribution symmetry",
+    "source": "2 2 1 FDistribution 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Normal inverse 0.01",
+    "source": "24 Precision 2 3 2 3 0.01 InvNormal Normal 0.01 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Normal inverse 0.5",
+    "source": "24 Precision 2 3 2 3 0.5 InvNormal Normal 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Normal inverse 0.99",
+    "source": "24 Precision 2 3 2 3 0.99 InvNormal Normal 0.99 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Student inverse 0.01",
+    "source": "24 Precision 7 7 0.01 InvStudent Student 0.01 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Student inverse 0.5",
+    "source": "24 Precision 7 7 0.5 InvStudent Student 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Student inverse 0.99",
+    "source": "24 Precision 7 7 0.99 InvStudent Student 0.99 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "ChiSquare inverse 0.01",
+    "source": "24 Precision 4 4 0.01 InvChiSquare ChiSquare 0.01 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "ChiSquare inverse 0.5",
+    "source": "24 Precision 4 4 0.5 InvChiSquare ChiSquare 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "ChiSquare inverse 0.99",
+    "source": "24 Precision 4 4 0.99 InvChiSquare ChiSquare 0.99 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FDistribution inverse 0.01",
+    "source": "24 Precision 5 8 5 8 0.01 InvFDistribution FDistribution 0.01 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FDistribution inverse 0.5",
+    "source": "24 Precision 5 8 5 8 0.5 InvFDistribution FDistribution 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FDistribution inverse 0.99",
+    "source": "24 Precision 5 8 5 8 0.99 InvFDistribution FDistribution 0.99 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Normal variance rejection",
+    "source": "0 -1 0 Normal",
+    "returncode": 0,
+    "stdout": "0\n-1\n0",
+    "stderr": "[21195 0.193726] errors: Error [Argument outside domain]\nArgument outside domain\n[23063 0.218640] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Inverse probability rejection",
+    "source": "5 0 InvStudent",
+    "returncode": 0,
+    "stdout": "5\n0",
+    "stderr": "[21180 0.200399] errors: Error [Argument outside domain]\nArgument outside domain\n[22817 0.211587] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "QR reconstruction",
+    "source": "[[1 2][3 4][5 7]] DUP MatrixQR * - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR orthogonality",
+    "source": "[[1 2][3 4][5 7]] MatrixQR DROP DUP TRANSPOSE * 3 IDN - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR rank-deficient reconstruction",
+    "source": "[[1 2][2 4]] DUP MatrixQR * - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "LQ rectangular reconstruction",
+    "source": "[[1 2 3][4 5 7]] DUP LQ * - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Cholesky reconstruction",
+    "source": "[[4 2][2 5]] DUP Cholesky DUP TRANSPOSE * - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Cholesky positivity rejection",
+    "source": "[[1 2][2 1]] Cholesky",
+    "returncode": 0,
+    "stdout": "[[ 1 2 ]\n  [ 2 1 ]]",
+    "stderr": "[21447 0.187330] errors: Error [Argument outside domain]\nArgument outside domain\n[23115 0.198552] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Cholesky symmetry rejection",
+    "source": "[[4 1][2 5]] Cholesky",
+    "returncode": 0,
+    "stdout": "[[ 4 1 ]\n  [ 2 5 ]]",
+    "stderr": "[21325 0.186985] errors: Error [Argument outside domain]\nArgument outside domain\n[23193 0.198457] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Diagonal conversion",
+    "source": "[1 2 3] DUP ToDiagonal FromDiagonal - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "SVD reconstruction",
+    "source": "[[1 2][3 4][5 7]] DUP SVD SWAP ToDiagonal ROT SWAP * SWAP TRANSPOSE * - Norm 1e-19 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "SVD wide reconstruction",
+    "source": "[[1 2 3][4 5 7]] DUP SVD SWAP ToDiagonal ROT SWAP * SWAP TRANSPOSE * - Norm 1e-19 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Singular values exact diagonal",
+    "source": "[[3 0][0 4]] SVL [4 3] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Condition number",
+    "source": "[[3 0][0 4]] CondNum 4 3 / - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Singular condition error",
+    "source": "[[1 0][0 0]] CondNum",
+    "returncode": 0,
+    "stdout": "[[ 1 0 ]\n  [ 0 0 ]]",
+    "stderr": "[21702 0.192665] errors: Error [Divide by zero]\nDivide by zero\n[23372 0.204076] errors: Error [Divide by zero]",
+    "passed": true
+  },
+  {
+    "name": "Schur reconstruction",
+    "source": "[[1 2 3][4 5 6][7 8 10]] DUP Schur OVER TRANSPOSE * * - Norm 1e-17 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Schur orthogonality",
+    "source": "[[1 2 3][4 5 6][7 8 10]] Schur DROP DUP TRANSPOSE * 3 IDN - Norm 1e-18 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Spectral radius complex pair",
+    "source": "[[0 -2][2 0]] SpecRad 2 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Spectral radius triangular",
+    "source": "[[2 3 1][0 -4 7][0 0 3]] SpecRad 4 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Modular pivot swap",
+    "source": "5 CASModulus [[0 1 2][1 1 3]] RREFMOD [[1 0 1][0 1 2]] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Modular composite rejection",
+    "source": "6 CASModulus [[1 2][3 4]] RREFMOD",
+    "returncode": 0,
+    "stdout": "[[ 1 2 ]\n  [ 3 4 ]]",
+    "stderr": "[21260 0.196319] errors: Error [Argument outside domain]\nArgument outside domain\n[23128 0.207748] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Modular large integers",
+    "source": "5 CASModulus [[100000000000000000000000000000000001 2][0 1]] RREFMOD [[1 0][0 1]] - Norm 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Taylor sine",
+    "source": "Rad 'SIN(x)' 'x' 0 5 Taylor 0.1 'x' STO EVAL 0.0998334166666666666666666666667 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Taylor shifted polynomial",
+    "source": "'x^2' 'x' 2 2 Taylor 3 'x' STO EVAL 9 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Finite difference",
+    "source": "'x^2' 'x' 1 FiniteDifference 3 'x' STO EVAL 7 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Derivative uses selected variable",
+    "source": "'Y' STOVX 'Y^3' DerivX 2 'Y' STO EVAL 12 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Primitive uses selected variable",
+    "source": "'Y' STOVX 'Y^2' IntVX 3 'Y' STO EVAL 9 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Removable limit 'SIN(x)/x'",
+    "source": "Rad 'SIN(x)/x' 'x' 0 Limit 1 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Removable limit '(EXP(x)-1)/x'",
+    "source": "Rad '(EXP(x)-1)/x' 'x' 0 Limit 1 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Removable limit '(x^2-1)/(x-1)'",
+    "source": "Rad '(x^2-1)/(x-1)' 'x' 1 Limit 2 - ABS 1e-23 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Discontinuous limit rejected",
+    "source": "'ABS(x)/x' 'x' 0 Limit",
+    "returncode": 0,
+    "stdout": "'abs x\u00f7x'\n'x'\n0",
+    "stderr": "[40156 0.196856] errors: Error [Argument outside domain]\nArgument outside domain\n[42019 0.208367] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite TanToSinCos",
+    "source": "Rad NumericalConstants 'TAN(x)' DUP TanToSinCos 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite TanSquaredToSinCos",
+    "source": "Rad NumericalConstants 'TAN(x)^2' DUP TanSquaredToSinCos 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite HalfTan",
+    "source": "Rad NumericalConstants 'SIN(x)+COS(x)' DUP HalfTan 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite TExpand",
+    "source": "Rad NumericalConstants 'SIN(x+2)+COS(x-1)' DUP TExpand 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite TLin",
+    "source": "Rad NumericalConstants 'SIN(x)*COS(x)' DUP TLin 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite ExpLn",
+    "source": "Rad NumericalConstants 'EXP(x+2)' DUP ExpLn 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite Lin",
+    "source": "Rad NumericalConstants 'EXP(x)*EXP(2)' DUP Lin 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite LnCollect",
+    "source": "Rad NumericalConstants 'LN(2)+LN(3)' DUP LnCollect 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Symbolic rewrite SinCos",
+    "source": "Rad NumericalConstants 'SIN(x)+COS(x)' DUP SinCos 0.3 'x' STO EVAL SWAP EVAL - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Find first match",
+    "source": "{3 7 7 9} 7 Find 2 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Find absent",
+    "source": "[3 7 9] 8 Find 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex erf independent value",
+    "source": "24 Precision (1;1) ERF (1.31615128169794764488027108024;0.190453469237834686284108861969) - ABS 1e-22 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex erfc complement",
+    "source": "24 Precision (1;1) DUP ERF SWAP ERFC + 1 - ABS 1e-22 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex erf imaginary axis",
+    "source": "24 Precision (0;1) ERF (0;1.65042575879754287602533772956) - ABS 1e-22 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex erf conjugate",
+    "source": "24 Precision (2;3) ERF CONJ (2;-3) ERF - ABS 1e-18 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex erf large argument",
+    "source": "24 Precision (30;1) ERF 1 - ABS 1e-22 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex lgamma consistency",
+    "source": "24 Precision (-2;3) LNGAMMA EXP (-2;3) GAMMA / 1 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "FFT repeated collection",
+    "source": "1 100 START [1 2 3 4 5 6 7 8] FFT InvFFT DROP NEXT True",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Matrix repeated collection",
+    "source": "1 100 START [[1 2][3 4][5 7]] MatrixQR * DROP [[3 1][1 2]] SVD DROP DROP DROP NEXT True",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "SVD rank-deficient orthogonality",
+    "source": "[[1 2][2 4]] SVD DROP DROP DUP TRANSPOSE SWAP * 2 IDN - Norm 1e-19 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "SVD zero-matrix orthogonality",
+    "source": "[[0 0][0 0][0 0]] SVD DROP DROP DUP TRANSPOSE SWAP * 2 IDN - Norm 1e-19 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Taylor preserves assigned variable",
+    "source": "99 'x' STO 'SIN(x)' 'x' 0 3 Taylor DROP x 99 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Analytic limit preserves angle mode",
+    "source": "Deg 'SIN(x)/x' 'x' 0 Limit 1 - ABS 1e-23 < 90 SIN 1 - ABS 1e-23 < AND",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Probability tiny lower tail",
+    "source": "24 Precision 2 1e-30 ChiSquare 5e-31 / 1 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Quantile invalid variance",
+    "source": "0 -1 0.5 InvNormal",
+    "returncode": 0,
+    "stdout": "0\n-1\n0.5",
+    "stderr": "[21258 0.218398] errors: Error [Argument outside domain]\nArgument outside domain\n[23349 0.229810] errors: Error [Argument outside domain]",
+    "passed": true
+  },
+  {
+    "name": "Existing DELTA directory name",
+    "source": "{ ALPHA BETA GAMMA2 DELTA } CRDIR VARS { DELTA GAMMA2 BETA ALPHA } SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR remains an algebraic variable",
+    "source": "7 'qr' STO 'qr+1' EVAL 8 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "New function names remain algebraic variables",
+    "source": "7 'Normal' STO 'Normal+1' EVAL 8 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR unit variable still parses",
+    "source": "'(qr_W)=((k_(W/(m*K)))*(A_(m\u00b2))/(L_m))*(UBASE(Th_\u00b0C)-UBASE(Tc_\u00b0C))' DROP True",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Explicit new function call still parses",
+    "source": "'Normal(0;1;0)' EVAL 0.5 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "SVD minimum precision",
+    "source": "3 Precision [[1 2][3 4]] SVD DROP DROP DUP TRANSPOSE SWAP * 2 IDN - Norm 0.03 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Schur minimum precision",
+    "source": "3 Precision [[1 2 3][4 5 6][7 8 10]] DUP Schur OVER TRANSPOSE * * - Norm 0.2 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Cholesky minimum precision",
+    "source": "3 Precision [[4 2][2 5]] DUP Cholesky DUP TRANSPOSE * - Norm 0.03 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Condition number minimum precision",
+    "source": "3 Precision [[3 0][0 4]] CondNum 1.33 - ABS 0.01 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Normal inverse extreme-tail symmetry",
+    "source": "24 Precision 0 1 1e-24 InvNormal 0 1 0.999999999999999999999999 InvNormal + ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Chi-square inverse extreme upper tail",
+    "source": "24 Precision 2 0.999999999999999999999999 InvChiSquare 1e-24 LN 2 * + ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "F inverse extreme upper tail",
+    "source": "24 Precision 2 2 0.999999999999999999999999 InvFDistribution 1e24 / 1 - ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Probability complex input rejected",
+    "source": "0 1 (1;1) Normal",
+    "returncode": 0,
+    "stdout": "0\n1\n1+\u2148",
+    "stderr": "[21195 0.189133] errors: Error [Bad argument type]\nBad argument type\n[23881 0.200568] errors: Error [Bad argument type]",
+    "passed": true
+  },
+  {
+    "name": "Inverse complex parameter rejected",
+    "source": "(1;1) 0.5 InvStudent",
+    "returncode": 0,
+    "stdout": "1+\u2148\n0.5",
+    "stderr": "[21188 0.205958] errors: Error [Bad argument type]\nBad argument type\n[23971 0.217561] errors: Error [Bad argument type]",
+    "passed": true
+  },
+  {
+    "name": "Probability symbolic rendering",
+    "source": "'Normal(M;V;X)' ToText \"'Normal(M;V;X)'\" SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Inverse symbolic rendering",
+    "source": "'InvNormal(M;V;P)' ToText \"'InvNormal(M;V;P)'\" SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Schur real eigenvalues are triangular",
+    "source": "[[1 2][3 4]] Schur SWAP DROP 2 GET 1 GET ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Schur repeated real eigenvalue",
+    "source": "[[2 1][-1 0]] Schur SWAP DROP 2 GET 1 GET ABS 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Schur three real eigenvalues are triangular",
+    "source": "[[1 2 3][4 5 6][7 8 10]] Schur SWAP DROP DUP 2 GET 1 GET ABS SWAP 3 GET 2 GET ABS + 1e-20 <",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Long ordinary identifier constant lookup",
+    "source": "99 'LongOrdinaryIdentifierWhichExceedsShortConstantNames' STO LongOrdinaryIdentifierWhichExceedsShortConstantNames 99 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Complex Gamma precision guard",
+    "source": "9999 Precision (1;1) Gamma",
+    "returncode": 0,
+    "stdout": "1+\u2148",
+    "stderr": "[21197 0.196394] errors: Error [Numerical precision lost]\nNumerical precision lost\n[23539 0.207670] errors: Error [Numerical precision lost]",
+    "passed": true
+  },
+  {
+    "name": "FFT precision guard",
+    "source": "9999 Precision [1] FFT",
+    "returncode": 0,
+    "stdout": "[ 1 ]",
+    "stderr": "[21200 0.190151] errors: Error [Numerical precision lost]\nNumerical precision lost\n[22648 0.201662] errors: Error [Numerical precision lost]",
+    "passed": true
+  },
+  {
+    "name": "CASModulus standard recall",
+    "source": "5 CASModulus 'CASModulus' RCL 5 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "CASModulus recall and restore",
+    "source": "5 CASModulus 'CASModulus' RCL CASModulus 'CASModulus' RCL 5 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR remains an RPL program variable",
+    "source": "7 'qr' STO \u00ab qr 1 + \u00bb EVAL 8 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "QR ordinary name recalls without escape",
+    "source": "7 'qr' STO 'qr' RCL 7 - 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm create returns ID",
+    "source": "20990101.120000 \"Lunch\" StoAlarm 1 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm recall message",
+    "source": "20990101.120000 \"Lunch\" StoAlarm RclAlarm 3 GET \"Lunch\" SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm list two",
+    "source": "20990101 \"A\" StoAlarm DROP 20990102 \"B\" StoAlarm DROP Alarms SIZE 2 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm delete",
+    "source": "20990101 \"A\" StoAlarm DelAlarm Alarms SIZE 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm find earliest",
+    "source": "20990103 \"Later\" StoAlarm DROP 20990102 \"Earlier\" StoAlarm DROP 20990101 FindAlarm 2 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm find strict boundary",
+    "source": "20990101 \"A\" StoAlarm DROP 20990101 FindAlarm 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm ack only oldest due",
+    "source": "20000101 \"A\" StoAlarm DROP 20000102 \"B\" StoAlarm DROP Ack 1 RclAlarm 4 GET 1 SAME 2 RclAlarm 4 GET 0 SAME AND",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm ack all keeps future",
+    "source": "20000101 \"Old\" StoAlarm DROP 20990101 \"Future\" StoAlarm DROP AckAll 1 RclAlarm 4 GET 1 SAME 2 RclAlarm 4 GET 0 SAME AND",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm empty acknowledge",
+    "source": "Ack AckAll Alarms SIZE 0 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm HOME persistence across directories",
+    "source": "20990101 \"A\" StoAlarm DROP 'AlarmTestDir' CRDIR AlarmTestDir Alarms SIZE 1 SAME",
+    "returncode": 0,
+    "stdout": "True",
+    "stderr": "",
+    "passed": true
+  },
+  {
+    "name": "Alarm invalid date",
+    "source": "20990230 \"A\" StoAlarm",
+    "returncode": 0,
+    "stdout": "20\u205f990\u205f230\n\"A\"",
+    "stderr": "[21329 0.187589] errors: Error [Invalid date]\nInvalid date\n[24195 0.198978] errors: Error [Invalid date]",
+    "passed": true
+  },
+  {
+    "name": "Alarm invalid time",
+    "source": "20990101.250000 \"A\" StoAlarm",
+    "returncode": 0,
+    "stdout": "20\u205f990\u205f101.25\n\"A\"",
+    "stderr": "[21337 0.188078] errors: Error [Invalid time]\nInvalid time\n[24431 0.199564] errors: Error [Invalid time]",
+    "passed": true
+  },
+  {
+    "name": "Alarm invalid message",
+    "source": "20990101 123 StoAlarm",
+    "returncode": 0,
+    "stdout": "20\u205f990\u205f101\n123",
+    "stderr": "[21180 0.294479] errors: Error [Bad argument type]\nBad argument type\n[23946 0.306809] errors: Error [Bad argument type]",
+    "passed": true
+  },
+  {
+    "name": "Alarm unknown ID",
+    "source": "999 RclAlarm",
+    "returncode": 0,
+    "stdout": "999",
+    "stderr": "[21169 0.275067] errors: Error [Alarm not found]\nAlarm not found\n[22602 0.286964] errors: Error [Alarm not found]",
+    "passed": true
+  },
+  {
+    "name": "Alarm corrupt data",
+    "source": "123 'LumaAlarms' STO Alarms",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "[21210 0.212459] errors: Error [Invalid alarm data]\nInvalid alarm data\n[22400 0.224111] errors: Error [Invalid alarm data]",
+    "passed": true
+  },
+  {
+    "name": "Alarm capacity",
+    "source": "1 33 START 20990101 \"A\" StoAlarm DROP NEXT",
+    "returncode": 0,
+    "stdout": "20\u205f990\u205f101\n\"A\"",
+    "stderr": "[40974 0.221369] errors: Error [Too many alarms]\nToo many alarms\n[42865 0.222370] errors: Error [Too many alarms]",
+    "passed": true
+  }
+]

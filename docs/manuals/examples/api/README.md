@@ -1,6 +1,6 @@
 # LumaRPL API & Assembly examples
 
-For firmware 0.10.0-rc.2 and the companion API & Assembly Reference.
+For firmware 0.10.0-rc.3 and the companion API & Assembly Reference.
 These are complete programs. No native Arm development or firmware calls are required.
 
 ## Lua

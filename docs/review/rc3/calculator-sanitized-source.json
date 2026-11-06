@@ -1,0 +1,8 @@
+{
+  "binary": "/Users/mathan/Documents/ChatGPT/PicoCalc/build/simulator-review-asan/db48x.app/Contents/MacOS/db48x",
+  "binary_sha256": "3acf052a3ec16ce7b01edd75e786e221db00853d7f1f6a5394049a78ea45eef9",
+  "test_source_sha256": "37b8991b2804e05a5715d1a68bbbe9a30b253090435f4175b5d7b7785269aae6",
+  "filter": null,
+  "cases": 135,
+  "failures": 0
+}

@@ -1,0 +1,3098 @@
+{
+  "binary": "/Users/mathan/Documents/ChatGPT/PicoCalc/LumaRPL/build/simulator-rgb332/help-console-rc3",
+  "binary_sha256": "db90293cedb4656d8cd3b410ef20283782aeba71d075bacb00cc04775134cf3c",
+  "scope": "Typed examples in the shipped RPL help executed with a fresh stack/config per example. Output and expected stack order are compared exactly; UI-only actions are checked separately.",
+  "examples": [
+    {
+      "title": "Stack addition",
+      "source": "2 3 +",
+      "expected": "5",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Exact fraction",
+      "source": "1 3 /",
+      "expected": "¹/₃",
+      "returncode": 0,
+      "actual": "¹/₃",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Complex addition",
+      "source": "(1;2) (3;4) +",
+      "expected": "4+6ⅈ",
+      "returncode": 0,
+      "actual": "4+6ⅈ",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Matrix determinant",
+      "source": "[[1 2][3 4]] DET",
+      "expected": "-2",
+      "returncode": 0,
+      "actual": "-2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Stored square program",
+      "source": "« DUP * » 'SQDEMO' STO 12 SQDEMO",
+      "expected": "144",
+      "returncode": 0,
+      "actual": "144",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Evaluate a quoted program",
+      "source": "« 2 3 + » EVAL",
+      "expected": "5",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Degrees sine",
+      "source": "Deg 90 SIN",
+      "expected": "1",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Radians sine",
+      "source": "Rad 0 SIN",
+      "expected": "0",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Grads sine",
+      "source": "Grad 100 SIN",
+      "expected": "1",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Pi radians sine",
+      "source": "PiRadians 0.5 SIN",
+      "expected": "1.",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Fixed decimal display",
+      "source": "3 Fix 1.25",
+      "expected": "1.250",
+      "returncode": 0,
+      "actual": "1.250",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Significant precision",
+      "source": "16 Precision 2 3 +",
+      "expected": "5",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Stack font selection",
+      "source": "2 StackFont 2 3 +",
+      "expected": "5",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Unit conversion",
+      "source": "100_cm 1_m Convert",
+      "expected": "1 m",
+      "returncode": 0,
+      "actual": "1 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Symbolic derivative",
+      "source": "'X^2' 'X' Derivative",
+      "expected": "'2·X'",
+      "returncode": 0,
+      "actual": "'2·X'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Symbolic antiderivative",
+      "source": "'X^2' 'X' Primitive",
+      "expected": "'X³÷3'",
+      "returncode": 0,
+      "actual": "'X³÷3'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Remainder",
+      "source": "5 2 rem",
+      "expected": "1",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Cube",
+      "source": "3 cubed",
+      "expected": "27",
+      "returncode": 0,
+      "actual": "27",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Base-two logarithm",
+      "source": "8 log2",
+      "expected": "3.",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Error function",
+      "source": "0 erf",
+      "expected": "0.",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Complementary error function",
+      "source": "0 erfc",
+      "expected": "1.",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Named formula inputs",
+      "source": "2 'WIDTH' STO 3 'HEIGHT' STO 'WIDTH*HEIGHT' EVAL",
+      "expected": "6",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Local numerical root",
+      "source": "Rad 16 Precision 'COS(X)-X' 'X' 1 Root",
+      "expected": "X=0.73908 51332 15",
+      "note": "Uses radians and 16 significant digits. The guess is 1; this seeks a local solution.",
+      "returncode": 0,
+      "actual": "X=0.73908 51332 15",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Conditional program",
+      "source": "« IF 2 1 > THEN 7 ELSE 9 END » EVAL",
+      "expected": "7",
+      "returncode": 0,
+      "actual": "7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FOR loop",
+      "source": "0 « 1 3 FOR K K + NEXT » EVAL",
+      "expected": "6",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "START loop",
+      "source": "0 « 1 3 START 1 + NEXT » EVAL",
+      "expected": "3",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "WHILE loop",
+      "source": "0 « WHILE DUP 3 < REPEAT 1 + END » EVAL",
+      "expected": "3",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DO loop",
+      "source": "0 « DO 1 + UNTIL DUP 3 < NOT END » EVAL",
+      "expected": "3",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Local variable",
+      "source": "2 « -> WIDTH « WIDTH WIDTH * » » EVAL",
+      "expected": "4",
+      "returncode": 0,
+      "actual": "4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "List total",
+      "source": "{1 2 3} ListSum",
+      "expected": "6",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Gamma endpoint",
+      "source": "1 0 GammaP",
+      "expected": "0",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Beta midpoint",
+      "source": "1 1 0.5 BetaI",
+      "expected": "0.5",
+      "returncode": 0,
+      "actual": "0.5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Chi-square endpoint",
+      "source": "2 0 UTPC",
+      "expected": "1",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Normal midpoint",
+      "source": "0 1 0 UTPN",
+      "expected": "0.5",
+      "returncode": 0,
+      "actual": "0.5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Student midpoint",
+      "source": "1 0 UTPT",
+      "expected": "0.5",
+      "returncode": 0,
+      "actual": "0.5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "F endpoint",
+      "source": "1 1 0 UTPF",
+      "expected": "1",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Termial",
+      "source": "6?",
+      "expected": "21",
+      "note": "Sum 1+2+3+4+5+6.",
+      "returncode": 0,
+      "actual": "21",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "add",
+      "source": "2 3 +",
+      "expected": "5",
+      "note": "",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "subtract",
+      "source": "10 3 -",
+      "expected": "7",
+      "note": "",
+      "returncode": 0,
+      "actual": "7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "multiply",
+      "source": "6 7 *",
+      "expected": "42",
+      "note": "",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "divide",
+      "source": "1 3 /",
+      "expected": "¹/₃",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₃",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "mod",
+      "source": "17 5 MOD",
+      "expected": "2",
+      "note": "",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "rem",
+      "source": "17 5 REM",
+      "expected": "2",
+      "note": "",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "pow",
+      "source": "2 8 ^",
+      "expected": "256",
+      "note": "",
+      "returncode": 0,
+      "actual": "256",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "neg",
+      "source": "7 NEG",
+      "expected": "-7",
+      "note": "",
+      "returncode": 0,
+      "actual": "-7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "abs",
+      "source": "-7 ABS",
+      "expected": "7",
+      "note": "",
+      "returncode": 0,
+      "actual": "7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "inv",
+      "source": "4 INV",
+      "expected": "¹/₄",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₄",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sqrt",
+      "source": "81 SQRT",
+      "expected": "9.",
+      "note": "",
+      "returncode": 0,
+      "actual": "9.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sq",
+      "source": "12 SQ",
+      "expected": "144",
+      "note": "",
+      "returncode": 0,
+      "actual": "144",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cubed",
+      "source": "3 CUBED",
+      "expected": "27",
+      "note": "",
+      "returncode": 0,
+      "actual": "27",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cbrt",
+      "source": "27 CBRT",
+      "expected": "3.",
+      "note": "",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "hypot",
+      "source": "3 4 HYPOT",
+      "expected": "5.",
+      "note": "",
+      "returncode": 0,
+      "actual": "5.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "xroot",
+      "source": "27 3 XROOT",
+      "expected": "3.",
+      "note": "",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sign",
+      "source": "-5 SIGN",
+      "expected": "-1",
+      "note": "",
+      "returncode": 0,
+      "actual": "-1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "IntPart",
+      "source": "3.75 IP",
+      "expected": "3.",
+      "note": "",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FracPart",
+      "source": "3.75 FP",
+      "expected": "0.75",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.75",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ceil",
+      "source": "3.2 CEIL",
+      "expected": "4.",
+      "note": "",
+      "returncode": 0,
+      "actual": "4.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "floor",
+      "source": "3.8 FLOOR",
+      "expected": "3.",
+      "note": "",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Round",
+      "source": "1.234 2 RND",
+      "expected": "1.23",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.23",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Truncate",
+      "source": "1.239 2 TRNC",
+      "expected": "1.23",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.23",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "mant",
+      "source": "1234 MANT",
+      "expected": "1.234",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.234",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "xpon",
+      "source": "1234 XPON",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Percent",
+      "source": "200 15 %",
+      "expected": "30",
+      "note": "",
+      "returncode": 0,
+      "actual": "30",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PercentChange",
+      "source": "100 125 %CH",
+      "expected": "25",
+      "note": "",
+      "returncode": 0,
+      "actual": "25",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PercentTotal",
+      "source": "200 50 %T",
+      "expected": "25",
+      "note": "",
+      "returncode": 0,
+      "actual": "25",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Min",
+      "source": "3 8 MIN",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Max",
+      "source": "3 8 MAX",
+      "expected": "8",
+      "note": "",
+      "returncode": 0,
+      "actual": "8",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "GCD",
+      "source": "48 18 GCD",
+      "expected": "6",
+      "note": "",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "LCM",
+      "source": "6 8 LCM",
+      "expected": "24",
+      "note": "",
+      "returncode": 0,
+      "actual": "24",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "IsPrime",
+      "source": "17 ISPRIME",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "NextPrime",
+      "source": "17 NEXTPRIME",
+      "expected": "19",
+      "note": "",
+      "returncode": 0,
+      "actual": "19",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PreviousPrime",
+      "source": "17 PreviousPrime",
+      "expected": "13",
+      "note": "",
+      "returncode": 0,
+      "actual": "13",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Factors",
+      "source": "60 FACTORS",
+      "expected": "{ 2 2 3 1 5 1 }",
+      "note": "The list alternates prime and exponent: 2^2 * 3^1 * 5^1 = 60.",
+      "returncode": 0,
+      "actual": "{ 2 2 3 1 5 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "fact",
+      "source": "5 FACT",
+      "expected": "120",
+      "note": "",
+      "returncode": 0,
+      "actual": "120",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "comb",
+      "source": "5 2 COMB",
+      "expected": "10",
+      "note": "",
+      "returncode": 0,
+      "actual": "10",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "perm",
+      "source": "5 2 PERM",
+      "expected": "20",
+      "note": "",
+      "returncode": 0,
+      "actual": "20",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToFraction",
+      "source": "0.5 ToFraction",
+      "expected": "¹/₂",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₂",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToQuotient",
+      "source": "0.5 ToQuotient",
+      "expected": "¹/₂",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₂",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToDecimal",
+      "source": "1 4 / ToDecimal",
+      "expected": "0.25",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.25",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sin",
+      "source": "Deg 90 SIN",
+      "expected": "1",
+      "note": "",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cos",
+      "source": "Deg 0 COS",
+      "expected": "1",
+      "note": "",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "tan",
+      "source": "Deg 0 TAN",
+      "expected": "0",
+      "note": "",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "asin",
+      "source": "Deg 1 ASIN",
+      "expected": "90. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "90. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "acos",
+      "source": "Deg 1 ACOS",
+      "expected": "0. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "0. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "atan",
+      "source": "Deg 0 ATAN",
+      "expected": "0. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "0. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sec",
+      "source": "Deg 0 SEC",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "csc",
+      "source": "Deg 90 CSC",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cot",
+      "source": "Deg 45 COT",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "asec",
+      "source": "Deg 1 ASEC",
+      "expected": "0. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "0. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "acsc",
+      "source": "Deg 1 ACSC",
+      "expected": "90. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "90. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "acot",
+      "source": "Deg 1 ACOT",
+      "expected": "45. °",
+      "note": "",
+      "returncode": 0,
+      "actual": "45. °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sinh",
+      "source": "0 SINH",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cosh",
+      "source": "0 COSH",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "tanh",
+      "source": "0 TANH",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "asinh",
+      "source": "0 ASINH",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "acosh",
+      "source": "1 ACOSH",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "atanh",
+      "source": "0 ATANH",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "sech",
+      "source": "0 SECH",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ln",
+      "source": "1 LN",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "exp",
+      "source": "0 EXP",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "log10",
+      "source": "100 LOG",
+      "expected": "2.",
+      "note": "",
+      "returncode": 0,
+      "actual": "2.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "exp10",
+      "source": "2 ALOG",
+      "expected": "100.",
+      "note": "",
+      "returncode": 0,
+      "actual": "100.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "log2",
+      "source": "8 LOG2",
+      "expected": "3.",
+      "note": "",
+      "returncode": 0,
+      "actual": "3.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "exp2",
+      "source": "3 EXP2",
+      "expected": "8.",
+      "note": "",
+      "returncode": 0,
+      "actual": "8.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ln1p",
+      "source": "0 LNP1",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "expm1",
+      "source": "0 EXPM",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "erf",
+      "source": "0 ERF",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "erfc",
+      "source": "0 ERFC",
+      "expected": "1.",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "tgamma",
+      "source": "5 TGAMMA",
+      "expected": "24.",
+      "note": "",
+      "returncode": 0,
+      "actual": "24.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "lgamma",
+      "source": "1 LGAMMA",
+      "expected": "0.",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "GammaP",
+      "source": "1 0 GammaP",
+      "expected": "0",
+      "note": "",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "BetaI",
+      "source": "1 1 0 BetaI",
+      "expected": "0",
+      "note": "",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UTPC",
+      "source": "2 0 UTPC",
+      "expected": "1",
+      "note": "",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UTPN",
+      "source": "0 1 0 UTPN",
+      "expected": "0.5",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UTPT",
+      "source": "1 0 UTPT",
+      "expected": "0.5",
+      "note": "",
+      "returncode": 0,
+      "actual": "0.5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UTPF",
+      "source": "2 2 0 UTPF",
+      "expected": "1",
+      "note": "",
+      "returncode": 0,
+      "actual": "1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Drop",
+      "source": "10 20 DROP DEPTH ToList",
+      "expected": "{ 10 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 10 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Drop2",
+      "source": "10 20 30 DROP2 DEPTH ToList",
+      "expected": "{ 10 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 10 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DropN",
+      "source": "10 20 30 2 DROPN DEPTH ToList",
+      "expected": "{ 10 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 10 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Dup",
+      "source": "7 DUP DEPTH ToList",
+      "expected": "{ 7 7 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 7 7 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Dup2",
+      "source": "2 3 DUP2 DEPTH ToList",
+      "expected": "{ 2 3 2 3 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 3 2 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DupN",
+      "source": "2 3 2 DUPN DEPTH ToList",
+      "expected": "{ 2 3 2 3 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 3 2 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Swap",
+      "source": "2 3 SWAP DEPTH ToList",
+      "expected": "{ 3 2 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 3 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Over",
+      "source": "2 3 OVER DEPTH ToList",
+      "expected": "{ 2 3 2 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 3 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Pick",
+      "source": "10 20 30 3 PICK DEPTH ToList",
+      "expected": "{ 10 20 30 10 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 10 20 30 10 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Rot",
+      "source": "1 2 3 ROT DEPTH ToList",
+      "expected": "{ 2 3 1 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 3 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Roll",
+      "source": "1 2 3 3 ROLL DEPTH ToList",
+      "expected": "{ 2 3 1 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 3 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RollD",
+      "source": "1 2 3 3 ROLLD DEPTH ToList",
+      "expected": "{ 3 1 2 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 3 1 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Nip",
+      "source": "1 2 NIP DEPTH ToList",
+      "expected": "{ 2 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UnRot",
+      "source": "1 2 3 UNROT DEPTH ToList",
+      "expected": "{ 3 1 2 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 3 1 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Pick3",
+      "source": "1 2 3 PICK3 DEPTH ToList",
+      "expected": "{ 1 2 3 1 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 1 2 3 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DupDup",
+      "source": "7 DUPDUP DEPTH ToList",
+      "expected": "{ 7 7 7 }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ 7 7 7 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ClearStack",
+      "source": "1 2 3 CLEAR DEPTH ToList",
+      "expected": "{ }",
+      "note": "The list shows the remaining stack from deepest value to top.",
+      "returncode": 0,
+      "actual": "{ }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Depth",
+      "source": "10 20 DEPTH",
+      "expected": "10\n20\n2",
+      "note": "",
+      "returncode": 0,
+      "actual": "10\n20\n2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Sto",
+      "source": "42 'DEMO' STO 'DEMO' RCL",
+      "expected": "42",
+      "note": "Stores a HOME variable named DEMO; choose another name if it already exists.",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Rcl",
+      "source": "42 'DEMO' STO 'DEMO' RCL",
+      "expected": "42",
+      "note": "Stores a HOME variable named DEMO; choose another name if it already exists.",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Purge",
+      "source": "42 'DEMO' STO 'DEMO' PURGE 7",
+      "expected": "7",
+      "note": "Removes the temporary DEMO variable, then leaves 7.",
+      "returncode": 0,
+      "actual": "7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Eval",
+      "source": "« 2 3 + » EVAL",
+      "expected": "5",
+      "note": "",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToProgram",
+      "source": "{ 2 3 + } ToProgram EVAL",
+      "expected": "5",
+      "note": "",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StoreAdd",
+      "source": "10 'DEMO' STO 3 'DEMO' STO+ DEMO",
+      "expected": "13",
+      "note": "",
+      "returncode": 0,
+      "actual": "13",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StoreSub",
+      "source": "10 'DEMO' STO 3 'DEMO' STO- DEMO",
+      "expected": "-7",
+      "note": "STO- uses the supplied value minus the stored value: 3 minus 10 gives -7.",
+      "returncode": 0,
+      "actual": "-7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StoreMul",
+      "source": "10 'DEMO' STO 3 'DEMO' STO* DEMO",
+      "expected": "30",
+      "note": "",
+      "returncode": 0,
+      "actual": "30",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StoreDiv",
+      "source": "10 'DEMO' STO 2 'DEMO' STO/ DEMO",
+      "expected": "¹/₅",
+      "note": "STO/ uses the supplied value divided by the stored value: 2 divided by 10 gives 1/5.",
+      "returncode": 0,
+      "actual": "¹/₅",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "True",
+      "source": "True",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "False",
+      "source": "False",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "And",
+      "source": "True False AND",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Or",
+      "source": "True False OR",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Xor",
+      "source": "True True XOR",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Not",
+      "source": "True NOT",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "same",
+      "source": "3 3 SAME",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TestSame",
+      "source": "3 3 TestSame",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TestLT",
+      "source": "2 3 <",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TestEQ",
+      "source": "3 3 TestEQ",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TestGT",
+      "source": "3 2 >",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TestNE",
+      "source": "2 3 TestNE",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "IFT",
+      "source": "True « 7 » IFT",
+      "expected": "7",
+      "note": "",
+      "returncode": 0,
+      "actual": "7",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "IFTE",
+      "source": "False « 7 » « 9 » IFTE",
+      "expected": "9",
+      "note": "",
+      "returncode": 0,
+      "actual": "9",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToList",
+      "source": "1 2 3 3 ToList",
+      "expected": "{ 1 2 3 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromList",
+      "source": "{ 1 2 3 } FromList",
+      "expected": "1\n2\n3\n3",
+      "note": "The values 1, 2, 3 are pushed, followed by their count, 3.",
+      "returncode": 0,
+      "actual": "1\n2\n3\n3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Get",
+      "source": "{ 10 20 30 } 2 GET",
+      "expected": "20",
+      "note": "",
+      "returncode": 0,
+      "actual": "20",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Put",
+      "source": "{ 10 20 30 } 2 99 PUT",
+      "expected": "{ 10 99 30 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 10 99 30 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Size",
+      "source": "{ 10 20 30 } SIZE",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Head",
+      "source": "{ 10 20 30 } HEAD",
+      "expected": "10",
+      "note": "",
+      "returncode": 0,
+      "actual": "10",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Tail",
+      "source": "{ 10 20 30 } TAIL",
+      "expected": "{ 20 30 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 20 30 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Sort",
+      "source": "{ 3 1 2 } SORT",
+      "expected": "{ 1 2 3 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "QuickSort",
+      "source": "{ 3 1 2 } QuickSort",
+      "expected": "{ 1 2 3 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ReverseSort",
+      "source": "{ 3 1 2 } ReverseSort",
+      "expected": "{ 3 2 1 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 3 2 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ReverseQuickSort",
+      "source": "{ 3 1 2 } ReverseQuickSort",
+      "expected": "{ 3 2 1 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 3 2 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ReverseList",
+      "source": "{ 1 2 3 } REVLIST",
+      "expected": "{ 3 2 1 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 3 2 1 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Unique",
+      "source": "{ 1 1 2 2 } UNIQUE",
+      "expected": "{ 1 2 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "QuickUnique",
+      "source": "{ 1 1 2 2 } QuickUnique",
+      "expected": "{ 1 2 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ListSum",
+      "source": "{ 1 2 3 } ListSum",
+      "expected": "6",
+      "note": "",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ListProduct",
+      "source": "{ 2 3 4 } ListProduct",
+      "expected": "24",
+      "note": "",
+      "returncode": 0,
+      "actual": "24",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ListDifferences",
+      "source": "{ 3 7 12 } ListDifferences",
+      "expected": "{ 4 5 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 4 5 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Map",
+      "source": "{ 1 2 3 } « SQ » MAP",
+      "expected": "{ 1 4 9 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 4 9 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Reduce",
+      "source": "{ 1 2 3 } « + » REDUCE",
+      "expected": "6",
+      "note": "",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Filter",
+      "source": "{ 1 2 3 4 } « 2 > » FILTER",
+      "expected": "{ 3 4 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 3 4 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CharToUnicode",
+      "source": "\"A\" CharToUnicode",
+      "expected": "65",
+      "note": "",
+      "returncode": 0,
+      "actual": "65",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UnicodeToText",
+      "source": "65 UnicodeToText",
+      "expected": "\"A\"",
+      "note": "",
+      "returncode": 0,
+      "actual": "\"A\"",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TextToUnicode",
+      "source": "\"AB\" TextToUnicode",
+      "expected": "{ 65 66 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 65 66 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Compile",
+      "source": "\"2 3 +\" Compile EVAL",
+      "expected": "5",
+      "note": "",
+      "returncode": 0,
+      "actual": "5",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CompileToInteger",
+      "source": "\"42\" CompileToInteger",
+      "expected": "42",
+      "note": "",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CompileToReal",
+      "source": "\"1.25\" CompileToReal",
+      "expected": "1.25",
+      "note": "",
+      "returncode": 0,
+      "actual": "1.25",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CompileToNumber",
+      "source": "\"42\" CompileToNumber",
+      "expected": "42",
+      "note": "",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CompileToPositive",
+      "source": "\"42\" CompileToPositive",
+      "expected": "42",
+      "note": "",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CompileToObject",
+      "source": "\"{ 1 2 }\" CompileToObject",
+      "expected": "{ 1 2 }",
+      "note": "",
+      "returncode": 0,
+      "actual": "{ 1 2 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToText",
+      "source": "42 ToText",
+      "expected": "\"42\"",
+      "note": "",
+      "returncode": 0,
+      "actual": "\"42\"",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "re",
+      "source": "(3;4) RE",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "im",
+      "source": "(3;4) IM",
+      "expected": "4",
+      "note": "",
+      "returncode": 0,
+      "actual": "4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "conj",
+      "source": "(3;4) CONJ",
+      "expected": "3-4ⅈ",
+      "note": "",
+      "returncode": 0,
+      "actual": "3-4ⅈ",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "arg",
+      "source": "Deg (0;1) ARG",
+      "expected": "90 °",
+      "note": "",
+      "returncode": 0,
+      "actual": "90 °",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RealToRectangular",
+      "source": "3 4 RealToRectangular",
+      "expected": "3+4ⅈ",
+      "note": "",
+      "returncode": 0,
+      "actual": "3+4ⅈ",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "dot",
+      "source": "[1 2 3] [4 5 6] DOT",
+      "expected": "32",
+      "note": "",
+      "returncode": 0,
+      "actual": "32",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "cross",
+      "source": "[1 0 0] [0 1 0] CROSS",
+      "expected": "[ 0 0 1 ]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[ 0 0 1 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "det",
+      "source": "[[1 2][3 4]] DET",
+      "expected": "-2",
+      "note": "",
+      "returncode": 0,
+      "actual": "-2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "norm",
+      "source": "[3 4] NORM",
+      "expected": "5.",
+      "note": "",
+      "returncode": 0,
+      "actual": "5.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Transpose",
+      "source": "[[1 2][3 4]] TRN",
+      "expected": "[[ 1 3 ]\n  [ 2 4 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 1 3 ]\n  [ 2 4 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "IdentityMatrix",
+      "source": "2 IDN",
+      "expected": "[[ 1 0 ]\n  [ 0 1 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 1 0 ]\n  [ 0 1 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ConstantArray",
+      "source": "{ 2 2 } 7 CON",
+      "expected": "[[ 7 7 ]\n  [ 7 7 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 7 7 ]\n  [ 7 7 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RowSwap",
+      "source": "[[1 2][3 4]] 1 2 RowSwap",
+      "expected": "[[ 3 4 ]\n  [ 1 2 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 3 4 ]\n  [ 1 2 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ColumnSwap",
+      "source": "[[1 2][3 4]] 1 2 ColumnSwap",
+      "expected": "[[ 2 1 ]\n  [ 4 3 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 2 1 ]\n  [ 4 3 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DeleteRow",
+      "source": "[[1 2][3 4]] 1 DeleteRow",
+      "expected": "[[ 3 4 ]]\n[ 1 2 ]",
+      "note": "Leaves the reduced matrix below the removed row.",
+      "returncode": 0,
+      "actual": "[[ 3 4 ]]\n[ 1 2 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DeleteColumn",
+      "source": "[[1 2][3 4]] 1 DeleteColumn",
+      "expected": "[[ 2 ][ 4 ]]\n[ 1 3 ]",
+      "note": "Leaves the reduced matrix below the removed column.",
+      "returncode": 0,
+      "actual": "[[ 2 ][ 4 ]]\n[ 1 3 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RREF",
+      "source": "[[1 2][3 4]] RREF",
+      "expected": "[[ 1 0 ]\n  [ 0 1 ]]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[[ 1 0 ]\n  [ 0 1 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Root",
+      "source": "Rad 16 Precision 'COS(X)-X' 'X' 1 Root",
+      "expected": "X=0.73908 51332 15",
+      "note": "Finds one local solution; it does not list every possible root.",
+      "returncode": 0,
+      "actual": "X=0.73908 51332 15",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Isolate",
+      "source": "'X+2=5' 'X' ISOL",
+      "expected": "'X=3'",
+      "note": "",
+      "returncode": 0,
+      "actual": "'X=3'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Derivative",
+      "source": "'X^3' 'X' Derivative",
+      "expected": "'3·X²'",
+      "note": "",
+      "returncode": 0,
+      "actual": "'3·X²'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Integrate",
+      "source": "Rad 0 1 'X^2' 'X' Integrate",
+      "expected": "¹/₃",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₃",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Expand",
+      "source": "'(X+1)^2' EXPAND",
+      "expected": "'X²+2·X+1'",
+      "note": "",
+      "returncode": 0,
+      "actual": "'X²+2·X+1'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Collect",
+      "source": "'X+X' COLLECT",
+      "expected": "'2·X'",
+      "note": "",
+      "returncode": 0,
+      "actual": "'2·X'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Subst",
+      "source": "'X+2' 'X=3' SUBST",
+      "expected": "'3+2'",
+      "note": "",
+      "returncode": 0,
+      "actual": "'3+2'",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Convert",
+      "source": "100_cm 1_m Convert",
+      "expected": "1 m",
+      "note": "",
+      "returncode": 0,
+      "actual": "1 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UBase",
+      "source": "1_cm UBASE",
+      "expected": "¹/₁₀₀ m",
+      "note": "",
+      "returncode": 0,
+      "actual": "¹/₁₀₀ m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "UVal",
+      "source": "25_m UVAL",
+      "expected": "25",
+      "note": "",
+      "returncode": 0,
+      "actual": "25",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToUnit",
+      "source": "5 1_m ToUnit",
+      "expected": "5 m",
+      "note": "",
+      "returncode": 0,
+      "actual": "5 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToHMS",
+      "source": "1.5 ToHMS",
+      "expected": "1:30:00",
+      "note": "",
+      "returncode": 0,
+      "actual": "1:30:00",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromHMS",
+      "source": "1.3 FromHMS",
+      "expected": "1 ¹/₂",
+      "note": "",
+      "returncode": 0,
+      "actual": "1 ¹/₂",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToDMS",
+      "source": "1.5 ToDMS",
+      "expected": "1°30′00″",
+      "note": "",
+      "returncode": 0,
+      "actual": "1°30′00″",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromDMS",
+      "source": "1.3 FromDMS",
+      "expected": "1 ¹/₂",
+      "note": "",
+      "returncode": 0,
+      "actual": "1 ¹/₂",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DegreesToRadians",
+      "source": "180 DegreesToRadians",
+      "expected": "3.14159 26535 9",
+      "note": "A decimal approximation of pi radians.",
+      "returncode": 0,
+      "actual": "3.14159 26535 9",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RadiansToDegrees",
+      "source": "1 RadiansToDegrees",
+      "expected": "57.29577 95131",
+      "note": "One radian is approximately 57.2958 degrees.",
+      "returncode": 0,
+      "actual": "57.29577 95131",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "CountBits",
+      "source": "#Fh CountBits",
+      "expected": "4",
+      "note": "",
+      "returncode": 0,
+      "actual": "4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SetBit",
+      "source": "#0h 3 SetBit",
+      "expected": "#8₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#8₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ClearBit",
+      "source": "#Fh 0 ClearBit",
+      "expected": "#E₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#E₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FlipBit",
+      "source": "#0h 2 FlipBit",
+      "expected": "#4₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#4₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "BinaryToReal",
+      "source": "#FFh B→R",
+      "expected": "255",
+      "note": "",
+      "returncode": 0,
+      "actual": "255",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RealToBinary",
+      "source": "255 R→B",
+      "expected": "#FF₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#FF₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Type",
+      "source": "42 TYPE",
+      "expected": "28",
+      "note": "28 is this engine's type code for an integer; TypeName gives a readable name.",
+      "returncode": 0,
+      "actual": "28",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "TypeName",
+      "source": "42 TypeName",
+      "expected": "\"integer\"",
+      "note": "",
+      "returncode": 0,
+      "actual": "\"integer\"",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToTag",
+      "source": "42 \"Answer\" ToTag",
+      "expected": "Answer:42",
+      "note": "",
+      "returncode": 0,
+      "actual": "Answer:42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromTag",
+      "source": ":Answer:42 FromTag",
+      "expected": "42\n\"Answer\"",
+      "note": "Leaves the untagged value below its text tag; the display lists deepest first.",
+      "returncode": 0,
+      "actual": "42\n\"Answer\"",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DTag",
+      "source": ":Answer:42 DTAG",
+      "expected": "42",
+      "note": "",
+      "returncode": 0,
+      "actual": "42",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Average",
+      "source": "[[1 2][2 4][3 6]] StoreData Average",
+      "expected": "[ 2 4 ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 2 4 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Median",
+      "source": "[[1 2][2 4][3 6]] StoreData Median",
+      "expected": "[ 2 4 ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 2 4 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "MinData",
+      "source": "[[1 2][2 4][3 6]] StoreData MinData",
+      "expected": "[ 1 2 ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 1 2 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "MaxData",
+      "source": "[[1 2][2 4][3 6]] StoreData MaxData",
+      "expected": "[ 3 6 ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 3 6 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DataSize",
+      "source": "[[1 2][2 4][3 6]] StoreData DataSize",
+      "expected": "3",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SumOfX",
+      "source": "[[1 2][2 4][3 6]] StoreData SumOfX",
+      "expected": "6",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SumOfY",
+      "source": "[[1 2][2 4][3 6]] StoreData SumOfY",
+      "expected": "12",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "12",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SumOfXY",
+      "source": "[[1 2][2 4][3 6]] StoreData SumOfXY",
+      "expected": "28",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "28",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SumOfXSquares",
+      "source": "[[1 2][2 4][3 6]] StoreData SumOfXSquares",
+      "expected": "14",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "14",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SumOfYSquares",
+      "source": "[[1 2][2 4][3 6]] StoreData SumOfYSquares",
+      "expected": "56",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "56",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Variance",
+      "source": "[[1 2][2 4][3 6]] StoreData Variance",
+      "expected": "[ 1 4 ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 1 4 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StandardDeviation",
+      "source": "[[1 2][2 4][3 6]] StoreData StandardDeviation",
+      "expected": "[ 1. 2. ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ 1. 2. ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PopulationVariance",
+      "source": "[[1 2][2 4][3 6]] StoreData PopulationVariance",
+      "expected": "[ ²/₃ 2 ²/₃ ]",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "[ ²/₃ 2 ²/₃ ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Correlation",
+      "source": "[[1 2][2 4][3 6]] StoreData Correlation",
+      "expected": "1.",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "1.",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Covariance",
+      "source": "[[1 2][2 4][3 6]] StoreData Covariance",
+      "expected": "2",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Slope",
+      "source": "[[1 2][2 4][3 6]] StoreData LinearRegression DROP2 Slope",
+      "expected": "2",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Intercept",
+      "source": "[[1 2][2 4][3 6]] StoreData LinearRegression DROP2 Intercept",
+      "expected": "0",
+      "note": "Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StoreData",
+      "source": "[[1 2][2 4][3 6]] StoreData RecallData",
+      "expected": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+      "note": "Replaces the current statistics data. RecallData reads it back.",
+      "returncode": 0,
+      "actual": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RecallData",
+      "source": "[[1 2][2 4][3 6]] StoreData RecallData",
+      "expected": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+      "note": "Sets example statistics data, then recalls it.",
+      "returncode": 0,
+      "actual": "[[ 1 2 ]\n  [ 2 4 ]\n  [ 3 6 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ClearData",
+      "source": "[[1 2][2 4][3 6]] StoreData ClearData DataSize",
+      "expected": "0",
+      "note": "Clears calculator statistics data. Save existing data first.",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RL",
+      "source": "#1h RL",
+      "expected": "#2₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#2₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RR",
+      "source": "#2h RR",
+      "expected": "#1₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#1₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SL",
+      "source": "#1h SL",
+      "expected": "#2₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#2₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SR",
+      "source": "#8h SR",
+      "expected": "#4₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#4₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SLB",
+      "source": "#1h SLB",
+      "expected": "#100₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#100₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "SRB",
+      "source": "#100h SRB",
+      "expected": "#1₁₆",
+      "note": "",
+      "returncode": 0,
+      "actual": "#1₁₆",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FirstBitSet",
+      "source": "#8h FirstBitSet",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "LastBitSet",
+      "source": "#8h LastBitSet",
+      "expected": "3",
+      "note": "",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "NAnd",
+      "source": "True True NAnd",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "NOr",
+      "source": "False False NOr",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Implies",
+      "source": "True False Implies",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Equiv",
+      "source": "True True Equiv",
+      "expected": "True",
+      "note": "",
+      "returncode": 0,
+      "actual": "True",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Excludes",
+      "source": "True True Excludes",
+      "expected": "False",
+      "note": "",
+      "returncode": 0,
+      "actual": "False",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RealToPolar",
+      "source": "5 0 RealToPolar",
+      "expected": "5∡0°",
+      "note": "",
+      "returncode": 0,
+      "actual": "5∡0°",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RectangularToReal",
+      "source": "(3;4) RectangularToReal",
+      "expected": "re:3\nim:4",
+      "note": "Pushes the real part, then the imaginary part.",
+      "returncode": 0,
+      "actual": "re:3\nim:4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToArray",
+      "source": "1 2 3 { 3 } ToArray",
+      "expected": "[ 1 2 3 ]",
+      "note": "",
+      "returncode": 0,
+      "actual": "[ 1 2 3 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromArray",
+      "source": "[1 2 3] FromArray",
+      "expected": "1\n2\n3\n{ 3 }",
+      "note": "Pushes elements followed by the dimensions.",
+      "returncode": 0,
+      "actual": "1\n2\n3\n{ 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToRange",
+      "source": "2 4 ToRange",
+      "expected": "2…4",
+      "note": "",
+      "returncode": 0,
+      "actual": "2…4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToDeltaRange",
+      "source": "10 2 ToDeltaRange",
+      "expected": "10±2",
+      "note": "",
+      "returncode": 0,
+      "actual": "10±2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromRange",
+      "source": "2 4 ToRange FromRange",
+      "expected": "2\n4",
+      "note": "",
+      "returncode": 0,
+      "actual": "2\n4",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToUncertain",
+      "source": "10 1 ToUncertain",
+      "expected": "10±σ1",
+      "note": "",
+      "returncode": 0,
+      "actual": "10±σ1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Precision",
+      "source": "16 Precision 'Precision' RCL",
+      "expected": "16",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "16",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Base",
+      "source": "16 Base 'Base' RCL",
+      "expected": "16",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "16",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StackFont",
+      "source": "2 StackFont 'StackFont' RCL",
+      "expected": "2",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "WordSize",
+      "source": "32 WordSize 'WordSize' RCL",
+      "expected": "32",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "32",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DisplayDigits",
+      "source": "3 DisplayDigits 'DisplayDigits' RCL",
+      "expected": "3",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "LineWidth",
+      "source": "2 LineWidth 'LineWidth' RCL",
+      "expected": "2",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "2",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StandardExponent",
+      "source": "9 StandardExponent 'StandardExponent' RCL",
+      "expected": "9",
+      "note": "Changes this calculator setting. Save the session to retain it after restart.",
+      "returncode": 0,
+      "actual": "9",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "MatrixToColumns",
+      "source": "[ 1 2 3 ] MatrixToColumns\n4 ToList",
+      "expected": "{ 1 2 3 3 }",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "{ 1 2 3 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "MatrixToRows",
+      "source": "[ 1 2 3 ] MatrixToRows\n4 ToList",
+      "expected": "{ 1 2 3 3 }",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "{ 1 2 3 3 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ColumnsToMatrix",
+      "source": "[ 1 2 ]\n[ 4 5 ]\n[ 7 8 ]\n3 ColumnsToMatrix",
+      "expected": "[[ 1 4 7 ]\n  [ 2 5 8 ]]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[[ 1 4 7 ]\n  [ 2 5 8 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RowsToMatrix",
+      "source": "[ 1 2 ]\n[ 4 5 ]\n[ 7 8 ]\n3 RowsToMatrix",
+      "expected": "[[ 1 2 ]\n  [ 4 5 ]\n  [ 7 8 ]]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[[ 1 2 ]\n  [ 4 5 ]\n  [ 7 8 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "AddColumn",
+      "source": "[[ 1 2 3 ] [ 4 5 6 ]]  @ Input matrix\n[ 22 33 ]              @ Column to insert\n2                      @ Insertion position\nCOL+",
+      "expected": "[[ 1 22 2 3 ]\n  [ 4 33 5 6 ]]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[[ 1 22 2 3 ]\n  [ 4 33 5 6 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "AddRow",
+      "source": "[[ 1 2 3 ] [ 4 5 6 ]]  @ Input matrix\n[ 22 33 44 ]           @ Row to insert\n2                      @ Insertion position\nROW+",
+      "expected": "[[ 1 2 3 ]\n  [ 22 33 44 ]\n  [ 4 5 6 ]]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[[ 1 2 3 ]\n  [ 22 33 44 ]\n  [ 4 5 6 ]]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RREFP",
+      "source": "[[2 1][3 4]] RREFP 2 ToList",
+      "expected": "{\n\t{ 10 5 }\n\t[[ 10 0 ]\n\t  [ 0 5 ]]\n}",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "{\n\t{ 10 5 }\n\t[[ 10 0 ]\n\t  [ 0 5 ]]\n}",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PEval",
+      "source": "[ 1 -5 6 ] 2 PEval",
+      "expected": "0",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "0",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PRoot",
+      "source": "[ 1 2 -25 -26 120 ] PRoot",
+      "expected": "[ -5 -3 2 4 ]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[ -5 -3 2 4 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PCoef",
+      "source": "CompatiblePolynomials\n[ 2 -3 4 -5 ] PCoef",
+      "expected": "[ 1 2 -25 -26 120 ]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[ 1 2 -25 -26 120 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToRectangular",
+      "source": "Deg 5 90 RealToPolar ToRectangular",
+      "expected": "5ⅈ",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "5ⅈ",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "To2DVector",
+      "source": "3 4 To2DVector",
+      "expected": "[ 3 4 ]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[ 3 4 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "To3DVector",
+      "source": "3 4 5 To3DVector",
+      "expected": "[ 3 4 5 ]",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "[ 3 4 5 ]",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "FromVector",
+      "source": "[ 3 4 ] FromVector Depth ToList",
+      "expected": "{ 3 4 }",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "{ 3 4 }",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "DateSub",
+      "source": "20250101 20240101 DDAYS",
+      "expected": "366 d",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "366 d",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "JulianDayNumber",
+      "source": "20000101.120000 JDN",
+      "expected": "2 451 545",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "2 451 545",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToPercentRange",
+      "source": "10 20 ToPercentRange",
+      "expected": "10±20%",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "10±20%",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RangeUnion",
+      "source": "1 3 ToRange 2 6 ToRange RangeUnion",
+      "expected": "1…6",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "1…6",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RangeIntersect",
+      "source": "1 3 ToRange 2 6 ToRange RangeIntersect",
+      "expected": "2…3",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "2…3",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Infinity",
+      "source": "infinity",
+      "expected": "∞",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "∞",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "NegativeInfinity",
+      "source": "NegativeInfinity",
+      "expected": "−∞",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "−∞",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToStandardUncertainty",
+      "source": "-3.141592654_m  0.000012  ToStandardUncertainty",
+      "expected": "0.00003 8 m",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "0.00003 8 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "ToRelativeUncertainty",
+      "source": "-3.141592654_m  0.000097_m  ToRelativeUncertainty",
+      "expected": "0.00003 1",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "0.00003 1",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "StandardRound",
+      "source": "-3.141592654_m  0.000045_m  StdRnd",
+      "expected": "-3.14159 3 m",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "-3.14159 3 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "RelativeRound",
+      "source": "-3.141592654_m  0.000012  RelRnd",
+      "expected": "-3.14159 3 m",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "-3.14159 3 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "PrecisionRound",
+      "source": "-3.141592654_m 0.000045_m  PrcRnd",
+      "expected": "-3.14159 3 m",
+      "note": "Run from the calculator stack. This example uses the current calculation settings.",
+      "provenance": "Adapted executable example from upstream DB48X help; independently checked against its stated mathematical result.",
+      "returncode": 0,
+      "actual": "-3.14159 3 m",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Bin",
+      "source": "65490 Bin",
+      "expected": "#1111 1111 1101 0010₂",
+      "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted.",
+      "returncode": 0,
+      "actual": "#1111 1111 1101 0010₂",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Oct",
+      "source": "#FFD2h Oct",
+      "expected": "#17 7722₈",
+      "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted.",
+      "returncode": 0,
+      "actual": "#17 7722₈",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Dec",
+      "source": "#177722o Dec",
+      "expected": "#6 5490₁₀",
+      "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted.",
+      "returncode": 0,
+      "actual": "#6 5490₁₀",
+      "stderr": "",
+      "passed": true
+    },
+    {
+      "title": "Hex",
+      "source": "#1111111111010010b Hex",
+      "expected": "#FFD2₁₆",
+      "note": "The value is 65490 in decimal. Decimal integers and explicit binary, octal or hexadecimal integers convert directly. Decimal fractions are not converted.",
+      "returncode": 0,
+      "actual": "#FFD2₁₆",
+      "stderr": "",
+      "passed": true
+    }
+  ]
+}

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 0.10.0-rc.3 (2026-11-06)
+
+- Complete calculator Fourier, probability, real-matrix and bounded symbolic commands; connect working menu actions and hide unavailable legacy interfaces.
+- Add one-time local-clock reminders with visual alerts, acknowledgement/deletion and saved-session persistence.
+- Restore parent menu pages and selected rows when returning from a submenu.
+- Preserve literal INPUT text and error dismissal, restore failed inline powers without extra operands, and improve large real/complex Gamma accuracy.
+- Correct decimal alignment, constant-name lookup, constant-cache arithmetic and desktop tick overflow found by runtime sanitizers.
+- Refresh calculator help, command insertion, manuals and release evidence. The patched simulator passes 8,507 tests; normal and sanitized calculator contracts pass 135 checks each.
+
 - Make the first minus key subtract immediately when two stack values are ready.
 
 - Support complex Gamma and factorial, including native imaginary-unit entry.
@@ -29,4 +38,4 @@
 - Retain the original evaluator, calculator memory reservations and saved formats.
 
 Earlier port notes are archived in docs/history. Candidate verification and
-physical acceptance are recorded in docs/RELEASE-REVIEW.md.
+physical acceptance are recorded in docs/RELEASE-NEXT.md and the versioned evidence under docs/review/.

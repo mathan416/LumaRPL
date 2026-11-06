@@ -1,0 +1,892 @@
+{
+  "version": "0.10.0-rc.3",
+  "cases": [
+    {
+      "language": "RPL",
+      "name": "First sum",
+      "source": "2 3 +",
+      "expected": "5",
+      "actual": "5\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Reuse answer",
+      "source": "2 3 + 4 *",
+      "expected": "20",
+      "actual": "20\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Subtract",
+      "source": "10 3 -",
+      "expected": "7",
+      "actual": "7\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Divide",
+      "source": "10 2 /",
+      "expected": "5",
+      "actual": "5\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Power",
+      "source": "2 3 ^",
+      "expected": "8",
+      "actual": "8\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Parentheses on stack",
+      "source": "3 4 + 5 6 + *",
+      "expected": "77",
+      "actual": "77\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Duplicate",
+      "source": "7 DUP *",
+      "expected": "49",
+      "actual": "49\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Swap",
+      "source": "10 3 SWAP -",
+      "expected": "-7",
+      "actual": "-7\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Drop",
+      "source": "1 2 DROP",
+      "expected": "1",
+      "actual": "1\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Over",
+      "source": "1 2 OVER",
+      "expected": "1\n2\n1",
+      "actual": "1\n2\n1\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Fraction",
+      "source": "1 3 /",
+      "expected": "1/3",
+      "actual": "¹/₃\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Complex",
+      "source": "(1;2) (3;4) +",
+      "expected": "4+6i",
+      "actual": "4+6ⅈ\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Store",
+      "source": "42 'ANSWER' STO ANSWER",
+      "expected": "42",
+      "actual": "42\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Determinant",
+      "source": "[[1 2][3 4]] DET",
+      "expected": "-2",
+      "actual": "-2\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "List sum",
+      "source": "{1 2 3} ListSum",
+      "expected": "6",
+      "actual": "6\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Units",
+      "source": "100_cm 1_m Convert",
+      "expected": "1m",
+      "actual": "1 m\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Stored program",
+      "source": "« DUP * » 'SQDEMO' STO 12 SQDEMO",
+      "expected": "144",
+      "actual": "144\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Hypotenuse",
+      "source": "3 4 « DUP * SWAP DUP * + SQRT » EVAL",
+      "expected": "5.",
+      "actual": "5.\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Locals",
+      "source": "3 4 « -> A B « A A * B B * + SQRT » » EVAL",
+      "expected": "5.",
+      "actual": "5.\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Nested quotation",
+      "source": "« « 2 3 + » » EVAL EVAL",
+      "expected": "5",
+      "actual": "5\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "IF",
+      "source": "« IF 2 1 > THEN 7 ELSE 9 END » EVAL",
+      "expected": "7",
+      "actual": "7\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "FOR",
+      "source": "0 « 1 5 FOR K K + NEXT » EVAL",
+      "expected": "15",
+      "actual": "15\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "WHILE",
+      "source": "0 « WHILE DUP 3 < REPEAT 1 + END » EVAL",
+      "expected": "3",
+      "actual": "3\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "RPL comment",
+      "source": "«\n@ Square the input\n12 DUP *\n» EVAL",
+      "expected": "144",
+      "actual": "144\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Decimal to hex",
+      "source": "255 Hex",
+      "expected": "#FF₁₆",
+      "actual": "#FF₁₆\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Binary input",
+      "source": "#101010b Dec",
+      "expected": "#42₁₀",
+      "actual": "#42₁₀\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Octal input",
+      "source": "#377o Dec",
+      "expected": "#255₁₀",
+      "actual": "#255₁₀\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "Hex to decimal",
+      "source": "#FFD2h Dec",
+      "expected": "#6 5490₁₀",
+      "actual": "#6 5490₁₀\n",
+      "passed": true
+    },
+    {
+      "language": "RPL",
+      "name": "BinaryToReal",
+      "source": "255 Hex BinaryToReal",
+      "expected": "255",
+      "actual": "255\n",
+      "passed": true
+    },
+    {
+      "language": "Lua",
+      "name": "Start with Lua",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Lua console",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Save a Lua script",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Variables and functions",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Loops and decisions",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Tables and strings",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "math functions",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "print",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "calc.eval",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Draw a greeting",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Colours and coordinates",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Plot two curves",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Available libraries",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Errors and pcall",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.clear",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.pixel",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.line",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.rect",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.circle",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.text",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.font",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.measure",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.show",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "screen.sprite",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "keyboard.poll",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "keyboard.wait",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "keyboard.down",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "system.sleep",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "system.millis",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "sound.beep",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "sound.stop",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "plot.clear",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "plot.window",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "plot.function2d",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "plot.surface",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "plot.show",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Memory and saving",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Lua drawing is blank",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 1",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 2",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 3",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 4",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 5",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 6",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 7",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 8",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 9",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 10",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 11",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 12",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "Programming tutorial 13",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "API bridge.lua",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "API canvas.lua",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "API errors.lua",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "Lua",
+      "name": "API plot.lua",
+      "passed": true,
+      "checks": "production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Start with CHIP-8",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "CHIP-8 examples",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Save CHIP-8 source",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Registers and numbers",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Labels and comments",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Draw a digit",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Fonts and BCD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Keypad",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Delay and sound timers",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Assembly error",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Blank CHIP-8 screen",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Profiles and compatibility",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "CLS",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "RET",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "JP",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "CALL",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "JPOFF",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "LD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "ADD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SUB",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SUBN",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "OR",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "AND",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "XOR",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SHR",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SHL",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SE",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SNE",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "RND",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "DRW",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SKP",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SKNP",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SAVE",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "LOAD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "DB",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "DW",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "EXIT",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "HIGH",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "LOW",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SCR",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SCL",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "SCD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "FLAGSAVE",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "FLAGLOAD",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Programming tutorial 1",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "Programming tutorial 2",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "API decimal.asm",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "API digit.asm",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "API key.asm",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "API saturating.asm",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    },
+    {
+      "language": "CHIP-8",
+      "name": "API timing.asm",
+      "passed": true,
+      "checks": "production assembler; complete examples run in production SUPER-CHIP VM with synthetic keys/timers"
+    }
+  ],
+  "device_verified": false,
+  "api_routine_contracts_passed": true,
+  "source_sha256": {
+    "docs/manuals/user-guide.md": "f226a5802e1063343a143ec84e60324d43cf30e37291c90570b8cc703b07bb59",
+    "docs/manuals/programming-guide.md": "10c76a4c1a4bf7df961e82b1283a93d5cc035d34520f18f00eac6963f36a76ea",
+    "docs/help/lua-reference.json": "0a6af824574bf31d71e8f61e3b8e3d5d271d4d5dcc583fbf3c361e628193b651",
+    "docs/help/chip8-reference.json": "ba9214963f6b3ff402a9b56a110e575409ed97a77858f546c82acf11255457d4",
+    "docs/manuals/api-assembly-reference.md": "a31347db9530a0dd48ea5bb2551a3ee7a9926206625cc2a846a67a07710398e3",
+    "docs/manuals/examples/api/README.md": "0343d7ae399842d0ce4818b421d43dc1a55834a6dfe87a2fe637e59525523388",
+    "docs/manuals/examples/api/bridge.lua": "5c5aee985b27058ad1ec74dcd7a52e5648e6ff9466c9bda9db8f2f70e275a15b",
+    "docs/manuals/examples/api/canvas.lua": "409522b1c680da93d9e3032611eb9864a68bbbf19efb5e2a0ebc9898626a53a9",
+    "docs/manuals/examples/api/decimal.asm": "72d782adc1c1fc9c4517b996272f051a2400392c85a7a2fc09028d632daffcbe",
+    "docs/manuals/examples/api/digit.asm": "caa9b5566e63925cbeb0a8337c2feea629f503e01052a66432f547d3c85a0bbd",
+    "docs/manuals/examples/api/errors.lua": "3c95914d26c03427d7a77516cb9dbaa920d04ea681f4a0604f6724af496f61a5",
+    "docs/manuals/examples/api/key.asm": "19114d689ea45942b450afbf724fe578bc50de83e938bf82ec6e7c42ba253cfd",
+    "docs/manuals/examples/api/plot.lua": "3a262369758e638b8c664da6c7377ced15b33fee5c968a1863afe746fb7e5cb7",
+    "docs/manuals/examples/api/saturating.asm": "57fd9016833d35429be1232782bcf9198fb16808764b94a4428908db3381acf8",
+    "docs/manuals/examples/api/timing.asm": "c9c5e68dd505b9d2b381a0f30052db7b4af466620acc5d6e09bf5c8610a9d796"
+  }
+}
