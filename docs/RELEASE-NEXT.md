@@ -8,6 +8,8 @@ Complex Gamma/factorial; exact Termial; native constants and signed entry; Math-
 
 ## Available evidence
 
+- After the verified SD deployment, the user confirmed that alarms and time work on the device (2026-11-05). This confirms those functions; save/restart and the complete mixed-use/device checklist remain pending.
+
 - The complete patched simulator suite passes all 8,507 tests with zero failures or engine assertions. The 135 numerical/contract checks pass normally and with address/undefined-behaviour sanitizers; 39 bounded host executables, Lua, 310 shipped-help examples and 135 manual examples also pass.
 
 - Calculator keyboard/controller checks pass in all eight themes, including address and undefined-behaviour sanitizers. Grouped expressions, classic complex literals, operator entry, error repair and pixel-equivalent partial redraw are covered. Reminder alerts preserve the stack, existing errors and queued keys, and pending/acknowledged alarms survive explicit session save/load.

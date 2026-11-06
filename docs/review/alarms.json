@@ -173,5 +173,20 @@
   "source_state_at_verification": {
     "committed": false,
     "pushed": false
+  },
+  "device_confirmation": {
+    "date": "2026-11-05",
+    "source": "User confirmation after SD deployment",
+    "statement": "I can confirm alarms and time is working",
+    "confirmed_scope": [
+      "time/clock operation",
+      "alarm operation"
+    ],
+    "full_release_acceptance_completed": false,
+    "still_pending": [
+      "remaining device checklist",
+      "save/restart acceptance",
+      "30-minute mixed-use session"
+    ]
   }
 }
