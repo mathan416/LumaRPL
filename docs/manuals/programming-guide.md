@@ -703,3 +703,33 @@ X is keypad value 0. DRW XORs pixels, so redrawing at the same location can eras
 ## Editor checks
 
 Open example is a separate Tools entry. Returning from it restores the parent's working source and undo history. A source-line jump moves the caret; it is not a source rewrite. Undo history is a live-session aid, not a restart-persistent file format.
+
+
+# Calculator command additions
+
+`FFT` and `InvFFT` accept real or complex vectors with power-of-two lengths
+from 1 to 1024, subject to memory. Forward coefficients are unscaled; inverse
+coefficients are divided by N. Use the Signal analysis workbench when you need
+windowing, demeaning or sample-rate-aware amplitude plots.
+
+Matrix factorizations work on the RPL stack: `MatrixQR` returns Q R; `LQ` returns L Q;
+`Cholesky` returns L; `SVD` returns U s V; `Schur` returns Q T. The thin SVD uses
+A = U diag(s) transpose(V); Schur uses A = Q T transpose(Q). Inputs are real
+matrices with dimensions up to 32, subject to memory. `SVL`, `CondNum`, `SpecRad`,
+`ToDiagonal` and `FromDiagonal` return one result. `RREFMOD` uses a prime modulus
+set by `CASModulus` and preserves exact integer arithmetic.
+
+`Normal`, `Student`, `ChiSquare` and `FDistribution` return lower-tail
+probabilities. Their `Inv` counterparts take a probability strictly between zero
+and one. See the command reference for argument order.
+
+`Taylor` takes expression, variable, point and order; `FiniteDifference` takes expression,
+variable and step. `Limit` takes expression, variable and finite real point,
+with support for analytic expressions and removable zero-over-zero singularities.
+Taylor and Limit use radians for analytic trigonometric calculations.
+`DerivX` and `IntVX` use the selected algebra variable. Variables in these command
+arguments stay symbolic even when a stored variable has the same name.
+
+Calculator shorthand conversion does not run inside `INPUT` prompts. Validators
+receive exactly the text that was entered, including parentheses, `^`, `!`, `?`
+and ordinary program variable names.

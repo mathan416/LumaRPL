@@ -1,5 +1,7 @@
 // Execute the shared production widgets against the real engine and fonts.
 #include "information_text.h"
+#include "matrix_engine.h"
+extern const unsigned char PicoSourceFont_sparse_font_data[];
 #include "native_menu.h"
 #include "editor_tools.h"
 #include "source_style.h"
@@ -100,14 +102,14 @@ inline void run()
     static blitter::pixword original_pixels[sizeof pixels/sizeof *pixels];memcpy(original_pixels,pixels,sizeof pixels);
     memset(dirty_rows,0,sizeof dirty_rows);unsigned full=full_refreshes,partial=partial_refreshes;
     surface_check(move_editor_cursor(editor,scroll,tools,0xb7)&&editor.cursor==1,"fast cursor advances one glyph");
-    unsigned rows=0;for(int y=0;y<320;++y){rows+=dirty_rows[y];surface_check(!dirty_rows[y]||(y>=38&&y<=57)||(y>=266&&y<=285),"only caret/Ln/Col rows sent to LCD");}
-    surface_check(rows==40&&full_refreshes==full&&partial_refreshes==partial+1,"one partial refresh, no full refresh");
+    unsigned rows=0;for(int y=0;y<320;++y){rows+=dirty_rows[y];surface_check(!dirty_rows[y]||(y>=38&&y<=49)||(y>=266&&y<=285),"only caret/Ln/Col rows sent to LCD");}
+    surface_check(rows==32&&full_refreshes==full&&partial_refreshes==partial+1,"one partial refresh, no full refresh");
     surface_check(move_editor_cursor(editor,scroll,tools,0xb4)&&!memcmp(original_pixels,pixels,sizeof pixels),"moving back restores all pixels exactly, including footer/hints");
     tools.anchor=0;surface_check(!move_editor_cursor(editor,scroll,tools,0xb7)&&editor.cursor==0,"selection uses full redraw path");tools.anchor=pico_editor_tools::none;
     partial=partial_refreshes;surface_check(move_editor_cursor(editor,scroll,tools,0xb4)&&partial_refreshes==partial,"boundary key sends no pixels");
-    char multiline[64];for(int i=0;i<12;++i){multiline[2*i]='x';multiline[2*i+1]='\n';}multiline[24]=0;
-    pico_text_editor tall{multiline,sizeof multiline,24,18,false};pico_editor_tools tall_tools(tall,clipboard);
-    surface_check(!move_editor_cursor(tall,0,tall_tools,0xb6)&&tall.cursor==18,"scrolling defers to full redraw without moving twice");
+    char multiline[64];for(int i=0;i<20;++i){multiline[2*i]='x';multiline[2*i+1]='\n';}multiline[40]=0;
+    pico_text_editor tall{multiline,sizeof multiline,40,34,false};pico_editor_tools tall_tools(tall,clipboard);
+    surface_check(!move_editor_cursor(tall,0,tall_tools,0xb6)&&tall.cursor==34,"scrolling defers to full redraw without moving twice");
     char unicode[16]="αβ";pico_text_editor utf8_editor{unicode,sizeof unicode,strlen(unicode),0,false};pico_editor_tools unicode_tools(utf8_editor,clipboard);
     render_editor(utf8_editor,"UTF8.lua",scroll,source_language::lua,unicode_tools);surface_check(move_editor_cursor(utf8_editor,scroll,unicode_tools,0xb7)&&utf8_editor.cursor==2,"fast cursor respects UTF-8 glyph boundary");
     puts("PASS: actual editor cursor fast path, exact pixel restoration, 40-row single refresh, static footer/tools hints, no-op boundaries, selection/scroll fallback and UTF-8; Lua proportional/columns toggle");

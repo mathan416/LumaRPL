@@ -1,3 +1,438 @@
+diff --git a/doc/commands/calculator-review.md b/doc/commands/calculator-review.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..115375d2b29198a95c4056c11d7f404466b2c97f
+--- /dev/null
++++ b/doc/commands/calculator-review.md
+@@ -0,0 +1,253 @@
++# Additional calculator commands
++
++## FFT
++
++Transform a real or complex vector to frequency coefficients. The length must
++be a power of two from 1 to 1024. Available memory may impose a smaller limit
++at high precision. Matrices and non-numeric elements are rejected.
++
++The forward transform uses the negative exponential and no scale factor:
++`X[k] = Sum(x[j] exp(-2 pi i j k/N))`. Values remain in ordinary frequency order,
++starting with the zero-frequency coefficient. No window, demeaning, sample-rate
++scaling or one-sided amplitude normalization is applied. Use Signal analysis
++for those data-analysis options. Calculation uses decimal arithmetic and the
++selected precision; the angle-mode setting is preserved.
++
++```rpl
++[1 0 0 0] FFT [1 1 1 1] - Norm 1e-20 <
++@ Expecting True
++```
++
++## InvFFT
++
++Inverse of `FFT`. The positive exponential and division by the vector length
++make `InvFFT(FFT(x))` recover the original samples, within numerical precision.
++Input restrictions match `FFT`.
++
++```rpl
++[1 2 3 4] DUP FFT InvFFT - Norm 1e-20 <
++@ Expecting True
++```
++
++## Normal
++
++Lower-tail normal probability. Takes mean, variance, then the evaluation point.
++The variance must be positive. `UTPN` provides the corresponding upper tail.
++
++```rpl
++0 1 0 Normal
++@ Expecting 0.5
++```
++
++## Student
++
++Lower-tail Student probability. Takes positive degrees of freedom, then the
++evaluation point. `UTPT` provides the corresponding upper tail.
++
++```rpl
++10 0 Student
++@ Expecting 0.5
++```
++
++## ChiSquare
++
++Lower-tail chi-square probability. Takes positive degrees of freedom, then the
++nonnegative evaluation point. Negative points return zero. See `UTPC` for the
++upper tail.
++
++## FDistribution
++
++Lower-tail Fisher probability. Takes positive numerator degrees of freedom,
++positive denominator degrees of freedom, then the evaluation point. Nonpositive
++points return zero. See `UTPF` for the upper tail.
++
++```rpl
++2 2 1 FDistribution 0.5 - ABS 1e-20 <
++@ Expecting True
++```
++
++## InvNormal
++
++Normal quantile. Takes mean, positive variance, then lower-tail probability.
++The probability must be strictly between zero and one, giving a finite result.
++
++```rpl
++0 1 0.5 InvNormal
++@ Expecting 0
++```
++
++## InvStudent
++
++Student quantile. Takes positive degrees of freedom, then lower-tail probability
++strictly between zero and one.
++
++## InvChiSquare
++
++Chi-square quantile. Takes positive degrees of freedom, then lower-tail
++probability strictly between zero and one.
++
++## InvFDistribution
++
++Fisher quantile. Takes positive numerator degrees of freedom, positive denominator
++degrees of freedom, then lower-tail probability strictly between zero and one.
++
++## Cholesky
++
++Replaces a real symmetric positive-definite matrix A with its lower triangular
++factor L, so `L DUP Transpose *` reconstructs A. Nonsymmetric or non-positive-
++definite inputs report a domain error. Dimensions are limited to 32, subject
++to available memory.
++
++```rpl
++[[4 2][2 5]] DUP Cholesky DUP Transpose * - Norm 1e-20 <
++@ Expecting True
++```
++
++## CondNum
++
++Spectral condition number: the largest singular value divided by the smallest.
++A zero smallest singular value reports divide by zero. Restrictions match `SVD`.
++
++## Schur
++
++Real Schur reduction. Replaces a real square matrix A with an orthogonal matrix
++Q and a block upper triangular matrix T, so `Q T * Q Transpose *` reconstructs A.
++T may contain two-by-two blocks, including conjugate complex eigenvalue pairs.
++Dimensions are limited to 32, subject to memory. The iteration is cancellable;
++failure to converge reports a domain error. A few guard digits of numerical
++accuracy may be lost during convergence.
++
++## SpecRad
++
++Spectral radius of a real square matrix: the largest eigenvalue magnitude,
++including eigenvalues represented by two-by-two Schur blocks. Restrictions match
++`Schur`.
++
++```rpl
++[[0 -2][2 0]] SpecRad 2 - ABS 1e-20 <
++@ Expecting True
++```
++
++## ToDiagonal
++
++Build a square diagonal matrix from a vector, preserving its elements. The
++vector length must be from 1 to 32, subject to available memory.
++
++## FromDiagonal
++
++Extract the main diagonal of a matrix as a vector. Rectangular inputs return
++min(rows,columns) elements.
++
++```rpl
++[1 2 3] DUP ToDiagonal FromDiagonal - Norm 1e-20 <
++@ Expecting True
++```
++
++## CASModulus
++
++Select the prime modulus for `RREFMOD`. The default is 13. Values from 2 to
++2147483647 can be stored; `RREFMOD` rejects composite values because its
++Gauss-Jordan reduction requires a field. Integer matrix entries of arbitrary
++size are reduced exactly, including negative entries. Matrix dimensions are
++limited to 32, subject to memory. `RREFMOD` swaps rows when a pivot is zero and
++preserves the input matrix if validation fails.
++
++```rpl
++5 CASModulus [[0 1 2][1 1 3]] RREFMOD
++@ Expecting [[1 0 1] [0 1 2]]
++```
++
++## DerivX
++
++Differentiate an expression with respect to the current algebra variable,
++selected with `StoreAlgebraVariable`. Equivalent to supplying that variable to
++`Derivative`.
++
++## IntVX
++
++Find a primitive with respect to the current algebra variable. Equivalent to
++supplying that variable to `Primitive`.
++
++## Taylor
++
++Build a Taylor polynomial from expression, variable, expansion point and order.
++The variable is kept symbolic even when it has a stored value. The point must
++allow evaluation of the required derivatives; a singular derivative reports an
++error. Orders from 0 to 1000 are accepted, subject to memory and rewrite limits.
++Trigonometric derivatives and coefficient evaluation use radians, preserving the
++user's angle setting. `Serie` is an alternate spelling.
++
++## FiniteDifference
++
++Forward finite difference. Takes expression, variable, then step and returns
++`f(x+step)-f(x)` symbolically. This is a finite difference, not division by step.
++
++## Limit
++
++Finite analytic limit. Takes expression, variable, then a finite real point.
++Direct substitution handles continuous analytic expressions. A quotient whose
++numerator and denominator both vanish uses repeated symbolic differentiation,
++up to 64 times. This supports removable singularities such as `sin(x)/x` at zero.
++Discontinuous operators such as absolute value, sign and rounding are rejected.
++Infinite endpoints, general piecewise limits and essential singularities are
++not supported; no numerical extrapolation is used to invent an answer.
++Analytic trigonometric limits use radians and preserve the user's angle mode.
++
++```rpl
++Rad 'SIN(x)/x' 'x' 0 Limit
++@ Expecting 1
++```
++
++## TanToSinCos
++
++Rewrite `tan(x)` as `sin(x)/cos(x)`.
++
++## TanSquaredToSinCos
++
++Rewrite squared tangent as `(1-cos(x)^2)/cos(x)^2`.
++
++## HalfTan
++
++Rewrite sine and cosine using tangent of the half angle.
++
++## TExpand
++
++Expand sine and cosine of sums, differences and double angles.
++
++## TLin
++
++Linearize products and squares of sine and cosine using sum and difference
++identities.
++
++## ExpLn
++
++Expand exponentials of sums and differences and cancel `exp(ln(x))`.
++It does not replace `ln(exp(x))` with x, which would lose complex branch
++information.
++
++## Lin
++
++Collect products and quotients of exponentials into exponentials of sums and
++differences.
++
++## LnCollect
++
++Collect sums and differences of logarithms of positive integer factors.
++Expressions with factors of unknown sign are left unchanged, preserving
++principal complex logarithm branches.
++
++## SinCos
++
++Rewrite sine and cosine using complex exponentials. Use `NumericalConstants`
++or `ToDecimal` to evaluate the imaginary-unit constant numerically afterwards.
++
++## Find
++
++Takes a list or vector and a target object. Return the first matching one-based
++index, or zero when absent. Comparison uses object equality and preserves the
++input elements; nested objects are supported.
++
++```rpl
++{3 7 7 9} 7 Find
++@ Expecting 2
++```
+diff --git a/doc/commands/matrix.md b/doc/commands/matrix.md
+index 5d55cae3e70cb314ab5f3bce5b9a337af91cefa3..1e333dce5675c62f1ebf5e9cfde65791c416ce05 100755
+--- a/doc/commands/matrix.md
++++ b/doc/commands/matrix.md
+@@ -521,6 +521,8 @@ Find a basis for the kernel of a linear application
+
+ ## LQ
+
++Replaces a real matrix A with L, then Q, so `L Q *` reconstructs A. This uses QR
++on the transpose. Dimensions and numerical restrictions match `MatrixQR`.
+
+ ## LSQ
+
+@@ -540,7 +542,7 @@ and `P` records the row exchanges performed during pivoting.
+ @ Expecting { [[ 7 0 0 ] [ -1 2 ⁶/₇ 0 ] [ 3 -1 ⁴/₇ -1 ]] [[ 1 ⁶/₇ ⁵/₇ ] [ 0 1 2 ] [ 0 0 1 ]] [[ 0 0 1 ] [ 1 0 0 ] [ 0 1 0 ]] }
+ ```
+
+-See also: `REF`, `RREF`, `QR`, `DET`, `INV`, `LSQ`.
++See also: `REF`, `RREF`, `MatrixQR`, `DET`, `INV`, `LSQ`.
+
+
+ ## MAD
+@@ -553,9 +555,18 @@ See also: `REF`, `RREF`, `QR`, `DET`, `INV`, `LSQ`.
+ Minimal polynomial of a matrix
+
+
+-## QR
+-QR Decomposition of a matrix
++## MatrixQR
+
++Householder factorization of a real matrix: replaces A with Q, then R. Q is a
++square orthogonal matrix; R has A's dimensions. `Q R *` reconstructs A. Rectangular
++and rank-deficient matrices are accepted. Dimensions are limited to 32, subject
++to available memory. These factorizations use decimal arithmetic at the selected
++precision. Complex and symbolic matrices are not accepted.
++
++```rpl
++[[1 2][3 4][5 7]] DUP MatrixQR * - Norm 1e-20 <
++@ Expecting True
++```
+
+ ## RANK
+ Rank of a matrix
+@@ -619,8 +630,11 @@ See also: `RREF`, `REF`, `RREFMOD`.
+
+
+ ## RREFMOD
+-Modular row-reduced echelon form (reduction modulo the current CAS modulus).
+-Requires symbolic results.
++Exact modular row-reduced echelon form over the prime field selected by
++`CASModulus` (default 13). Takes an integer matrix, including arbitrary-size and
++negative integers. Composite moduli and non-integer entries are rejected.
++Zero pivots are handled by swapping rows. Numerical-results mode does not affect
++this exact operation. Matrix dimensions are limited to 32, subject to memory.
+
+
+ ## EchelonFormKeepLastColumn
+@@ -684,9 +698,22 @@ lists.
+
+ ## SVD
+
++Thin singular value decomposition of a real matrix. Replaces A with U, a vector
++s of descending singular values, then V. With k=min(rows,columns), U has k
++columns and V has k columns. `U s ToDiagonal * V Transpose *` reconstructs A.
++Dimensions are limited to 32, subject to memory. The iteration is cancellable;
++failure to converge reports a domain error. Complex and symbolic inputs are
++not accepted. Zero singular values receive an orthonormal completion in U.
+
+ ## SVL
+
++Return only the descending singular values of a real matrix. Restrictions match
++`SVD`.
++
++```rpl
++[[3 0][0 4]] SVL [4 3] - Norm 1e-20 <
++@ Expecting True
++```
+
+ ## SYLVESTER
+
+diff --git a/doc/commands/system.md b/doc/commands/system.md
+index 7e4ca5471b59345c03a26cb8fc902c105d1f7dff..3a18108c6ffc4c8277d37c7719b08f5e25c5068e 100644
+--- a/doc/commands/system.md
++++ b/doc/commands/system.md
+@@ -2,51 +2,51 @@
+
+ Date and time commands are documented in `datetime.md`.
+
+-## ACK
+-Acknowledge oldest alarm (dismiss)
++The alarm menu is for clock-based reminders: scheduling an alert, listing
++alarms, and acknowledging or deleting them. Reminders use the calculator's local
++clock. Set the date and time before scheduling. Up to 32 one-time reminders are
++stored in the HOME variable `LumaAlarms` and included in calculator session saves.
++Save the session to retain changes across a restart. Do not edit this variable.
+
++On PicoCalc an overdue reminder appears when the calculator is idle. Press Enter
++to acknowledge it. Reminders wait while a program or INPUT prompt is active.
++A switched-off calculator cannot sound an alert; an unacknowledged overdue
++reminder appears after the saved session is restored with the correct clock.
++Acknowledgement retains the record until `DelAlarm` removes it. No recurring
++alarms, automatic program execution or hardware wake-up are provided.
+
+-## ACKALL
+-Acknowledge (dismiss) all alarms
++## Alarms
+
++List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session.
+
+-## RCLALARM
+-Recall specified alarm
++## StoAlarm
+
++Schedule a clock-based reminder: put YYYYMMDD.HHMMSS and a message string on the stack, then run StoAlarm. Returns an alarm ID. Example: 20261225.093000 "Check the oven" StoAlarm. Uses the calculator local clock.
+
+-## STOALARM
+-Create a new alarm
++## RclAlarm
+
++Recall the alarm record for the ID on the stack.
+
+-## DELALARM
+-Delete an existing alarm
++## DelAlarm
+
++Delete the alarm identified by the ID on the stack, including its reminder history.
+
+-## FINDALARM
+-Get first alarm due after the given time
+-## ACK
+-Acknowledge oldest alarm (dismiss)
++## FindAlarm
+
++Return the ID of the earliest unacknowledged alarm strictly after the date/time on the stack, or zero if none.
+
+-## ACKALL
+-Acknowledge (dismiss) all alarms
++## Ack
+
++Acknowledge the oldest due reminder. Leaves future alarms scheduled and retains the record.
+
+-## RCLALARM
+-Recall specified alarm
++## AckAll
+
++Acknowledge all currently due reminders. Future reminders remain scheduled.
+
+-## STOALARM
+-Create a new alarm
+-
+-
+-## DELALARM
+-Delete an existing alarm
+-
+-
+-## FINDALARM
+-Get first alarm due after the given time
+-
++```rpl
++20991225.093000 "Check the oven" StoAlarm RclAlarm 3 GET
++@ Expecting "Check the oven"
++```
+
+ ## Version
+
+diff --git a/doc/commands/termial.md b/doc/commands/termial.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..8d91eb16cec54a73b0090e399e7539073753dbeb
+--- /dev/null
++++ b/doc/commands/termial.md
+@@ -0,0 +1,5 @@
++# Termial
++
++Compute the triangular sum `1+2+...+n` as `n*(n+1)/2`. The argument must be a nonnegative whole number; `0?` is zero. Fractional and negative arguments report a domain error.
++
++Use `6?` or `6 Termial` to get `21`. The algebraic forms `'N?'` and `'Termial(N)'` are equivalent. In RPL, separate a variable and the operator: `N ?` or `N Termial`. Ordinary RPL identifiers can still contain question marks; use the explicit name prefix `Ⓥ` when quoting such a name inside algebraic syntax. The explicit constant `Ⓒ?` is unchanged.
 diff --git a/sim/sim-screen.cpp b/sim/sim-screen.cpp
 index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183e086aef6 100644
 --- a/sim/sim-screen.cpp
@@ -41,11 +476,1218 @@ index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183
                          if (xx >= LCD_W)
                          {
                              if (y >= 23 && y < 217)
+diff --git a/src/alarms.inc b/src/alarms.inc
+new file mode 100644
+index 0000000000000000000000000000000000000000..d828a8bdc2a676505dccc215e6d224fe34edf869
+--- /dev/null
++++ b/src/alarms.inc
+@@ -0,0 +1,233 @@
++// Clock reminders are ordinary HOME data, included in calculator session saves.
++namespace {
++constexpr cstring alarm_data_name = "LumaAlarms";
++constexpr uint alarm_capacity = 32;
++
++ularge alarm_seconds(const dt_t &dt, const tm_t &tm)
++{
++    return julian_day_number(dt.day, dt.month, dt.year) * 86400ULL +
++           tm.hour * 3600ULL + tm.min * 60ULL + tm.sec;
++}
++
++ularge alarm_now()
++{
++    dt_t dt{};
++    tm_t tm{};
++    rtc_read(&tm, &dt);
++    return alarm_seconds(dt, tm);
++}
++
++list_p alarm_data()
++{
++    symbol_g name = symbol::make(alarm_data_name);
++    if (!name) return nullptr;
++    object_g data = rt.homedir()->recall(+name);
++    if (!data) return list::make(object::ID_list, nullptr, 0);
++    list_p rows = data->as<list>();
++    if (!rows || rows->items() > alarm_capacity)
++    {
++        rt.error("Invalid alarm data");
++        return nullptr;
++    }
++    for (object_p row : *rows)
++    {
++        list_p entry = row->as<list>();
++        if (!entry || entry->items() != 5 ||
++            !entry->at(0)->is_integer() || !entry->at(2)->as<text>() ||
++            !entry->at(3)->is_integer() || !entry->at(4)->is_integer())
++        {
++            rt.error("Invalid alarm data");
++            return nullptr;
++        }
++    }
++    return rows;
++}
++
++bool alarm_store(list_r rows)
++{
++    symbol_g name = symbol::make(alarm_data_name);
++    return name && rt.homedir()->store(+name, +rows);
++}
++
++// Select by due time, then ID; acknowledgement does not delete history.
++int alarm_due(list_r rows, ularge now)
++{
++    int selected = -1;
++    ularge earliest = ~ularge(0);
++    uint index = 0;
++    for (object_p row : *rows)
++    {
++        list_p entry = row->as<list>();
++        ularge due = entry->at(4)->as_uint64(0, false);
++        if (!entry->at(3)->as_uint32(0, false) && due <= now && due < earliest)
++        {
++            selected = int(index);
++            earliest = due;
++        }
++        ++index;
++    }
++    return selected;
++}
++
++bool alarm_change(list_r rows, int index, bool remove, bool all = false)
++{
++    scribble scr;
++    int n = 0;
++    ularge now = alarm_now();
++    for (object_g row : *rows)
++    {
++        list_g entry = row->as<list>();
++        if (n++ == index || (all && entry->at(4)->as_uint64(0, false) <= now))
++        {
++            if (remove) continue;
++            object_g id = entry->at(0), date = entry->at(1), msg = entry->at(2);
++            object_g due = entry->at(4);
++            integer_g ack = integer::make(1);
++            entry = list::make(id, date, msg, ack, due);
++            if (!entry) return false;
++        }
++        if (!scr.append(+entry)) return false;
++    }
++    list_g result = list::make(object::ID_list, scr.scratch(), scr.growth());
++    return result && alarm_store(result);
++}
++
++int alarm_index(list_r rows, object_p value)
++{
++    if (!value || !value->is_integer())
++    {
++        rt.type_error();
++        return -1;
++    }
++    ularge id = value->as_uint64(0, false);
++    int index = 0;
++    for (object_p row : *rows)
++    {
++        if (row->as<list>()->at(0)->as_uint64(0, false) == id)
++            return index;
++        ++index;
++    }
++    rt.error("Alarm not found");
++    return -1;
++}
++}
++
++COMMAND_BODY(Alarms)
++{
++    list_g rows = alarm_data();
++    return rows && rt.push(+rows) ? OK : ERROR;
++}
++
++COMMAND_BODY(StoAlarm)
++{
++    object_g date = rt.stack(1), message = rt.stack(0);
++    if (!message || !message->as<text>())
++    {
++        rt.type_error();
++        return ERROR;
++    }
++    dt_t dt{};
++    tm_t tm{};
++    if (!to_date(+date, dt, tm)) return ERROR;
++    list_g rows = alarm_data();
++    if (!rows) return ERROR;
++    if (rows->items() >= alarm_capacity)
++    {
++        rt.error("Too many alarms");
++        return ERROR;
++    }
++    ularge next = 1;
++    for (object_p row : *rows)
++    {
++        ularge id = row->as<list>()->at(0)->as_uint64(0, false);
++        if (id >= next) next = id + 1;
++    }
++    integer_g id = integer::make(next), ack = integer::make(0);
++    integer_g due = integer::make(alarm_seconds(dt, tm));
++    list_g entry = list::make(id, date, message, ack, due);
++    if (!entry) return ERROR;
++    scribble scr;
++    for (object_p existing : *rows)
++        if (!scr.append(existing)) return ERROR;
++    if (!scr.append(+entry)) return ERROR;
++    rows = list::make(object::ID_list, scr.scratch(), scr.growth());
++    if (!rows || !alarm_store(rows)) return ERROR;
++    rt.drop(1);
++    return rt.top(+id) ? OK : ERROR;
++}
++
++COMMAND_BODY(RclAlarm)
++{
++    list_g rows = alarm_data();
++    if (!rows) return ERROR;
++    int index = alarm_index(rows, rt.stack(0));
++    return index >= 0 && rt.top(rows->at(index)) ? OK : ERROR;
++}
++
++COMMAND_BODY(DelAlarm)
++{
++    list_g rows = alarm_data();
++    if (!rows) return ERROR;
++    int index = alarm_index(rows, rt.stack(0));
++    if (index < 0 || !alarm_change(rows, index, true)) return ERROR;
++    rt.drop(1);
++    return OK;
++}
++
++COMMAND_BODY(FindAlarm)
++{
++    dt_t dt{};
++    tm_t tm{};
++    if (!to_date(rt.stack(0), dt, tm)) return ERROR;
++    ularge after = alarm_seconds(dt, tm), earliest = ~ularge(0), found = 0;
++    list_g rows = alarm_data();
++    if (!rows) return ERROR;
++    for (object_p row : *rows)
++    {
++        list_p entry = row->as<list>();
++        ularge due = entry->at(4)->as_uint64(0, false);
++        if (!entry->at(3)->as_uint32(0, false) && due > after && due < earliest)
++        {
++            earliest = due;
++            found = entry->at(0)->as_uint64(0, false);
++        }
++    }
++    integer_g id = integer::make(found);
++    return id && rt.top(+id) ? OK : ERROR;
++}
++
++COMMAND_BODY(Ack)
++{
++    list_g rows = alarm_data();
++    if (!rows) return ERROR;
++    int index = alarm_due(rows, alarm_now());
++    return index < 0 || alarm_change(rows, index, false) ? OK : ERROR;
++}
++
++COMMAND_BODY(AckAll)
++{
++    list_g rows = alarm_data();
++    return rows && alarm_change(rows, -1, false, true) ? OK : ERROR;
++}
++
++bool alarm_notify()
++{
++    // Called only between calculations; never replace an existing error.
++    static uint32_t last_check;
++    uint32_t now = sys_current_ms();
++    if (uint32_t(now - last_check) < 1000 || rt.error() || !key_empty()) return false;
++    last_check = now;
++    // Avoid allocations during the common no-alarm case.
++    symbol_g name = symbol::make(alarm_data_name);
++    if (!name || !rt.homedir()->recall(+name)) return false;
++    list_g rows = alarm_data();
++    if (!rows) return false;
++    int index = alarm_due(rows, alarm_now());
++    if (index < 0) return false;
++    list_g entry = rows->at(index)->as<list>();
++    text_g message = entry->at(2)->as<text>();
++    ui.draw_message("Alarm reminder", message->null_terminated_value(),
++                    "Press Enter to acknowledge");
++    wait_for_key_press();
++    return alarm_change(rows, index, false);
++}
+diff --git a/src/array-extended.inc b/src/array-extended.inc
+new file mode 100644
+index 0000000000000000000000000000000000000000..04fd873cb37725a8c245a48ea4f2f07921c9ffb7
+--- /dev/null
++++ b/src/array-extended.inc
+@@ -0,0 +1,962 @@
++// Decimal matrix factorizations. Scratch entries remain rooted across GC.
++namespace
++{
++algebraic_p matrix_round(algebraic_r value, uint digits)
++{
++    if (!value)
++        return nullptr;
++    return value->is_decimal()
++             ? algebraic_p(decimal_p(+value)->precision(digits))
++             : +value;
++}
++
++struct numeric_matrix
++{
++    size_t                    rows, cols;
++    scoped_array<algebraic_g> cells;
++    numeric_matrix(size_t r, size_t c) : rows(r), cols(c), cells(r * c)
++    {
++    }
++    algebraic_g &at(size_t r, size_t c)
++    {
++        return cells[r * cols + c];
++    }
++    bool valid()
++    {
++        return !!cells;
++    }
++    bool identity()
++    {
++        if (!valid())
++            return false;
++        for (size_t r = 0; r < rows; ++r)
++        {
++            for (size_t c = 0; c < cols; ++c)
++                if (!(at(r, c) = integer::make(r == c)))
++                    return false;
++        }
++        return true;
++    }
++    bool load(array_r input)
++    {
++        if (!valid())
++            return false;
++        size_t r = 0;
++        for (object_p row : *input)
++        {
++            list_g line = list_p(row);
++            size_t c    = 0;
++            for (object_p item : *line)
++            {
++                algebraic_g value = item->as_algebraic();
++                if (!value || !value->is_real())
++                {
++                    rt.type_error();
++                    return false;
++                }
++                if (!algebraic::to_decimal(value))
++                    return false;
++                at(r, c++) = value;
++            }
++            ++r;
++        }
++        return true;
++    }
++    static object_p item(size_t, size_t, size_t r, size_t c, void *data)
++    {
++        return static_cast<numeric_matrix *>(data)->at(r, c);
++    }
++    array_p pack(uint digits = 0)
++    {
++        if (digits)
++            for (size_t i = 0; i < rows * cols; ++i)
++                if (!(cells[i] = matrix_round(cells[i], digits)))
++                    return nullptr;
++        return array::build(rows, cols, item, this);
++    }
++};
++
++bool matrix_shape(array_r input, size_t &rows, size_t &cols)
++{
++    if (!input || input->type() != object::ID_array)
++    {
++        rt.type_error();
++        return false;
++    }
++    if (!input->is_matrix(&rows, &cols, false) || !rows || !cols || rows > 32 ||
++        cols > 32)
++    {
++        rt.dimension_error();
++        return false;
++    }
++    return true;
++}
++
++bool matrix_qr(numeric_matrix &r, numeric_matrix &q)
++{
++    if (!q.identity())
++        return false;
++    scoped_array<algebraic_g> v(r.rows);
++    if (!v)
++    {
++        rt.out_of_memory_error();
++        return false;
++    }
++    algebraic_g zero = integer::make(0), two = integer::make(2);
++    for (size_t k = 0; k < r.rows && k < r.cols; ++k)
++    {
++        if (program::interrupted())
++            return false;
++        algebraic_g norm = zero;
++        for (size_t i = k; i < r.rows; ++i)
++            norm = norm + r.at(i, k) * r.at(i, k);
++        if (!norm)
++            return false;
++        if (norm->is_zero(false))
++            continue;
++        norm = sqrt::run(norm);
++        if (!norm)
++            return false;
++        algebraic_g alpha = r.at(k, k)->is_negative(false) ? norm : -norm;
++        for (size_t i = k; i < r.rows; ++i)
++            v[i] = r.at(i, k);
++        v[k]               = v[k] - alpha;
++        algebraic_g square = zero;
++        for (size_t i = k; i < r.rows; ++i)
++            square = square + v[i] * v[i];
++        if (!square || square->is_zero(false))
++            return false;
++        for (size_t j = k; j < r.cols; ++j)
++        {
++            algebraic_g dot = zero;
++            for (size_t i = k; i < r.rows; ++i)
++                dot = dot + v[i] * r.at(i, j);
++            algebraic_g factor = two * dot / square;
++            for (size_t i = k; i < r.rows; ++i)
++                if (!(r.at(i, j) = r.at(i, j) - v[i] * factor))
++                    return false;
++        }
++        for (size_t i = 0; i < q.rows; ++i)
++        {
++            algebraic_g dot = zero;
++            for (size_t j = k; j < q.cols; ++j)
++                dot = dot + q.at(i, j) * v[j];
++            algebraic_g factor = two * dot / square;
++            for (size_t j = k; j < q.cols; ++j)
++                if (!(q.at(i, j) = q.at(i, j) - factor * v[j]))
++                    return false;
++        }
++        r.at(k, k) = alpha;
++        for (size_t i = k + 1; i < r.rows; ++i)
++            r.at(i, k) = zero;
++    }
++    return true;
++}
++
++object::result matrix_qr_command(bool lq)
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return object::ERROR;
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    uint                                digits = Settings.Precision();
++    if (digits > DB48X_MAXDIGITS - 8)
++    {
++        rt.precision_loss_error();
++        return object::ERROR;
++    }
++    settings::SavePrecision precision(digits + 8 < 12 ? 12 : digits + 8);
++    if (lq)
++    {
++        input = input->transpose();
++        if (!input)
++            return object::ERROR;
++        size_t temporary = rows;
++        rows             = cols;
++        cols             = temporary;
++    }
++    numeric_matrix r(rows, cols), q(rows, rows);
++    if (!r.valid() || !q.valid())
++    {
++        rt.out_of_memory_error();
++        return object::ERROR;
++    }
++    if (!r.load(input) || !matrix_qr(r, q))
++        return object::ERROR;
++    array_g qa = q.pack(digits), ra = r.pack(digits);
++    if (lq)
++    {
++        qa = qa ? qa->transpose() : nullptr;
++        ra = ra ? ra->transpose() : nullptr;
++        return qa && ra && rt.push(+qa) && rt.stack(1, ra) ? object::OK
++                                                           : object::ERROR;
++    }
++    return qa && ra && rt.push(+ra) && rt.stack(1, qa) ? object::OK
++                                                       : object::ERROR;
++}
++} // namespace
++
++COMMAND_BODY(MatrixQR)
++// ----------------------------------------------------------------------------
++//   Householder QR: A becomes Q R, with Q square and orthogonal
++// ----------------------------------------------------------------------------
++{
++    return matrix_qr_command(false);
++}
++
++COMMAND_BODY(LQ)
++// ----------------------------------------------------------------------------
++//   Householder LQ: A becomes L Q
++// ----------------------------------------------------------------------------
++{
++    return matrix_qr_command(true);
++}
++
++COMMAND_BODY(Cholesky)
++// ----------------------------------------------------------------------------
++//   Lower triangular factor of a real symmetric positive-definite matrix
++// ----------------------------------------------------------------------------
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return ERROR;
++    if (rows != cols)
++    {
++        rt.dimension_error();
++        return ERROR;
++    }
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    uint                                digits = Settings.Precision();
++    if (digits > DB48X_MAXDIGITS - 8)
++    {
++        rt.precision_loss_error();
++        return object::ERROR;
++    }
++    settings::SavePrecision precision(digits + 8 < 12 ? 12 : digits + 8);
++    numeric_matrix          a(rows, cols), l(rows, cols);
++    if (!a.valid() || !l.valid())
++    {
++        rt.out_of_memory_error();
++        return ERROR;
++    }
++    if (!a.load(input) || !l.identity())
++        return ERROR;
++    algebraic_g zero = integer::make(0);
++    for (size_t i = 0; i < rows; ++i)
++    {
++        for (size_t j = 0; j <= i; ++j)
++        {
++            if (program::interrupted())
++                return ERROR;
++            algebraic_g difference = a.at(i, j) - a.at(j, i);
++            if (!difference)
++                return ERROR;
++            if (!difference->is_zero(false))
++            {
++                rt.domain_error();
++                return ERROR;
++            }
++            algebraic_g value = a.at(i, j);
++            for (size_t k = 0; k < j; ++k)
++                value = value - l.at(i, k) * l.at(j, k);
++            if (!value)
++                return ERROR;
++            if (i == j)
++            {
++                if (value->is_negative(false) || value->is_zero(false))
++                {
++                    rt.domain_error();
++                    return ERROR;
++                }
++                value = sqrt::run(value);
++            }
++            else
++            {
++                value = value / l.at(j, j);
++            }
++            if (!(l.at(i, j) = value))
++                return ERROR;
++            if (i != j)
++                l.at(j, i) = zero;
++        }
++    }
++    array_g result = l.pack(digits);
++    return result && rt.top(result) ? OK : ERROR;
++}
++
++COMMAND_BODY(ToDiagonal)
++// ----------------------------------------------------------------------------
++//   Build a diagonal matrix from a vector
++// ----------------------------------------------------------------------------
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  n     = 0;
++    if (!input)
++        return ERROR;
++    if (input->type() != ID_array)
++    {
++        rt.type_error();
++        return ERROR;
++    }
++    if (!input->is_vector(&n, false) || !n || n > 32)
++    {
++        rt.dimension_error();
++        return ERROR;
++    }
++    numeric_matrix result(n, n);
++    if (!result.valid())
++    {
++        rt.out_of_memory_error();
++        return ERROR;
++    }
++    if (!result.identity())
++        return ERROR;
++    size_t i = 0;
++    for (object_p item : *input)
++    {
++        algebraic_g value = item->as_algebraic();
++        if (!value)
++        {
++            rt.type_error();
++            return ERROR;
++        }
++        result.at(i, i) = value;
++        ++i;
++    }
++    array_g packed = result.pack();
++    return packed && rt.top(packed) ? OK : ERROR;
++}
++
++COMMAND_BODY(FromDiagonal)
++// ----------------------------------------------------------------------------
++//   Extract the main diagonal of a matrix
++// ----------------------------------------------------------------------------
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return ERROR;
++    size_t   n = rows < cols ? rows : cols;
++    scribble output;
++    size_t   r = 0;
++    for (object_p row : *input)
++    {
++        if (r >= n)
++            break;
++        list_g   line  = list_p(row);
++        object_g value = line->at(r++);
++        if (!output.append(value))
++            return ERROR;
++    }
++    array_g packed =
++        array_p(list::make(ID_array, output.scratch(), output.growth()));
++    return packed && rt.top(packed) ? OK : ERROR;
++}
++
++namespace
++{
++bool matrix_svd(numeric_matrix &b, numeric_matrix &v, algebraic_g *sigma)
++{
++    if (!v.identity())
++        return false;
++    algebraic_g zero = integer::make(0), one = integer::make(1),
++                two       = integer::make(2);
++    algebraic_g tolerance = decimal::make(1, -int(Settings.Precision() - 3));
++    bool        converged = false;
++    for (size_t sweep = 0; sweep < 128; ++sweep)
++    {
++        bool changed = false;
++        for (size_t p = 0; p < b.cols; ++p)
++        {
++            for (size_t q = p + 1; q < b.cols; ++q)
++            {
++                if (program::interrupted())
++                    return false;
++                algebraic_g alpha = zero, beta = zero, gamma = zero;
++                for (size_t i = 0; i < b.rows; ++i)
++                {
++                    alpha = alpha + b.at(i, p) * b.at(i, p);
++                    beta  = beta + b.at(i, q) * b.at(i, q);
++                    gamma = gamma + b.at(i, p) * b.at(i, q);
++                }
++                if (!alpha || !beta || !gamma)
++                    return false;
++                if (alpha->is_zero(false) || beta->is_zero(false))
++                    continue;
++                algebraic_g limit    = tolerance * sqrt::run(alpha * beta);
++                algebraic_g residual = abs::run(gamma) - limit;
++                if (!residual)
++                    return false;
++                if (residual->is_negative(false) || residual->is_zero(false))
++                    continue;
++                changed         = true;
++                algebraic_g tau = (beta - alpha) / (two * gamma);
++                algebraic_g t =
++                    one / (abs::run(tau) + sqrt::run(one + tau * tau));
++                if (!tau || !t)
++                    return false;
++                if (tau->is_negative(false))
++                    t = -t;
++                algebraic_g c = one / sqrt::run(one + t * t), s = c * t;
++                if (!c || !s)
++                    return false;
++                for (size_t i = 0; i < b.rows; ++i)
++                {
++                    algebraic_g x = b.at(i, p), y = b.at(i, q);
++                    b.at(i, p) = c * x - s * y;
++                    b.at(i, q) = s * x + c * y;
++                    if (!b.at(i, p) || !b.at(i, q))
++                        return false;
++                }
++                for (size_t i = 0; i < v.rows; ++i)
++                {
++                    algebraic_g x = v.at(i, p), y = v.at(i, q);
++                    v.at(i, p) = c * x - s * y;
++                    v.at(i, q) = s * x + c * y;
++                    if (!v.at(i, p) || !v.at(i, q))
++                        return false;
++                }
++            }
++        }
++        if (!changed)
++        {
++            converged = true;
++            break;
++        }
++    }
++    if (!converged)
++    {
++        rt.domain_error();
++        return false;
++    }
++    for (size_t j = 0; j < b.cols; ++j)
++    {
++        algebraic_g square = zero;
++        for (size_t i = 0; i < b.rows; ++i)
++            square = square + b.at(i, j) * b.at(i, j);
++        if (!(sigma[j] = sqrt::run(square)))
++            return false;
++    }
++    for (size_t p = 0; p < b.cols; ++p)
++    {
++        for (size_t q = p + 1; q < b.cols; ++q)
++        {
++            algebraic_g difference = sigma[q] - sigma[p];
++            if (!difference)
++                return false;
++            if (difference->is_negative(false) || difference->is_zero(false))
++                continue;
++            algebraic_g temporary = sigma[p];
++            sigma[p]              = sigma[q];
++            sigma[q]              = temporary;
++            for (size_t i = 0; i < b.rows; ++i)
++            {
++                temporary  = b.at(i, p);
++                b.at(i, p) = b.at(i, q);
++                b.at(i, q) = temporary;
++            }
++            for (size_t i = 0; i < v.rows; ++i)
++            {
++                temporary  = v.at(i, p);
++                v.at(i, p) = v.at(i, q);
++                v.at(i, q) = temporary;
++            }
++        }
++    }
++    // Normalize nonzero columns; complete the left basis at null singular
++    // values.
++    for (size_t j = 0; j < b.cols; ++j)
++    {
++        if (!sigma[j]->is_zero(false))
++        {
++            for (size_t i = 0; i < b.rows; ++i)
++                if (!(b.at(i, j) = b.at(i, j) / sigma[j]))
++                    return false;
++            continue;
++        }
++        bool found = false;
++        for (size_t axis = 0; axis < b.rows && !found; ++axis)
++        {
++            for (size_t i = 0; i < b.rows; ++i)
++                b.at(i, j) = i == axis ? one : zero;
++            for (size_t k = 0; k < j; ++k)
++            {
++                algebraic_g dot = zero;
++                for (size_t i = 0; i < b.rows; ++i)
++                    dot = dot + b.at(i, k) * b.at(i, j);
++                for (size_t i = 0; i < b.rows; ++i)
++                    b.at(i, j) = b.at(i, j) - dot * b.at(i, k);
++            }
++            algebraic_g square = zero;
++            for (size_t i = 0; i < b.rows; ++i)
++                square = square + b.at(i, j) * b.at(i, j);
++            algebraic_g residual = square - tolerance;
++            if (!residual)
++                return false;
++            if (residual->is_negative(false) || residual->is_zero(false))
++                continue;
++            algebraic_g length = sqrt::run(square);
++            for (size_t i = 0; i < b.rows; ++i)
++                b.at(i, j) = b.at(i, j) / length;
++            found = true;
++        }
++        if (!found)
++        {
++            rt.domain_error();
++            return false;
++        }
++    }
++    return true;
++}
++
++object_p singular_item(size_t, size_t, size_t row, size_t, void *data)
++{
++    return static_cast<algebraic_g *>(data)[row];
++}
++
++object::result matrix_svd_command(int mode)
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return object::ERROR;
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    uint                                digits = Settings.Precision();
++    if (digits > DB48X_MAXDIGITS - 8)
++    {
++        rt.precision_loss_error();
++        return object::ERROR;
++    }
++    settings::SavePrecision precision(digits + 8 < 12 ? 12 : digits + 8);
++    bool                    transposed = rows < cols;
++    if (transposed)
++    {
++        input = input->transpose();
++        if (!input)
++            return object::ERROR;
++        size_t temporary = rows;
++        rows             = cols;
++        cols             = temporary;
++    }
++    numeric_matrix            b(rows, cols), v(cols, cols);
++    scoped_array<algebraic_g> sigma(cols);
++    if (!b.valid() || !v.valid() || !sigma)
++    {
++        rt.out_of_memory_error();
++        return object::ERROR;
++    }
++    if (!b.load(input) || !matrix_svd(b, v, sigma.get()))
++        return object::ERROR;
++    if (mode == 2)
++    {
++        if (sigma[cols - 1]->is_zero(false))
++        {
++            rt.zero_divide_error();
++            return object::ERROR;
++        }
++        algebraic_g condition = sigma[0] / sigma[cols - 1];
++        condition             = matrix_round(condition, digits);
++        return condition && rt.top(condition) ? object::OK : object::ERROR;
++    }
++    for (size_t i = 0; i < cols; ++i)
++        if (!(sigma[i] = matrix_round(sigma[i], digits)))
++            return object::ERROR;
++    array_g singular = array::build(cols, 0, singular_item, sigma.get());
++    if (!singular)
++        return object::ERROR;
++    if (mode == 1)
++        return rt.top(singular) ? object::OK : object::ERROR;
++    array_g u = b.pack(digits), right = v.pack(digits);
++    if (transposed)
++    {
++        array_g temporary = u;
++        u                 = right;
++        right             = temporary;
++    }
++    if (!u || !right || !rt.push(+singular))
++        return object::ERROR;
++    if (!rt.push(+right))
++    {
++        rt.drop();
++        return object::ERROR;
++    }
++    return rt.stack(2, u) ? object::OK : object::ERROR;
++}
++} // namespace
++
++COMMAND_BODY(SVD)
++// ----------------------------------------------------------------------------
++//   Thin singular value decomposition: U singular-values V, A=U diag(s) V^T
++// ----------------------------------------------------------------------------
++{
++    return matrix_svd_command(0);
++}
++
++COMMAND_BODY(SVL)
++// ----------------------------------------------------------------------------
++//   Descending singular values of a real matrix
++// ----------------------------------------------------------------------------
++{
++    return matrix_svd_command(1);
++}
++
++COMMAND_BODY(CondNum)
++// ----------------------------------------------------------------------------
++//   Spectral condition number: largest divided by smallest singular value
++// ----------------------------------------------------------------------------
++{
++    return matrix_svd_command(2);
++}
++
++namespace
++{
++bool matrix_small(algebraic_r value, algebraic_r scale, algebraic_r tolerance)
++{
++    algebraic_g delta = abs::run(value) - tolerance * scale;
++    return delta && (delta->is_negative(false) || delta->is_zero(false));
++}
++
++bool matrix_schur(numeric_matrix &t, numeric_matrix &z)
++{
++    if (!z.identity())
++        return false;
++    const size_t n    = t.rows;
++    algebraic_g  zero = integer::make(0), one = integer::make(1),
++                two = integer::make(2), four = integer::make(4);
++    algebraic_g tolerance = decimal::make(1, -int(Settings.Precision() - 4));
++    algebraic_g scale     = zero;
++    for (size_t i = 0; i < n; ++i)
++        for (size_t j = 0; j < n; ++j)
++            scale = scale + abs::run(t.at(i, j));
++    if (!scale)
++        return false;
++    if (scale->is_zero(false))
++        return true;
++    size_t active = n;
++    for (size_t iteration = 0; active > 1 && iteration < 2000; ++iteration)
++    {
++        if (program::interrupted())
++            return false;
++        bool last = true;
++        for (size_t j = 0; j + 1 < active; ++j)
++            last = last && matrix_small(t.at(active - 1, j), scale, tolerance);
++        if (last)
++        {
++            for (size_t j = 0; j + 1 < active; ++j)
++                t.at(active - 1, j) = zero;
++            --active;
++            continue;
++        }
++        bool pair = true;
++        for (size_t i = active - 2; i < active; ++i)
++            for (size_t j = 0; j + 2 < active; ++j)
++                pair = pair && matrix_small(t.at(i, j), scale, tolerance);
++        if (pair)
++        {
++            algebraic_g a            = t.at(active - 2, active - 2),
++                        b            = t.at(active - 2, active - 1);
++            algebraic_g c            = t.at(active - 1, active - 2),
++                        d            = t.at(active - 1, active - 1);
++            algebraic_g discriminant = (a - d) * (a - d) + four * b * c;
++            if (!discriminant)
++                return false;
++            // Real eigenvalues must reduce to triangular one-by-one blocks.
++            if (discriminant->is_negative(false))
++            {
++                for (size_t i = active - 2; i < active; ++i)
++                    for (size_t j = 0; j + 2 < active; ++j)
++                        t.at(i, j) = zero;
++                active -= 2;
++                continue;
++            }
++        }
++        numeric_matrix r(active, active), q(active, active), work(n, n);
++        if (!r.valid() || !q.valid() || !work.valid())
++        {
++            rt.out_of_memory_error();
++            return false;
++        }
++        algebraic_g a            = t.at(active - 2, active - 2),
++                    b            = t.at(active - 2, active - 1);
++        algebraic_g c            = t.at(active - 1, active - 2),
++                    d            = t.at(active - 1, active - 1);
++        algebraic_g discriminant = (a - d) * (a - d) + four * b * c,
++                    shift        = (a + d) / two;
++        if (!discriminant || !shift)
++            return false;
++        if (!discriminant->is_negative(false))
++        {
++            algebraic_g root = sqrt::run(discriminant) / two;
++            algebraic_g left = shift - root, right = shift + root;
++            algebraic_g difference = abs::run(left - d) - abs::run(right - d);
++            if (!difference)
++                return false;
++            shift = difference->is_negative(false) ? left : right;
++        }
++        for (size_t i = 0; i < active; ++i)
++            for (size_t j = 0; j < active; ++j)
++                r.at(i, j) = i == j ? t.at(i, j) - shift : t.at(i, j);
++        if (!matrix_qr(r, q))
++            return false;
++        // T <- Q^T T Q, including its coupling to already deflated blocks.
++        for (size_t i = 0; i < n; ++i)
++        {
++            for (size_t j = 0; j < n; ++j)
++            {
++                algebraic_g value = zero;
++                if (j >= active)
++                    value = t.at(i, j);
++                else
++                    for (size_t k = 0; k < active; ++k)
++                        value = value + t.at(i, k) * q.at(k, j);
++                if (!(work.at(i, j) = value))
++                    return false;
++            }
++        }
++        for (size_t i = 0; i < n; ++i)
++        {
++            for (size_t j = 0; j < n; ++j)
++            {
++                algebraic_g value = zero;
++                if (i >= active)
++                    value = work.at(i, j);
++                else
++                    for (size_t k = 0; k < active; ++k)
++                        value = value + q.at(k, i) * work.at(k, j);
++                if (!(t.at(i, j) = value))
++                    return false;
++            }
++        }
++        for (size_t i = 0; i < n; ++i)
++        {
++            for (size_t j = 0; j < n; ++j)
++            {
++                algebraic_g value = zero;
++                if (j >= active)
++                    value = z.at(i, j);
++                else
++                    for (size_t k = 0; k < active; ++k)
++                        value = value + z.at(i, k) * q.at(k, j);
++                if (!(work.at(i, j) = value))
++                    return false;
++            }
++        }
++        for (size_t i = 0; i < n; ++i)
++            for (size_t j = 0; j < n; ++j)
++                z.at(i, j) = work.at(i, j);
++    }
++    if (active > 1)
++    {
++        rt.domain_error();
++        return false;
++    }
++    return true;
++}
++
++object::result matrix_schur_command(bool radius)
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return object::ERROR;
++    if (rows != cols)
++    {
++        rt.dimension_error();
++        return object::ERROR;
++    }
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    uint                                digits = Settings.Precision();
++    if (digits > DB48X_MAXDIGITS - 8)
++    {
++        rt.precision_loss_error();
++        return object::ERROR;
++    }
++    settings::SavePrecision precision(digits + 8 < 12 ? 12 : digits + 8);
++    numeric_matrix          t(rows, cols), z(rows, cols);
++    if (!t.valid() || !z.valid())
++    {
++        rt.out_of_memory_error();
++        return object::ERROR;
++    }
++    if (!t.load(input) || !matrix_schur(t, z))
++        return object::ERROR;
++    if (!radius)
++    {
++        array_g q = z.pack(digits), triangular = t.pack(digits);
++        return q && triangular && rt.push(+triangular) && rt.stack(1, q)
++                 ? object::OK
++                 : object::ERROR;
++    }
++    algebraic_g result = integer::make(0), two = integer::make(2),
++                four = integer::make(4);
++    for (size_t i = 0; i < rows; ++i)
++    {
++        algebraic_g candidate = abs::run(t.at(i, i));
++        if (i + 1 < rows && !t.at(i + 1, i)->is_zero(false))
++        {
++            algebraic_g a = t.at(i, i), b = t.at(i, i + 1), c = t.at(i + 1, i),
++                        d    = t.at(i + 1, i + 1);
++            algebraic_g disc = (a - d) * (a - d) + four * b * c;
++            if (!disc)
++                return object::ERROR;
++            if (disc->is_negative(false))
++            {
++                candidate = sqrt::run(abs::run(a * d - b * c));
++            }
++            else
++            {
++                algebraic_g root  = sqrt::run(disc),
++                            x     = abs::run((a + d + root) / two),
++                            y     = abs::run((a + d - root) / two);
++                algebraic_g delta = x - y;
++                if (!delta)
++                    return object::ERROR;
++                candidate = delta->is_negative(false) ? y : x;
++            }
++            ++i;
++        }
++        algebraic_g delta = candidate - result;
++        if (!delta)
++            return object::ERROR;
++        if (!delta->is_negative(false))
++            result = candidate;
++    }
++    result = matrix_round(result, digits);
++    return result && rt.top(result) ? object::OK : object::ERROR;
++}
++} // namespace
++
++COMMAND_BODY(Schur)
++// ----------------------------------------------------------------------------
++//   Real Schur form Q T, allowing real two-by-two blocks for complex pairs
++// ----------------------------------------------------------------------------
++{
++    return matrix_schur_command(false);
++}
++
++COMMAND_BODY(SpecRad)
++// ----------------------------------------------------------------------------
++//   Largest eigenvalue magnitude of a real square matrix
++// ----------------------------------------------------------------------------
++{
++    return matrix_schur_command(true);
++}
++
++
++namespace
++{
++struct modular_matrix
++{
++    uint32_t       *data;
++    size_t          columns;
++    static object_p item(size_t, size_t, size_t r, size_t c, void *opaque)
++    {
++        auto &matrix = *static_cast<modular_matrix *>(opaque);
++        return integer::make(matrix.data[r * matrix.columns + c]);
++    }
++};
++} // namespace
++
++static object::result modular_echelon()
++// ----------------------------------------------------------------------------
++//   Exact Gauss-Jordan elimination over the prime field selected by CASModulus
++// ----------------------------------------------------------------------------
++{
++    array_g input = array_p(rt.stack(0));
++    size_t  rows = 0, cols = 0;
++    if (!matrix_shape(input, rows, cols))
++        return object::ERROR;
++    uint32_t modulus = Settings.CASModulus();
++    for (uint32_t divisor = 2; uint64_t(divisor) * divisor <= modulus;
++         ++divisor)
++    {
++        if (program::interrupted())
++            return object::ERROR;
++        if (modulus % divisor == 0)
++        {
++            rt.domain_error();
++            return object::ERROR;
++        }
++    }
++    scoped_array<uint32_t> data(rows * cols);
++    if (!data)
++    {
++        rt.out_of_memory_error();
++        return object::ERROR;
++    }
++    size_t      r = 0;
++    algebraic_g m = integer::make(modulus);
++    for (object_p row : *input)
++    {
++        list_g line = list_p(row);
++        size_t c    = 0;
++        for (object_p item : *line)
++        {
++            algebraic_g value = item->as_algebraic();
++            if (!value || !value->is_integer())
++            {
++                rt.type_error();
++                return object::ERROR;
++            }
++            value = mod::evaluate(value, m);
++            if (!value)
++                return object::ERROR;
++            data[r * cols + c++] = value->as_uint32(0, true);
++        }
++        ++r;
++    }
++    size_t pivot_row = 0, end = cols;
++    if (Settings.EchelonFormKeepLastColumn() && end)
++        --end;
++    for (size_t col = 0; col < end && pivot_row < rows; ++col)
++    {
++        if (program::interrupted())
++            return object::ERROR;
++        size_t pivot = pivot_row;
++        while (pivot < rows && !data[pivot * cols + col])
++            ++pivot;
++        if (pivot == rows)
++            continue;
++        for (size_t j = 0; j < cols; ++j)
++        {
++            uint32_t temporary         = data[pivot_row * cols + j];
++            data[pivot_row * cols + j] = data[pivot * cols + j];
++            data[pivot * cols + j]     = temporary;
++        }
++        uint64_t inverse = 1, power = data[pivot_row * cols + col];
++        for (uint32_t exponent = modulus - 2; exponent; exponent >>= 1)
++        {
++            if (exponent & 1)
++                inverse = inverse * power % modulus;
++            power = power * power % modulus;
++        }
++        for (size_t j = 0; j < cols; ++j)
++        {
++            data[pivot_row * cols + j] =
++                uint64_t(data[pivot_row * cols + j]) * inverse % modulus;
++        }
++        for (size_t i = 0; i < rows; ++i)
++        {
++            if (i == pivot_row)
++                continue;
++            uint64_t factor = data[i * cols + col];
++            for (size_t j = 0; j < cols; ++j)
++            {
++                data[i * cols + j] =
++                    (data[i * cols + j] + modulus -
++                     factor * data[pivot_row * cols + j] % modulus) %
++                    modulus;
++            }
++        }
++        ++pivot_row;
++    }
++    modular_matrix context{ data.get(), cols };
++    array_g result = array::build(rows, cols, modular_matrix::item, &context);
++    return result && rt.top(result) ? object::OK : object::ERROR;
++}
 diff --git a/src/array.cc b/src/array.cc
-index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497161ca7a1 100644
+index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..1fcb3d61f0f3940cb9edb26956bfdcbae94a32a1 100644
 --- a/src/array.cc
 +++ b/src/array.cc
-@@ -27,6 +27,7 @@
+@@ -27,10 +27,12 @@
  //   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  // ****************************************************************************
 
@@ -53,7 +1695,12 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
  #include "array.h"
 
  #include "arithmetic.h"
-@@ -1033,7 +1034,13 @@ echelon_result array::row_echelon(array_r m, echelon_options opt)
+ #include "compare.h"
++#include "complex.h"
+ #include "expression.h"
+ #include "functions.h"
+ #include "grob.h"
+@@ -1033,7 +1035,13 @@ echelon_result array::row_echelon(array_r m, echelon_options opt)
          return result;
      }
 
@@ -68,7 +1715,23 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
      for (size_t i = 0; i < rows; i++)
          pivot_col[i] = SIZE_MAX;
 
-@@ -1334,7 +1341,13 @@ lu_result array::lu_factorization(array_r m)
+@@ -1201,12 +1209,14 @@ COMMAND_BODY(RREFP)
+ }
+
+
++static object::result modular_echelon();
++
+ COMMAND_BODY(RREFMOD)
+ // ----------------------------------------------------------------------------
+ //   Modular row-reduced echelon form
+ // ----------------------------------------------------------------------------
+ {
+-    return array::echelon_command(echelon_mode::RREFMOD);
++    return modular_echelon();
+ }
+
+
+@@ -1334,7 +1344,13 @@ lu_result array::lu_factorization(array_r m)
          return result;
      }
 
@@ -83,7 +1746,7 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
      for (size_t i = 0; i < n; i++)
          row_perm[i] = i;
 
-@@ -1434,13 +1447,13 @@ lu_result array::lu_factorization(array_r m)
+@@ -1434,13 +1450,13 @@ lu_result array::lu_factorization(array_r m)
          }
      }
 
@@ -100,6 +1763,184 @@ index faf4a9cbcf5d69ec1a72d0b21cddd66eda7195a5..83d2faa28dd1cd232d81360dba0c2497
      if (!result.P)
          goto err;
 
+@@ -3666,3 +3682,154 @@ array_p operator/(array_r x, array_r y)
+         return nullptr;
+     return array::mul(yi, x);
+ }
++
++
++static object_p fourier_item(size_t, size_t, size_t row, size_t, void *data)
++// ----------------------------------------------------------------------------
++//   Read a rooted Fourier coefficient while building the output vector
++// ----------------------------------------------------------------------------
++{
++    return static_cast<complex_g *>(data)[row];
++}
++
++static object::result fourier_transform(bool inverse)
++// ----------------------------------------------------------------------------
++//   Decimal radix-two transform; forward is unscaled, inverse divides by N
++// ----------------------------------------------------------------------------
++{
++    array_g input = array_p(rt.stack(0));
++    if (!input)
++        return object::ERROR;
++    if (input->type() != object::ID_array)
++    {
++        rt.type_error();
++        return object::ERROR;
++    }
++    size_t n = 0;
++    if (!input->is_vector(&n, false) || !n || (n & (n - 1)))
++    {
++        rt.dimension_error();
++        return object::ERROR;
++    }
++    // Bound scratch memory independently of the available object arena.
++    if (n > 1024)
++    {
++        rt.dimension_error();
++        return object::ERROR;
++    }
++    scoped_array<complex_g> values(n);
++    if (!values)
++    {
++        rt.out_of_memory_error();
++        return object::ERROR;
++    }
++    uint                                digits = Settings.Precision();
++    if(digits+24>DB48X_MAXDIGITS)
++    {
++        rt.precision_loss_error();
++        return object::ERROR;
++    }
++    settings::SavePrecision             precision(digits + 12);
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    settings::SaveAngleMode             radians(object::ID_Rad);
++    size_t                              index = 0;
++    for (object_p item : *input)
++    {
++        algebraic_g value = item->as_algebraic();
++        if (!value || !(values[index] = complex::from_algebraic(value)))
++        {
++            rt.type_error();
++            return object::ERROR;
++        }
++        ++index;
++    }
++    for (size_t i = 1, j = 0; i < n; ++i)
++    {
++        size_t bit = n >> 1;
++        while (j & bit)
++        {
++            j ^= bit;
++            bit >>= 1;
++        }
++        j ^= bit;
++        if (i < j)
++        {
++            complex_g temporary = values[i];
++            values[i]           = values[j];
++            values[j]           = temporary;
++        }
++    }
++    for (size_t width = 2; width <= n; width <<= 1)
++    {
++        for (size_t k = 0; k < width / 2; ++k)
++        {
++            if (program::interrupted())
++                return object::ERROR;
++            // Calculate each twiddle directly, avoiding accumulated phase
++            // error.
++            decimal_g angle = decimal::make(inverse ? 2 : -2);
++            angle           = angle * decimal_g(decimal::make(k)) /
++                    decimal_g(decimal::make(width));
++            complex_g twiddle;
++            {
++                settings::SaveAngleMode pi_radians(object::ID_PiRadians);
++                decimal_g               real = decimal::cos(angle),
++                          imag               = decimal::sin(angle);
++                twiddle =
++                    rectangular::make(algebraic_g(+real), algebraic_g(+imag));
++            }
++            if (!twiddle)
++                return object::ERROR;
++            for (size_t base = 0; base < n; base += width)
++            {
++                size_t    left = base + k, right = left + width / 2;
++                complex_g a = values[left], b = values[right] * twiddle;
++                values[left]  = a + b;
++                values[right] = a - b;
++                if (!values[left] || !values[right])
++                    return object::ERROR;
++            }
++        }
++    }
++    if (inverse)
++    {
++        complex_g divisor = complex::make(n);
++        for (size_t i = 0; i < n; ++i)
++        {
++            values[i] = values[i] / divisor;
++            if (!values[i])
++                return object::ERROR;
++        }
++    }
++    for (size_t i = 0; i < n; ++i)
++    {
++        algebraic_g real = values[i]->re(), imag = values[i]->im();
++        if (!algebraic::to_decimal(real) || !algebraic::to_decimal(imag))
++            return object::ERROR;
++        real = decimal_p(+real)->precision(digits);
++        imag = decimal_p(+imag)->precision(digits);
++        if (!(values[i] = rectangular::make(real, imag)))
++            return object::ERROR;
++    }
++    array_g result = array::build(n, 0, fourier_item, values.get());
++    return result && rt.top(result) ? object::OK : object::ERROR;
++}
++
++COMMAND_BODY(FFT)
++// ----------------------------------------------------------------------------
++//   Transform a real or complex vector to frequency coefficients
++// ----------------------------------------------------------------------------
++{
++    return fourier_transform(false);
++}
++
++COMMAND_BODY(InvFFT)
++// ----------------------------------------------------------------------------
++//   Transform frequency coefficients back to samples
++// ----------------------------------------------------------------------------
++{
++    return fourier_transform(true);
++}
++
++#include "array-extended.inc"
+diff --git a/src/array.h b/src/array.h
+index 80b086b3706e24ac514ecccea5ec426e3b4d2206..94fabb91ece617318a90f4f6a94cf9b3866e3ad1 100644
+--- a/src/array.h
++++ b/src/array.h
+@@ -181,6 +181,18 @@ array_p operator-(array_r x, array_r y);
+ array_p operator*(array_r x, array_r y);
+ array_p operator/(array_r x, array_r y);
+
++COMMAND_DECLARE(MatrixQR, 1);
++COMMAND_DECLARE(LQ, 1);
++COMMAND_DECLARE(Cholesky, 1);
++COMMAND_DECLARE(ToDiagonal, 1);
++COMMAND_DECLARE(FromDiagonal, 1);
++COMMAND_DECLARE(SVD, 1);
++COMMAND_DECLARE(SVL, 1);
++COMMAND_DECLARE(CondNum, 1);
++COMMAND_DECLARE(Schur, 1);
++COMMAND_DECLARE(SpecRad, 1);
++COMMAND_DECLARE_FN(FFT, 1);
++COMMAND_DECLARE_FN(InvFFT, 1);
+ FUNCTION_MAT(det);
+ COMMAND_DECLARE_SPECIAL(dot,   algebraic, 2, PREC_DECL(MULTIPLICATIVE); );
+ COMMAND_DECLARE_SPECIAL(cross, algebraic, 2, PREC_DECL(MULTIPLICATIVE); );
 diff --git a/src/blitter.h b/src/blitter.h
 index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482ee5de8078 100644
 --- a/src/blitter.h
@@ -385,6 +2226,474 @@ index 4de658f2598388d72fdc2e93391d81cea811b076..ddba546fca4c3d8dc98b665ecd73482e
  #undef CONVERT
 
 
+diff --git a/src/command.cc b/src/command.cc
+index 68d83396b9029be8a9f9603a8bd815b9b5834816..81f7459f3d183e277525fb1b51b800a8246e25c4 100644
+--- a/src/command.cc
++++ b/src/command.cc
+@@ -74,6 +74,7 @@ static inline bool at_end(utf8 name, size_t max, utf8 cmd, size_t len, bool eq)
+ // ----------------------------------------------------------------------------
+ {
+     return len >= max
++        || (len == 1 && *cmd == '?')
+         || (eq && (!is_valid_as_name_initial(cmd) ||
+                    ((name[len] < '0' || name[len] > '9') &&
+                     !is_valid_in_function_name(name + len))))
+@@ -81,6 +82,23 @@ static inline bool at_end(utf8 name, size_t max, utf8 cmd, size_t len, bool eq)
+ }
+
+
++static bool calculator_name_is_symbol(object::id type,
++                                      utf8       name,
++                                      size_t     length,
++                                      size_t     available,
++                                      bool       equation)
++// ----------------------------------------------------------------------------
++//   New named functions require parentheses inside existing algebraic formulas
++// ----------------------------------------------------------------------------
++{
++    if (!equation || type < object::ID_FFT || type > object::ID_Find)
++        return false;
++    while (length < available && isspace(name[length]))
++        ++length;
++    return length == available || name[length] != '(';
++}
++
++
+ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
+ // ----------------------------------------------------------------------------
+ //   Lookup a command and return its ID
+@@ -113,7 +131,7 @@ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
+
+         // Compute the maximum possible size for the command
+         size_t max = maxlen;
+-        if (is_valid_as_name_initial(name) ||
++        if ((is_valid_as_name_initial(name) && *name != '?') ||
+             (!eq && utf8_codepoint(name) == U'↑')) // e.g. ↑Match
+         {
+             for (max = utf8_size(name, max);
+@@ -166,7 +184,8 @@ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
+                         {
+                             if (at_end(name, max, cmd, len, eq))
+                             {
+-                                if (uskip || xsq)
++                                if (uskip || xsq || calculator_name_is_symbol(
++                                        type,name,len,maxlen,eq))
+                                     return id(0);
+                                 maxlen = len;
+                                 return type;
+@@ -218,6 +237,7 @@ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
+                 && strncasecmp(cstring(name), cstring(cmd), len) == 0
+                 && at_end(name, maxlen, cmd, len, eq))
+             {
++                if(calculator_name_is_symbol(type,name,len,maxlen,eq))continue;
+                 found = type;
+                 break;
+             }
+diff --git a/src/complex.cc b/src/complex.cc
+index 09fb12f0825cd0c9115f0f7edbd9e3943a315f70..2181d70da1de1bf1f0c33536320616452d11282b 100644
+--- a/src/complex.cc
++++ b/src/complex.cc
+@@ -33,6 +33,8 @@
+ #include "arithmetic.h"
+ #include "array.h"
+ #include "compare.h"
++#include "decimal.h"
++#include "program.h"
+ #include "expression.h"
+ #include "fraction.h"
+ #include "functions.h"
+@@ -1816,38 +1818,272 @@ COMPLEX_BODY(exp2)
+ }
+
+
++static complex_p complex_error_function(complex_r argument, bool complement)
++// ----------------------------------------------------------------------------
++//   DLMF 7.6.1 power series and 7.12.1 large-argument expansion
++// ----------------------------------------------------------------------------
++{
++    if (!argument)
++        return nullptr;
++    uint                                digits = Settings.Precision();
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    settings::SaveAngleMode             radians(object::ID_Rad);
++    algebraic_g real = argument->re(), imag = argument->im();
++    if (!real || !imag || !algebraic::to_decimal(real) ||
++        !algebraic::to_decimal(imag))
++    {
++        return nullptr;
++    }
++    if (imag->is_zero(false))
++    {
++        decimal_g value = complement
++                            ? decimal::erfc(decimal_g(decimal_p(+real)))
++                            : decimal::erf(decimal_g(decimal_p(+real)));
++        return value ? rectangular::make(algebraic_g(+value), imag) : nullptr;
++    }
++    algebraic_g magnitude = real * real + imag * imag;
++    if (!magnitude)
++        return nullptr;
++    uint square     = magnitude->as_uint32(1000000, false);
++    bool asymptotic = square > 4 * digits + 256;
++    uint guard      = asymptotic ? 24 : 2 * square + 24;
++    if (digits + guard > DB48X_MAXDIGITS)
++    {
++        rt.precision_loss_error();
++        return nullptr;
++    }
++    settings::SavePrecision precision(digits + guard);
++    complex_g z = rectangular::make(real, imag), one = complex::make(1),
++              two  = complex::make(2);
++    bool reflected = real->is_negative(false);
++    if (reflected)
++        z = -z;
++    complex_g   zsquare = z * z, term = one, sum = one, result;
++    algebraic_g epsilon   = decimal::make(1, -int(digits + guard - 6));
++    bool        converged = false;
++    if (asymptotic)
++    {
++        // Reflect to Re(z)>=0, keeping the expansion inside its sector.
++        for (uint n = 1; n < 4 * (digits + guard) + 256; ++n)
++        {
++            if (program::interrupted())
++                return nullptr;
++            term = term * complex_g(complex::make(1 - 2 * int(n))) /
++                   (two * zsquare);
++            if (!term)
++                return nullptr;
++            sum                  = sum + term;
++            algebraic_g residual = abs::run(algebraic_g(+term)) -
++                                   epsilon * abs::run(algebraic_g(+sum));
++            if (!residual)
++                return nullptr;
++            if (residual->is_negative(false))
++            {
++                converged = true;
++                break;
++            }
++        }
++        complex_g rootpi = complex::from_algebraic(
++            algebraic_g(decimal::sqrt(decimal_g(decimal::pi()))));
++        result = complex::exp(-zsquare) * sum / (rootpi * z);
++        if (reflected)
++            result = two - result;
++        if (!complement)
++            result = one - result;
++    }
++    else
++    {
++        term = z;
++        sum  = z;
++        for (uint n = 1; n < 4 * (digits + guard) + 256; ++n)
++        {
++            if (program::interrupted())
++                return nullptr;
++            term = -term * zsquare / complex_g(complex::make(n));
++            complex_g contribution = term / complex_g(complex::make(2 * n + 1));
++            if (!term || !contribution)
++                return nullptr;
++            sum = sum + contribution;
++            algebraic_g residual =
++                abs::run(algebraic_g(+contribution)) - epsilon;
++            if (!residual)
++                return nullptr;
++            if (n > square && residual->is_negative(false))
++            {
++                converged = true;
++                break;
++            }
++        }
++        complex_g rootpi = complex::from_algebraic(
++            algebraic_g(decimal::sqrt(decimal_g(decimal::pi()))));
++        result = two * sum / rootpi;
++        if (reflected)
++            result = -result;
++        if (complement)
++            result = one - result;
++    }
++    if (!converged)
++    {
++        rt.precision_loss_error();
++        return nullptr;
++    }
++    if (!result)
++        return nullptr;
++    real = result->re();
++    imag = result->im();
++    if (!algebraic::to_decimal(real) || !algebraic::to_decimal(imag))
++        return nullptr;
++    real = decimal_p(+real)->precision(digits);
++    imag = decimal_p(+imag)->precision(digits);
++    if (argument->re()->is_zero(false))
++        real = decimal::make(complement ? 1 : 0);
++    return rectangular::make(real, imag);
++}
++
+ COMPLEX_BODY(erf)
+ // ----------------------------------------------------------------------------
+-//   Complex implementation of erf
++//   Complex error function
+ // ----------------------------------------------------------------------------
+ {
+-    rt.unimplemented_error();
+-    return z;
++    return complex_error_function(z, false);
+ }
+
+ COMPLEX_BODY(erfc)
+ // ----------------------------------------------------------------------------
+-//   Complex implementation of erfc
++//   Complex complementary error function
+ // ----------------------------------------------------------------------------
+ {
+-    rt.unimplemented_error();
+-    return z;
++    return complex_error_function(z, true);
+ }
+
+ COMPLEX_BODY(tgamma)
+ // ----------------------------------------------------------------------------
+-//   Complex implementation of tgamma
++//   Spouge approximation, with reflection into the right half-plane.
++//   Compute coefficients at guard precision: their alternating sum cancels.
++//   No coefficient array or persistent cache is needed on the PicoCalc.
+ // ----------------------------------------------------------------------------
+ {
+-    rt.unimplemented_error();
+-    return z;
++    if (!z)
++        return nullptr;
++    uint                                digits = Settings.Precision();
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    settings::SaveNumericalConstants    constants(true);
++    settings::SaveAngleMode             radians(ID_Rad);
++    // Spouge coefficients grow exponentially with a. Reserve a decimal
++    // guard digit per coefficient so cancellation remains harmless even
++    // when a large argument leaves a sum close to sqrt(2*pi).
++    uint                                a = (13 * (digits + 8) + 9) / 10;
++    if(digits+a+12>DB48X_MAXDIGITS-12)
++    {
++        rt.precision_loss_error();
++        return nullptr;
++    }
++    settings::SavePrecision             precision(digits + a + 12);
++    algebraic_g                         real = z->re(), imag = z->im();
++    if (!real || !imag || !algebraic::to_decimal(real) ||
++        !algebraic::to_decimal(imag))
++    {
++        return nullptr;
++    }
++    complex_g input = rectangular::make(real, imag), result;
++    if (!input)
++        return nullptr;
++    if (imag->is_zero(false))
++    {
++        // Also handles poles at zero and negative integers consistently with
++        // real Gamma, without losing the complex argument's representation.
++        decimal_g value = decimal::tgamma(decimal_p(+real));
++        return value ? rectangular::make(value->precision(digits), imag)
++                     : nullptr;
++    }
++    complex_g   one = complex::make(1), two = complex::make(2);
++    algebraic_g half  = decimal::make(5, -1);
++    algebraic_g delta = real - half;
++    if (!delta || !one || !two)
++        return nullptr;
++    if (delta->is_negative(false))
++    {
++        // Gamma(z) = pi / (sin(pi*z) Gamma(1-z)).  The recursive call is
++        // always in Re(z) > 1/2; both calls use radian transcendental
++        // functions.
++        complex_g pi = complex::from_algebraic(decimal::pi());
++        // Evaluate sin(pi*z) by components. Pi-radian reduction keeps
++        // sin(pi*n) exactly zero, and decimal sinh retains tiny imaginary
++        // offsets near a pole instead of cancelling exp(y)-exp(-y).
++        decimal_g sine, cosine;
++        {
++            settings::SaveAngleMode pi_radians(ID_PiRadians);
++            sine   = decimal::sin(decimal_g(decimal_p(+real)));
++            cosine = decimal::cos(decimal_g(decimal_p(+real)));
++        }
++        decimal_g y  = decimal_g(decimal::pi()) * decimal_g(decimal_p(+imag));
++        decimal_g sr = sine * decimal_g(decimal::cosh(y));
++        decimal_g si = cosine * decimal_g(decimal::sinh(y));
++        complex_g sinpi = rectangular::make(algebraic_g(+sr), algebraic_g(+si));
++        complex_g reflected = complex::tgamma(one - input);
++        result              = pi / (sinpi * reflected);
++    }
++    else
++    {
++        // Gamma(z) ~ (z+a-1)^(z-1/2) exp(-(z+a-1))
++        //             * (sqrt(2*pi) + sum c_k/(z+k-1)).
++        // a > 1.3*(digits+8) leaves margin beyond Spouge's error bound.
++        decimal_g factorial = decimal::make(1);
++        complex_g sum       = complex::from_algebraic(
++            algebraic_g(+decimal::constants().sqrt_2pi()));
++        complex_g denominator = input;
++        for (uint k = 1; k < a; ++k)
++        {
++            if (program::interrupted())
++                return nullptr;
++            decimal_g t     = decimal::make(a - k);
++            decimal_g power = t, scale = decimal::exp(t);
++            uint      exponent = k - 1;
++            while (exponent)
++            {
++                if (exponent & 1)
++                    scale = scale * power;
++                exponent >>= 1;
++                if (exponent)
++                    power = power * power;
++            }
++            decimal_g coefficient = decimal::sqrt(t) * scale / factorial;
++            complex_g term =
++                complex::from_algebraic(algebraic_g(+coefficient)) /
++                denominator;
++            sum         = k & 1 ? sum + term : sum - term;
++            denominator = denominator + one;
++            factorial   = factorial * decimal_g(decimal::make(k));
++            if (!sum || !denominator || !factorial)
++                return nullptr;
++        }
++        complex_g offset = complex::make(a - 1);
++        complex_g t      = input + offset;
++        result = complex::exp((input - one / two) * complex::ln(t) - t +
++                              complex::ln(sum));
++    }
++    if (!result)
++        return nullptr;
++    real = result->re();
++    imag = result->im();
++    if (!real || !imag || !algebraic::to_decimal(real) ||
++        !algebraic::to_decimal(imag))
++    {
++        return nullptr;
++    }
++    real = decimal_p(+real)->precision(digits);
++    imag = decimal_p(+imag)->precision(digits);
++    return rectangular::make(real, imag);
+ }
+
++
+ COMPLEX_BODY(lgamma)
+ // ----------------------------------------------------------------------------
+ //   Complex implementation of lgamma
+ // ----------------------------------------------------------------------------
+ {
+-    rt.unimplemented_error();
+-    return z;
++    complex_g value = complex::tgamma(z);
++    return value ? complex::ln(value) : nullptr;
+ }
+diff --git a/src/constants.cc b/src/constants.cc
+index 47db22eed5f530c3b025b2e73d7b809bb365c0ae..10f46d7b5dfd7fef4326c5101a319a8f6aa3c1d8 100644
+--- a/src/constants.cc
++++ b/src/constants.cc
+@@ -2972,7 +2972,8 @@ constant_p constant::do_lookup(config_r cfg, utf8 txt, size_t len, bool error)
+         if (builtins[b+1] && *builtins[b+1])
+         {
+             ctxt = utf8(builtins[b]);
+-            if (ctxt[len] == 0 && symbol::compare(ctxt, name, len) == 0)
++            if (strlen(cstring(ctxt)) == len &&
++                symbol::compare(ctxt, name, len) == 0)
+                 return constant::make(cfg.type, idx);
+             idx++;
+         }
+diff --git a/src/datetime.cc b/src/datetime.cc
+index cf0f3aa3fcf715705ed03e2624f5e06ca15e40af..09fb647efbffe82c05e7af29392d2282335a5cdb 100644
+--- a/src/datetime.cc
++++ b/src/datetime.cc
+@@ -35,6 +35,8 @@
+ #include "renderer.h"
+ #include "tag.h"
+ #include "unit.h"
++#include "variables.h"
++#include "user_interface.h"
+
+
+ // ============================================================================
+@@ -1006,3 +1008,5 @@ COMMAND_BODY(TimedEval)
+                         return OK;
+     return ERROR;
+ }
++
++#include "alarms.inc"
+diff --git a/src/datetime.h b/src/datetime.h
+index e0189e5073f695e8d1ed2cdcbed703294fbd846c..8cca7908837212f327fd26aaae84c2903688c936 100644
+--- a/src/datetime.h
++++ b/src/datetime.h
+@@ -99,4 +99,15 @@ COMMAND_DECLARE_FN(JulianDayNumber,1);// Return JDN for given date
+ COMMAND_DECLARE_FN(DateFromJulianDayNumber,1); // Date from JDN
+ COMMAND_DECLARE(InsertHms,-1);  // Insert _hms, optionnaly replacing _dms
+
++
++COMMAND_DECLARE(Alarms,0);
++COMMAND_DECLARE(StoAlarm,2);
++COMMAND_DECLARE(RclAlarm,1);
++COMMAND_DECLARE(DelAlarm,1);
++COMMAND_DECLARE(FindAlarm,1);
++COMMAND_DECLARE(Ack,0);
++COMMAND_DECLARE(AckAll,0);
++// Show and acknowledge a due reminder at an idle UI boundary.
++bool alarm_notify();
++
+ #endif // DATETIME_H
+diff --git a/src/decimal.cc b/src/decimal.cc
+index 174bb25317e62950677fa1ce0891675bd061b590..c4e555280a718a1574b309940506e1f7a12cbafb 100644
+--- a/src/decimal.cc
++++ b/src/decimal.cc
+@@ -33,6 +33,7 @@
+ #include "constants.h"
+ #include "fraction.h"
+ #include "parser.h"
++#include "program.h"
+ #include "renderer.h"
+ #include "runtime.h"
+ #include "settings.h"
+@@ -3838,13 +3839,23 @@ decimal_p decimal::fact(decimal_r x)
+         return tgamma(fp);
+     }
+
++    // Repeated multiplication accumulates rounding error. Bound it by
++    // the number of factors, then round once to the requested precision.
++    uint guard = 4;
++    for (large count = ip; count >= 10; count /= 10)
++        ++guard;
++    precision_adjust precision(guard, true);
+     decimal_g r = make(1);
+     for (large i = 2; i <= ip; i++)
+     {
++        if (program::interrupted())
++            return nullptr;
+         fp = make(i);
+         r = r * fp;
++        if (!r)
++            return nullptr;
+     }
+-    return r;
++    return precision(r);
+ }
+
+
+diff --git a/src/decimal.h b/src/decimal.h
+index b57b8011dff8e31ca83f8a091eaf21dd855da73a..094f947e76b238703f8becda86034f66925ca0ea 100644
+--- a/src/decimal.h
++++ b/src/decimal.h
+@@ -74,7 +74,12 @@ struct decimal : algebraic
+ // ----------------------------------------------------------------------------
+ {
+     // A number between 0 and 1000 fits in 16 bits
+-    using kint = uint16_t;
++    // Serialized decimal digits follow a variable-length header and can
++    // start at any byte address. Keep their two-byte storage size while
++    // telling the compiler that digit loads and stores may be unaligned.
++    typedef uint16_t kint __attribute__((aligned(1)));
++    static_assert(sizeof(kint)==2 && alignof(kint)==1,
++                  "Decimal digits require two-byte storage and byte alignment");
+
+     decimal(id type, size_t len, gcbytes bytes): algebraic(type)
+     // ------------------------------------------------------------------------
 diff --git a/src/dmcp/main.cc b/src/dmcp/main.cc
 index 782ddb794d56426863fb0a31f42a2eb40b99503f..869ff1abacc4aca947b9973b81ed68a3bb834b18 100644
 --- a/src/dmcp/main.cc
@@ -431,7 +2740,7 @@ index 7092c46efc87761050747ab2689ca1af42053d51..efbc995cb8c3af5e33e48c6d8f1a8616
  using pattern = blitter::pattern<blitter::mode::RGB_16BPP>;
  #else
 diff --git a/src/expression.cc b/src/expression.cc
-index ed63e4fe8777fd0f2b1684af32e8e25849591735..c23966beb92d7f2a621ce49d31d6e68bc869923e 100644
+index ed63e4fe8777fd0f2b1684af32e8e25849591735..602093303fd5f0333c78dcb13c38696a98836568 100644
 --- a/src/expression.cc
 +++ b/src/expression.cc
 @@ -27,6 +27,7 @@
@@ -492,8 +2801,387 @@ index ed63e4fe8777fd0f2b1684af32e8e25849591735..c23966beb92d7f2a621ce49d31d6e68b
      for (size_t v = 0; v < nvars; v++)
      {
          size_t len  = 0;
+@@ -5165,3 +5184,339 @@ NFUNCTION_BODY(Zeros)
+         rt.type_error();
+     return nullptr;
+ }
++
++
++COMMAND_BODY(DerivX)
++// ----------------------------------------------------------------------------
++//   Differentiate with respect to the current algebra variable
++// ----------------------------------------------------------------------------
++{
++    symbol_g variable = polynomial::main_variable();
++    if (!variable || !rt.push(+variable))
++        return ERROR;
++    result status = Derivative::evaluate();
++    if (status != OK)
++        rt.drop();
++    return status;
++}
++
++COMMAND_BODY(IntVX)
++// ----------------------------------------------------------------------------
++//   Find a primitive with respect to the current algebra variable
++// ----------------------------------------------------------------------------
++{
++    symbol_g variable = polynomial::main_variable();
++    if (!variable || !rt.push(+variable))
++        return ERROR;
++    result status = Primitive::evaluate();
++    if (status != OK)
++        rt.drop();
++    return status;
++}
++
++NFUNCTION_BODY(Taylor)
++// ----------------------------------------------------------------------------
++//   Taylor polynomial from expression, variable, expansion point and order
++// ----------------------------------------------------------------------------
++{
++    expression_g derivative = expression::get(args[3]);
++    symbol_g     variable   = args[2]->as_quoted<symbol>();
++    algebraic_g  point = args[1], degree = args[0];
++    if (!derivative || !variable || !degree->is_integer() ||
++        degree->is_negative(false))
++    {
++        rt.type_error();
++        return nullptr;
++    }
++    uint order = degree->as_uint32(1001, false);
++    if (order > 1000)
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    save<symbol_g *> independent(expression::independent, &variable);
++    settings::SaveNumericalResults symbolic(false);
++    settings::SaveAngleMode        radians(ID_Rad);
++    expression_g                   displacement =
++        expression::make(ID_subtract, algebraic_g(+variable), point);
++    algebraic_g sum = integer::make(0), factorial = integer::make(1);
++    for (uint n = 0; n <= order; ++n)
++    {
++        if (program::interrupted())
++            return nullptr;
++        algebraic_g coefficient =
++            algebraic::evaluate_function(program_g(program_p(+derivative)),
++                                         point);
++        if (!coefficient)
++            return nullptr;
++        coefficient        = coefficient / factorial;
++        expression_g power = expression::make(ID_pow,
++                                              algebraic_g(+displacement),
++                                              algebraic_g(integer::make(n)));
++        expression_g term =
++            expression::make(ID_multiply, coefficient, algebraic_g(+power));
++        sum = expression::make(ID_add, sum, algebraic_g(+term));
++        if (!sum)
++            return nullptr;
++        if (n < order)
++        {
++            derivative = derivative->derivative(variable);
++            factorial  = factorial * algebraic_g(integer::make(n + 1));
++            if (!derivative || !factorial)
++                return nullptr;
++        }
++    }
++    expression_g result = expression::get(sum);
++    return result ? result->simplify() : nullptr;
++}
++
++NFUNCTION_BODY(FiniteDifference)
++// ----------------------------------------------------------------------------
++//   Forward finite difference: expression variable step -> f(x+h)-f(x)
++// ----------------------------------------------------------------------------
++{
++    expression_g source   = expression::get(args[2]);
++    symbol_g     variable = args[1]->as_quoted<symbol>();
++    if (!source || !variable)
++    {
++        rt.type_error();
++        return nullptr;
++    }
++    expression_g shifted =
++        expression::make(ID_add, algebraic_g(+variable), args[0]);
++    expression_g replacement = expression::make(ID_TestEQ,
++                                                algebraic_g(+variable),
++                                                algebraic_g(+shifted));
++    expression_g changed     = expression_p(source->substitute(replacement));
++    expression_g result      = changed ? expression::make(ID_subtract,
++                                                     algebraic_g(+changed),
++                                                     algebraic_g(+source))
++                                       : nullptr;
++    return result ? result->simplify() : nullptr;
++}
++
++FUNCTION_BODY(TanToSinCos)
++// ----------------------------------------------------------------------------
++//   Rewrite tangent using sine and cosine
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(tan(X), sin(X) / cos(X)) : nullptr;
++}
++
++FUNCTION_BODY(TanSquaredToSinCos)
++// ----------------------------------------------------------------------------
++//   Rewrite squared tangents using the Pythagorean identity
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(sq(tan(X)),
++                                     (k1 - sq(cos(X))) / sq(cos(X)),
++                                     tan(X) ^ k2,
++                                     (k1 - sq(cos(X))) / sq(cos(X)))
++                  : nullptr;
++}
++
++FUNCTION_BODY(HalfTan)
++// ----------------------------------------------------------------------------
++//   Rewrite sine and cosine using the tangent half-angle substitution
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source
++             ? source->rewrites(sin(X),
++                                k2 * tan(X / k2) / (k1 + sq(tan(X / k2))),
++                                cos(X),
++                                (k1 - sq(tan(X / k2))) / (k1 + sq(tan(X / k2))))
++             : nullptr;
++}
++
++FUNCTION_BODY(TExpand)
++// ----------------------------------------------------------------------------
++//   Expand trigonometric sums and double angles
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(sin(X + Y),
++                                     sin(X) * cos(Y) + cos(X) * sin(Y),
++                                     sin(X - Y),
++                                     sin(X) * cos(Y) - cos(X) * sin(Y),
++                                     cos(X + Y),
++                                     cos(X) * cos(Y) - sin(X) * sin(Y),
++                                     cos(X - Y),
++                                     cos(X) * cos(Y) + sin(X) * sin(Y),
++                                     sin(k2 * X),
++                                     k2 * sin(X) * cos(X),
++                                     cos(k2 * X),
++                                     sq(cos(X)) - sq(sin(X)))
++                  : nullptr;
++}
++
++FUNCTION_BODY(TLin)
++// ----------------------------------------------------------------------------
++//   Linearize products and squares of trigonometric functions
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(sq(sin(X)),
++                                     (k1 - cos(k2 * X)) / k2,
++                                     sin(X) ^ k2,
++                                     (k1 - cos(k2 * X)) / k2,
++                                     sq(cos(X)),
++                                     (k1 + cos(k2 * X)) / k2,
++                                     cos(X) ^ k2,
++                                     (k1 + cos(k2 * X)) / k2,
++                                     sin(X) * sin(Y),
++                                     (cos(X - Y) - cos(X + Y)) / k2,
++                                     cos(X) * cos(Y),
++                                     (cos(X - Y) + cos(X + Y)) / k2,
++                                     sin(X) * cos(Y),
++                                     (sin(X + Y) + sin(X - Y)) / k2,
++                                     cos(X) * sin(Y),
++                                     (sin(X + Y) - sin(X - Y)) / k2)
++                  : nullptr;
++}
++
++FUNCTION_BODY(ExpLn)
++// ----------------------------------------------------------------------------
++//   Expand exponential sums; preserve logarithm branch identities
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(exp(X + Y),
++                                     exp(X) * exp(Y),
++                                     exp(X - Y),
++                                     exp(X) / exp(Y),
++                                     exp(ln(X)),
++                                     X)
++                  : nullptr;
++}
++
++FUNCTION_BODY(Lin)
++// ----------------------------------------------------------------------------
++//   Combine products of exponentials
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(exp(X) * exp(Y),
++                                     exp(X + Y),
++                                     exp(X) / exp(Y),
++                                     exp(X - Y))
++                  : nullptr;
++}
++
++FUNCTION_BODY(LnCollect)
++// ----------------------------------------------------------------------------
++//   Collect logarithms where positive integer factors make branches unambiguous
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(ln(K) + ln(L),
++                                     ln(K * L),
++                                     ln(K) - ln(L),
++                                     ln(K / L))
++                  : nullptr;
++}
++
++FUNCTION_BODY(SinCos)
++// ----------------------------------------------------------------------------
++//   Rewrite sine and cosine as complex exponentials
++// ----------------------------------------------------------------------------
++{
++    expression_g source = expression::get(x);
++    return source ? source->rewrites(sin(X),
++                                     (exp(ki * X) - exp(-ki * X)) / (k2 * ki),
++                                     cos(X),
++                                     (exp(ki * X) + exp(-ki * X)) / k2)
++                  : nullptr;
++}
++
++static bool limit_analytic(expression_r expression)
++// ----------------------------------------------------------------------------
++//   Avoid guessing limits across discontinuities or unevaluated commands
++// ----------------------------------------------------------------------------
++{
++    for (object_p item : *expression)
++    {
++        if (item->is_real() || item->is_complex() || item->is_symbolic())
++            continue;
++        switch (item->type())
++        {
++        case object::ID_add:
++        case object::ID_subtract:
++        case object::ID_multiply:
++        case object::ID_divide:
++        case object::ID_pow:
++        case object::ID_neg:
++        case object::ID_sq:
++        case object::ID_cubed:
++        case object::ID_sin:
++        case object::ID_cos:
++        case object::ID_tan:
++        case object::ID_exp:
++        case object::ID_expm1:
++        case object::ID_ln:
++        case object::ID_ln1p:
++        case object::ID_sqrt:
++        case object::ID_cbrt: break;
++        default: return false;
++        }
++    }
++    return true;
++}
++
++NFUNCTION_BODY(Limit)
++// ----------------------------------------------------------------------------
++//   Finite analytic limits, including removable zeros via l'Hopital's rule
++// ----------------------------------------------------------------------------
++{
++    expression_g source   = expression::get(args[2]);
++    symbol_g     variable = args[1]->as_quoted<symbol>();
++    algebraic_g  point    = args[0];
++    if (!source || !variable || !point->is_real())
++    {
++        rt.type_error();
++        return nullptr;
++    }
++    if (!limit_analytic(source))
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    save<symbol_g *> independent(expression::independent, &variable);
++    settings::SaveAngleMode radians(ID_Rad);
++    expression_g     numerator, denominator;
++    if (!source->split(object::ID_divide, numerator, denominator))
++    {
++        return algebraic::evaluate_function(program_g(program_p(+source)),
++                                            point);
++    }
++    for (uint iteration = 0; iteration < 64; ++iteration)
++    {
++        if (program::interrupted())
++            return nullptr;
++        algebraic_g n =
++            algebraic::evaluate_function(program_g(program_p(+numerator)),
++                                         point);
++        if (!n)
++            return nullptr;
++        algebraic_g d =
++            algebraic::evaluate_function(program_g(program_p(+denominator)),
++                                         point);
++        if (!n || !d)
++            return nullptr;
++        if (!d->is_zero(false))
++            return n / d;
++        if (!n->is_zero(false))
++        {
++            rt.domain_error();
++            return nullptr;
++        }
++        numerator   = numerator->derivative(variable);
++        denominator = denominator->derivative(variable);
++        if (!numerator || !denominator)
++            return nullptr;
++    }
++    rt.precision_loss_error();
++    return nullptr;
++}
+diff --git a/src/expression.h b/src/expression.h
+index e8388c406b162fcf235d6dfadb1fe470740c8ed7..a3d72ec30fc0d592a1f84620abdad3a723203366 100644
+--- a/src/expression.h
++++ b/src/expression.h
+@@ -503,6 +503,7 @@ struct eq
+     EQ_FUNCTION(sq);
+     EQ_FUNCTION(cubed);
+     EQ_FUNCTION(fact);
++    EQ_FUNCTION(Termial);
+
+     EQ_FUNCTION(re);
+     EQ_FUNCTION(im);
+@@ -717,6 +718,7 @@ EQ_FUNCTION(neg);
+ EQ_FUNCTION(sq);
+ EQ_FUNCTION(cubed);
+ EQ_FUNCTION(fact);
++EQ_FUNCTION(Termial);
+
+ EQ_FUNCTION(re);
+ EQ_FUNCTION(im);
+@@ -793,4 +795,18 @@ COMMAND_DECLARE_SPECIAL(Where, arithmetic, 2,
+                         SYMARGS);
+ NFUNCTION_EXT(Subst, 2, SYMARGS);
+
++COMMAND_DECLARE(DerivX, 1);
++COMMAND_DECLARE(IntVX, 1);
++NFUNCTION_EXT(Taylor, 4, SYMARGS_DECL(SYMARG(1) SYMARG(2)); );
++NFUNCTION_EXT(FiniteDifference, 3, SYMARGS_DECL(SYMARG(1) SYMARG(2)); );
++FUNCTION(TanToSinCos);
++FUNCTION(TanSquaredToSinCos);
++FUNCTION(HalfTan);
++FUNCTION(TExpand);
++FUNCTION(TLin);
++FUNCTION(ExpLn);
++FUNCTION(Lin);
++FUNCTION(LnCollect);
++FUNCTION(SinCos);
++NFUNCTION_EXT(Limit, 3, SYMARGS_DECL(SYMARG(1) SYMARG(2)); );
+ #endif // EXPRESSION_H
 diff --git a/src/functions.cc b/src/functions.cc
-index 613e5015214cbf17263ee32a9281024e58937b63..bdcc57fd77ddcd6f5e62df1a78e8e799b2b3bbe5 100644
+index 613e5015214cbf17263ee32a9281024e58937b63..12c6e12219360bdf153f1f0a12af307810fd674b 100644
 --- a/src/functions.cc
 +++ b/src/functions.cc
 @@ -27,6 +27,7 @@
@@ -593,6 +3281,327 @@ index 613e5015214cbf17263ee32a9281024e58937b63..bdcc57fd77ddcd6f5e62df1a78e8e799
  NFUNCTION_BODY(comb)
  // ----------------------------------------------------------------------------
  //   Compute number of combinations (n! / (n! * (n-m)!))
+@@ -2192,3 +2257,293 @@ NFUNCTION_BODY(UTPF)
+     algebraic_g i = BetaI::evaluate(ID_BetaI, ba, 3);
+     return i ? one - i : nullptr;
+ }
++
++
++static algebraic_p distribution_cdf(object::id command, algebraic_g *args)
++// ----------------------------------------------------------------------------
++//   Lower-tail distributions reuse the engine's decimal tail implementations
++// ----------------------------------------------------------------------------
++{
++    uint count =
++        command == object::ID_Normal || command == object::ID_FDistribution ? 3
++                                                                            : 2;
++    for (uint i = 0; i < count; ++i)
++        if (args[i]->is_symbolic())
++            return expression::make(command,
++                                    args,
++                                    count,
++                                    object::ID_expression,
++                                    true);
++    for (uint i = 0; i < count; ++i)
++        if (!args[i]->is_real())
++        {
++            rt.type_error();
++            return nullptr;
++        }
++    algebraic_g one = integer::make(1);
++    if (command == object::ID_Normal)
++    {
++        algebraic_g reflected[3] = { args[2] + args[2] - args[0],
++                                     args[1],
++                                     args[2] };
++        return UTPN::evaluate(object::ID_UTPN, reflected, 3);
++    }
++    if (command == object::ID_Student)
++    {
++        algebraic_g reflected[2] = { -args[0], args[1] };
++        return UTPT::evaluate(object::ID_UTPT, reflected, 2);
++    }
++    algebraic_g zero = integer::make(0), two = integer::make(2);
++    if (args[1]->is_negative(false) || args[1]->is_zero(false) ||
++        (command == object::ID_FDistribution &&
++         (args[2]->is_negative(false) || args[2]->is_zero(false))))
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    if (args[0]->is_negative(false) || args[0]->is_zero(false))
++        return zero;
++    if (command == object::ID_ChiSquare)
++    {
++        algebraic_g parameters[2] = { args[0] / two, args[1] / two };
++        return GammaP::evaluate(object::ID_GammaP, parameters, 2);
++    }
++    algebraic_g scaled        = args[2] * args[0];
++    algebraic_g parameters[3] = { scaled / (scaled + args[1]),
++                                  args[1] / two,
++                                  args[2] / two };
++    return BetaI::evaluate(object::ID_BetaI, parameters, 3);
++}
++
++NFUNCTION_BODY(Normal)
++// ----------------------------------------------------------------------------
++//   Normal lower-tail probability: mean variance x
++// ----------------------------------------------------------------------------
++{
++    return distribution_cdf(ID_Normal, args);
++}
++
++NFUNCTION_BODY(Student)
++// ----------------------------------------------------------------------------
++//   Student lower-tail probability: degrees-of-freedom x
++// ----------------------------------------------------------------------------
++{
++    return distribution_cdf(ID_Student, args);
++}
++
++NFUNCTION_BODY(ChiSquare)
++// ----------------------------------------------------------------------------
++//   Chi-square lower-tail probability: degrees-of-freedom x
++// ----------------------------------------------------------------------------
++{
++    return distribution_cdf(ID_ChiSquare, args);
++}
++
++NFUNCTION_BODY(FDistribution)
++// ----------------------------------------------------------------------------
++//   Fisher lower-tail probability: numerator-df denominator-df x
++// ----------------------------------------------------------------------------
++{
++    return distribution_cdf(ID_FDistribution, args);
++}
++
++static algebraic_p distribution_tail(object::id command, algebraic_g *args)
++// ----------------------------------------------------------------------------
++//   Evaluate upper tails directly so inverse probabilities do not lose digits
++// ----------------------------------------------------------------------------
++{
++    if (command == object::ID_Normal)
++        return UTPN::evaluate(object::ID_UTPN, args, 3);
++    if (command == object::ID_Student)
++        return UTPT::evaluate(object::ID_UTPT, args, 2);
++    algebraic_g one = integer::make(1), two = integer::make(2);
++    if (args[1]->is_negative(false) || args[1]->is_zero(false) ||
++        (command == object::ID_FDistribution &&
++         (args[2]->is_negative(false) || args[2]->is_zero(false))))
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    if (args[0]->is_negative(false) || args[0]->is_zero(false))
++        return one;
++    if (command == object::ID_ChiSquare)
++    {
++        algebraic_g a = args[1] / two, x = args[0] / two;
++        algebraic_g threshold = x - a - one;
++        if (!threshold)
++            return nullptr;
++        if (!threshold->is_negative(false))
++        {
++            algebraic_g loggamma = lgamma::run(a);
++            return loggamma ? gamma_q_fraction(a, x, loggamma) : nullptr;
++        }
++        algebraic_g parameters[2] = { x, a };
++        algebraic_g lower = GammaP::evaluate(object::ID_GammaP, parameters, 2);
++        return lower ? one - lower : nullptr;
++    }
++    algebraic_g scaled        = args[2] * args[0];
++    algebraic_g parameters[3] = { args[1] / (scaled + args[1]),
++                                  args[2] / two,
++                                  args[1] / two };
++    return BetaI::evaluate(object::ID_BetaI, parameters, 3);
++}
++
++static algebraic_p distribution_quantile(object::id   command,
++                                         algebraic_g *args,
++                                         size_t       count)
++// ----------------------------------------------------------------------------
++//   Bracket then bisect a finite quantile at the selected decimal precision
++// ----------------------------------------------------------------------------
++{
++    object::id inverse = command == object::ID_Normal  ? object::ID_InvNormal
++                       : command == object::ID_Student ? object::ID_InvStudent
++                       : command == object::ID_ChiSquare
++                           ? object::ID_InvChiSquare
++                           : object::ID_InvFDistribution;
++    for (uint i = 0; i < count; ++i)
++        if (args[i]->is_symbolic())
++            return expression::make(inverse,
++                                    args,
++                                    count,
++                                    object::ID_expression,
++                                    true);
++    for (uint i = 0; i < count; ++i)
++        if (!args[i]->is_real())
++        {
++            rt.type_error();
++            return nullptr;
++        }
++    settings::SaveHardwareFloatingPoint hardware(false);
++    settings::SaveNumericalResults      numerical(true);
++    uint                                digits = Settings.Precision();
++    if (digits > DB48X_MAXDIGITS - 8)
++    {
++        rt.precision_loss_error();
++        return nullptr;
++    }
++    settings::SavePrecision precision(digits + 8);
++    algebraic_g             zero = integer::make(0), one = integer::make(1);
++    algebraic_g             two = integer::make(2), probability = args[0];
++    if (!probability->is_real() || probability->is_negative(false) ||
++        probability->is_zero(false) || !(one - probability) ||
++        (one - probability)->is_negative(false) ||
++        (one - probability)->is_zero(false))
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    algebraic_g centered = probability - algebraic_g(decimal::make(5, -1));
++    if (!centered)
++        return nullptr;
++    bool upper = !centered->is_negative(false) && !centered->is_zero(false);
++    if (upper)
++        probability = one - probability;
++    algebraic_g parameters[3]  = { zero, args[1], count == 3 ? args[2] : zero };
++    auto        probability_at = [&]() -> algebraic_p
++    {
++        return upper ? distribution_tail(command, parameters)
++                     : distribution_cdf(command, parameters);
++    };
++    algebraic_g low =
++        command == object::ID_Normal || command == object::ID_Student ? -one
++                                                                      : zero;
++    algebraic_g high      = one, value;
++    bool        bracketed = false;
++    for (uint step = 0; step < 4096; ++step)
++    {
++        if (program::interrupted())
++            return nullptr;
++        parameters[0] = low;
++        value         = probability_at();
++        if (!value)
++            return nullptr;
++        algebraic_g delta = upper ? probability - value : value - probability;
++        if (!delta)
++            return nullptr;
++        if (delta->is_negative(false) || delta->is_zero(false))
++        {
++            parameters[0] = high;
++            value         = probability_at();
++            delta = value ? (upper ? probability - value : value - probability)
++                          : nullptr;
++            if (!delta)
++                return nullptr;
++            if (!delta->is_negative(false))
++            {
++                bracketed = true;
++                break;
++            }
++            high = high * two;
++        }
++        else
++        {
++            low = low * two;
++        }
++    }
++    if (!bracketed)
++    {
++        rt.domain_error();
++        return nullptr;
++    }
++    algebraic_g tolerance = decimal::make(1, -int(digits + 2));
++    for (uint step = 0; step < 4 * digits + 64; ++step)
++    {
++        if (program::interrupted())
++            return nullptr;
++        algebraic_g middle = (low + high) / two;
++        parameters[0]      = middle;
++        value              = probability_at();
++        if (!value)
++            return nullptr;
++        algebraic_g delta = upper ? probability - value : value - probability;
++        if (!delta)
++            return nullptr;
++        if (delta->is_zero(false))
++            return middle;
++        if (delta->is_negative(false))
++            low = middle;
++        else
++            high = middle;
++        algebraic_g width     = high - low;
++        algebraic_g bound     = tolerance * (one + abs::run(middle));
++        algebraic_g remaining = width - bound;
++        if (!remaining)
++            return nullptr;
++        if (remaining->is_negative(false))
++            return (low + high) / two;
++    }
++    rt.domain_error();
++    return nullptr;
++}
++
++NFUNCTION_BODY(InvNormal)
++// ----------------------------------------------------------------------------
++//   Normal quantile: mean variance probability
++// ----------------------------------------------------------------------------
++{
++    return distribution_quantile(ID_Normal, args, 3);
++}
++
++NFUNCTION_BODY(InvStudent)
++// ----------------------------------------------------------------------------
++//   Student quantile: degrees-of-freedom probability
++// ----------------------------------------------------------------------------
++{
++    return distribution_quantile(ID_Student, args, 2);
++}
++
++NFUNCTION_BODY(InvChiSquare)
++// ----------------------------------------------------------------------------
++//   Chi-square quantile: degrees-of-freedom probability
++// ----------------------------------------------------------------------------
++{
++    return distribution_quantile(ID_ChiSquare, args, 2);
++}
++
++NFUNCTION_BODY(InvFDistribution)
++// ----------------------------------------------------------------------------
++//   Fisher quantile: numerator-df denominator-df probability
++// ----------------------------------------------------------------------------
++{
++    return distribution_quantile(ID_FDistribution, args, 3);
++}
+diff --git a/src/functions.h b/src/functions.h
+index 7390f7bf135442bd9c9f04e770435c007614ed0d..3aae2be251a15ff593dcdaa25b559472defaad89 100644
+--- a/src/functions.h
++++ b/src/functions.h
+@@ -273,6 +273,7 @@ FUNCTION_EXT_PREC(neg,
+ FUNCTION_FANCY_MAT(sq);
+ FUNCTION_FANCY_MAT(cubed);
+ FUNCTION_FANCY(fact);
++FUNCTION_FANCY(Termial);
+
+ FUNCTION(re);
+ FUNCTION(im);
+@@ -363,4 +364,14 @@ NFUNCTION(PercentChange, 2);
+ NFUNCTION(PercentTotal, 2);
+
+
++NFUNCTION(Normal, 3);
++NFUNCTION(Student, 2);
++NFUNCTION(ChiSquare, 2);
++NFUNCTION(FDistribution, 3);
++NFUNCTION(InvNormal, 3);
++NFUNCTION(InvStudent, 2);
++NFUNCTION(InvChiSquare, 2);
++NFUNCTION(InvFDistribution, 3);
++
+ #endif // FUNCTIONS_H
++
 diff --git a/src/graphics.cc b/src/graphics.cc
 index 666a957d495507c70aad510bba97b7a358279504..f1df4b24cf167aff45caa5d8901ad9366e617f44 100644
 --- a/src/graphics.cc
@@ -633,8 +3642,79 @@ index 4485ad8e23a545541c783b07449d58b46a03d188..06a24cd69afb1eacd250ce2917801069
      }                                                                   \
  }                                                                       \
  while(0)
+diff --git a/src/ids.tbl b/src/ids.tbl
+index 4c7697414f999c99b7f56ddb3b37587dafc10799..a63a2f2a06d1e61a184135f5ae8adb5c75543a0c 100644
+--- a/src/ids.tbl
++++ b/src/ids.tbl
+@@ -133,8 +133,8 @@ ID_RANGE(is_complex,       rectangular,    polar)
+ ID_RANGE(is_range,         range,          uncertain)
+ ID_RANGE(is_strict_range,  range,          prange)
+ ID_RANGE(is_algebraic_num, unit,           neg_decimal,   range, uncertain)
+-ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse)
+-ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu)
++ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse, Termial, AckAll)
++ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu, Termial, AckAll)
+ ID_RANGE(is_symbolic,      expression,     xlib,
+                            polynomial,     relative_uncertainty)
+ ID_RANGE(is_immediate,     MainMenu,       SelfInsert)
+@@ -1684,6 +1684,55 @@ ID(solving_menu_store)
+ ID(solving_menu_solve)
+ ID(solving_menu_recall)
+
++// Appended to preserve every existing persisted object/command ID.
++NAMED(Termial, "Termial")        ALIAS(Termial, "?")
++CMD(FFT)
++CMD(InvFFT)
++CMD(Normal)
++CMD(Student)
++CMD(ChiSquare)
++CMD(FDistribution)
++CMD(InvNormal)
++CMD(InvStudent)
++CMD(InvChiSquare)
++CMD(InvFDistribution)
++CMD(MatrixQR)
++CMD(LQ)
++CMD(Cholesky)
++CMD(ToDiagonal)
++CMD(FromDiagonal)
++CMD(SVD)
++CMD(SVL)
++CMD(CondNum)
++CMD(Schur)
++CMD(SpecRad)
++CMD(DerivX)
++CMD(IntVX)
++CMD(Taylor) ALIAS(Taylor, "Serie")
++CMD(FiniteDifference)
++CMD(TanToSinCos)
++CMD(TanSquaredToSinCos)
++CMD(HalfTan)
++CMD(TExpand)
++CMD(TLin)
++CMD(ExpLn)
++CMD(Lin)
++CMD(LnCollect)
++CMD(SinCos)
++CMD(Limit)
++CMD(Find)
++ALIAS(PRoot, "FRoots")
++ALIAS(PCoef, "FCoef")
++SETTING(CASModulus, uint(2), uint(2147483647), uint(13))
++
++CMD(Alarms)
++CMD(StoAlarm)
++CMD(RclAlarm)
++CMD(DelAlarm)
++CMD(FindAlarm)
++CMD(Ack)
++CMD(AckAll)
++
+ #undef ID
+ #undef OP
+ #undef CMD
 diff --git a/src/list.cc b/src/list.cc
-index fcd9903499c3591ea29d158b301e5231d4be29e1..87d2c3225d5f06a1e514181ea3a68c598ee016f0 100644
+index fcd9903499c3591ea29d158b301e5231d4be29e1..6984e503f2e0ba2971d451e1af39cae66ad8e2fe 100644
 --- a/src/list.cc
 +++ b/src/list.cc
 @@ -27,6 +27,7 @@
@@ -702,6 +3782,41 @@ index fcd9903499c3591ea29d158b301e5231d4be29e1..87d2c3225d5f06a1e514181ea3a68c59
  }
 
 
+@@ -3048,3 +3061,24 @@ list_p list::unique(runtime::sort_fn compare) const
+     }
+     return list::make(ty, scr.scratch(), scr.growth());
+ }
++
++
++COMMAND_BODY(Find)
++// ----------------------------------------------------------------------------
++//   Return the first one-based list/vector element index, or zero if absent
++// ----------------------------------------------------------------------------
++{
++    object_g target=rt.stack(0),container=rt.stack(1);
++    if(!target||!container)return ERROR;
++    if(container->type()!=ID_list && container->type()!=ID_array)
++    {rt.type_error();return ERROR;}
++    list_g sequence=list_p(+container);size_t index=0,found=0;
++    for(object_p item:*sequence)
++    {
++        if(program::interrupted())return ERROR;
++        ++index;
++        if(item->is_same_as(target)){found=index;break;}
++    }
++    integer_g result=integer::make(found);
++    return result && rt.drop() && rt.top(result)?OK:ERROR;
++}
+diff --git a/src/list.h b/src/list.h
+index fbc6abd90b0585139d07c800dc4a97571097effe..8f18bf225b5ae70c39cd96a4d23d11bbd10aa87a 100644
+--- a/src/list.h
++++ b/src/list.h
+@@ -453,4 +453,5 @@ int memory_compare(object_p x, object_p y);
+
+
+
++COMMAND_DECLARE(Find, 2);
+ #endif // LIST_H
 diff --git a/src/locals.cc b/src/locals.cc
 index 7a9e592f50e29457f8ea3990da263121cd9fc5d4..ac181b1ac211c39dfbbed6e4aab5eb59dee8a262 100644
 --- a/src/locals.cc
@@ -718,11 +3833,82 @@ index 7a9e592f50e29457f8ea3990da263121cd9fc5d4..ac181b1ac211c39dfbbed6e4aab5eb59
 
      return OK;
 diff --git a/src/menu.cc b/src/menu.cc
-index 365400baf970fb412e4c141da7a21222bad63bac..6a3889f60497adb8daa9dc4f7729461eaa33cd95 100644
+index 365400baf970fb412e4c141da7a21222bad63bac..f62d5f9bca07e397fe1123527981c59194656598 100644
 --- a/src/menu.cc
 +++ b/src/menu.cc
-@@ -772,7 +772,8 @@ MENU(ProbabilitiesMenu,
-      "FFT⁻¹",   ID_Unimplemented,
+@@ -604,7 +604,7 @@ MENU(MatrixMenu,
+
+      "RowNrm",  ID_RowNorm,
+      "ColNrm",  ID_ColumnNorm,
+-     "CondNum", ID_Unimplemented,
++     "CondNum", ID_CondNum,
+      "Size",    ID_Size,
+      "Vector",  ID_VectorMenu,
+
+@@ -615,16 +615,16 @@ MENU(MatrixMenu,
+      "ColSwp",  ID_ColumnSwap,
+
+      "LU",      ID_LU,
+-     "LQ",      ID_Unimplemented,
+-     "QR",      ID_Unimplemented,
+-     "Schur",   ID_Unimplemented,
+-     "Cholesky",ID_Unimplemented,
++     "LQ",      ID_LQ,
++     "QR",      ID_MatrixQR,
++     "Schur",   ID_Schur,
++     "Cholesky",ID_Cholesky,
+
+-     "SVD",     ID_Unimplemented,
+-     "SVL",     ID_Unimplemented,
+-     "Diag→",   ID_Unimplemented,
+-     "→Diag",   ID_Unimplemented,
+-     "SpecRad", ID_Unimplemented,
++     "SVD",     ID_SVD,
++     "SVL",     ID_SVL,
++     "Diag→",   ID_FromDiagonal,
++     "→Diag",   ID_ToDiagonal,
++     "SpecRad", ID_SpecRad,
+
+      "Row+",    ID_AddRow,
+      "Row-",    ID_DeleteRow,
+@@ -654,9 +654,9 @@ MENU(PolynomialsMenu,
+      "MSolvr",  ID_SolverMenu,
+      "Solve",   ID_Root,
+      "TVMRoot", ID_TVMRoot,
+-     "FRoots",  ID_Unimplemented,
++     "FRoots",  ID_PRoot,
+      "XRoot",   ID_xroot,
+-     "FCoef",   ID_Unimplemented,
++     "FCoef",   ID_PCoef,
+      "PrtFrc",  ID_PartFrac);
+
+
+@@ -759,20 +759,21 @@ MENU(ProbabilitiesMenu,
+      "RSeed",   ID_RandomSeed,
+
+      // LTND: Lower Tail Normal Distribution, see HP20b
+-     "Normal",  ID_Unimplemented,
+-     "Student", ID_Unimplemented,
+-     "Chi²",    ID_Unimplemented,
+-     "F-Distr", ID_Unimplemented,
+-     "FFT",     ID_Unimplemented,
+-
+-     "Normal⁻¹",ID_Unimplemented,
+-     "Studnt⁻¹",ID_Unimplemented,
+-     "Chi²⁻¹",  ID_Unimplemented,
+-     "F-Dist⁻¹",ID_Unimplemented,
+-     "FFT⁻¹",   ID_Unimplemented,
++     "Normal",  ID_Normal,
++     "Student", ID_Student,
++     "Chi²",    ID_ChiSquare,
++     "F-Distr", ID_FDistribution,
++     "FFT",     ID_FFT,
++
++     "Normal⁻¹",ID_InvNormal,
++     "Studnt⁻¹",ID_InvStudent,
++     "Chi²⁻¹",  ID_InvChiSquare,
++     "F-Dist⁻¹",ID_InvFDistribution,
++     "FFT⁻¹",   ID_InvFFT,
 
       RandomGeneratorBits::label, ID_RandomGeneratorBits,
 -     RandomGeneratorOrder::label, ID_RandomGeneratorOrder
@@ -731,6 +3917,116 @@ index 365400baf970fb412e4c141da7a21222bad63bac..6a3889f60497adb8daa9dc4f7729461e
  );
 
 
+@@ -827,8 +828,8 @@ MENU(SignalProcessingMenu,
+ // ----------------------------------------------------------------------------
+ //   Signal processing (Fast Fourier Transform)
+ // ----------------------------------------------------------------------------
+-     "FFT",             ID_Unimplemented,
+-     "InvFFT",          ID_Unimplemented);
++     "FFT",             ID_FFT,
++     "InvFFT",          ID_InvFFT);
+
+ MENU(SymbolicMenu,
+ // ----------------------------------------------------------------------------
+@@ -868,7 +869,7 @@ MENU(AlgebraMenu,
+      "∫",               ID_Primitive,
+      "∑",               ID_Sum,
+      "∏",               ID_Product,
+-     "∆",               ID_Unimplemented,
++     "∆",               ID_FiniteDifference,
+      "→Qπ",             ID_ToQuotient,
+
+      "Ⓓ",               ID_AlgebraConfiguration,
+@@ -886,14 +887,14 @@ MENU(ArithmeticMenu,
+      "∫",               ID_Primitive,
+      "∑",               ID_Sum,
+      "∏",               ID_Product,
+-     "∆",               ID_Unimplemented,
+-     "Taylor",          ID_Unimplemented,
++     "∆",               ID_FiniteDifference,
++     "Taylor",          ID_Taylor,
+
+      "Show",            ID_Show,
+      "Quote",           ID_Quote,
+      "|",               ID_Where,
+      "=",               ID_SelfInsert,
+-     "Rules",           ID_Unimplemented,
++     "↓Match",          ID_MatchDown,
+      "Symb",            ID_SymbolicMenu);
+
+ MENU(CalculationMenu,
+@@ -903,23 +904,23 @@ MENU(CalculationMenu,
+      "LName",           ID_LName,
+      "XVars",           ID_XVars,
+      "Deriv",           ID_Derivative,
+-     "DerivX",          ID_Unimplemented,
+-     "IBF",             ID_Unimplemented,
+-     "IntVX",           ID_Unimplemented,
+-     "Limit",           ID_Unimplemented,
+-     "Serie",           ID_Unimplemented,
+-     "Taylor",          ID_Unimplemented,
++     "DerivX",          ID_DerivX,
++     "PrtFrc",          ID_PartFrac,
++     "IntVX",           ID_IntVX,
++     "Limit",           ID_Limit,
++     "Serie",           ID_Taylor,
++     "Taylor",          ID_Taylor,
+      "Symb",            ID_SymbolicMenu);
+
+ MENU(TrigIdentitiesMenu,
+ // ----------------------------------------------------------------------------
+ //   Trigonometry identities
+ // ----------------------------------------------------------------------------
+-     "HalfTan",         ID_Unimplemented,
+-     "Tan→SinCos",      ID_Unimplemented,
+-     "Tan→SinCos²",     ID_Unimplemented,
+-     "TExpand",         ID_Unimplemented,
+-     "TLin",            ID_Unimplemented,
++     "HalfTan",         ID_HalfTan,
++     "Tan→SinCos",      ID_TanToSinCos,
++     "Tan→SinCos²",     ID_TanSquaredToSinCos,
++     "TExpand",         ID_TExpand,
++     "TLin",            ID_TLin,
+      "TrigSin",         ID_TrigSin,
+      "Symb",            ID_SymbolicMenu);
+
+@@ -927,11 +928,11 @@ MENU(ExpLogIdentitiesMenu,
+ // ----------------------------------------------------------------------------
+ //   Exponentials and logarithm identities
+ // ----------------------------------------------------------------------------
+-     "ExpLn",         ID_Unimplemented,
+-     "Lin",      ID_Unimplemented,
+-     "LnCollect",     ID_Unimplemented,
+-     "SinCos",   ID_Unimplemented,
+-     "TExpand",   ID_Unimplemented,
++     "ExpLn",         ID_ExpLn,
++     "Lin",      ID_Lin,
++     "LnCollect",     ID_LnCollect,
++     "SinCos",   ID_SinCos,
++     "TExpand",   ID_TExpand,
+      "Symb",    ID_SymbolicMenu);
+
+ MENU(ProgramMenu,
+@@ -1114,7 +1115,7 @@ MENU(ListMenu,
+      "Extract", ID_Extract,
+
+      "Obj→",    ID_Explode,
+-     "Find",    ID_Unimplemented,
++     "Find",    ID_Find,
+      "Unique",  ID_Unique,
+      "QUnique", ID_QuickUnique,
+      "Objects", ID_ObjectMenu);
+@@ -1344,8 +1345,8 @@ MENU(MultiSolverMenu,
+ // ----------------------------------------------------------------------------
+ //   Menu for linear system solving
+ // ----------------------------------------------------------------------------
+-     "Eqs",     ID_Unimplemented,
+-     "Indeps",  ID_Unimplemented,
++     "Eqs",     ID_RcEq,
++     "Indeps",  ID_XVars,
+      "MRoot",   ID_MultipleEquationsSolver,
+
+      ID_SolverMenu);
 @@ -1435,6 +1436,12 @@ MENU(ClearThingsMenu,
       "Error",   ID_err0,
       "LCD",     ID_ClLCD);
@@ -773,6 +4069,55 @@ index 365400baf970fb412e4c141da7a21222bad63bac..6a3889f60497adb8daa9dc4f7729461e
 
       TextRenderingSizeLimit::label,             ID_TextRenderingSizeLimit,
       GraphRenderingSizeLimit::label,            ID_GraphRenderingSizeLimit,
+@@ -1825,17 +1836,13 @@ MENU(DateMenu,
+
+
+ MENU(AlarmMenu,
+-// ----------------------------------------------------------------------------
+-//   Alarm operations
+-// ----------------------------------------------------------------------------
+-     "Alarm",   ID_Unimplemented,
+-     "Ack",     ID_Unimplemented,
+-     "→Alarm",  ID_Unimplemented,
+-     "Alarm→",  ID_Unimplemented,
+-     "FindAlm", ID_Unimplemented,
+-     "DelAlm",  ID_Unimplemented,
+-
+-     "AckAll",  ID_Unimplemented,
++     "Alarms",  ID_Alarms,
++     "Ack",     ID_Ack,
++     "→Alarm",  ID_StoAlarm,
++     "Alarm→",  ID_RclAlarm,
++     "FindAlm", ID_FindAlarm,
++     "DelAlm",  ID_DelAlarm,
++     "AckAll",  ID_AckAll,
+      "Time",    ID_TimeMenu,
+      "Date",    ID_DateMenu);
+
+diff --git a/src/menu.h b/src/menu.h
+index 9df10dbf54439e5dc1c06ab0687d9e3f9971810a..3e15b931908414f6d4cabf25885ef312ded77ef8 100644
+--- a/src/menu.h
++++ b/src/menu.h
+@@ -77,6 +77,9 @@ struct menu : command
+     static void items(info &mi, cstring label, object_p action);
+     static void items(info &mi, cstring label, id action)
+     {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        if((action==ID_Unimplemented && label && *label))return;
++#endif
+         return items(mi, label, command::static_object(action));
+     }
+     static void items(info &mi, symbol_p label, object_p action)
+@@ -106,6 +109,9 @@ struct menu : command
+     template <typename... Args>
+     static uint count(cstring UNUSED label, id UNUSED action, Args... args)
+     {
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        if((action==ID_Unimplemented && label && *label))return count(args...);
++#endif
+         return 1 + count(args...);
+     }
+
 diff --git a/src/polynomial.cc b/src/polynomial.cc
 index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b36eb4c9d 100644
 --- a/src/polynomial.cc
@@ -892,7 +4237,7 @@ index 2efa0c0c4595b839991659265070b04cb2566aa7..769d122f22fd195d771d6aa6767fcf5b
      // Evaluate each of the variables exactly once (this is where we save time)
      for (size_t v = 0; v < nvars; v++)
 diff --git a/src/program.cc b/src/program.cc
-index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7206cc736 100644
+index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..562606b2b500f68c6f450fcf4e69a089faffe578 100644
 --- a/src/program.cc
 +++ b/src/program.cc
 @@ -304,9 +304,13 @@ bool program::low_battery()
@@ -909,7 +4254,7 @@ index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7
  }
 
 
-@@ -330,6 +334,9 @@ uint program::read_time()
+@@ -330,15 +334,19 @@ uint program::read_time()
  // ----------------------------------------------------------------------------
  //   The sys_current_ms() function stops running when timers are off.
  {
@@ -919,7 +4264,10 @@ index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7
      dt_t date;
      tm_t time;
      rtc_read(&time, &date);
-@@ -339,6 +346,7 @@ uint program::read_time()
+-    int jd = julian_day(&date);
++    uint32_t jd = uint32_t(julian_day(&date));
+     ticks = ((time.sec +
+              time.min * 60 +
               time.hour * 3600 +
                jd * 86400) * 100 + time.csec) * 10;
      return ticks;
@@ -928,7 +4276,7 @@ index 98f1bc7974161dfa1a2eb97f723cf3376b88b6d8..ecaf44966cd4d6bc6678ee411894aff7
 
 
 diff --git a/src/runtime.cc b/src/runtime.cc
-index ea88a32d0b7b5c13503772e42e42a5d69ee111a6..6c19b235011af638336502b32f2a9ad0347a1732 100644
+index ea88a32d0b7b5c13503772e42e42a5d69ee111a6..77fdfbce2de1dce63de61eaf3be1f9673a2e778d 100644
 --- a/src/runtime.cc
 +++ b/src/runtime.cc
 @@ -433,15 +433,18 @@ void runtime::uncache(object_p start, size_t sz)
@@ -953,7 +4301,30 @@ index ea88a32d0b7b5c13503772e42e42a5d69ee111a6..6c19b235011af638336502b32f2a9ad0
                  ptr = nullptr;
          }
      }
-@@ -2168,7 +2171,7 @@ bool runtime::run_select_case(bool condition)
+@@ -1905,7 +1908,12 @@ bool runtime::constants(size_t nentries)
+ {
+     runtime_invariants check;
+     size_t existing = constants();
+-    size_t count    = nentries - existing;
++    if(nentries>size_t(INTPTR_MAX)/sizeof(object_p))
++    {
++        out_of_memory_error();
++        return false;
++    }
++    ptrdiff_t count = ptrdiff_t(nentries)-ptrdiff_t(existing);
+     if (count)
+     {
+         if (nentries > existing)
+@@ -1920,7 +1928,7 @@ bool runtime::constants(size_t nentries)
+         }
+         else if (nentries < existing)
+         {
+-            for (object_p *ptr = CallStack-1; ptr >= Stack; ptr--)
++            for (object_p *ptr = CallStack-1; ptr >= Stack-count; ptr--)
+                 ptr[0] = ptr[count];
+         }
+         Stack       -= count;
+@@ -2168,7 +2176,7 @@ bool runtime::run_select_case(bool condition)
      if (condition)
      {
          object_p obj = command::static_object(object::ID_case_skip_conditional);
@@ -1018,6 +4389,47 @@ index 37fab88c9ffa6ee7043198dd8c17679ffd417441..67f4df416999c37e023666796b701808
              }
 
              call_stack_drop(2);
+diff --git a/src/scoped_array.h b/src/scoped_array.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..fbd86550cd8a979072483f3f60b3ed5c4332e62a
+--- /dev/null
++++ b/src/scoped_array.h
+@@ -0,0 +1,35 @@
++#ifndef DB48X_SCOPED_ARRAY_H
++#define DB48X_SCOPED_ARRAY_H
++// Fallible scratch storage outside the C stack. Construct GC roots in order
++// and destroy them in reverse order, just like an automatic array.
++#include <cstdlib>
++#include <new>
++#include <stdint.h>
++template<class T> class scoped_array
++{
++    T *data=nullptr;
++    size_t count=0;
++public:
++    explicit scoped_array(size_t n):count(n)
++    {
++        if(n && n<=SIZE_MAX/sizeof(T))
++            data=static_cast<T *>(std::malloc(n*sizeof(T)));
++        if(data)
++            for(size_t i=0;i<n;++i) ::new(static_cast<void *>(data+i)) T();
++    }
++    ~scoped_array()
++    {
++        if(data)
++        {
++            for(size_t i=count;i;--i) data[i-1].~T();
++            std::free(data);
++        }
++    }
++    scoped_array(const scoped_array &)=delete;
++    scoped_array &operator=(const scoped_array &)=delete;
++    bool operator!() const {return count&&!data;}
++    T *get() {return data;}
++    const T *get() const {return data;}
++    T &operator[](size_t i) {return data[i];}
++};
++#endif
 diff --git a/src/settings.cc b/src/settings.cc
 index e7495d116b7418334bea75903a48c619f87f0ab8..7e7eceac499de1b05101ce139ec2e3f45cd18339 100644
 --- a/src/settings.cc
@@ -1064,8 +4476,90 @@ index 9a5068de4e294c802adc8426e3796f4cb35bdc16..7b8d20dc0e1add87cbc57c47a0902f07
 
      static unicode digit_separator(uint index);
 
+diff --git a/src/symbol.cc b/src/symbol.cc
+index 600c55e86f5c51d64dc0d15b3f6f13fd8abc5c42..265623a94fed464bc164c0e04092050030fc4b3f 100644
+--- a/src/symbol.cc
++++ b/src/symbol.cc
+@@ -120,7 +120,13 @@ PARSE_BODY(symbol)
+
+     // Other characters must be alphabetic
+     while (parsed < max && is_valid_in_name(source + parsed))
++    {
++        // In algebraic expressions, ? is postfix; the explicit Ⓥ name
++        // escape and ordinary RPL identifiers retain question marks.
++        if (p.precedence && !skip && source[parsed] == '?')
++            break;
+         parsed = utf8_next(source, parsed, max);
++    }
+
+     // Build the resulting symbol
+     gcutf8 text   = source;
+@@ -137,10 +143,14 @@ RENDER_BODY(symbol)
+ // ----------------------------------------------------------------------------
+ {
+     size_t   len    = 0;
+-    utf8     txt    = o->value(&len);
++    gcutf8   txt    = o->value(&len);
+     size_t   cmdlen = len;
+     auto format = r.editing() ? ID_LongFormNames : Settings.NameDisplayMode();
+-    if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
++    // A literal question-mark name needs its escape in algebraic text.
++    bool postfix_name = (r.editing() || r.expression()) && memchr(+txt, '?', len);
++    if (postfix_name)
++        r.put(unicode(U'Ⓥ'));
++    else if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
+                                          (!r.graphing() || !r.expression()))))
+     {
+         if (command::lookup(+txt, cmdlen) && cmdlen == len)
+diff --git a/src/tests.cc b/src/tests.cc
+index 3dfaa9913b2a6b3f3ee6825d3137940cb599db50..3589c1dd60c0ad924d64eb4a29ad707c9f703364 100644
+--- a/src/tests.cc
++++ b/src/tests.cc
+@@ -11196,7 +11196,7 @@ void tests::catalog_test()
+         .test(B, U).editor("{ abs Background BU}")
+         .test(F1).editor("{ abs Background BusyIndicatorRefresh }");
+     step("Catalog with nothing entered")
+-        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh cosh⁻¹ }");
++        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh Ack }");
+
+     step("Test the default menu")
+         .test(CLEAR, EXIT, A, RSHIFT, RUNSTOP).editor("{}")
+@@ -14422,6 +14422,33 @@ void tests::probabilities()
+ {
+     BEGIN(probabilities);
+
++    {
++        settings::SaveMantissaSpacing spacing(0);
++        step("Termial postfix and named command")
++            .test(CLEAR, "6?", ENTER).expect("21")
++            .test(CLEAR, "6 Termial", ENTER).expect("21");
++        step("Termial zero and one")
++            .test(CLEAR, "0?", ENTER).expect("0")
++            .test(CLEAR, "1?", ENTER).expect("1");
++        step("Termial exact whole decimal")
++            .test(CLEAR, "6.0?", ENTER).expect("21");
++        step("Termial exact large integer")
++            .test(CLEAR, "100000000000000000000?", ENTER)
++            .expect("5000000000000000000050000000000000000000");
++        step("Termial chained postfix operators")
++            .test(CLEAR, "6??", ENTER).expect("231")
++            .test(CLEAR, "4!?", ENTER).expect("300");
++        step("Termial in algebraic expressions")
++            .test(CLEAR, "'(2+4)?' ToDecimal", ENTER).expect("21")
++            .test(CLEAR, "'Termial(6)' ToDecimal", ENTER).expect("21");
++        step("Termial symbolic variable")
++            .test(CLEAR, "4 'TTN' STO 'TTN?' ToDecimal 'TTN' PURGE", ENTER)
++            .expect("10");
++        step("Termial rejects negative and fractional counts")
++            .test(CLEAR, "-1?", ENTER).error("Argument outside domain").clear_error()
++            .test(CLEAR, "2.5?", ENTER).error("Argument outside domain").clear_error();
++    }
++
+     step("Factorial in program")
+         .test(CLEAR, "37 FACT", ENTER)
+         .expect("13 763 753 091 226 345 046 315 979 581 580 902 400 000 000");
 diff --git a/src/user_interface.cc b/src/user_interface.cc
-index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f5966304ea79 100644
+index 2f250aa9bcc2b9c411f0161d095696220760969c..a3cc926b56468a59150ec150c24e0c173f47d3cf 100644
 --- a/src/user_interface.cc
 +++ b/src/user_interface.cc
 @@ -27,6 +27,15 @@
@@ -1102,7 +4596,46 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      // Handle keys
      bool result =
          handle_shifts(key, talpha)      ||
-@@ -1301,6 +1321,44 @@ void user_interface::menu_pop()
+@@ -1227,6 +1247,9 @@ void user_interface::menu(menu_p menu, uint page)
+     if (mid != *menuStack)
+     {
+         pageStack[0] = menuPage;
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        pageStack[0] |= shift_plane() << MENU_PLANE_SHIFT;
++#endif
+         memmove(menuStack+1, menuStack, sizeof(menuStack) - sizeof(*menuStack));
+         memmove(pageStack+1, pageStack, sizeof(pageStack) - sizeof(*pageStack));
+         if (menu)
+@@ -1265,6 +1288,9 @@ void user_interface::menu_pop()
+ {
+     id current = menuStack[0];
+     uint cpage = pageStack[0];
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    cpage = menuPage | (shift_plane() << MENU_PLANE_SHIFT);
++#endif
+
+     record(menus, "Popping menu %+s", menu::name(current));
+     transient_object(nullptr);
+@@ -1287,12 +1313,18 @@ void user_interface::menu_pop()
+     {
+         menu_p m = menu_p(menu::static_object(mty));
+         menuPage = pageStack[0];
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++        menuPage &= MENU_PAGE_MASK;
++#endif
+         m->update(menuPage);
+     }
+     else
+     {
+         menus(0, nullptr, nullptr);
+     }
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    shift_plane(pageStack[0] >> MENU_PLANE_SHIFT);
++#endif
+     dirtyMenu = true;
+
+     for (uint i = 0; i < HISTORY; i++)
+@@ -1301,6 +1333,44 @@ void user_interface::menu_pop()
  }
 
 
@@ -1135,10 +4668,10 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 +    memmove(pageStack, pageStack + 1, sizeof(pageStack) - sizeof(*pageStack));
 +    menuStack[HISTORY-1] = menu::ID_object;
 +    pageStack[HISTORY-1] = 0;
-+    menuPage = pageStack[0];
++    menuPage = pageStack[0] & MENU_PAGE_MASK;
 +    menu_p parent = menu_p(menu::static_object(menuStack[0]));
 +    parent->update(menuPage);
-+    clear_shift();
++    shift_plane(pageStack[0] >> MENU_PLANE_SHIFT);
 +    dirtyMenu = dirtyStack = dirtyEditor = true;
 +}
 +#endif
@@ -1147,7 +4680,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
  uint user_interface::page()
  // ----------------------------------------------------------------------------
  //   Return the currently displayed page
-@@ -1652,6 +1710,19 @@ bool user_interface::draw_menus()
+@@ -1652,6 +1722,19 @@ bool user_interface::draw_menus()
      bool   flat          = menuStyle == object::ID_FlatMenus;
      int    visiblePlanes = single ? 1 : planes;
      uint   newMenuHeight = visiblePlanes * mh;
@@ -1167,7 +4700,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      if (newMenuHeight != menuHeight)
      {
          menuHeight = newMenuHeight;
-@@ -1686,14 +1757,22 @@ bool user_interface::draw_menus()
+@@ -1686,14 +1769,22 @@ bool user_interface::draw_menus()
      }
 
      settings::SaveTabWidth stw(0);
@@ -1191,7 +4724,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
              };
              labels = helpMenu;
          }
-@@ -1796,6 +1875,10 @@ bool user_interface::draw_menus()
+@@ -1796,6 +1887,10 @@ bool user_interface::draw_menus()
                      len = strlen(cstring(label));
                  }
 
@@ -1202,7 +4735,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
                  // Check if we have a marker from VariablesMenu
                  rect trect = mrect;
                  if (!help && !Stack.interactive)
-@@ -1816,22 +1899,50 @@ bool user_interface::draw_menus()
+@@ -1816,22 +1911,50 @@ bool user_interface::draw_menus()
                              marker         = mark;
                              mkw            = (marker == '/'
                                                ? 0
@@ -1257,7 +4790,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
                  if (tw + 2 >= mcw)
                  {
                      menuAnimate |= animask;
-@@ -1842,7 +1953,8 @@ bool user_interface::draw_menus()
+@@ -1842,7 +1965,8 @@ bool user_interface::draw_menus()
                      x = (mrect.x1 + mrect.x2 - tw) / 2;
                  }
                  coord ty = mrect.y1 - 1;
@@ -1267,7 +4800,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
                  if (marker)
                  {
                      Screen.clip(mrect);
-@@ -1851,26 +1963,32 @@ bool user_interface::draw_menus()
+@@ -1851,26 +1975,32 @@ bool user_interface::draw_menus()
                      {
                          pattern fldcol = Settings.FolderCornerForeground();
                          if (alt || square)
@@ -1305,7 +4838,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      {
          int my = LCD_H - (shplane * !single + 1) * mh;
          pattern sel = Settings.SelectedMenuForeground();
-@@ -1882,6 +2000,21 @@ bool user_interface::draw_menus()
+@@ -1882,6 +2012,21 @@ bool user_interface::draw_menus()
      if (!animating)
          draw_dirty(0, LCD_H - 1 - menuHeight, LCD_W, LCD_H-1);
 
@@ -1327,7 +4860,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      lastShiftPlane = shplane;
      menuDrawn = time;
      dirtyMenu = false;
-@@ -2152,6 +2285,9 @@ bool user_interface::draw_battery(bool now)
+@@ -2152,6 +2297,9 @@ bool user_interface::draw_battery(bool now)
      bool        usb        = program::on_usb;
      uint        delay      = time - program::last_power_check;
      uint        refresh    = Settings.BatteryRefresh();
@@ -1337,7 +4870,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      const uint  usb_period = 1024;
 
      if (now || delay >= refresh)
-@@ -2169,7 +2305,11 @@ bool user_interface::draw_battery(bool now)
+@@ -2169,7 +2317,11 @@ bool user_interface::draw_battery(bool now)
 
      // Experimentally, battery voltage below 2.6V cause calculator flakiness
      const uint vmax  = BATTERY_VMAX;
@@ -1349,7 +4882,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      const uint vlow  = (vmax + 7 * vmin) / 8;
      const uint vhalf = (vmax + 3 * vmin) / 4;
 
-@@ -2191,7 +2331,12 @@ bool user_interface::draw_battery(bool now)
+@@ -2191,7 +2343,12 @@ bool user_interface::draw_battery(bool now)
      if (Settings.ShowVoltage())
      {
          char buffer[16];
@@ -1362,7 +4895,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          pattern vcol = Settings.VoltageForeground();
          if (vcol.bits == Settings.HeaderBackground())
              vcol = vpat;
-@@ -2231,6 +2376,9 @@ bool user_interface::draw_battery(bool now)
+@@ -2231,6 +2388,9 @@ bool user_interface::draw_battery(bool now)
      }
 
      size batw = bat_body.width();
@@ -1372,7 +4905,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      float ratio = float(vdd - vmin) / (vmax - vmin);
      ratio = 1-ratio;
      ratio = ratio * ratio;
-@@ -2240,16 +2388,36 @@ bool user_interface::draw_battery(bool now)
+@@ -2240,16 +2400,36 @@ bool user_interface::draw_battery(bool now)
          w = batw;
      else if (w < 1)
          w = 1;
@@ -1410,7 +4943,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      {
          bat_body.x2 += 1;
          while (bat_body.x2 > x + 8)
-@@ -2962,6 +3130,16 @@ bool user_interface::draw_error()
+@@ -2962,6 +3142,16 @@ bool user_interface::draw_error()
  //   Draw the error message if there is one
  // ----------------------------------------------------------------------------
  {
@@ -1427,7 +4960,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      if (utf8 err = rt.error())
      {
          const int border = 4;
-@@ -3003,6 +3181,7 @@ bool user_interface::draw_error()
+@@ -3003,6 +3193,7 @@ bool user_interface::draw_error()
                  beep(freq, dur);
      }
      return true;
@@ -1435,7 +4968,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
  }
 
 
-@@ -3014,6 +3193,9 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
+@@ -3014,6 +3205,9 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
      if (freezeStack)
          return false;
 
@@ -1445,7 +4978,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      font_p font   = LibMonoFont10x17;
      size   h      = font->height();
      size   ch     = h * 5 / 2 + h * count + 10;
-@@ -3051,6 +3233,7 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
+@@ -3051,6 +3245,7 @@ bool user_interface::draw_message(utf8 header, uint count, utf8 msgs[])
      refresh_dirty();
 
      return true;
@@ -1453,7 +4986,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
  }
 
 
-@@ -3168,6 +3351,11 @@ void user_interface::load_help(utf8 topic, size_t len)
+@@ -3168,6 +3363,11 @@ void user_interface::load_help(utf8 topic, size_t len)
  //   Find the help message associated with the topic
  // ----------------------------------------------------------------------------
  {
@@ -1465,7 +4998,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      record(help, "Loading help topic %.*s", len, topic);
 
      if (!len)
-@@ -4121,7 +4309,7 @@ restart:
+@@ -4121,7 +4321,7 @@ restart:
          return false;
 
      using p                                    = pattern;
@@ -1474,7 +5007,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      // -------------------------------------------------------------------------
      //  Table of styles
      // -------------------------------------------------------------------------
-@@ -4129,18 +4317,40 @@ restart:
+@@ -4129,18 +4329,40 @@ restart:
          { HelpTitleFont,    p::black,  p::white,  false, false, false, false },
          { HelpSubTitleFont, p::black,  p::gray50,  true, false, true,  false },
          { HelpSubTitleFont, p::black,  p::white,   true,  true, false, false },
@@ -1517,7 +5050,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
      // Compute the size for the help display
      coord      ytop   = stackTop + 1;
      coord      ybot   = LCD_H - (MenuFont->height() + 5);
-@@ -4158,7 +4368,11 @@ restart:
+@@ -4158,7 +4380,11 @@ restart:
      r.inset(2);
      Screen.fill(r, pattern::black);
      r.inset(2);
@@ -1529,7 +5062,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
 
      // Clip drawing area in case some text does not really fit
      r.inset(1);
-@@ -4760,6 +4974,7 @@ restart:
+@@ -4760,6 +4986,7 @@ restart:
          font              = styles[style].font;
          height            = font->height();
 
@@ -1537,7 +5070,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          // If we are rendering a command name, follow user preferences
          if (style == SUBTITLE || style == CODE || style == HIGHLIGHTED_CODE)
          {
-@@ -4816,8 +5031,22 @@ restart:
+@@ -4816,8 +5043,22 @@ restart:
              }
          }
 
@@ -1560,7 +5093,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          size kwidth = 0;
          if (style == KEY)
          {
-@@ -4825,6 +5054,25 @@ restart:
+@@ -4825,6 +5066,25 @@ restart:
              width += 2*kwidth;
          }
 
@@ -1586,7 +5119,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
          if (style <= SUBSUBTITLE)
          {
              // Center titles
-@@ -4921,6 +5169,40 @@ restart:
+@@ -4921,6 +5181,40 @@ restart:
          // Draw next word
          for (int i = 0; i < 1 + 3 * italic; i++)
          {
@@ -1627,7 +5160,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
              if (draw)
              {
                  x = xl + kwidth;
-@@ -5220,6 +5502,14 @@ bool user_interface::handle_help(int &key)
+@@ -5220,6 +5514,14 @@ bool user_interface::handle_help(int &key)
                      {
                          rt.command(command::static_object(object::ID_Help));
                          load_help(htopic);
@@ -1643,7 +5176,7 @@ index 2f250aa9bcc2b9c411f0161d095696220760969c..f3d4a68efb3e64b43132a92924c3f596
                          {
                              key  = 0; // Do not execute a function if no help
 diff --git a/src/user_interface.h b/src/user_interface.h
-index 34e7a7d728c901ca62d1a780658ca84b59dff640..183b8c595adfac147c11bb81d88d563c14d9cff6 100644
+index 34e7a7d728c901ca62d1a780658ca84b59dff640..8a85bd610ed492bd438fbcd025f4566f1a63e1a1 100644
 --- a/src/user_interface.h
 +++ b/src/user_interface.h
 @@ -100,6 +100,10 @@ struct user_interface
@@ -1657,341 +5190,15 @@ index 34e7a7d728c901ca62d1a780658ca84b59dff640..183b8c595adfac147c11bb81d88d563c
      uint        page();
      void        page(uint p);
      uint        pages();
-diff --git a/src/scoped_array.h b/src/scoped_array.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..fbd86550cd8a979072483f3f60b3ed5c4332e62a
---- /dev/null
-+++ b/src/scoped_array.h
-@@ -0,0 +1,35 @@
-+#ifndef DB48X_SCOPED_ARRAY_H
-+#define DB48X_SCOPED_ARRAY_H
-+// Fallible scratch storage outside the C stack. Construct GC roots in order
-+// and destroy them in reverse order, just like an automatic array.
-+#include <cstdlib>
-+#include <new>
-+#include <stdint.h>
-+template<class T> class scoped_array
-+{
-+    T *data=nullptr;
-+    size_t count=0;
-+public:
-+    explicit scoped_array(size_t n):count(n)
-+    {
-+        if(n && n<=SIZE_MAX/sizeof(T))
-+            data=static_cast<T *>(std::malloc(n*sizeof(T)));
-+        if(data)
-+            for(size_t i=0;i<n;++i) ::new(static_cast<void *>(data+i)) T();
-+    }
-+    ~scoped_array()
-+    {
-+        if(data)
-+        {
-+            for(size_t i=count;i;--i) data[i-1].~T();
-+            std::free(data);
-+        }
-+    }
-+    scoped_array(const scoped_array &)=delete;
-+    scoped_array &operator=(const scoped_array &)=delete;
-+    bool operator!() const {return count&&!data;}
-+    T *get() {return data;}
-+    const T *get() const {return data;}
-+    T &operator[](size_t i) {return data[i];}
-+};
+@@ -284,6 +288,11 @@ protected:
+     int      edColumn;          // Current editor column (in pixels)
+     id       menuStack[HISTORY];// Current and past menus
+     uint     pageStack[HISTORY];// Current and past menus pages
++#if defined(PICOCALC) || defined(PICOCALC_UI_HOST)
++    // Native menu rows occupy the unused high bits of each bounded page entry.
++    static constexpr uint MENU_PLANE_SHIFT = sizeof(uint) * 8 - 2;
++    static constexpr uint MENU_PAGE_MASK = ~0U >> 2;
 +#endif
-diff --git a/src/complex.cc b/src/complex.cc
-index 09fb12f0825cd0c9115f0f7edbd9e3943a315f70..2be4c9b299ab93828e68baa62df029e0f7d20eab 100644
---- a/src/complex.cc
-+++ b/src/complex.cc
-@@ -33,6 +33,8 @@
- #include "arithmetic.h"
- #include "array.h"
- #include "compare.h"
-+#include "decimal.h"
-+#include "program.h"
- #include "expression.h"
- #include "fraction.h"
- #include "functions.h"
-@@ -1836,13 +1838,109 @@ COMPLEX_BODY(erfc)
-
- COMPLEX_BODY(tgamma)
- // ----------------------------------------------------------------------------
--//   Complex implementation of tgamma
-+//   Spouge approximation, with reflection into the right half-plane.
-+//   Compute coefficients at guard precision: their alternating sum cancels.
-+//   No coefficient array or persistent cache is needed on the PicoCalc.
- // ----------------------------------------------------------------------------
- {
--    rt.unimplemented_error();
--    return z;
-+    if (!z)
-+        return nullptr;
-+    uint digits = Settings.Precision();
-+    settings::SaveHardwareFloatingPoint hardware(false);
-+    settings::SaveNumericalResults numerical(true);
-+    settings::SaveNumericalConstants constants(true);
-+    settings::SaveAngleMode radians(ID_Rad);
-+    settings::SavePrecision precision(digits + digits / 2 + 12);
-+    algebraic_g real = z->re(), imag = z->im();
-+    if (!real || !imag || !algebraic::to_decimal(real) ||
-+        !algebraic::to_decimal(imag))
-+        return nullptr;
-+    complex_g input = rectangular::make(real, imag), result;
-+    if (!input)
-+        return nullptr;
-+    if (imag->is_zero(false))
-+    {
-+        // Also handles poles at zero and negative integers consistently with
-+        // real Gamma, without losing the complex argument's representation.
-+        decimal_g value = decimal::tgamma(decimal_p(+real));
-+        return value ? rectangular::make(value->precision(digits), imag) : nullptr;
-+    }
-+    complex_g one = complex::make(1), two = complex::make(2);
-+    algebraic_g half = decimal::make(5, -1);
-+    algebraic_g delta = real - half;
-+    if (!delta || !one || !two)
-+        return nullptr;
-+    if (delta->is_negative(false))
-+    {
-+        // Gamma(z) = pi / (sin(pi*z) Gamma(1-z)).  The recursive call is
-+        // always in Re(z) > 1/2; both calls use radian transcendental functions.
-+        complex_g pi = complex::from_algebraic(decimal::pi());
-+        // Evaluate sin(pi*z) by components. Pi-radian reduction keeps
-+        // sin(pi*n) exactly zero, and decimal sinh retains tiny imaginary
-+        // offsets near a pole instead of cancelling exp(y)-exp(-y).
-+        decimal_g sine, cosine;
-+        {
-+            settings::SaveAngleMode pi_radians(ID_PiRadians);
-+            sine = decimal::sin(decimal_g(decimal_p(+real)));
-+            cosine = decimal::cos(decimal_g(decimal_p(+real)));
-+        }
-+        decimal_g y = decimal_g(decimal::pi()) * decimal_g(decimal_p(+imag));
-+        decimal_g sr = sine * decimal_g(decimal::cosh(y));
-+        decimal_g si = cosine * decimal_g(decimal::sinh(y));
-+        complex_g sinpi = rectangular::make(algebraic_g(+sr), algebraic_g(+si));
-+        complex_g reflected = complex::tgamma(one - input);
-+        result = pi / (sinpi * reflected);
-+    }
-+    else
-+    {
-+        // Gamma(z) ~ (z+a-1)^(z-1/2) exp(-(z+a-1))
-+        //             * (sqrt(2*pi) + sum c_k/(z+k-1)).
-+        // a > 1.3*(digits+8) leaves margin beyond Spouge's error bound.
-+        uint a = (13 * (digits + 8) + 9) / 10;
-+        decimal_g factorial = decimal::make(1);
-+        complex_g sum = complex::from_algebraic(algebraic_g(+decimal::constants().sqrt_2pi()));
-+        complex_g denominator = input;
-+        for (uint k = 1; k < a; ++k)
-+        {
-+            if (program::interrupted())
-+                return nullptr;
-+            decimal_g t = decimal::make(a - k);
-+            decimal_g power = t, scale = decimal::exp(t);
-+            uint exponent = k - 1;
-+            while (exponent)
-+            {
-+                if (exponent & 1)
-+                    scale = scale * power;
-+                exponent >>= 1;
-+                if (exponent)
-+                    power = power * power;
-+            }
-+            decimal_g coefficient = decimal::sqrt(t) * scale / factorial;
-+            complex_g term = complex::from_algebraic(algebraic_g(+coefficient)) / denominator;
-+            sum = k & 1 ? sum + term : sum - term;
-+            denominator = denominator + one;
-+            factorial = factorial * decimal_g(decimal::make(k));
-+            if (!sum || !denominator || !factorial)
-+                return nullptr;
-+        }
-+        complex_g offset = complex::make(a - 1);
-+        complex_g t = input + offset;
-+        result = complex::exp((input - one / two) * complex::ln(t) - t
-+                              + complex::ln(sum));
-+    }
-+    if (!result)
-+        return nullptr;
-+    real = result->re();
-+    imag = result->im();
-+    if (!real || !imag || !algebraic::to_decimal(real) ||
-+        !algebraic::to_decimal(imag))
-+        return nullptr;
-+    real = decimal_p(+real)->precision(digits);
-+    imag = decimal_p(+imag)->precision(digits);
-+    return rectangular::make(real, imag);
- }
-
-+
- COMPLEX_BODY(lgamma)
- // ----------------------------------------------------------------------------
- //   Complex implementation of lgamma
-diff --git a/src/ids.tbl b/src/ids.tbl
-index 4c7697414f999c99b7f56ddb3b37587dafc10799..ba1ae8fddea8dcef48e299d14f0904c466268021 100644
---- a/src/ids.tbl
-+++ b/src/ids.tbl
-@@ -133,8 +133,8 @@ ID_RANGE(is_complex,       rectangular,    polar)
- ID_RANGE(is_range,         range,          uncertain)
- ID_RANGE(is_strict_range,  range,          prange)
- ID_RANGE(is_algebraic_num, unit,           neg_decimal,   range, uncertain)
--ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse)
--ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu)
-+ID_RANGE(is_program_cmd,   Drop,           IfErrThenElse, Termial, Termial)
-+ID_RANGE(is_command,       Drop,           ToQuotient,  ToList, LastMenu, Termial, Termial)
- ID_RANGE(is_symbolic,      expression,     xlib,
-                            polynomial,     relative_uncertainty)
- ID_RANGE(is_immediate,     MainMenu,       SelfInsert)
-@@ -1684,6 +1684,9 @@ ID(solving_menu_store)
- ID(solving_menu_solve)
- ID(solving_menu_recall)
-
-+// Appended to preserve every existing persisted object/command ID.
-+NAMED(Termial, "Termial")        ALIAS(Termial, "?")
-+
- #undef ID
- #undef OP
- #undef CMD
-diff --git a/src/functions.h b/src/functions.h
-index 7390f7bf135442bd9c9f04e770435c007614ed0d..3608a05d7cae4062ac4a2c53ef539b075a3e2301 100644
---- a/src/functions.h
-+++ b/src/functions.h
-@@ -273,6 +273,7 @@ FUNCTION_EXT_PREC(neg,
- FUNCTION_FANCY_MAT(sq);
- FUNCTION_FANCY_MAT(cubed);
- FUNCTION_FANCY(fact);
-+FUNCTION_FANCY(Termial);
-
- FUNCTION(re);
- FUNCTION(im);
-diff --git a/src/command.cc b/src/command.cc
-index 68d83396b9029be8a9f9603a8bd815b9b5834816..b5968f0e12b79348fa9fa93e050a6b259e95ec54 100644
---- a/src/command.cc
-+++ b/src/command.cc
-@@ -74,6 +74,7 @@ static inline bool at_end(utf8 name, size_t max, utf8 cmd, size_t len, bool eq)
- // ----------------------------------------------------------------------------
- {
-     return len >= max
-+        || (len == 1 && *cmd == '?')
-         || (eq && (!is_valid_as_name_initial(cmd) ||
-                    ((name[len] < '0' || name[len] > '9') &&
-                     !is_valid_in_function_name(name + len))))
-@@ -113,7 +114,7 @@ object::id command::lookup(utf8 name, size_t &maxlen, bool eq)
-
-         // Compute the maximum possible size for the command
-         size_t max = maxlen;
--        if (is_valid_as_name_initial(name) ||
-+        if ((is_valid_as_name_initial(name) && *name != '?') ||
-             (!eq && utf8_codepoint(name) == U'↑')) // e.g. ↑Match
-         {
-             for (max = utf8_size(name, max);
-diff --git a/src/expression.h b/src/expression.h
-index e8388c406b162fcf235d6dfadb1fe470740c8ed7..39837802ef5131946cefcd0a319bbd116d4a1c71 100644
---- a/src/expression.h
-+++ b/src/expression.h
-@@ -503,6 +503,7 @@ struct eq
-     EQ_FUNCTION(sq);
-     EQ_FUNCTION(cubed);
-     EQ_FUNCTION(fact);
-+    EQ_FUNCTION(Termial);
-
-     EQ_FUNCTION(re);
-     EQ_FUNCTION(im);
-@@ -717,6 +718,7 @@ EQ_FUNCTION(neg);
- EQ_FUNCTION(sq);
- EQ_FUNCTION(cubed);
- EQ_FUNCTION(fact);
-+EQ_FUNCTION(Termial);
-
- EQ_FUNCTION(re);
- EQ_FUNCTION(im);
-diff --git a/src/symbol.cc b/src/symbol.cc
-index 600c55e86f5c51d64dc0d15b3f6f13fd8abc5c42..265623a94fed464bc164c0e04092050030fc4b3f 100644
---- a/src/symbol.cc
-+++ b/src/symbol.cc
-@@ -120,7 +120,13 @@ PARSE_BODY(symbol)
-
-     // Other characters must be alphabetic
-     while (parsed < max && is_valid_in_name(source + parsed))
-+    {
-+        // In algebraic expressions, ? is postfix; the explicit Ⓥ name
-+        // escape and ordinary RPL identifiers retain question marks.
-+        if (p.precedence && !skip && source[parsed] == '?')
-+            break;
-         parsed = utf8_next(source, parsed, max);
-+    }
-
-     // Build the resulting symbol
-     gcutf8 text   = source;
-@@ -137,10 +143,14 @@ RENDER_BODY(symbol)
- // ----------------------------------------------------------------------------
- {
-     size_t   len    = 0;
--    utf8     txt    = o->value(&len);
-+    gcutf8   txt    = o->value(&len);
-     size_t   cmdlen = len;
-     auto format = r.editing() ? ID_LongFormNames : Settings.NameDisplayMode();
--    if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
-+    // A literal question-mark name needs its escape in algebraic text.
-+    bool postfix_name = (r.editing() || r.expression()) && memchr(+txt, '?', len);
-+    if (postfix_name)
-+        r.put(unicode(U'Ⓥ'));
-+    else if (!unambiguous && (r.editing() || (Settings.ShowAmbiguousNames() &&
-                                          (!r.graphing() || !r.expression()))))
-     {
-         if (command::lookup(+txt, cmdlen) && cmdlen == len)
-diff --git a/src/tests.cc b/src/tests.cc
-index 3dfaa9913b2a6b3f3ee6825d3137940cb599db50..e9544dcd4ae906e9e66d380042ba3be5faf9e1d3 100644
---- a/src/tests.cc
-+++ b/src/tests.cc
-@@ -11196,7 +11196,7 @@ void tests::catalog_test()
-         .test(B, U).editor("{ abs Background BU}")
-         .test(F1).editor("{ abs Background BusyIndicatorRefresh }");
-     step("Catalog with nothing entered")
--        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh cosh⁻¹ }");
-+        .test(F6, F3).editor("{ abs Background BusyIndicatorRefresh cos⁻¹ }");
-
-     step("Test the default menu")
-         .test(CLEAR, EXIT, A, RSHIFT, RUNSTOP).editor("{}")
-@@ -14422,6 +14422,33 @@ void tests::probabilities()
- {
-     BEGIN(probabilities);
-
-+    {
-+        settings::SaveMantissaSpacing spacing(0);
-+        step("Termial postfix and named command")
-+            .test(CLEAR, "6?", ENTER).expect("21")
-+            .test(CLEAR, "6 Termial", ENTER).expect("21");
-+        step("Termial zero and one")
-+            .test(CLEAR, "0?", ENTER).expect("0")
-+            .test(CLEAR, "1?", ENTER).expect("1");
-+        step("Termial exact whole decimal")
-+            .test(CLEAR, "6.0?", ENTER).expect("21");
-+        step("Termial exact large integer")
-+            .test(CLEAR, "100000000000000000000?", ENTER)
-+            .expect("5000000000000000000050000000000000000000");
-+        step("Termial chained postfix operators")
-+            .test(CLEAR, "6??", ENTER).expect("231")
-+            .test(CLEAR, "4!?", ENTER).expect("300");
-+        step("Termial in algebraic expressions")
-+            .test(CLEAR, "'(2+4)?' ToDecimal", ENTER).expect("21")
-+            .test(CLEAR, "'Termial(6)' ToDecimal", ENTER).expect("21");
-+        step("Termial symbolic variable")
-+            .test(CLEAR, "4 'TTN' STO 'TTN?' ToDecimal 'TTN' PURGE", ENTER)
-+            .expect("10");
-+        step("Termial rejects negative and fractional counts")
-+            .test(CLEAR, "-1?", ENTER).error("Argument outside domain").clear_error()
-+            .test(CLEAR, "2.5?", ENTER).error("Argument outside domain").clear_error();
-+    }
-+
-     step("Factorial in program")
-         .test(CLEAR, "37 FACT", ENTER)
-         .expect("13 763 753 091 226 345 046 315 979 581 580 902 400 000 000");
-diff --git a/doc/commands/termial.md b/doc/commands/termial.md
-new file mode 100644
-index 00000000..8d91eb16
---- /dev/null
-+++ b/doc/commands/termial.md
-@@ -0,0 +1,5 @@
-+# Termial
-+
-+Compute the triangular sum `1+2+...+n` as `n*(n+1)/2`. The argument must be a nonnegative whole number; `0?` is zero. Fractional and negative arguments report a domain error.
-+
-+Use `6?` or `6 Termial` to get `21`. The algebraic forms `'N?'` and `'Termial(N)'` are equivalent. In RPL, separate a variable and the operator: `N ?` or `N Termial`. Ordinary RPL identifiers can still contain question marks; use the explicit name prefix `Ⓥ` when quoting such a name inside algebraic syntax. The explicit constant `Ⓒ?` is unchanged.
+     uint     menuPage;          // Current menu page
+     uint     menuPages;         // Number of menu pages
+     uint     menuHeight;        // Height of the menu

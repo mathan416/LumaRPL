@@ -38,6 +38,12 @@ Try it
 
 You should get: '3·X²'
 
+## DerivX
+
+Differentiate an expression with respect to the current algebra variable,
+selected with StoreAlgebraVariable. Equivalent to supplying that variable to
+Derivative.
+
 ## Equation
 
 Use the supplied equation definition in the engine equation/library context.
@@ -61,6 +67,17 @@ Try it
 
 You should get: 'X²+2·X+1'
 
+## ExpLn
+
+Expand exponentials of sums and differences and cancel exp(ln(x)).
+It does not replace ln(exp(x)) with x, which would lose complex branch
+information.
+
+## FiniteDifference
+
+Forward finite difference. Takes expression, variable, then step and returns
+f(x+step)-f(x) symbolically. This is a finite difference, not division by step.
+
 ## FoldConstants
 
 Combine the constant parts of an expression.
@@ -70,6 +87,10 @@ Combine the constant parts of an expression.
 Convert a polynomial object back to an algebraic expression.
 
 You can also enter: Polynomial→, Poly→.
+
+## HalfTan
+
+Rewrite sine and cosine using tangent of the half angle.
 
 ## Integrate
 
@@ -82,6 +103,11 @@ Rad 0 1 'X^2' 'X' Integrate
 
 You should get: ¹/₃
 
+## IntVX
+
+Find a primitive with respect to the current algebra variable. Equivalent to
+supplying that variable to Primitive.
+
 ## Isolate
 
 Rearrange an equation to isolate the supplied variable. Some equations cannot be isolated by the engine.
@@ -92,6 +118,28 @@ Try it
 'X+2=5' 'X' ISOL
 
 You should get: 'X=3'
+
+## Limit
+
+Finite analytic limit. Takes expression, variable, then a finite real point.
+Direct substitution handles continuous analytic expressions. A quotient whose
+numerator and denominator both vanish uses repeated symbolic differentiation,
+up to 64 times. This supports removable singularities such as sin(x)/x at zero.
+Discontinuous operators such as absolute value, sign and rounding are rejected.
+Infinite endpoints, general piecewise limits and essential singularities are
+not supported; no numerical extrapolation is used to invent an answer.
+Analytic trigonometric limits use radians and preserve the user's angle mode.
+
+## Lin
+
+Collect products and quotients of exponentials into exponentials of sums and
+differences.
+
+## LnCollect
+
+Collect sums and differences of logarithms of positive integer factors.
+Expressions with factors of unknown sign are left unchanged, preserving
+principal complex logarithm branches.
 
 ## MatchDown
 
@@ -133,7 +181,7 @@ You can also enter: PartialFractions.
 
 Return polynomial coefficients using the engine's coefficient order.
 
-You can also enter: PolynomialCoefficients.
+You can also enter: PolynomialCoefficients, FCoef.
 
 Try it
 CompatiblePolynomials
@@ -175,7 +223,7 @@ You can also enter: ∏.
 
 Find roots of the supplied polynomial using the polynomial solver.
 
-You can also enter: PolynomialRoots.
+You can also enter: PolynomialRoots, FRoots.
 
 Try it
 [ 1 2 -25 -26 120 ] PRoot
@@ -207,6 +255,11 @@ Finds one local solution; it does not list every possible root.
 
 Simplify an expression using the current algebra rules.
 
+## SinCos
+
+Rewrite sine and cosine using complex exponentials. Use NumericalConstants
+or ToDecimal to evaluate the imaginary-unit constant numerically afterwards.
+
 ## StEq
 
 Store the supplied equation as the engine's current equation.
@@ -235,6 +288,34 @@ You should get: '3+2'
 Evaluate a summation from an expression, variable and bounds.
 
 You can also enter: Σ.
+
+## TanSquaredToSinCos
+
+Rewrite squared tangent as (1-cos(x)^2)/cos(x)^2.
+
+## TanToSinCos
+
+Rewrite tan(x) as sin(x)/cos(x).
+
+## Taylor
+
+Build a Taylor polynomial from expression, variable, expansion point and order.
+The variable is kept symbolic even when it has a stored value. The point must
+allow evaluation of the required derivatives; a singular derivative reports an
+error. Orders from 0 to 1000 are accepted, subject to memory and rewrite limits.
+Trigonometric derivatives and coefficient evaluation use radians, preserving the
+user's angle setting. Serie is an alternate spelling.
+
+You can also enter: Serie.
+
+## TExpand
+
+Expand sine and cosine of sums, differences and double angles.
+
+## TLin
+
+Linearize products and squares of sine and cosine using sum and difference
+identities.
 
 ## ToPolynomial
 
@@ -615,7 +696,7 @@ Move up in calculator entry or recall entry history, depending on the current en
 
 Open the calculator alarm soft menu. Type AlarmMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 AlarmMenu
@@ -626,7 +707,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator algebra soft menu. Type AlgebraMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 AlgebraMenu
@@ -637,7 +718,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator angles soft menu. Type AnglesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 AnglesMenu
@@ -648,7 +729,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator arithmetic soft menu. Type ArithmeticMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ArithmeticMenu
@@ -659,7 +740,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator bases soft menu. Type BasesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 BasesMenu
@@ -670,7 +751,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator calculation soft menu. Type CalculationMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 CalculationMenu
@@ -681,7 +762,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator characters soft menu. Type CharactersMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 CharactersMenu
@@ -692,7 +773,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator circular soft menu. Type CircularMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 CircularMenu
@@ -703,7 +784,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator clear things soft menu. Type ClearThingsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ClearThingsMenu
@@ -714,7 +795,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator compare soft menu. Type CompareMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 CompareMenu
@@ -725,7 +806,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator complex soft menu. Type ComplexMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ComplexMenu
@@ -736,7 +817,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator constants soft menu. Type ConstantsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: ConLib, ConstantsLibrary.
 
@@ -749,7 +830,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator date soft menu. Type DateMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 DateMenu
@@ -760,7 +841,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator debug soft menu. Type DebugMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 DebugMenu
@@ -771,7 +852,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator differential solver soft menu. Type DifferentialSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 DifferentialSolverMenu
@@ -782,7 +863,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator display modes soft menu. Type DisplayModesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 DisplayModesMenu
@@ -793,7 +874,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator edit soft menu. Type EditMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 EditMenu
@@ -804,7 +885,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator equations soft menu. Type EquationsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: EqnLib, EquationsLibrary.
 
@@ -817,7 +898,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator exp log identities soft menu. Type ExpLogIdentitiesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ExpLogIdentitiesMenu
@@ -828,7 +909,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator files soft menu. Type FilesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 FilesMenu
@@ -839,7 +920,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator flags soft menu. Type FlagsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 FlagsMenu
@@ -850,7 +931,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator fractions soft menu. Type FractionsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 FractionsMenu
@@ -861,7 +942,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator graphics soft menu. Type GraphicsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 GraphicsMenu
@@ -872,7 +953,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator hyperbolic soft menu. Type HyperbolicMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 HyperbolicMenu
@@ -883,7 +964,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator integration soft menu. Type IntegrationMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: DifferentiationMenu.
 
@@ -896,7 +977,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator io soft menu. Type IOMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 IOMenu
@@ -907,7 +988,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator library soft menu. Type Library and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 Library
@@ -918,7 +999,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator linear solver soft menu. Type LinearSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 LinearSolverMenu
@@ -929,7 +1010,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator list soft menu. Type ListMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ListMenu
@@ -940,7 +1021,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator loops soft menu. Type LoopsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 LoopsMenu
@@ -951,7 +1032,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator main soft menu. Type MainMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MainMenu
@@ -962,7 +1043,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator math soft menu. Type MathMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MathMenu
@@ -973,7 +1054,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator math modes soft menu. Type MathModesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MathModesMenu
@@ -984,7 +1065,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator matrix soft menu. Type MatrixMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MatrixMenu
@@ -995,7 +1076,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator memory soft menu. Type MemoryMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MemoryMenu
@@ -1006,7 +1087,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator modes soft menu. Type ModesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ModesMenu
@@ -1017,7 +1098,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator multi solver soft menu. Type MultiSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 MultiSolverMenu
@@ -1028,7 +1109,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator numbers soft menu. Type NumbersMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 NumbersMenu
@@ -1039,7 +1120,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator numerical solver soft menu. Type NumericalSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 NumericalSolverMenu
@@ -1050,7 +1131,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator object soft menu. Type ObjectMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ObjectMenu
@@ -1061,7 +1142,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator parts soft menu. Type PartsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 PartsMenu
@@ -1072,7 +1153,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator plot soft menu. Type PlotMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 PlotMenu
@@ -1083,7 +1164,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator polynomials soft menu. Type PolynomialsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 PolynomialsMenu
@@ -1094,7 +1175,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator polynomial solver soft menu. Type PolynomialSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 PolynomialSolverMenu
@@ -1105,7 +1186,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator powers soft menu. Type PowersMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: ExpLogMenu.
 
@@ -1118,7 +1199,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator printing soft menu. Type PrintingMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 PrintingMenu
@@ -1129,7 +1210,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator probabilities soft menu. Type ProbabilitiesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ProbabilitiesMenu
@@ -1140,7 +1221,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator program soft menu. Type ProgramMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 ProgramMenu
@@ -1151,7 +1232,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator range soft menu. Type RangeMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 RangeMenu
@@ -1162,7 +1243,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator real soft menu. Type RealMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 RealMenu
@@ -1173,7 +1254,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator separator modes soft menu. Type SeparatorModesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 SeparatorModesMenu
@@ -1184,7 +1265,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator signal processing soft menu. Type SignalProcessingMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 SignalProcessingMenu
@@ -1195,7 +1276,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator solver soft menu. Type SolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: MSolvr.
 
@@ -1208,7 +1289,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator stack soft menu. Type StackMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 StackMenu
@@ -1219,7 +1300,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator statistics soft menu. Type StatisticsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 StatisticsMenu
@@ -1230,7 +1311,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator symbolic soft menu. Type SymbolicMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 SymbolicMenu
@@ -1241,7 +1322,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator symbolic solver soft menu. Type SymbolicSolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 SymbolicSolverMenu
@@ -1252,7 +1333,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator tests soft menu. Type TestsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 TestsMenu
@@ -1263,7 +1344,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator text soft menu. Type TextMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 TextMenu
@@ -1274,7 +1355,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator time soft menu. Type TimeMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 TimeMenu
@@ -1285,7 +1366,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator trig identities soft menu. Type TrigIdentitiesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 TrigIdentitiesMenu
@@ -1296,7 +1377,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator units conversions soft menu. Type UnitsConversionsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 UnitsConversionsMenu
@@ -1307,7 +1388,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator units soft menu. Type UnitsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 UnitsMenu
@@ -1318,7 +1399,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator user interface modes soft menu. Type UserInterfaceModesMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 UserInterfaceModesMenu
@@ -1329,7 +1410,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator user mode soft menu. Type UserModeMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 UserModeMenu
@@ -1340,7 +1421,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator vector soft menu. Type VectorMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 Try it
 VectorMenu
@@ -1660,6 +1741,17 @@ Try it
 CarefulEvaluation
 
 Applies the choice described above without a stack argument. Enter LazyEvaluation to choose its opposite. Save the session to keep this preference.
+
+## CASModulus
+
+Prime modulus for exact RREFMOD matrix reduction; default 13. Store an integer from 2 to 2147483647. RREFMOD rejects a composite modulus.
+
+To change it, enter a value followed by CASModulus. Read the current value with 'CASModulus' RCL.
+
+Try it
+'CASModulus' RCL
+
+Shows the current value. To change it, replace the recalled value with your chosen value and enter CASModulus. Save the session to keep it after restart.
 
 ## ChargingForeground
 
@@ -5076,6 +5168,13 @@ Deg (0;1) ARG
 
 You should get: 90 °
 
+## Cholesky
+
+Replaces a real symmetric positive-definite matrix A with its lower triangular
+factor L, so L DUP Transpose * reconstructs A. Nonsymmetric or non-positive-
+definite inputs report a domain error. Dimensions are limited to 32, subject
+to available memory.
+
 ## ColumnNorm
 
 Find the matrix column norm.
@@ -5109,6 +5208,11 @@ Try it
 
 You should get: [[ 2 1 ]
   [ 4 3 ]]
+
+## CondNum
+
+Spectral condition number: the largest singular value divided by the smallest.
+A zero smallest singular value reports divide by zero. Restrictions match SVD.
 
 ## conj
 
@@ -5188,6 +5292,19 @@ Try it
 
 You should get: 32
 
+## FFT
+
+Transform a real or complex vector to frequency coefficients. The length must
+be a power of two from 1 to 1024. Available memory may impose a smaller limit
+at high precision. Matrices and non-numeric elements are rejected.
+
+The forward transform uses the negative exponential and no scale factor:
+X[k] = Sum(x[j] exp(-2 pi i j k/N)). Values remain in ordinary frequency order,
+starting with the zero-frequency coefficient. No window, demeaning, sample-rate
+scaling or one-sided amplitude normalization is applied. Use Signal analysis
+for those data-analysis options. Calculation uses decimal arithmetic and the
+selected precision; the angle-mode setting is preserved.
+
 ## FromArray
 
 Unpack an array into its values and dimensions.
@@ -5202,6 +5319,11 @@ You should get: 1
 3
 { 3 }
 Pushes elements followed by the dimensions.
+
+## FromDiagonal
+
+Extract the main diagonal of a matrix as a vector. Rectangular inputs return
+min(rows,columns) elements.
 
 ## FromVector
 
@@ -5236,11 +5358,30 @@ Try it
 
 You should get: 4
 
+## InvFFT
+
+Inverse of FFT. The positive exponential and division by the vector length
+make InvFFT(FFT(x)) recover the original samples, within numerical precision.
+Input restrictions match FFT.
+
+## LQ
+
+Replaces a real matrix A with L, then Q, so L Q * reconstructs A. This uses QR
+on the transpose. Dimensions and numerical restrictions match QR.
+
 ## LU
 
 Factor a matrix into lower and upper triangular factors using the engine pivoting convention.
 
 You can also enter: LUFactorization, LUDecomposition.
+
+## MatrixQR
+
+Householder factorization of a real matrix: replaces A with Q, then R. Q is a
+square orthogonal matrix; R has A's dimensions. Q R * reconstructs A. Rectangular
+and rank-deficient matrices are accepted. Dimensions are limited to 32, subject
+to available memory. These factorizations use decimal arithmetic at the selected
+precision. Complex and symbolic matrices are not accepted.
 
 ## MatrixToColumns
 
@@ -5388,7 +5529,7 @@ You should get: [[ 1 0 ]
 
 ## RREFMOD
 
-Modulo row reduction is not implemented in this engine build and reports an error. Use REF or RREF for ordinary row reduction.
+Exact modular row reduction of an integer matrix over the prime field selected by CASModulus (default 13). Swaps zero pivots, accepts negative and arbitrary-size integers, and rejects composite moduli. Dimensions up to 32 are accepted, subject to memory.
 
 You can also enter: RowReducedEchelonFormModulo.
 
@@ -5407,6 +5548,35 @@ You should get: {
 	  [ 0 5 ]]
 }
 Run from the calculator stack. This example uses the current calculation settings.
+
+## Schur
+
+Real Schur reduction. Replaces a real square matrix A with an orthogonal matrix
+Q and a block upper triangular matrix T, so Q T * Q Transpose * reconstructs A.
+T may contain two-by-two blocks, including conjugate complex eigenvalue pairs.
+Dimensions are limited to 32, subject to memory. The iteration is cancellable;
+failure to converge reports a domain error. A few guard digits of numerical
+accuracy may be lost during convergence.
+
+## SpecRad
+
+Spectral radius of a real square matrix: the largest eigenvalue magnitude,
+including eigenvalues represented by two-by-two Schur blocks. Restrictions match
+Schur.
+
+## SVD
+
+Thin singular value decomposition of a real matrix. Replaces A with U, a vector
+s of descending singular values, then V. With k=min(rows,columns), U has k
+columns and V has k columns. U s ToDiagonal * V Transpose * reconstructs A.
+Dimensions are limited to 32, subject to memory. The iteration is cancellable;
+failure to converge reports a domain error. Complex and symbolic inputs are
+not accepted. Zero singular values receive an orthonormal completion in U.
+
+## SVL
+
+Return only the descending singular values of a real matrix. Restrictions match
+SVD.
 
 ## To2DVector
 
@@ -5449,6 +5619,11 @@ Convert coordinates to cylindrical form.
 
 You can also enter: →Cylindrical.
 
+## ToDiagonal
+
+Build a square diagonal matrix from a vector, preserving its elements. The
+vector length must be from 1 to 32, subject to available memory.
+
 ## ToPolar
 
 Convert a complex value or coordinate object to polar form.
@@ -5490,6 +5665,34 @@ Try it
 
 You should get: [[ 1 3 ]
   [ 2 4 ]]
+
+## Ack
+
+Acknowledge the oldest due reminder. Leaves future alarms scheduled and retains the record.
+
+## AckAll
+
+Acknowledge all currently due reminders. Future reminders remain scheduled.
+
+## Alarms
+
+List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session.
+
+## DelAlarm
+
+Delete the alarm identified by the ID on the stack, including its reminder history.
+
+## FindAlarm
+
+Return the ID of the earliest unacknowledged alarm strictly after the date/time on the stack, or zero if none.
+
+## RclAlarm
+
+Recall the alarm record for the ID on the stack.
+
+## StoAlarm
+
+Schedule a clock-based reminder: put YYYYMMDD.HHMMSS and a message string on the stack, then run StoAlarm. Returns an alarm ID. Example: 20261225.093000 "Check the oven" StoAlarm. Uses the calculator local clock.
 
 ## ChronoTime
 
@@ -5864,7 +6067,7 @@ Calculate the hyperbolic cosecant for the top stack value. Its real domain and t
 
 ## erf
 
-Calculate the error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate the error function of a real or complex argument. Complex calculations use guarded decimal series or a large-argument expansion, preserving angle and precision settings. Very demanding inputs can report precision loss when the working precision is insufficient.
 
 Try it
 0 ERF
@@ -5873,7 +6076,7 @@ You should get: 0.
 
 ## erfc
 
-Calculate the complementary error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate the complementary error function of a real or complex argument. Complex calculations use guarded decimal series or a large-argument expansion, preserving angle and precision settings. Very demanding inputs can report precision loss when the working precision is insufficient.
 
 Try it
 0 ERFC
@@ -5944,7 +6147,7 @@ You should get: 0
 
 ## lgamma
 
-Calculate the logarithm of the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate log Gamma. Complex arguments return the principal complex logarithm of Gamma; this can differ by a multiple of 2*pi*i from an analytically continued log-Gamma branch. Poles report a domain error.
 
 You can also enter: lnΓ, LnGamma.
 
@@ -6072,7 +6275,7 @@ Sum 1+2+3+4+5+6.
 
 ## tgamma
 
-Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate real or complex Gamma at the selected precision. For positive integers Gamma(n)=(n-1)!. Zero and negative integers are poles and report a domain error. Complex arguments use decimal arithmetic, preserve the angle setting, and include reflection for negative real parts.
 
 You can also enter: Γ, Gamma.
 
@@ -6512,6 +6715,12 @@ Try it
 { 1 2 3 4 } « 2 > » FILTER
 
 You should get: { 3 4 }
+
+## Find
+
+Takes a list or vector and a target object. Return the first matching one-based
+index, or zero when absent. Comparison uses object equality and preserves the
+input elements; nested objects are supported.
 
 ## FromList
 
@@ -8092,6 +8301,12 @@ Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save e
 
 Choose the best engine regression fit among its supported models.
 
+## ChiSquare
+
+Lower-tail chi-square probability. Takes positive degrees of freedom, then the
+nonnegative evaluation point. Negative points return zero. See UTPC for the
+upper tail.
+
 ## ClearData
 
 Clear the engine statistical data.
@@ -8164,6 +8379,12 @@ Select the engine exponential regression model.
 
 You can also enter: ExpFit.
 
+## FDistribution
+
+Lower-tail Fisher probability. Takes positive numerator degrees of freedom,
+positive denominator degrees of freedom, then the evaluation point. Nonpositive
+points return zero. See UTPF for the upper tail.
+
 ## FrequencyBins
 
 Count observations in the supplied frequency bins.
@@ -8185,6 +8406,26 @@ Try it
 
 You should get: 0
 Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.
+
+## InvChiSquare
+
+Chi-square quantile. Takes positive degrees of freedom, then lower-tail
+probability strictly between zero and one.
+
+## InvFDistribution
+
+Fisher quantile. Takes positive numerator degrees of freedom, positive denominator
+degrees of freedom, then lower-tail probability strictly between zero and one.
+
+## InvNormal
+
+Normal quantile. Takes mean, positive variance, then lower-tail probability.
+The probability must be strictly between zero and one, giving a finite result.
+
+## InvStudent
+
+Student quantile. Takes positive degrees of freedom, then lower-tail probability
+strictly between zero and one.
 
 ## LinearFit
 
@@ -8237,6 +8478,11 @@ Try it
 
 You should get: [ 1 2 ]
 Replaces calculator statistics data with three rows: (1,2), (2,4), (3,6). Save existing statistics first.
+
+## Normal
+
+Lower-tail normal probability. Takes mean, variance, then the evaluation point.
+The variance must be positive. UTPN provides the corresponding upper tail.
 
 ## PopulationCovariance
 
@@ -8353,6 +8599,11 @@ You should get: [[ 1 2 ]
   [ 2 4 ]
   [ 3 6 ]]
 Replaces the current statistics data. RecallData reads it back.
+
+## Student
+
+Lower-tail Student probability. Takes positive degrees of freedom, then the
+evaluation point. UTPT provides the corresponding upper tail.
 
 ## SumOfX
 
@@ -9275,7 +9526,20 @@ You can also enter: PartialFractions.
 
 Return polynomial coefficients using the engine's coefficient order.
 
-You can also enter: PolynomialCoefficients.
+You can also enter: PolynomialCoefficients, FCoef.
+
+Try it
+CompatiblePolynomials
+[ 2 -3 4 -5 ] PCoef
+
+You should get: [ 1 2 -25 -26 120 ]
+Run from the calculator stack. This example uses the current calculation settings.
+
+## FCoef
+
+Return polynomial coefficients using the engine's coefficient order.
+
+You can also enter: PolynomialCoefficients, FCoef.
 
 Try it
 CompatiblePolynomials
@@ -9317,7 +9581,19 @@ You can also enter: ∏.
 
 Find roots of the supplied polynomial using the polynomial solver.
 
-You can also enter: PolynomialRoots.
+You can also enter: PolynomialRoots, FRoots.
+
+Try it
+[ 1 2 -25 -26 120 ] PRoot
+
+You should get: [ -5 -3 2 4 ]
+Run from the calculator stack. This example uses the current calculation settings.
+
+## FRoots
+
+Find roots of the supplied polynomial using the polynomial solver.
+
+You can also enter: PolynomialRoots, FRoots.
 
 Try it
 [ 1 2 -25 -26 120 ] PRoot
@@ -9365,6 +9641,17 @@ You should get: '3+2'
 Evaluate a summation from an expression, variable and bounds.
 
 You can also enter: Σ.
+
+## Serie
+
+Build a Taylor polynomial from expression, variable, expansion point and order.
+The variable is kept symbolic even when it has a stored value. The point must
+allow evaluation of the required derivatives; a singular derivative reports an
+error. Orders from 0 to 1000 are accepted, subject to memory and rewrite limits.
+Trigonometric derivatives and coefficient evaluation use radians, preserving the
+user's angle setting. Serie is an alternate spelling.
+
+You can also enter: Serie.
 
 ## →Polynomial
 
@@ -9508,7 +9795,7 @@ You can also enter: ShiftRightCount.
 
 Open the calculator constants soft menu. Type ConstantsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: ConLib, ConstantsLibrary.
 
@@ -9521,7 +9808,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator constants soft menu. Type ConstantsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: ConLib, ConstantsLibrary.
 
@@ -9534,7 +9821,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator equations soft menu. Type EquationsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: EqnLib, EquationsLibrary.
 
@@ -9547,7 +9834,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator equations soft menu. Type EquationsMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: EqnLib, EquationsLibrary.
 
@@ -9560,7 +9847,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator integration soft menu. Type IntegrationMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: DifferentiationMenu.
 
@@ -9573,7 +9860,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator powers soft menu. Type PowersMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: ExpLogMenu.
 
@@ -9586,7 +9873,7 @@ The soft menu opens. Press Tab to select a row, then F1-F5 (Ctrl+F5 for column s
 
 Open the calculator solver soft menu. Type SolverMenu and press Enter.
 
-Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc goes back one menu level, then clears the top-level menu.
+Tab selects its row. F1-F5 chooses columns 1-5; Ctrl+F5 chooses column 6. Esc restores the parent menu page and Tab-selected row, then clears the top-level menu.
 
 You can also enter: MSolvr.
 
@@ -10532,7 +10819,7 @@ You should get: [[ 1 0 ]
 
 ## RowReducedEchelonFormModulo
 
-Modulo row reduction is not implemented in this engine build and reports an error. Use REF or RREF for ordinary row reduction.
+Exact modular row reduction of an integer matrix over the prime field selected by CASModulus (default 13). Swaps zero pivots, accepts negative and arbitrary-size integers, and rejects composite moduli. Dimensions up to 32 are accepted, subject to memory.
 
 You can also enter: RowReducedEchelonFormModulo.
 
@@ -11202,7 +11489,7 @@ You should get: 120
 
 ## lnΓ
 
-Calculate the logarithm of the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate log Gamma. Complex arguments return the principal complex logarithm of Gamma; this can differ by a multiple of 2*pi*i from an analytically continued log-Gamma branch. Poles report a domain error.
 
 You can also enter: lnΓ, LnGamma.
 
@@ -11213,7 +11500,7 @@ You should get: 0.
 
 ## LnGamma
 
-Calculate the logarithm of the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate log Gamma. Complex arguments return the principal complex logarithm of Gamma; this can differ by a multiple of 2*pi*i from an analytically continued log-Gamma branch. Poles report a domain error.
 
 You can also enter: lnΓ, LnGamma.
 
@@ -11269,7 +11556,7 @@ Sum 1+2+3+4+5+6.
 
 ## Γ
 
-Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate real or complex Gamma at the selected precision. For positive integers Gamma(n)=(n-1)!. Zero and negative integers are poles and report a domain error. Complex arguments use decimal arithmetic, preserve the angle setting, and include reflection for negative real parts.
 
 You can also enter: Γ, Gamma.
 
@@ -11280,7 +11567,7 @@ You should get: 24.
 
 ## Gamma
 
-Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function.
+Calculate real or complex Gamma at the selected precision. For positive integers Gamma(n)=(n-1)!. Zero and negative integers are poles and report a domain error. Complex arguments use decimal arithmetic, preserve the angle setting, and include reflection for negative real parts.
 
 You can also enter: Γ, Gamma.
 

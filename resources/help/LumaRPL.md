@@ -18,7 +18,7 @@ Most screens work the same way: move with the arrows, open the selected item wit
 
 File browsers use F2 for Run and F3 for New, so use Left/Right to page through files. F4 Actions contains file details. In other menus, F4 Details explains the selected choice.
 
-The calculator's soft menus are different. They have six columns and several rows. Press Tab to choose a row, then F1-F5 for columns 1-5 or Ctrl+F5 for column 6. That row stays selected until you press Tab again. Esc goes up one menu level; at the top it closes the menu. If an error is showing, Esc dismisses that first.
+The calculator's soft menus are different. They have six columns and several rows. Press Tab to choose a row, then F1-F5 for columns 1-5 or Ctrl+F5 for column 6. That row stays selected until you press Tab again. Esc goes up one menu level and restores the parent menu page and Tab-selected row; at the top it closes the menu. If an error is showing, Esc dismisses that first.
 
 From the stack: Ctrl+O opens the Math soft menu. Const has mathematical constants, Cmplx includes the imaginary unit, and Powers / Trig have functions. Ctrl+A opens Command Catalogue, Ctrl+R opens Advanced RPL settings, Ctrl+Y opens Number bases, and Ctrl+K finds a command in Help. Catalogue inserts a name; it doesn't supply that command's arguments.
 

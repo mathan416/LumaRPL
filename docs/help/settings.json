@@ -130,5 +130,6 @@
   "BatteryLevelForeground": "The drawing pattern for battery level foreground. These are packed RPL pattern values, not RGB332 palette numbers. Choose a theme under Settings > Display if you want coordinated interface colours.",
   "HalfBatteryForeground": "The drawing pattern for half battery foreground. These are packed RPL pattern values, not RGB332 palette numbers. Choose a theme under Settings > Display if you want coordinated interface colours.",
   "LowBatteryForeground": "The drawing pattern for low battery foreground. These are packed RPL pattern values, not RGB332 palette numbers. Choose a theme under Settings > Display if you want coordinated interface colours.",
-  "ChargingForeground": "The drawing pattern for charging foreground. These are packed RPL pattern values, not RGB332 palette numbers. Choose a theme under Settings > Display if you want coordinated interface colours."
+  "ChargingForeground": "The drawing pattern for charging foreground. These are packed RPL pattern values, not RGB332 palette numbers. Choose a theme under Settings > Display if you want coordinated interface colours.",
+  "CASModulus": "Prime modulus for exact RREFMOD matrix reduction; default 13. Store an integer from 2 to 2147483647. RREFMOD rejects a composite modulus."
 }

@@ -35,6 +35,7 @@
 #include "blitter.h"
 #include "dmcp.h"
 #include "expression.h"
+#include "datetime.h"
 #include "font.h"
 #include "program.h"
 #include "recorder.h"
@@ -370,6 +371,9 @@ void power_check(bool running, bool showimage)
             if (last_awake)
                 program::active_time += tin - last_awake;
             sys_sleep();
+            if (!running && !ST(STAT_PGM_END) && !rt.error() &&
+                !ui.in_input() && alarm_notify())
+                redraw_lcd(true);
             uint tout = sys_current_ms();
             last_awake = tout;
             program::sleeping_time += tout - tin;

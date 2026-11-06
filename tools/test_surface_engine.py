@@ -3,7 +3,7 @@
 from pathlib import Path
 import subprocess,os,argparse
 parser=argparse.ArgumentParser();parser.add_argument('--indexed',action='store_true');parser.add_argument('--ui',action='store_true');args=parser.parse_args()
-root=Path(__file__).resolve().parents[1];(root/'reports').mkdir(exist_ok=True);out=root/('build/simulator-rgb332' if args.indexed else 'build/simulator-colour')
+root=Path(__file__).resolve().parents[1];out=root/('build/simulator-rgb332' if args.indexed else 'build/simulator-colour')
 # Link the same pinned Lua runner to the real calculator bridge for integration.
 lua_obj=out/'lua-objects';lua_obj.mkdir(exist_ok=True)
 lua_sources=[p for p in (root/'dependencies/lua-5.4.9/src').glob('*.c') if p.name not in ('lua.c','luac.c')]+[root/'pico/lua_runner.c',root/'tests/lua_device_stub.c']
@@ -24,13 +24,15 @@ if args.ui:
 # The generated simulator Makefile supplies the exact Qt/engine compiler flags.
 (out/'SurfaceProbe.mk').write_text('''include Makefile
 surface-probe-main.o: surface-probe-main.cc
-\t$(CXX) -c $(CXXFLAGS) $(INCPATH) -I../../pico -I../../tests -o $@ $<
+\t$(CXX) -c $(CXXFLAGS) $(INCPATH) -I../../pico -I../../pico/fatfs -I../../tests -o $@ $<
+source-font.o: ../../pico/SourceFont.cc
+\t$(CXX) -c $(CXXFLAGS) $(INCPATH) -I../../pico/fatfs -o $@ $<
 header-font.o: ../../pico/HeaderFont.cc
 \t$(CXX) -c $(CXXFLAGS) $(INCPATH) -I../../pico/fatfs -o $@ $<
 calculator-bridge.o: ../../pico/calculator_bridge.cc
 \t$(CXX) -c $(CXXFLAGS) $(INCPATH) -I../../pico -o $@ $<
-surface-probe: surface-probe-main.o header-font.o calculator-bridge.o lua-probe.a $(filter-out obj/main.o,$(OBJECTS))
-\t$(LINK) $(LFLAGS) -o $@ surface-probe-main.o header-font.o calculator-bridge.o $(filter-out obj/main.o,$(OBJECTS)) lua-probe.a $(OBJCOMP) $(LIBS)
+surface-probe: surface-probe-main.o header-font.o source-font.o calculator-bridge.o lua-probe.a $(filter-out obj/main.o,$(OBJECTS))
+\t$(LINK) $(LFLAGS) -o $@ surface-probe-main.o header-font.o source-font.o calculator-bridge.o $(filter-out obj/main.o,$(OBJECTS)) lua-probe.a $(OBJCOMP) $(LIBS)
 ''')
 subprocess.run(['make','-j8','-f','SurfaceProbe.mk','surface-probe'],cwd=out,check=True)
 subprocess.run([str(out/'surface-probe'),'-H','-Z','-m208'],cwd=Path(os.environ.get('PICOCALC_TEST_WORKDIR',str(root/'db48x'))),check=True,timeout=120)

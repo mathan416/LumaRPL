@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Compile production controllers with host device/storage I/O, at Pico dimensions."""
 from pathlib import Path
+from simulator_checks import run_checked
 import subprocess,shutil,hashlib,json,os
 root=Path(__file__).resolve().parents[1];out=root/'build/simulator-rgb332'
 subprocess.run(['python3',str(root/'tools/prepare_port302_baseline.py')],check=True)
@@ -84,7 +85,8 @@ shutil.copytree(root/'resources',work,dirs_exist_ok=True)
 captures=root/'reports/port305-controllers'
 if captures.exists():shutil.rmtree(captures)
 captures.mkdir()
-subprocess.run([str(out/binary),'-H','-Z','-m208'],cwd=work,check=True,timeout=300)
+status=run_checked([str(out/binary),'-H','-Z','-m208'],work,root/'reports'/('controller-sanitizer-assertions.json' if sanitized else 'controller-assertions.json'))
+assert status==0, 'Controller runner failed or emitted an engine assertion'
 
 assert reference_state()==initial_reference,"Reference changed during verification"
 (root/"reports/port305-reference-source.json").write_text(json.dumps(initial_reference,indent=2)+"\n")

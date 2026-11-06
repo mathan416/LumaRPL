@@ -9,6 +9,7 @@
 #include <glob.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "datetime.h"
 #include "../pico/target.h"
 extern "C" {
 void pico_ui_host_refresh();int pico_ui_host_disk_ok();
@@ -42,7 +43,7 @@ int pico_ui_host_read_key();
 #undef mark_dirty
 #undef sys_disk_ok
 [[noreturn]] static void test_abort(int line){fprintf(stderr,"FAIL: production controller check at line %d, screen %s\n",line,pico_ui::visible_screen);std::exit(1);}
-static bool host_sd=true,host_fail_save=false;static unsigned host_write_opens=0;
+static bool host_sd=true,host_fail_save=false;static bool host_alarm_ack=false;static unsigned host_write_opens=0;
 static std::string host_rates_csv;
 static int host_theme=0;
 static std::string host_variant="normal";
@@ -71,6 +72,7 @@ void pico_ui_host_refresh()
 {
     ++host_frames;
     std::string id=pico_ui::visible_screen;visits[id]++;
+    if(host_alarm_ack && id=="legacy.message"){host_alarm_ack=false;key_push(0);key_push(33);}
     unsigned rows=0;for(auto &row:host_dirty_rows){rows+=row;row=false;}host_transfers[id][rows]++;
     static std::map<std::string,bool> saved;
     std::string snapshot=host_variant+"."+std::to_string(host_theme)+"."+id;
@@ -302,7 +304,7 @@ static void language_reference_cases()
 
 static void command_reference_cases()
 {
- pico_reference::store store;if(!store.open()||store.count!=1043)test_abort(__LINE__);
+ pico_reference::store store;if(!store.open()||store.count!=pico_reference_data::record_count)test_abort(__LINE__);
  for(auto sample:{std::pair<const char*,const char*>{"Fix","Fix"},{"FixedDisplay","Fix"},{"Grad","Grad"},{"Grads","Grad"},{"Prec","Precision"}}){pico_reference::entry e;if(!store.exact(sample.first,e)||strcmp(e.title,sample.second))test_abort(__LINE__);}
  char body[4097];pico_reference::entry e;for(unsigned i=0;i<store.count;++i)if(!store.read(i,e)||!store.topic(e,body,sizeof body))test_abort(__LINE__);
  for(int theme=0;theme<int(pico_themes::count);++theme)
@@ -321,7 +323,7 @@ static void command_reference_cases()
   ui.clear_menu();rt.reset();
  }
  host_theme=0;apply_theme(0);host_variant="normal";
- puts("PASS: all 1043 native reference records/CRC/UTF8, real engine Help aliases, standard arrows/page/Back controls, find/no-match/missing SD and stack/entry preservation in eight themes");
+ puts("PASS: all native reference records/CRC/UTF8, real engine Help aliases, standard arrows/page/Back controls, find/no-match/missing SD and stack/entry preservation in eight themes");
 }
 
 static unsigned softkey_count=0,softkey_total=0;
@@ -401,6 +403,57 @@ static void calculator_shortcuts_cases()
     force({18,'h','e','l','l','o',13,'b','y','e',13,'2',0x81,0x85});edit_file("data/SHORTCUTS.lua","SHORTCUTS.lua",false);
     {FILE *f=fopen("data/SHORTCUTS.lua","rb");char text[40]={};fread(text,1,sizeof text-1,f);fclose(f);if(strcmp(text,"bye bye")){fprintf(stderr,"FAIL shortcut test line %d graphics=%d help=%d menu=%u depth=%u editor=%u\n",__LINE__,ui.showing_graphics(),ui.showing_help(),ui.menu()?unsigned(ui.menu()->type()):0,unsigned(rt.depth()),unsigned(rt.editing()));std::exit(1);}}
     puts("PASS: real Ctrl+A/Ctrl+R dispatcher preserves stack and entry, Tab/Beep/sixth entry and help; source editor keeps Select all and Replace");
+}
+
+static void menu_row_return_cases()
+{
+    auto press=[](int key,bool repeating=false){pico_stack_menu_key(ui,Stack,key,repeating,false);pico_stack_menu_key(ui,Stack,0,false,false);};
+    auto select=[&](object::id id)
+    {
+        for(unsigned col=0;col<6;++col)
+        {
+            auto action=ui.object_for_key(38+col);
+            if(action && action->type()==id){press(38+col);return;}
+        }
+        test_abort(__LINE__);
+    };
+    for(int theme=0;theme<int(pico_themes::count);++theme)
+    {
+        rt.reset();load_saved_keymap();Settings=settings();host_theme=theme;apply_theme(theme);ui.clear_help();ui.show_graphics(false);Stack.interactive=false;rt.push(integer::make(123));
+        pico_calculator_menu_shortcut(ui,pico_translate_key(15),[](int menu){pico_open_calculator_menu(menu);});
+        if(!ui.menu()||ui.menu()->type()!=object::ID_MathMenu||ui.shift_plane())test_abort(__LINE__);
+        press(28);unsigned parent_row=ui.shift_plane(),parent_page=ui.page();
+        if(parent_row!=1)test_abort(__LINE__);
+        select(object::ID_StatisticsMenu);
+        if(ui.menu()->type()!=object::ID_StatisticsMenu||ui.shift_plane())test_abort(__LINE__);
+        press(28);press(28);unsigned stats_row=ui.shift_plane(),stats_page=ui.page();
+        select(object::ID_ProbabilitiesMenu);
+        if(ui.menu()->type()!=object::ID_ProbabilitiesMenu||ui.shift_plane())test_abort(__LINE__);
+        press(KEY_EXIT,true);if(ui.menu()->type()!=object::ID_ProbabilitiesMenu)test_abort(__LINE__);
+        press(KEY_EXIT);
+        if(ui.menu()->type()!=object::ID_StatisticsMenu||ui.shift_plane()!=stats_row||ui.page()!=stats_page)test_abort(__LINE__);
+        host_variant="stats-row-restored";calculator_frame("calculator.softmenus","Back restores the Stats row");
+        // Error dismissal stays in this menu and keeps its selected row.
+        rt.value_error();press(KEY_EXIT);
+        if(rt.error()||ui.menu()->type()!=object::ID_StatisticsMenu||ui.shift_plane()!=stats_row)test_abort(__LINE__);
+        ui.insert(utf8("'N+1'"),user_interface::TEXT);ui.update_mode();
+        std::string entry(reinterpret_cast<const char *>(rt.editor()),rt.editing());
+        press(KEY_EXIT);
+        if(ui.menu()->type()!=object::ID_MathMenu||ui.shift_plane()!=parent_row||ui.page()!=parent_page||rt.depth()!=1||rt.top()->as_int32(0,false)!=123||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing())!=entry)test_abort(__LINE__);
+        host_variant="math-row-restored";calculator_frame("calculator.softmenus","Back restores the Ctrl+O row");
+        press(KEY_EXIT);if(ui.menu()||ui.shift_plane())test_abort(__LINE__);
+        ui.clear_editor();
+        pico_open_calculator_menu(3);if(ui.shift_plane())test_abort(__LINE__);
+        press(KEY_EXIT);
+        // Menu pages retain their existing Back behavior together with rows.
+        pico_open_calculator_menu(1);object::static_object(object::ID_UserInterfaceModesMenu)->evaluate();
+        ui.page(1);press(28);press(28);unsigned row=ui.shift_plane();
+        object::static_object(object::ID_AnglesMenu)->evaluate();ui.clear_shift();press(KEY_EXIT);
+        if(ui.menu()->type()!=object::ID_UserInterfaceModesMenu||ui.page()!=1||ui.shift_plane()!=row)test_abort(__LINE__);
+        ui.menu_root();
+    }
+    rt.reset();load_saved_keymap();Settings=settings();host_theme=0;apply_theme(0);host_variant="normal";
+    puts("PASS: Ctrl+O Tab Stats Back restores parent rows/pages, nested Back and error dismissal preserve row/entry/stack, fresh roots reset row in 8 themes");
 }
 
 static void menu_back_cases()
@@ -492,6 +545,79 @@ static void bases_cases(){
  }
  Settings.Base(saved);rt.reset();return_to_calculator=false;host_variant="normal";host_theme=0;apply_theme(0);ui.clear_menu();ui.clear_shift();puts("PASS: fixed-base integers/bignums convert exactly through typed and actual soft-key Bin/Oct/Dec/Hex; Ctrl+Y Bases, sticky row and stack preservation in eight themes");
 }
+static void alarm_reminder_cases()
+{
+    for(int theme=0;theme<8;++theme)
+    {
+        rt.reset();load_saved_keymap();ui.clear_editor();ui.clear_help();
+        host_theme=theme;apply_theme(theme);host_variant="alarm-reminder";
+        key_pop_all();
+        if(!execute("20000101 \"Check the oven\" StoAlarm DROP 20990101 \"Future\" StoAlarm DROP 42"))test_abort(__LINE__);
+        if(!save_state_file_silent("data/ALARMS.48S"))test_abort(__LINE__);
+        rt.reset();load_saved_keymap();
+        if(!load_state_file_silent("data/ALARMS.48S")||rt.depth()!=1||rt.top()->as_int32(0,false)!=42)test_abort(__LINE__);
+        sys_delay(1100);
+        rt.error("Preserved alarm test");
+        if(alarm_notify()||strcmp((const char *)rt.error(),"Preserved alarm test"))test_abort(__LINE__);
+        rt.clear_error();key_push(33);
+        if(alarm_notify())test_abort(__LINE__);
+        key_pop_all();host_alarm_ack=true;
+        if(!alarm_notify()||rt.error()||rt.depth()!=1||rt.top()->as_int32(0,false)!=42)test_abort(__LINE__);
+        key_pop_all();
+        if(!execute("1 RclAlarm 4 GET 1 SAME 2 RclAlarm 4 GET 0 SAME AND")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
+        if(!save_state_file_silent("data/ALARMS.48S"))test_abort(__LINE__);
+        rt.reset();load_saved_keymap();
+        if(!load_state_file_silent("data/ALARMS.48S")||!execute("1 RclAlarm 4 GET 1 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
+    }
+    remove("data/ALARMS.48S");rt.reset();load_saved_keymap();
+    host_variant="normal";host_theme=0;apply_theme(0);
+    puts("PASS: alarm alert/acknowledgement, preserved calculator stack, future reminders and saved-session restoration in eight themes");
+}
+
+static void available_menu_cases()
+{
+    rt.reset();load_saved_keymap();Settings=settings();ui.clear_editor();ui.clear_help();ui.show_graphics(false);Stack.interactive=false;
+    unsigned inspected=0;
+    for(auto type:{object::ID_ProbabilitiesMenu,object::ID_SignalProcessingMenu,
+                  object::ID_MatrixMenu,object::ID_PolynomialsMenu,
+                  object::ID_ArithmeticMenu,object::ID_CalculationMenu,
+                  object::ID_TrigIdentitiesMenu,object::ID_ExpLogIdentitiesMenu,
+                  object::ID_LoopsMenu,object::ID_ListMenu,object::ID_MultiSolverMenu,
+                  object::ID_PrintingMenu,object::ID_IOMenu,object::ID_FilesMenu,
+                  object::ID_GraphicsMenu,object::ID_TimeMenu,object::ID_DateMenu,
+                  object::ID_AlarmMenu})
+    {
+        ui.menu(menu_p(object::static_object(type)));
+        unsigned pages=ui.pages();
+        for(unsigned page=0;page<pages;++page)
+        {
+            ui.page(page);
+            for(unsigned plane=0;plane<3;++plane)
+            {
+                ui.shift_plane(plane);
+                for(unsigned column=0;column<6;++column)
+                {
+                    object_p action=ui.object_for_key(38+column);
+                    const char *label=ui.label_text(plane*6+column);
+                    if(label && *label && action &&
+                       (action->type()==object::ID_Unimplemented))test_abort(__LINE__);
+                    if(label && *label)++inspected;
+                }
+            }
+        }
+    }
+    if(inspected<200)test_abort(__LINE__);
+    ui.clear_menu();ui.clear_shift();rt.clear_error();
+    puts("PASS: native calculator menus expose working actions; unavailable legacy/hardware actions and alarm links omitted");
+}
+
+static std::string validated_entry;
+static bool validate_literal_entry(gcutf8 &source,size_t length)
+{
+    validated_entry.assign(reinterpret_cast<const char *>(+source),length);
+    return true;
+}
+
 static void cursor_error_recovery_cases()
 {
     auto text=[](const char *s){while(*s){pico_calculator_text_key(ui,Stack,unsigned(*s++),false);pico_stack_menu_key(ui,Stack,0,false,false);}};
@@ -501,6 +627,23 @@ static void cursor_error_recovery_cases()
     for(int theme=0;theme<int(pico_themes::count);++theme)
     {
         reset();Settings=settings();ui.clear_menu();ui.clear_help();ui.clear_shift();host_theme=theme;apply_theme(theme);
+        for(const char *literal:{"(2+3)","2^3","6!","6?","i"})
+        {
+            reset();validated_entry.clear();ui.input(validate_literal_entry);
+            ui.editing_mode(user_interface::TEXT);text(literal);enter();
+            if(rt.error()||validated_entry!=literal)test_abort(__LINE__);
+            ui.input(nullptr);
+        }
+        reset();Settings.NeedToClearErrors(true);text("((2+3)");enter();
+        text("9");
+        if(!rt.error()||editor()!="((2+3)")test_abort(__LINE__);
+        enter();Settings.NeedToClearErrors(false);enter();text(")");
+        if(rt.error()||editor()!="((2+3))")test_abort(__LINE__);
+        reset();text("0^-1");enter();
+        if(!rt.error()||editor()!="0^-1"||rt.depth()){fprintf(stderr,"Power recovery error=%s editor=%s depth=%u\n",rt.error()?cstring(rt.error()):"none",editor().c_str(),unsigned(rt.depth()));test_abort(__LINE__);}
+        enter();ui.remove(2,1);ui.cursor_position(2);enter();
+        if(rt.error()||rt.depth()!=1||!rt.top()->is_zero(false))test_abort(__LINE__);
+        reset();
         for(char op:std::string("!?^+-*/"))for(unsigned cursor:{0U,1U})
         {
             reset();text("99");enter();text("12");ui.cursor_position(cursor);
@@ -838,6 +981,9 @@ void port305_controller_cases()
     static blitter::pixword framebuffer[320*320*surface::BPP/32];::Screen=surface(framebuffer,320,320);
     pico_ui::menu_observer=menu_observer;pico_ui::observer=[](const char *,const char *title){host_title=title;apply_theme(host_theme);};
 
+    if(getenv("LUMARPL_ALARMS_ONLY")){alarm_reminder_cases();std::fflush(nullptr);std::_Exit(0);}
+    if(getenv("LUMARPL_REVIEW_ONLY")){alarm_reminder_cases();available_menu_cases();menu_row_return_cases();signed_entry_cases();cursor_error_recovery_cases();grouped_entry_cursor_cases();postfix_entry_cases();power_entry_cases();termial_entry_cases();std::fflush(nullptr);std::_Exit(0);}
+    if(getenv("LUMARPL_MENU_ROWS_ONLY")){menu_row_return_cases();menu_back_cases();math_menu_shortcut_cases();std::fflush(nullptr);std::_Exit(0);}
     if(getenv("LUMARPL_MINUS_ONLY")){signed_entry_cases();cursor_error_recovery_cases();grouped_entry_cursor_cases();postfix_entry_cases();power_entry_cases();termial_entry_cases();std::fflush(nullptr);std::_Exit(0);}
     if(getenv("LUMARPL_RECOVERY_ONLY")){cursor_error_recovery_cases();grouped_entry_cursor_cases();postfix_entry_cases();power_entry_cases();termial_entry_cases();std::fflush(nullptr);std::_Exit(0);}
     if(getenv("LUMARPL_GROUPED_ONLY")){grouped_entry_cursor_cases();postfix_entry_cases();power_entry_cases();termial_entry_cases();std::fflush(nullptr);std::_Exit(0);}
@@ -1046,7 +1192,7 @@ void port305_controller_cases()
 
     {auto press=[](int key){pico_stack_menu_key(ui,Stack,key,false,false);pico_stack_menu_key(ui,Stack,0,false,false);};
      rt.reset();load_saved_keymap();ui.clear_shift();object::static_object(object::ID_ModesMenu)->evaluate();press(28);if(ui.shift_plane()!=1)test_abort(__LINE__);bool beep=Settings.BeepOn();press(40);if(Settings.BeepOn()==beep||ui.shift_plane()!=1)test_abort(__LINE__);press(40);if(Settings.BeepOn()!=beep||ui.shift_plane()!=1)test_abort(__LINE__);
-     ui.insert(utf8("« 1 2 "),user_interface::DIRECT);object::static_object(object::ID_Catalog)->evaluate();ui.clear_shift();press(28);press(28);unsigned plane=ui.shift_plane();char selected[40]={};ui.object_for_key(38)->render(selected,sizeof selected);if(strcmp(selected,"<"))test_abort(__LINE__);press(38);if(ui.shift_plane()!=plane||!rt.editing()||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing()).find('<')==std::string::npos)test_abort(__LINE__);if(rt.editing())press(33);if(!ui.menu()||ui.menu()->type()!=object::ID_ModesMenu||ui.shift_plane()||!rt.editing())test_abort(__LINE__);press(33);if(ui.menu()||!rt.editing())test_abort(__LINE__);press(33);if(rt.editing())test_abort(__LINE__);rt.clear_error();ui.clear_shift();
+     ui.insert(utf8("« 1 2 "),user_interface::DIRECT);object::static_object(object::ID_Catalog)->evaluate();ui.clear_shift();press(28);press(28);unsigned plane=ui.shift_plane();char selected[40]={};ui.object_for_key(38)->render(selected,sizeof selected);if(strcmp(selected,"<"))test_abort(__LINE__);press(38);if(ui.shift_plane()!=plane||!rt.editing()||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing()).find('<')==std::string::npos)test_abort(__LINE__);if(rt.editing())press(33);if(!ui.menu()||ui.menu()->type()!=object::ID_ModesMenu||ui.shift_plane()!=1||!rt.editing())test_abort(__LINE__);press(33);if(ui.menu()||!rt.editing())test_abort(__LINE__);press(33);if(rt.editing())test_abort(__LINE__);rt.clear_error();ui.clear_shift();
      rt.reset();load_saved_keymap();ui.clear_shift();object::static_object(object::ID_ModesMenu)->evaluate();ui.shift_plane(0);press(43);if(!ui.menu()||ui.menu()->type()!=object::ID_UserInterfaceModesMenu)test_abort(__LINE__);
      puts("PASS: sixth RPL soft key dispatches UI settings; physical Ctrl+F5 translation remains unchanged");
      puts("PASS: actual Modes/Beep and Catalog F1 preserve Tab row across dispatch and release");}

@@ -7,10 +7,10 @@ This guide starts with calculations you can try immediately. Later chapters foll
 ## Your first calculation
 
 1. Start LumaRPL from the UF2 Loader. The calculator stack opens.
-2. Type `2 3 +` and press **Enter**.
-3. The answer is **5**. Type `4 *` and press Enter to use that answer in the next calculation. The result is **20**.
+2. Type `2`, press **Enter**, then type `3` and press **+**.
+3. The answer appears immediately: **5**. Type `4` and press the multiplication key to use that answer in the next calculation. The result is **20**.
 
-Spaces separate values and commands in the examples. You can also enter the values one at a time. When a step says to enter RPL at the calculator, type the shown text at the stack and press Enter. A code box is not a menu path.
+Spaces separate values and commands in the examples. You can also enter the values one at a time. Finish textual RPL commands with Enter. Arithmetic keys can finish an entry immediately: if the result already appears, continue without another Enter. A code box is not a menu path.
 
 > Before experimenting with an existing session, press Ctrl+S to save it. Examples that store a name can replace a variable with that name.
 
@@ -49,13 +49,13 @@ The answer is **7**, because subtraction takes the earlier value minus the top v
 | Entry or action | Stack, bottom to top | Why |
 | 10 Enter | 10 | First input |
 | 3 Enter | 10, 3 | Second input is on top |
-| - Enter | 7 | 10 minus 3 |
+| - | 7 | 10 minus 3 |
 | DUP Enter | 7, 7 | Copy the top value |
-| * Enter | 49 | Multiply the two copies |
+| * | 49 | Multiply the two copies |
 
 ## Enter negative numbers
 
-Type `-1` and press Enter. A leading `-` starts a signed number even when other values are already on the stack. To subtract two values already on the stack, type `-` by itself and press Enter. Subtraction after a number retains the usual operator behavior.
+With fewer than two values on the stack, type `-1` and press Enter to enter a negative number. With two or more values and an empty entry, **-** subtracts immediately. To enter a negative number in that case, type `1 Neg` and press Enter; this adds -1 without subtracting the existing values. Subtraction after an entered number retains the usual operator behavior.
 
 ## A calculation in stages
 
@@ -103,7 +103,7 @@ The result is **4+6i**. The display may typeset the imaginary unit differently f
 
 For the imaginary unit alone, enter `i`. To calculate its factorial, type `i!` and press Enter; `i Factorial` is equivalent. The result is approximately `0.498015668118-0.154949828302i`. The calculator recognizes `i`, `i!` and `i Factorial` as convenient entries for an unassigned imaginary unit. A stored variable named `i` still takes precedence. RPL program source, iterator names and quoted algebra retain their normal symbol semantics.
 
-`Gamma` accepts complex numbers, for example `(1;1) Gamma` gives the same result as `(0;1)!`. Complex Gamma uses the selected calculation precision and works independently of degree/radian mode. Zero and negative integer arguments are poles and report a domain error. Complex `LnGamma` remains unsupported.
+`Gamma` accepts complex numbers, for example `(1;1) Gamma` gives the same result as `(0;1)!`. Complex Gamma uses the selected calculation precision and works independently of degree/radian mode. Zero and negative integer arguments are poles and report a domain error. Complex `LnGamma` returns the principal logarithm of Gamma. Complex `Erf` and `Erfc` are also supported. Very demanding inputs can report precision loss when the available precision cannot safely resolve cancellation.
 
 ## Mathematical constants and functions
 
@@ -125,11 +125,81 @@ Use Left/Right to move the formula cursor. Cursor navigation updates the editor 
 
 Type `6?` or `6 Termial` and press Enter to sum `1+2+3+4+5+6`, giving **21**. `0?` gives zero. Counts must be nonnegative whole numbers; fractions and negative counts report a domain error. Whole-valued decimals such as `6.0` are accepted. The calculation uses `n*(n+1)/2` and keeps integer results exact, including large counts.
 
-In quoted algebra, `'N?'` means `Termial(N)`, and `'(2+4)?'` gives 21 when evaluated. In RPL, put a space before `?` after a variable (`N ?`), or use `N Termial`. Ordinary RPL names ending in `?` remain valid. Use the explicit name prefix `Ⓥ` when quoting such a literal name, for example `'ⓋREADY?'`. The explicit undefined constant `Ⓒ?` is unchanged.
+In quoted algebra, `'N?'` means `Termial(N)`, and `'(2+4)?'` gives 21 when evaluated. In RPL, put a space before `?` after a variable (`N ?`), or use `N Termial`. Ordinary RPL names ending in `?` remain valid. Use the explicit name prefix (a circled V) when quoting a literal name that ends in `?`. The explicit undefined constant (a circled C followed by `?`) is unchanged.
 
 With the editor empty, pressing `?` immediately applies Termial to the top stack value: `6 Enter ?` gives **21**. Similarly, `6 Enter !` immediately gives **720**. Typing `6?` or `6!` also calculates immediately, without Enter. In programs and quoted algebra, these characters remain mathematical notation.
 
 Termial is also in the Command Catalogue and at the end of Math > Proba. It follows the same postfix editing convention as factorial.
+
+## Fourier transforms and matrix commands
+
+`FFT` and `InvFFT` now work directly on the calculator stack and in RPL programs.
+Enter a real or complex vector with a power-of-two length from 1 to 1024, subject
+to available memory. `FFT` returns all frequency coefficients in their ordinary
+order, with a negative exponential and no scaling. `InvFFT` uses the positive
+exponential and divides by the vector length. Neither command applies a window
+or subtracts a mean. The Signal analysis workbench still provides those options.
+
+```rpl
+[1 2 3 4] FFT InvFFT
+```
+
+The Matrix menu includes decimal `MatrixQR`, `LQ`, `Cholesky`, `SVD`, `SVL`, `CondNum`,
+`Schur`, `SpecRad`, `ToDiagonal` and `FromDiagonal` commands. Factorizations accept
+real matrices with dimensions up to 32, subject to memory. QR returns Q then R;
+LQ returns L then Q; Cholesky returns a lower triangular factor. SVD returns U,
+a vector of descending singular values, then V, with A = U diag(s) transpose(V).
+Schur returns Q then T, with A = Q T transpose(Q). Schur can retain two-by-two
+blocks for complex eigenvalue pairs. Singular condition numbers report divide
+by zero; invalid or nonconvergent factorizations report an error.
+
+`RREFMOD` performs exact modular row reduction. Select a prime with
+`5 CASModulus`, for example; the default modulus is 13. Non-integer matrix
+entries and composite moduli are rejected.
+
+## Probability and symbolic commands
+
+The Probability menu now includes lower-tail probabilities and finite inverse
+probabilities. `Normal` takes mean, variance and x; `Student` and `ChiSquare`
+take degrees of freedom and x; `FDistribution` takes numerator degrees of freedom,
+denominator degrees of freedom and x. Their `Inv` commands use a lower-tail
+probability strictly between zero and one in place of x. Existing `UTPN`, `UTPT`,
+`UTPC` and `UTPF` commands remain available for upper tails.
+
+`Taylor` takes expression, variable, expansion point and nonnegative order.
+`FiniteDifference` takes expression, variable and step, and returns the forward difference.
+`DerivX` and `IntVX` use the currently selected algebra variable. Taylor and
+analytic Limit coefficient calculations use radians and preserve your angle
+mode. `Limit` takes expression, variable and a finite real point; it handles
+continuous analytic expressions and removable zero-over-zero singularities.
+Discontinuous or unsupported limits report an error rather than an estimate.
+
+Trigonometric and exponential rewrite commands are available in their calculator
+menus. `LnCollect` conservatively combines logarithms of positive integer
+factors, preserving complex logarithm branches. `SinCos` rewrites sine and cosine
+using complex exponentials; use `ToDecimal` or `NumericalConstants` to evaluate
+the imaginary constant. `Find` returns the first one-based match in a list or
+vector, or zero when absent.
+
+The **Alarms** menu under Time or Date manages clock-based reminders. Set the
+local clock first. Enter `20261225.093000 "Check the oven"` and choose **→Alarm**
+(`StoAlarm`) to schedule a reminder and receive its ID. **Alarms** lists records;
+**Alarm→** recalls an ID; **DelAlm** deletes an ID. **Ack** dismisses the oldest
+due reminder; **AckAll** dismisses all due reminders and preserves future ones.
+
+A due reminder displays at an idle boundary; press Enter to acknowledge it.
+Alerts wait for programs and INPUT prompts. Save the session to retain alarms
+across restarts. Up to 32 records, including acknowledged ones, are retained.
+The device cannot alert while switched off; overdue reminders appear after
+restoring the session with the correct clock. Recurring alarms and hardware
+wake-up are not supported.
+
+PicoCalc menus omit inherited unavailable actions, including IR printing,
+legacy file-handle commands and unimplemented branch labels.
+Use the existing file browser, RPL structured control flow and subprograms, or
+Lua file APIs for those supported workflows. No IR or other hardware integration
+has been added. Range-to-standard-deviation conversion remains deliberately
+rejected: an interval alone does not specify a probability distribution.
 
 ## Quoted algebra
 
@@ -151,13 +221,14 @@ HOME variables and programs are part of the calculator session. **Ctrl+S** saves
 
 ## Lists and matrices
 
-`{1 2 3}` is a list. `[1 2 3]` is a vector. `[[1 2][3 4]]` is a two-row matrix. For a quick matrix example, enter:
+`{1 2 3}` is a list; `[1 2 3]` is a vector. This two-row matrix example
+returns the determinant **-2**. The Matrix workbench also provides a grid editor
+and named A/B matrices.
 
 ```rpl
 [[1 2][3 4]] DET
 ```
 
-The determinant is **-2**. Use the Matrix workbench when a grid editor and named A/B matrices make the problem easier to manage.
 
 # 4 Calculator menus and settings
 
@@ -168,6 +239,8 @@ Native lists and calculator soft menus have different controls. Recognizing whic
 Use Arrows and Enter, or the numbered visible row shortcuts 1-8. Left/Right pages through a longer list. In ordinary lists, labelled Previous/Next actions may also be available. F4 Details explains the current choice; F5 or Esc returns.
 
 ## Calculator soft menus
+
+When you go back from a submenu, the parent page and Tab-selected row are restored. Opening a fresh root menu starts at its first row.
 
 These have six columns and multiple rows. **Tab** selects a row. **F1-F5** activate columns 1-5 of that row; **Ctrl+F5** activates column 6. The row remains selected until you press Tab again. A genuinely different menu begins at its first row.
 

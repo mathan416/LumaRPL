@@ -1,0 +1,153 @@
+{
+  "status": "Implemented and software-validated; copied and hash-verified on SD; unreleased",
+  "tests": {
+    "alarm_contract_cases": 16,
+    "calculator_regressions": {
+      "binary": "/Users/mathan/Documents/ChatGPT/PicoCalc/build/simulator-rgb332/db48x.app/Contents/MacOS/db48x",
+      "binary_sha256": "686ca980962acbb330977038b5b22520b650ff3d0f7b18b499eecd54319ffd75",
+      "test_source_sha256": "37b8991b2804e05a5715d1a68bbbe9a30b253090435f4175b5d7b7785269aae6",
+      "filter": null,
+      "cases": 135,
+      "failures": 0
+    },
+    "sanitized_calculator_regressions": {
+      "binary": "/Users/mathan/Documents/ChatGPT/PicoCalc/build/simulator-review-asan/db48x.app/Contents/MacOS/db48x",
+      "binary_sha256": "3acf052a3ec16ce7b01edd75e786e221db00853d7f1f6a5394049a78ea45eef9",
+      "test_source_sha256": "37b8991b2804e05a5715d1a68bbbe9a30b253090435f4175b5d7b7785269aae6",
+      "filter": null,
+      "cases": 135,
+      "failures": 0
+    },
+    "full_simulator": {
+      "tests": 8507,
+      "failures": 0,
+      "process_returncode": 0,
+      "assertion_count": 0,
+      "assertions": [],
+      "passed": true,
+      "fixtures": {
+        "manual": "db48x/help/db50x.md",
+        "manual_sha256": "b25ec2d6d441aac3ba2b7e191f180e92ea1ed8638fcbaa83133f69cef7e11da1",
+        "index_sha256": "c1571e543880741967064036d910824458ac57876e73a88d3b8fc9ce34ab761c",
+        "index_entries": 5936,
+        "colour_goldens": true
+      },
+      "log": "reports/alarm-final-suite.log"
+    },
+    "native_ui": {
+      "themes": 8,
+      "coverage": [
+        "alert rendering and acknowledgement",
+        "stack preservation",
+        "future reminders retained",
+        "session save/load before and after acknowledgement",
+        "existing error preservation",
+        "queued key preservation",
+        "available menu actions",
+        "earlier calculator editing/menu regressions"
+      ],
+      "normal": {
+        "process_returncode": 0,
+        "assertion_count": 0,
+        "assertions": [],
+        "passed": true
+      },
+      "sanitized": {
+        "process_returncode": 0,
+        "assertion_count": 0,
+        "assertions": [],
+        "passed": true
+      }
+    },
+    "host_sanitizer_executables": 39,
+    "lua": "passed",
+    "shipped_help_examples": 310,
+    "manual_examples": 135
+  },
+  "firmware": {
+    "path": "build/pico/db48x-picocalc-pico2w.uf2",
+    "sha256": "77c0c70f511e1904c61eaf999c6ff4abb07ff8dff098ae94454a9e9e37bc53b3",
+    "file_bytes": 4623360,
+    "build_and_uf2_validation": "passed",
+    "memory": {
+      "flash_image_bytes": 2311256,
+      "application_partition_bytes": 4186112,
+      "internal_ram_before_heap_bytes": 390288,
+      "calculator_arena_bytes": 212992,
+      "framebuffer_bytes": 102400,
+      "bounded_heap_bytes": 98304,
+      "reserved_stack_bytes": 32768,
+      "unused_gap_bytes": 2928,
+      "note": "Arena/framebuffer are included in internal_ram_before_heap_bytes. Linker RAM-region usage is 100% because stack is at top of RAM; unused_gap_bytes remains unallocated.",
+      "parkable_document_payload_bytes": 21180,
+      "matrix_document_bytes": 1164,
+      "finance_document_bytes": 216,
+      "matrix_b_document_bytes": 1164,
+      "complex_document_bytes": 132,
+      "geometry_document_bytes": 160,
+      "math_lab_document_bytes": 1576,
+      "advanced_math_document_bytes": 1016,
+      "science_document_bytes": 1392,
+      "research_document_bytes": 5968,
+      "editor_tools_internal_bytes": 572,
+      "editor_undo_payload_bytes": 4256,
+      "shared_workspace_bytes": 16384,
+      "psram_chip_bytes": 8388608,
+      "psram_backing_pool_bytes": 8323072,
+      "psram_physically_verified": false,
+      "network_application_state_bound_bytes": 400,
+      "network_boot_client_heap_bytes": 240,
+      "network_sdk_heap_delta_device_measured": false
+    }
+  },
+  "engine_patch": {
+    "sha256": "f7042f4e453d0e97c4d06a095a9952b89d7fc72f4dba42f2c7680dcc1bf5d68f",
+    "files": 42
+  },
+  "manuals": [
+    {
+      "file": "LumaRPL-User-Guide.pdf",
+      "pages": 63,
+      "sha256": "10ec5df9319702a146526c1ed1419e922ef99921013980be3bfe8b5b4d2b8ca7",
+      "layout_and_visual_review": "passed"
+    },
+    {
+      "file": "LumaRPL-Programming-Guide.pdf",
+      "pages": 84,
+      "sha256": "833147349312c7d7d48c0badef275ef4c793d2a2bce5272d89b2dae669c7cf2b",
+      "layout_and_visual_review": "passed"
+    }
+  ],
+  "physical_device_verified": false,
+  "sd_deployed": true,
+  "capabilities": "../CALCULATOR-CAPABILITIES.md",
+  "alarm_details": "alarms.json",
+  "scope": "Earlier calculator review fixes, 42 appended calculator commands and one setting, completed calculator menu actions and clock reminders; unsupported legacy hardware/interfaces remain hidden.",
+  "deployment": {
+    "card": "/Volumes/NO NAME",
+    "backup": "/Users/mathan/Documents/ChatGPT/PicoCalc/sd-backups/alarms-20261106T042541Z",
+    "files_written": [
+      "pico2-apps/LumaRPL-Pico-2-W.uf2",
+      "db48x/help/LumaRPL.md",
+      "db48x/help/commands.lri",
+      "db48x/help/commands.lrt",
+      "db48x/help/db48x.idx",
+      "db48x/help/db48x.md",
+      "db48x/help/picocalc-reference.json",
+      "db48x/manuals/LumaRPL-API-Assembly-Reference.pdf",
+      "db48x/manuals/LumaRPL-Programming-Guide.pdf",
+      "db48x/manuals/LumaRPL-User-Guide.pdf",
+      "db48x/manuals/SHA256SUMS"
+    ],
+    "files_verified": 846,
+    "firmware_sha256": "77c0c70f511e1904c61eaf999c6ff4abb07ff8dff098ae94454a9e9e37bc53b3",
+    "bootloader_preserved": true,
+    "saved_data_and_other_apps_preserved": true,
+    "left_mounted": true,
+    "device_boot_tested": false
+  },
+  "source_state_at_verification": {
+    "committed": false,
+    "pushed": false
+  }
+}

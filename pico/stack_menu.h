@@ -3,7 +3,7 @@
 #include "variables.h"
 #include "text.h"
 // Keep Tab-selected RPL menu rows across soft-key actions and key releases.
-// A different menu starts with its own initial row; stack arrows retain their plane.
+// Submenus start on their initial row; Back restores the parent row.
 template<class Interface,class StackView>
 bool pico_stack_menu_key(Interface &ui,StackView &stack,int key,bool repeating,bool alpha)
 {
@@ -22,7 +22,7 @@ bool pico_stack_menu_key(Interface &ui,StackView &stack,int key,bool repeating,b
     {
         ui.shift_plane(plane);
     }
-    if((leave&&(active||!menu||menu!=ui.menu())) ||
+    if((leave&&(active||!menu||!ui.menu())) ||
        (active&&!stack.interactive))ui.clear_shift();
     if(key==0)plain_release=false;
     return consumed;
@@ -78,6 +78,18 @@ inline bool pico_calculator_grouped_formula(const byte *text,size_t first,size_t
 template<class Interface,class StackView>
 bool pico_calculator_text_key(Interface &ui,StackView &stack,unsigned c,bool repeating)
 {
+    if(rt.error())
+    {
+        if(Settings.NeedToClearErrors())
+            return pico_stack_menu_key(ui,stack,KB_ADD,repeating,false);
+        rt.clear_error();
+        pico_stack_menu_key(ui,stack,0,false,false);
+    }
+    if(ui.in_input())
+    {
+        ui.insert(c,Interface::DIRECT,false);
+        return true;
+    }
     unsigned cursor=ui.cursor_position();
     const auto *editor=rt.editor();
     if(rt.editing() && cursor<rt.editing() && !stack.interactive &&
@@ -131,7 +143,7 @@ bool pico_calculator_text_key(Interface &ui,StackView &stack,unsigned c,bool rep
 template<class Interface>
 bool pico_calculator_prepare_entry(Interface &ui)
 {
-    if(ui.showing_help()||ui.showing_graphics())return true;
+    if(ui.showing_help()||ui.showing_graphics()||ui.in_input())return true;
     size_t length=rt.editing(),first=0,last=length;
     const auto *text=rt.editor();
     while(first<last && text[first]==' ')++first;
@@ -150,9 +162,9 @@ bool pico_calculator_prepare_entry(Interface &ui)
            pico_calculator_numeric_literal(text,first,power) &&
            pico_calculator_numeric_literal(text,power+1,last))
         {
-            if(ui.insert(last,utf8(" ^"),2)!=2)return false;
-            rt.editor()[power]=' ';
-            ui.cursor_position(last+2);
+            if(ui.insert(last,utf8("' EVAL"),6)!=6)return false;
+            if(ui.insert(first,U'\'')!=1)return false;
+            ui.cursor_position(last+7);
             ui.update_mode();
             return true;
         }
@@ -184,10 +196,16 @@ bool pico_calculator_key(Interface &ui,StackView &stack,int key,bool repeating,b
         return pico_stack_menu_key(ui,stack,key,repeating,alpha);
     size_t length=rt.editing(),first=0;
     while(first<length && rt.editor()[first]==' ')++first;
-    bool grouped=pico_calculator_grouped_formula(rt.editor(),0,length);
-    text_g original=grouped?text::make(rt.editor(),length):nullptr;
-    if(grouped && !original)return true;
+    bool transformed=!ui.in_input() &&
+        pico_calculator_grouped_formula(rt.editor(),0,length);
+    for(size_t power=first;!transformed && !ui.in_input() && power<length;++power)
+        transformed=rt.editor()[power]=='^' &&
+            pico_calculator_numeric_literal(rt.editor(),first,power) &&
+            pico_calculator_numeric_literal(rt.editor(),power+1,length);
+    text_g original=transformed?text::make(rt.editor(),length):nullptr;
+    if(transformed && !original)return true;
     unsigned original_cursor=ui.cursor_position();
+    size_t original_depth=rt.depth();
     bool prepared=pico_calculator_prepare_entry(ui);
     bool consumed=prepared?pico_stack_menu_key(ui,stack,key,repeating,alpha):true;
     if(original && rt.error())
@@ -210,6 +228,7 @@ bool pico_calculator_key(Interface &ui,StackView &stack,int key,bool repeating,b
         if(unclosed>0){cursor=length;selection=~0U;}
         // Restore both user-visible text and error coordinates, not the adapter.
         error_save error;
+        if(rt.depth()>original_depth)rt.drop(rt.depth()-original_depth);
         ui.clear_editor();
         if(rt.edit(original->value(),length)==length)
         {

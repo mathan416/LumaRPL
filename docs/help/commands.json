@@ -501,19 +501,19 @@
   },
   "erf": {
     "category": "Functions",
-    "text": "Calculate the error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+    "text": "Calculate the error function of a real or complex argument. Complex calculations use guarded decimal series or a large-argument expansion, preserving angle and precision settings. Very demanding inputs can report precision loss when the working precision is insufficient."
   },
   "erfc": {
     "category": "Functions",
-    "text": "Calculate the complementary error function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+    "text": "Calculate the complementary error function of a real or complex argument. Complex calculations use guarded decimal series or a large-argument expansion, preserving angle and precision settings. Very demanding inputs can report precision loss when the working precision is insufficient."
   },
   "tgamma": {
     "category": "Functions",
-    "text": "Calculate the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+    "text": "Calculate real or complex Gamma at the selected precision. For positive integers Gamma(n)=(n-1)!. Zero and negative integers are poles and report a domain error. Complex arguments use decimal arithmetic, preserve the angle setting, and include reflection for negative real parts."
   },
   "lgamma": {
     "category": "Functions",
-    "text": "Calculate the logarithm of the gamma function for the top stack value. Its real domain and the real/complex result setting determine which inputs are accepted. Complex arguments are not implemented for this function."
+    "text": "Calculate log Gamma. Complex arguments return the principal complex logarithm of Gamma; this can differ by a multiple of 2*pi*i from an analytically continued log-Gamma branch. Poles report a domain error."
   },
   "GammaP": {
     "category": "Functions",
@@ -1117,7 +1117,7 @@
   },
   "RREFMOD": {
     "category": "Complex numbers and matrices",
-    "text": "Modulo row reduction is not implemented in this engine build and reports an error. Use REF or RREF for ordinary row reduction."
+    "text": "Exact modular row reduction of an integer matrix over the prime field selected by CASModulus (default 13). Swaps zero pivots, accepts negative and arbitrary-size integers, and rejects composite moduli. Dimensions up to 32 are accepted, subject to memory."
   },
   "LU": {
     "category": "Complex numbers and matrices",
@@ -2386,5 +2386,173 @@
   "Show": {
     "category": "Graphics",
     "text": "Show an enlarged rendering of the supplied calculator object. This is separate from plotting a native saved graph."
+  },
+  "FFT": {
+    "category": "Complex numbers and matrices",
+    "text": "Transform a real or complex vector to frequency coefficients. The length must\nbe a power of two from 1 to 1024. Available memory may impose a smaller limit\nat high precision. Matrices and non-numeric elements are rejected.\n\nThe forward transform uses the negative exponential and no scale factor:\nX[k] = Sum(x[j] exp(-2 pi i j k/N)). Values remain in ordinary frequency order,\nstarting with the zero-frequency coefficient. No window, demeaning, sample-rate\nscaling or one-sided amplitude normalization is applied. Use Signal analysis\nfor those data-analysis options. Calculation uses decimal arithmetic and the\nselected precision; the angle-mode setting is preserved."
+  },
+  "InvFFT": {
+    "category": "Complex numbers and matrices",
+    "text": "Inverse of FFT. The positive exponential and division by the vector length\nmake InvFFT(FFT(x)) recover the original samples, within numerical precision.\nInput restrictions match FFT."
+  },
+  "Normal": {
+    "category": "Statistics and finance",
+    "text": "Lower-tail normal probability. Takes mean, variance, then the evaluation point.\nThe variance must be positive. UTPN provides the corresponding upper tail."
+  },
+  "Student": {
+    "category": "Statistics and finance",
+    "text": "Lower-tail Student probability. Takes positive degrees of freedom, then the\nevaluation point. UTPT provides the corresponding upper tail."
+  },
+  "ChiSquare": {
+    "category": "Statistics and finance",
+    "text": "Lower-tail chi-square probability. Takes positive degrees of freedom, then the\nnonnegative evaluation point. Negative points return zero. See UTPC for the\nupper tail."
+  },
+  "FDistribution": {
+    "category": "Statistics and finance",
+    "text": "Lower-tail Fisher probability. Takes positive numerator degrees of freedom,\npositive denominator degrees of freedom, then the evaluation point. Nonpositive\npoints return zero. See UTPF for the upper tail."
+  },
+  "InvNormal": {
+    "category": "Statistics and finance",
+    "text": "Normal quantile. Takes mean, positive variance, then lower-tail probability.\nThe probability must be strictly between zero and one, giving a finite result."
+  },
+  "InvStudent": {
+    "category": "Statistics and finance",
+    "text": "Student quantile. Takes positive degrees of freedom, then lower-tail probability\nstrictly between zero and one."
+  },
+  "InvChiSquare": {
+    "category": "Statistics and finance",
+    "text": "Chi-square quantile. Takes positive degrees of freedom, then lower-tail\nprobability strictly between zero and one."
+  },
+  "InvFDistribution": {
+    "category": "Statistics and finance",
+    "text": "Fisher quantile. Takes positive numerator degrees of freedom, positive denominator\ndegrees of freedom, then lower-tail probability strictly between zero and one."
+  },
+  "LQ": {
+    "category": "Complex numbers and matrices",
+    "text": "Replaces a real matrix A with L, then Q, so L Q * reconstructs A. This uses QR\non the transpose. Dimensions and numerical restrictions match QR."
+  },
+  "Cholesky": {
+    "category": "Complex numbers and matrices",
+    "text": "Replaces a real symmetric positive-definite matrix A with its lower triangular\nfactor L, so L DUP Transpose * reconstructs A. Nonsymmetric or non-positive-\ndefinite inputs report a domain error. Dimensions are limited to 32, subject\nto available memory."
+  },
+  "SVD": {
+    "category": "Complex numbers and matrices",
+    "text": "Thin singular value decomposition of a real matrix. Replaces A with U, a vector\ns of descending singular values, then V. With k=min(rows,columns), U has k\ncolumns and V has k columns. U s ToDiagonal * V Transpose * reconstructs A.\nDimensions are limited to 32, subject to memory. The iteration is cancellable;\nfailure to converge reports a domain error. Complex and symbolic inputs are\nnot accepted. Zero singular values receive an orthonormal completion in U."
+  },
+  "SVL": {
+    "category": "Complex numbers and matrices",
+    "text": "Return only the descending singular values of a real matrix. Restrictions match\nSVD."
+  },
+  "CondNum": {
+    "category": "Complex numbers and matrices",
+    "text": "Spectral condition number: the largest singular value divided by the smallest.\nA zero smallest singular value reports divide by zero. Restrictions match SVD."
+  },
+  "Schur": {
+    "category": "Complex numbers and matrices",
+    "text": "Real Schur reduction. Replaces a real square matrix A with an orthogonal matrix\nQ and a block upper triangular matrix T, so Q T * Q Transpose * reconstructs A.\nT may contain two-by-two blocks, including conjugate complex eigenvalue pairs.\nDimensions are limited to 32, subject to memory. The iteration is cancellable;\nfailure to converge reports a domain error. A few guard digits of numerical\naccuracy may be lost during convergence."
+  },
+  "SpecRad": {
+    "category": "Complex numbers and matrices",
+    "text": "Spectral radius of a real square matrix: the largest eigenvalue magnitude,\nincluding eigenvalues represented by two-by-two Schur blocks. Restrictions match\nSchur."
+  },
+  "ToDiagonal": {
+    "category": "Complex numbers and matrices",
+    "text": "Build a square diagonal matrix from a vector, preserving its elements. The\nvector length must be from 1 to 32, subject to available memory."
+  },
+  "FromDiagonal": {
+    "category": "Complex numbers and matrices",
+    "text": "Extract the main diagonal of a matrix as a vector. Rectangular inputs return\nmin(rows,columns) elements."
+  },
+  "DerivX": {
+    "category": "Algebra and calculus",
+    "text": "Differentiate an expression with respect to the current algebra variable,\nselected with StoreAlgebraVariable. Equivalent to supplying that variable to\nDerivative."
+  },
+  "IntVX": {
+    "category": "Algebra and calculus",
+    "text": "Find a primitive with respect to the current algebra variable. Equivalent to\nsupplying that variable to Primitive."
+  },
+  "Taylor": {
+    "category": "Algebra and calculus",
+    "text": "Build a Taylor polynomial from expression, variable, expansion point and order.\nThe variable is kept symbolic even when it has a stored value. The point must\nallow evaluation of the required derivatives; a singular derivative reports an\nerror. Orders from 0 to 1000 are accepted, subject to memory and rewrite limits.\nTrigonometric derivatives and coefficient evaluation use radians, preserving the\nuser's angle setting. Serie is an alternate spelling."
+  },
+  "Limit": {
+    "category": "Algebra and calculus",
+    "text": "Finite analytic limit. Takes expression, variable, then a finite real point.\nDirect substitution handles continuous analytic expressions. A quotient whose\nnumerator and denominator both vanish uses repeated symbolic differentiation,\nup to 64 times. This supports removable singularities such as sin(x)/x at zero.\nDiscontinuous operators such as absolute value, sign and rounding are rejected.\nInfinite endpoints, general piecewise limits and essential singularities are\nnot supported; no numerical extrapolation is used to invent an answer.\nAnalytic trigonometric limits use radians and preserve the user's angle mode."
+  },
+  "TanToSinCos": {
+    "category": "Algebra and calculus",
+    "text": "Rewrite tan(x) as sin(x)/cos(x)."
+  },
+  "TanSquaredToSinCos": {
+    "category": "Algebra and calculus",
+    "text": "Rewrite squared tangent as (1-cos(x)^2)/cos(x)^2."
+  },
+  "HalfTan": {
+    "category": "Algebra and calculus",
+    "text": "Rewrite sine and cosine using tangent of the half angle."
+  },
+  "TExpand": {
+    "category": "Algebra and calculus",
+    "text": "Expand sine and cosine of sums, differences and double angles."
+  },
+  "TLin": {
+    "category": "Algebra and calculus",
+    "text": "Linearize products and squares of sine and cosine using sum and difference\nidentities."
+  },
+  "ExpLn": {
+    "category": "Algebra and calculus",
+    "text": "Expand exponentials of sums and differences and cancel exp(ln(x)).\nIt does not replace ln(exp(x)) with x, which would lose complex branch\ninformation."
+  },
+  "Lin": {
+    "category": "Algebra and calculus",
+    "text": "Collect products and quotients of exponentials into exponentials of sums and\ndifferences."
+  },
+  "LnCollect": {
+    "category": "Algebra and calculus",
+    "text": "Collect sums and differences of logarithms of positive integer factors.\nExpressions with factors of unknown sign are left unchanged, preserving\nprincipal complex logarithm branches."
+  },
+  "SinCos": {
+    "category": "Algebra and calculus",
+    "text": "Rewrite sine and cosine using complex exponentials. Use NumericalConstants\nor ToDecimal to evaluate the imaginary-unit constant numerically afterwards."
+  },
+  "Find": {
+    "category": "Lists and text",
+    "text": "Takes a list or vector and a target object. Return the first matching one-based\nindex, or zero when absent. Comparison uses object equality and preserves the\ninput elements; nested objects are supported."
+  },
+  "FiniteDifference": {
+    "category": "Algebra and calculus",
+    "text": "Forward finite difference. Takes expression, variable, then step and returns\nf(x+step)-f(x) symbolically. This is a finite difference, not division by step."
+  },
+  "MatrixQR": {
+    "category": "Complex numbers and matrices",
+    "text": "Householder factorization of a real matrix: replaces A with Q, then R. Q is a\nsquare orthogonal matrix; R has A's dimensions. Q R * reconstructs A. Rectangular\nand rank-deficient matrices are accepted. Dimensions are limited to 32, subject\nto available memory. These factorizations use decimal arithmetic at the selected\nprecision. Complex and symbolic matrices are not accepted."
+  },
+  "Alarms": {
+    "category": "Date and time",
+    "text": "List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session."
+  },
+  "StoAlarm": {
+    "category": "Date and time",
+    "text": "Schedule a clock-based reminder: put YYYYMMDD.HHMMSS and a message string on the stack, then run StoAlarm. Returns an alarm ID. Example: 20261225.093000 \"Check the oven\" StoAlarm. Uses the calculator local clock."
+  },
+  "RclAlarm": {
+    "category": "Date and time",
+    "text": "Recall the alarm record for the ID on the stack."
+  },
+  "DelAlarm": {
+    "category": "Date and time",
+    "text": "Delete the alarm identified by the ID on the stack, including its reminder history."
+  },
+  "FindAlarm": {
+    "category": "Date and time",
+    "text": "Return the ID of the earliest unacknowledged alarm strictly after the date/time on the stack, or zero if none."
+  },
+  "Ack": {
+    "category": "Date and time",
+    "text": "Acknowledge the oldest due reminder. Leaves future alarms scheduled and retains the record."
+  },
+  "AckAll": {
+    "category": "Date and time",
+    "text": "Acknowledge all currently due reminders. Future reminders remain scheduled."
   }
 }
