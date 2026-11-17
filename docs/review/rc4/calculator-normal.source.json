@@ -1,0 +1,8 @@
+{
+  "binary": "/Users/mathan/Developer/PicoCalc/LumaRPL/build/simulator-rgb332/db48x.app/Contents/MacOS/db48x",
+  "binary_sha256": "dad9f82af9b5fbc0c0fe3655320604d7f3545c879b4d57c23cc183aac71c6307",
+  "test_source_sha256": "37b8991b2804e05a5715d1a68bbbe9a30b253090435f4175b5d7b7785269aae6",
+  "filter": null,
+  "cases": 135,
+  "failures": 0
+}

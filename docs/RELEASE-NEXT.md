@@ -1,36 +1,46 @@
-# 0.10.0-rc.3 release-candidate readiness
+# 0.10.0-rc.4 release-candidate readiness
 
-Review date: 2026-11-06. VERSION is 0.10.0-rc.3. This is a prerelease candidate, not a stable release. Candidate build provenance and checksums are included with its GitHub assets.
+Review date: 2026-11-17. VERSION is 0.10.0-rc.4. This is a prerelease candidate, not a stable release. It replaces rc.3 and fixes the findings from the full code review.
 
-## Changes under review
+## Changes since rc.3
 
-Complex Gamma/factorial; exact Termial; native constants and signed entry; Math-menu shortcut; immediate postfix and RPN power operations; grouped formula evaluation; partial cursor redraw; cursor-safe operators; and original-formula error recovery. The API & Assembly companion adds a reviewed 71-page PDF and nine maintained examples. The calculator completion pass fixes the seven review failures, preserves submenu rows, adds the supported Fourier/probability/matrix/symbolic commands, and retires inherited empty menu entries. The Time/Date Alarms menu now supports 32 one-time local-clock reminders, visual alerts, acknowledgement/deletion and saved-session restoration; it does not wake powered-off hardware. See `docs/CALCULATOR-CAPABILITIES.md` for exact scope and limits.
+- Calculator entry: a typed power keeps a leading minus with its number
+  (`-2^2` is 4), and operator keys no longer edit a hidden entry while help,
+  graphics or stack browsing is shown.
+- Alarms: Enter acknowledges; Esc/Back or a one-minute timeout snoozes; idle
+  checks never raise errors and back off after a failed draw or save.
+- Lua: F5 is an ordinary key; Esc interrupts pattern searches; `load` refuses
+  bytecode and `string.dump` is removed.
+- Editors and tools: Replace all is fully undoable up to 8 matches and asks
+  first beyond that; CHIP-8 assembler numbers with leading zeros are decimal;
+  ODE examples ask before replacing unsaved work.
+- Storage and devices: failed saves remove their temporary files; startup
+  reports a recovered session; SD v1 detection, large-card sector counts,
+  PSRAM transfer timing, key-queue pairing and alarm timing statistics fixed.
+- Release tooling: committed-content packaging, verification of the `db48x`
+  tree against the patch, explicit checks under optimized Python, and isolated
+  simulator test runs.
+- Manuals: rebuilt with these changes. The User Guide is now 64 pages; the
+  Programming Guide (84) and API & Assembly Reference (71) keep their counts.
+  All 219 pages pass the out-of-page and sparse-page checks.
 
-## Available evidence
+## Verification
 
-- After the verified SD deployment, the user confirmed that alarms and time work on the device (2026-11-05). This confirms those functions; the user subsequently confirmed a 30-minute mixed-use session without issues and successful save/restart with alarm restoration. Other individual checklist items were not separately asserted.
+All checks ran on candidate commit `d0f753f` (firmware SHA-256 `16122123ced26c31423fa3a3a43655e48f51471a08ace4857bb1f2f4d7b4fad5`) and are recorded in `docs/review/release-evidence.json` with logs in `docs/review/rc4/`.
 
-- The complete patched simulator suite passes all 8,507 tests with zero failures or engine assertions. The 135 numerical/contract checks pass normally and with address/undefined-behaviour sanitizers; 39 bounded host executables, Lua, 310 shipped-help examples and 135 manual examples also pass.
+- The patched full simulator suite passes all 8,507 tests with zero failures and zero engine assertions. The pristine-upstream baseline is the rc.3 run of the same pinned upstream commit, reused because the pin and toolchain are unchanged.
+- The 135 calculator contract checks pass normally and under address/undefined-behaviour sanitizers.
+- Production controllers pass in all eight themes, normally and under sanitizers: 325 screen IDs, 29,583 keys and 32,256 frames.
+- 41 bounded host test programs, Lua, Arm allocation and Arm TLS, 310 help examples and 135 manual examples (29 RPL, 55 Lua, 51 CHIP-8) pass.
+- All 219 manual pages pass layout checks; the release-tool tests pass.
 
-- Calculator keyboard/controller checks pass in all eight themes, including address and undefined-behaviour sanitizers. Grouped expressions, classic complex literals, operator entry, error repair and pixel-equivalent partial redraw are covered. Reminder alerts preserve the stack, existing errors and queued keys, and pending/acknowledged alarms survive explicit session save/load.
-- Target firmware builds and passes RP2350 UF2/loader/partition validation. See `docs/review/calculator-completion.json` for the tested firmware hash and scope.
-- Existing command opcode values are retained; new commands are appended. The normal binary-file version checks still apply. FiniteDifference avoids reserving DELTA, and bare variables such as qr remain valid in formulas.
-- Generated help/reference/insertion freshness, upstream patch hashes and PDF checksums are checked before commit.
-- All 135 manual examples pass: 29 RPL, 55 Lua and 51 CHIP-8, plus production assembler/VM routine contracts. Physical execution of the new examples remains separate. See `docs/manuals/API-AUDIT.md`.
+Hardware testing of this exact rc.4 image has not been done yet. Earlier device confirmations apply to the rc.3-era image they were recorded for.
 
-## Candidate publication checks
+## Before publishing
 
-The calculator runtime remains identical to commit `06f36d7`; this candidate
-updates version metadata, manuals and release packaging/verification tools.
-Current source hashes, test evidence, the fresh pristine-baseline comparison and
-scoped device confirmations are recorded in `docs/review/release-evidence.json`.
-The release tooling rejects mismatched firmware/source evidence and packages
-versioned defaults only, excluding local saves and private resource files.
+- Install the exact rc.4 image and confirm on hardware: cold boot, stack and soft menus, alarms (Enter acknowledges, Esc/Back snoozes), Lua keys (F5 readable, Esc interrupts), save/restart, Wi-Fi/NTP and a 30-minute mixed-use session. Record the result and firmware hash in `device_acceptance`.
+- Publication requires a clean committed tree, passing `tools/verify_release.py`, checksummed assets from `tools/package_release.py`, green CI on the release commit and a verified annotated tag. Packaging never deploys to an SD card.
 
-Publication requires a clean committed source tree, passing release verification,
-checksummed assets, green CI on the release commit and a verified annotated tag.
-The User Guide, Programming Guide and API reference contain 63, 84 and 71 pages,
-respectively; all 218 pages were checked for version-only text changes and layout.
+## rc.3 history
 
-
-The completion pass is tracked in `docs/review/calculator-completion.json`. Hardware confirmations apply to the tested predecessor firmware hash. The rc.3 build updates version metadata and packaging; cold boot of that exact newly versioned image remains a candidate acceptance check.
+The rc.3 readiness record (review date 2026-11-06) and its evidence remain in `docs/releases/0.10.0-rc.3.md` and `docs/review/rc3/`.

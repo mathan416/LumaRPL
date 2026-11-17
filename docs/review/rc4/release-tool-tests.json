@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Only committed defaults and verified patch files are packaged; private resources and local edits are excluded",
+    "passed": true
+  },
+  {
+    "name": "Corresponding source excludes local tracked edits and untracked files",
+    "passed": true
+  },
+  {
+    "name": "verify_release.py preserves subprocess gates under PYTHONOPTIMIZE",
+    "passed": true
+  },
+  {
+    "name": "Reject edited or added db48x sources outside the verified patch",
+    "passed": true
+  },
+  {
+    "name": "package_release.py preserves subprocess gates under PYTHONOPTIMIZE",
+    "passed": true
+  },
+  {
+    "name": "Reject missing candidate evidence",
+    "passed": true
+  },
+  {
+    "name": "Release checks stay active under PYTHONOPTIMIZE",
+    "passed": true
+  },
+  {
+    "name": "Reject evidence for a different firmware",
+    "passed": true
+  },
+  {
+    "name": "Reject changed bound source",
+    "passed": true
+  }
+]

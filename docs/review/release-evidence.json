@@ -1,24 +1,24 @@
 {
-  "version": "0.10.0-rc.3",
-  "firmware_sha256": "b23ba63dc69b9fdee0f8e626f327cc997687e898b4d9508e6268c74f62412dbb",
-  "runtime_source_commit": "06f36d7289eb8868ae51b3337139de5904b00666",
+  "version": "0.10.0-rc.4",
+  "firmware_sha256": "16122123ced26c31423fa3a3a43655e48f51471a08ace4857bb1f2f4d7b4fad5",
+  "runtime_source_commit": "d0f753f93f08d4260de2da2c2cd09a4036626739",
   "source_hashes": {
     "SOURCES.lock.json": "fb9846b9ae89fa134ca221f4b7d0f17c0a7eabde9099ff93b80a92a32ee04b13",
-    "VERSION": "8288df70aede02e5034c5ee61ec351cc480ea8a9ebb05dff67e1c7cb392afd30",
+    "VERSION": "fe9907827c677c373dd7081ddc7811d230435d6982eaddd8fb1fd3e0d240307f",
     "docs/help/chip8-reference.json": "ba9214963f6b3ff402a9b56a110e575409ed97a77858f546c82acf11255457d4",
     "docs/help/command-examples.json": "6ae5c6d6cb998307ea7497b696e4d8d71e0ec13b786b5e4a546f6a7250b6c773",
-    "docs/help/commands.json": "5b8fdfb0496f5251e51d87a371a013c6556b1bf58045f12d4ae79ef36123e719",
+    "docs/help/commands.json": "71f784cffab55a2e5362c01c460fc9e42281d0b4796b982fab8ac82e9a96e04c",
     "docs/help/examples.json": "57c5e384cd04f9195e53a270e24688cedf8372584fa0c998d507db4774c97b12",
     "docs/help/flags.json": "37ac34c5ed977942ea0f52fd8e7b289b3924fb607d2ace0972ca03a3a3dcb5c6",
     "docs/help/language-navigation.json": "add50729261d290740f5548483604daf91c8e4b6f0b441516273c4e24890bfb7",
     "docs/help/lua-reference.json": "0a6af824574bf31d71e8f61e3b8e3d5d271d4d5dcc583fbf3c361e628193b651",
     "docs/help/settings.json": "08b5ab7e6d1907cd04428a89ac2d439002af15d610f969feb6f8d18b6dd9dc50",
     "docs/help/topics.json": "3b6be0e88be5cad4cbd215109091cef9ea8fe83b5e75afd6f50d87955e9a4c0d",
-    "docs/manuals/API-AUDIT.md": "56593857c33d8b5a06a72a25b2e5c86d7cb22f19f86c04ba3a5dac159c0b8a85",
+    "docs/manuals/API-AUDIT.md": "4e4514290a96218c41b9d209b69aff9bb263a2b0baf50f817a8b09d689247585",
     "docs/manuals/AUDIT.md": "21856da813dd4cae66c001020ec4d628ffc2b8618488f3852fb741739f195aef",
     "docs/manuals/PDF-FONT-NOTICES.txt": "0ce641932cd0323c4a885715843db6b9b4da8137b7c277d3b73c92b2f40887a4",
-    "docs/manuals/README.md": "65bc227d349bcca3ab1947cc46d139f073f02067fb7ad7291a9d49ce2c623f63",
-    "docs/manuals/api-assembly-reference.md": "a31347db9530a0dd48ea5bb2551a3ee7a9926206625cc2a846a67a07710398e3",
+    "docs/manuals/README.md": "f72309242d63acd6f9510c0f85fbf4cc362db649a7808290c3a417e0df344f2d",
+    "docs/manuals/api-assembly-reference.md": "41abefd91113f808dd2d97d6f0c3b0189f4d23a276d85fcf0a31a57f4c490822",
     "docs/manuals/assets/README.md": "b554ccf73117f22983f034d5b10c0b5228ad78f751d2cd824604bb4148f282d2",
     "docs/manuals/assets/cover-photo.jpg": "9fb76611d84b3182ccb402318e5cb8c4263988ab75bf3700f8c9bef4abcf7cdb",
     "docs/manuals/assets/help.png": "61c5ba6a9de3114ae0692973d988fe3b0a15b7a0bfe24a4f0cad907b52797b34",
@@ -27,7 +27,7 @@
     "docs/manuals/assets/sprite.png": "3fecea24d46de741ef0602aef24c48115d170f11c95ebd1a2516af3995187985",
     "docs/manuals/assets/workbench.png": "89e747b7b8a0c10293a8b608142f242014325ca315b9064100c4d211db9da187",
     "docs/manuals/credits.json": "4c656974191725f80810205319533d93f65e2e1a42ad10bdb6c5d1ee2cf8a5f6",
-    "docs/manuals/examples/api/README.md": "0343d7ae399842d0ce4818b421d43dc1a55834a6dfe87a2fe637e59525523388",
+    "docs/manuals/examples/api/README.md": "9952d8b4be666df03a984a55dcba93b20df3c241e387d30430eb750e6e9eeddf",
     "docs/manuals/examples/api/bridge.lua": "5c5aee985b27058ad1ec74dcd7a52e5648e6ff9466c9bda9db8f2f70e275a15b",
     "docs/manuals/examples/api/canvas.lua": "409522b1c680da93d9e3032611eb9864a68bbbf19efb5e2a0ebc9898626a53a9",
     "docs/manuals/examples/api/decimal.asm": "72d782adc1c1fc9c4517b996272f051a2400392c85a7a2fc09028d632daffcbe",
@@ -37,20 +37,20 @@
     "docs/manuals/examples/api/plot.lua": "3a262369758e638b8c664da6c7377ced15b33fee5c968a1863afe746fb7e5cb7",
     "docs/manuals/examples/api/saturating.asm": "57fd9016833d35429be1232782bcf9198fb16808764b94a4428908db3381acf8",
     "docs/manuals/examples/api/timing.asm": "c9c5e68dd505b9d2b381a0f30052db7b4af466620acc5d6e09bf5c8610a9d796",
-    "docs/manuals/pdf/LumaRPL-API-Assembly-Reference.pdf": "02507b965d7e09c8ad54bbeb12748e3977641eb079bb3e34474176e47426ab21",
-    "docs/manuals/pdf/LumaRPL-Programming-Guide.pdf": "5455d4a24ae27eb88359a833005c5a605b548554c138237395a64a7ee1212abc",
-    "docs/manuals/pdf/LumaRPL-User-Guide.pdf": "21d45d5c65352703f0ad7bdd03e5926141fb49b24b2ee5c1180b0b946082f21a",
-    "docs/manuals/pdf/SHA256SUMS": "9b40e3a01b31ada58f13bc449efc0a9e5f08b549e012ae7ceeb6e160477ff1cb",
-    "docs/manuals/programming-guide.md": "10c76a4c1a4bf7df961e82b1283a93d5cc035d34520f18f00eac6963f36a76ea",
+    "docs/manuals/pdf/LumaRPL-API-Assembly-Reference.pdf": "79076576191d0833199c35e2a803647071127b97f1e072a6ad0b3af106f1e3ac",
+    "docs/manuals/pdf/LumaRPL-Programming-Guide.pdf": "6edab425201faf13eee82957d0289fc0cb2ffdfafd8d1f412be6af98bb5f5449",
+    "docs/manuals/pdf/LumaRPL-User-Guide.pdf": "af35480a4d9037179514eef20984d7da75da28fddd720b7447febbcd4a0627c7",
+    "docs/manuals/pdf/SHA256SUMS": "9c3e2bd0f12c07642012f9ddcfcf75448f711c854f9fcb447bfcd05925d4b997",
+    "docs/manuals/programming-guide.md": "7038d022b49f2b0063481e81e5b0c192c34e6aeee4ed2f7d6d58fc4e8a551888",
     "docs/manuals/requirements-pdf.txt": "b1e30ca45cbd71e59b7df67f8e758dd6a6f7716c54426d02719236da67e1d50c",
-    "docs/manuals/user-guide.md": "f226a5802e1063343a143ec84e60324d43cf30e37291c90570b8cc703b07bb59",
+    "docs/manuals/user-guide.md": "642f1a6804652e3ca86ce2286d599f801a4eb6c3ce77a1a2797f4d7bb6701627",
     "docs/ui/HELP-AUTHORING.md": "78c9e86c0b1474826c60482cd29b979c8ffbd0cf3387316bf75242884465d1e9",
     "docs/ui/menu-help.json": "7887b1a4a1d26cde7a037753eedb263c759b81d562f322dd7ebe7b9b276ed14a",
     "docs/ui/reference.json": "c652c66c1b5f7341e7d9374745075d8a08f3db2a87f2790e1b53c992ed8589c9",
     "docs/ui/tool-help.json": "0a95c699c5a4dab27d04b60f42420102f4186788380756c32e090b5ca9f2e89a",
-    "patches/db48x-picocalc.json": "de63a774df6d3f8a0f29de523304421c8376fb704d113e1d57bfb8c58cc570d5",
-    "patches/db48x-picocalc.patch": "f7042f4e453d0e97c4d06a095a9952b89d7fc72f4dba42f2c7680dcc1bf5d68f",
-    "pico/CMakeLists.txt": "e07b062974921530b3850e1255f4d82119dd10bbb2df773a83f9336afbc1662d",
+    "patches/db48x-picocalc.json": "8af11ed8e06a8285050696d6a517cd6e785f9295b8c539b408a2c6b23a1d6ab8",
+    "patches/db48x-picocalc.patch": "d1144d831e7e69c70cfc839f13c3f4dcd4169c5e695e9ee51dd94b532911cece",
+    "pico/CMakeLists.txt": "075ebd4a87da5db775cf58f8d4767fceba4c8cf3ca86f67d3e5b7eef31d56a09",
     "pico/HeaderFont.cc": "fcb7e5fffc0f75f2e4b144aa5777a3a8b9a47bf30d911b007f1b75593a7e1068",
     "pico/ReferenceFont.cc": "8b85a99963e92f2e41e7332350578e4597cb061fc49edb223aae734582ce2b89",
     "pico/SourceFont.cc": "26a541ec1f4d1d4e7c661feefe84d47c452cbbe6864a395311a47a8999031be6",
@@ -69,7 +69,7 @@
     "pico/calculator_shortcuts.h": "0371b7c07135b8a30777f7e05c892d8ca9324dbc6e2ef035c6e756177aa7e371",
     "pico/calculus.h": "e7182c3ecacc4b5501d460d03fbeb8fa48287f292f7b9198eb78534dc02e8814",
     "pico/chip8.h": "b3280f9ac31feb6b9b96d0433d8c4121d7ea81c879ebce750eaf842539efc9de",
-    "pico/chip8_assembler.h": "1d44b6370c825f732a0da61d5ab5be7e4f52868b36c10a41210f7ad57c548324",
+    "pico/chip8_assembler.h": "357c5d1e5e7b9cd67119e8af9d46505bd2fd8b3b0310321f6cdc9befa2fa23db",
     "pico/complex_engine.h": "22c3a59537f1c7a3aa2172f90bd2edf4f95a99d141b34eb1e18f0f825abbd37f",
     "pico/compute_gate.h": "8e39d677b42e49ec4a27796730d4405bdc5b63a8388bc280126ef67b59e83cdc",
     "pico/contour_layer.h": "3cc56f3d5b49321ef909b27fd78a17ca3e8038ac336d656167ccd58478b9b4e7",
@@ -85,15 +85,15 @@
     "pico/data_file.h": "2b18070219cb6cbe4633a6baa74c97b6db316d06b5052fa203cdf4115f931705",
     "pico/data_table.h": "16f2633080f4812a1bf1373e00bf15eee84423f3f5d52841b3e155ac47bf40e2",
     "pico/data_ui.inc": "8063b3c2ea81e6c05f6cb3fc42e0a65692ab56144a25cbddf2d66ab9fa5dd9c9",
-    "pico/desktop.cc": "a87fe9fbf39013dfd4e51fdf0980ecfcc68d2e40bbf87324487bb258e6b327f6",
+    "pico/desktop.cc": "58131a2fad221a36d1cd0a3753af7d6ff01e0957007a76a666a257ecc884cbb6",
     "pico/devices.c": "5a8dc02c88d64874fe2ef50dccd26841aa2c216b47bd73a4d2e308060b9329fe",
     "pico/dmcp.h": "ce1daca94478981a4c17a77611c4de7a2f07c373b600e1d611fd55d1d41cfb00",
     "pico/dmcp_fonts.cc": "1deb3b3cde0b30c9bc582a0a71033ab43fa9636163c17af17c6525aabd4d8aa9",
     "pico/document_browser.inc": "0e5c46b337b128ac312029aba6d3c482084089b3ed0b372309c092957157e994",
-    "pico/editor_tools.h": "3efa4614356f2d5c151da13913bfb0b23cfdf7f00b1d3d44c01c018919443b66",
+    "pico/editor_tools.h": "31dba8588847f6513ad7b397956207ed6aa445fff457ddb71a06f11a92aed88b",
     "pico/exploration_documents.h": "b40b6f76442df75f90e245b5faa98107d9d0b2d599cecb855e5e5914828bade2",
     "pico/exploration_ui.inc": "b42fe5a592a3b5c989d9b580566d82f7f33a0bb3032968a607b1f03afe7eefb2",
-    "pico/fatfs/diskio.c": "5a32d06578c4c8f761d0a277d992b3c20483fbc6a42fe3140ff59a7ac60ec9ba",
+    "pico/fatfs/diskio.c": "335969d2bc049697ba549e4d864786267e640325ff08653896b14a20f3ae9004",
     "pico/fatfs/diskio.h": "2279ac777bc7a8a317b1b44519df8604e4cdd0cd3b1608861eed3c78045d89c6",
     "pico/fatfs/ff.c": "e54e1d7d3c5b916a8593cd3c7075d2baf440bb1b4298ba46df32906767e805dd",
     "pico/fatfs/ff.h": "86099100a6ef3c3623dfbeaacb3a2613ff266df76aad1386513042b831c5b733",
@@ -110,7 +110,7 @@
     "pico/form_ui.inc": "e66a54622e7db93b3d9bca5588faea42826b0cfbc61d2561eccc1e62ba8b374c",
     "pico/formula_tools.h": "b2fd1869f47a82d87574e8e9e759ebc504dda9707eda88817e441f62d571f0a8",
     "pico/geometry_math.h": "145e60a9470c0ba5955136b2fc194d3f0cc84e22aa5dfcb2cd9b65f0f7926aec",
-    "pico/graph_export.h": "30fbc05c6fbe6d4f371435208e11818063d917b3019013003f5c29b218fbe6aa",
+    "pico/graph_export.h": "7a843302c17b23e9e5bfb0de2bf224ef72bf48c9a70fceee1d7a9c7c65d0eb63",
     "pico/graph_scene.h": "c7bd68be73b24c3aa645d7ee3265231ad25abe447274c46a03bcb98c3d46fc5e",
     "pico/heap.c": "3dbd16e8fd2fd4eee6a5138865b23565d6eac3c9ac2dfdf9d9399115f85c062e",
     "pico/http_response.h": "0181ab656e825abb50bcd73b9495c49894b3e5f65b97b33143245d64ab0b6983",
@@ -122,10 +122,11 @@
     "pico/lua_canvas.h": "c30e13914e2124eca41bb529f041b14a3b7d678016aca9522c5ea3e2f78cf37f",
     "pico/lua_device.h": "f05f406ecc80e3f5410086723f93276a0a936cb897c7464a1096461578f50372",
     "pico/lua_devices.cc": "89c320961b9a95f2cdb3cd079b574a0e96dd7c9dbe6bf804ec5f014c7ce269b0",
-    "pico/lua_input.h": "20ad2af52ca58f29e99c158c1d7e039ec9b0b19e5fd25313face0731dc99aded",
-    "pico/lua_runner.c": "8a26745ceaaff7b6a4b88e77161f7b186b15f75a45ad2b31903d3e5d51c60428",
+    "pico/lua_input.h": "9ce0c57f8bbbdd8626571ed6f75cf16305e857a0b107632d10d1798d7938aaaa",
+    "pico/lua_runner.c": "dfa6975e04019f852352f63a238726c14721cd24cbcd7b1b9d12444bc519dac1",
     "pico/lua_runner.h": "6f5f1b6446e117f2511e28298e477bc3df5f2b23e18e5bf620569eef5c1eddfc",
-    "pico/main.cc": "2ebb7a5b69e1e3a87d244a97d43538c067a76e3dfa2d70f2338af0f015b82e6f",
+    "pico/lua_strlib.c": "5a50cbe755ea7ca94e8031f8f84ea6f4ec8e3a8edea2b99f454e4a5cffe92054",
+    "pico/main.cc": "6dba7650463c5736cec5c4f09ab00accfd8b04eaf748d512e466acd3f55f3ed5",
     "pico/math_document_file.h": "ed580689efb6389bf97328fd6b16b00d1c4b5fbc4e809a26a73d20b6b83c8b42",
     "pico/math_documents.h": "7f3ac91fa48d0081ba5e8de9b0307c9da8b8ace336074eafb9108ef7a2cf7cfb",
     "pico/math_lab.h": "a64b36cd7ab01c1174ac2ef42bbbd0354901c336fa9edc25a75ce90ddafa6720",
@@ -141,7 +142,7 @@
     "pico/memory_profile.h": "c69eea19381bd9a7f07fcf1c64eddd983945684b714c5949450834b02cba61ce",
     "pico/native_layout.h": "9ec7636635e54953b5ec1d1d1144a768be408c9e8772b3995ad65a865b532502",
     "pico/native_menu.h": "c26421aca08aa34cecdde4552acc22423fc0f6f74631c93a8d305a6b9a7c72f2",
-    "pico/network.cc": "d94bed7021179a336c936b668c60949ed62bf570cae7f6c0aeaa4f0ba14163b3",
+    "pico/network.cc": "38bf1922572c47134d1fb3df467771f6a1427bbe346f2c0906a7c236149153ea",
     "pico/network.h": "959b1f440e3dd0abdbde3d5ac3926527e3bab91a8327147e8d630ad038eb4961",
     "pico/network/ca_root.h": "1fdd8cf743b3dab756d0639a50f3ae447949fc3d013f6a4c92be1522085c42c5",
     "pico/network/lwipopts.h": "8601ff32a323fa1186208e11578f4615c7fe890567133155ee96757b67ed5c18",
@@ -156,12 +157,12 @@
     "pico/ode.h": "6e970105e14828178f374b5b9df0e9769d3989cfcfac8a1a91ceb00acf47ae23",
     "pico/ode_engine.h": "918d858338e5dac603aea52771765d1a7d50b126ba622610b14b8d7dc0146bdc",
     "pico/ode_file.h": "9c83a8a247505b903ade19951139b7f67aa8b0e2f292a4ed31b9abf1f2748de8",
-    "pico/ode_ui.inc": "f620934e499c914d0a8075909fdc18ad07b74f43c423027c28a0e87d10a56cdf",
+    "pico/ode_ui.inc": "1d2bb3fede44e9d8057ab8dbf7b65d03db2d1cac6ff09a34c5ab7d0fa4eb961f",
     "pico/path_engine.h": "d8ed26387ee07f4797ab625d3eb52029997bec6adf2aa982da8034fbfe1e1454",
     "pico/path_file.h": "873b2be15d6930a55d724e7dba30115bf8ecc63a69ec154e0d46b7d3119d49c4",
     "pico/path_scene.h": "d1c707d7667b57fe3052bebc5bfab35b12ee9c5258ed11cf10f75496d51216be",
     "pico/path_ui.inc": "3551944a12db13e1b1643966b6e89405ebb2f77498adb32ad6955327cc49e369",
-    "pico/platform.cc": "ac1e72c39bf383bf338333b7f2d94b28a0c4e4cb4b4a7e03bf321520d3496aab",
+    "pico/platform.cc": "9a15e85140de5975a643e8463707ec05a3ff96163a29e0e7ff62d91903b633e3",
     "pico/platform.h": "1195e597ea5b7b290b0831cc9305a6fcdbcac7a6474b99dbf6f8d6972b4ddef3",
     "pico/plot_analysis.h": "933605ad2b7542bdb796956e20d2b8480023d441d600e745d092e8161d355cef",
     "pico/plot_api.h": "29c41c22503ffeac135a8beabad69152f3fdecdb5a96ed0ec4e46f5ccfa7114c",
@@ -169,20 +170,20 @@
     "pico/plot_explore.h": "72f4fc2911b4d56db10eb54aaf23f8579886ff29d28568455853f970488a4a7c",
     "pico/psram.c": "06db9cba299f8b13f4accc1e8c54cf79d1715251a823ee6be4a2535c62d151fe",
     "pico/psram.h": "5126aa66f24f6ebe6197621e970f85bbfa4fb51e246df9711a24a059171b7542",
-    "pico/psram_bus.c": "d6fd1c03ce1a5fa2b094266c344e2416b286a82d8e91975fb946515c284aef1a",
+    "pico/psram_bus.c": "6f7007c70e3e214e7f0abf942fa3d620465e39fab751e1e49fe1bbeb092d8f79",
     "pico/psram_bus.h": "151d6282b864ed862466b0f325b4a8c181c7ef5bcb36ddb49334dcf2b8233214",
     "pico/psram_spi.pio": "7a413083b2849e253afcf4e37241ff1ea8e02d5c8f031854d9650d8c5a2d8655",
     "pico/quantity_engine.h": "bd13d4ec9006d3c11665c0023cb07b8e1059aae9551a78e8cccf10a699b5df4c",
     "pico/radio_owner.inc": "59234fb915cd6f59c97b36c1d5df1ee5efa0a15b2091ba69a3c2a3488b614ee7",
     "pico/reference_input.h": "b6b1a3292130bb868d4c495cfbbe7449654fd67172a6eea48c24bbbea69bbf21",
-    "pico/reference_store.h": "e6d07b085bdce2107a351cb072c054705055678fd5058202fd0291d07fb2c624",
+    "pico/reference_store.h": "5f0bee5ef68b21341df18c410a08d66e8535d36a9342ba97519e99a38bcf93ad",
     "pico/reference_ui.inc": "227c469f40e78d99648b7d0c8e9106a1d0c45e5b232f4d9a3f3b765ae37b238a",
     "pico/register_ui.inc": "cd9f9b272facf96f07edbd63feced13e16076976c687be79673e20059db35cd7",
     "pico/research_document.h": "6eea1035d2d7df02cefc626cb8e7b4402ccba0bda812f440ca85bb3d60ff9eff",
     "pico/research_engine.h": "59e889c37661d7f924ebdda537dbc838f083733a2e31a08fc17518b26f9931a5",
     "pico/research_numeric.h": "7b7b253c61188c690a9610b7410d11520b312e842bd2977007c6e4b68ac202ab",
     "pico/research_ui.inc": "bd91ef0cae1102358b23607a4ef14e8c1cd6d1113e83e5b02c231f5690b00034",
-    "pico/resource_file.h": "1398c7ec564886a84519bb639e856c70d281d6206231592f6612655e723ed6cb",
+    "pico/resource_file.h": "5e6d21765e155a2d439b364a1532772e4a9f72aa76586e0f7910e0395ef8ed38",
     "pico/sample_cache.h": "5c85ce70293550625517c6183106c3353800c9540c526b4ce4ac1f168c1bbe68",
     "pico/science_document.h": "5ef69c5aba6f127dc0f8ddea0d76fe1fa29e10bdb82bbc8817befe45ed1bafd1",
     "pico/science_engine.h": "8d7a0c7623a097702fca833055785474a509c527d748fe8b398e6a49abb94ddf",
@@ -190,18 +191,18 @@
     "pico/science_ui.inc": "fc50563277ffabc4a2b7ef38d9d898f23abdc2ef26965a3217085949e875cdf8",
     "pico/sd_deadline.h": "4c5db2c190bfb342e682b56e4428d90ea64490cb54e9e0f57e501a75247784a6",
     "pico/sd_read.h": "83915051fa8483769dd6aa4b3401cef868142a8f8035d3dc063dff57b6b1eb8e",
-    "pico/sdmmc.c": "de5a68dc30716f713f5a0c0ae4a608e33879622bc67c82f70cd77abd6bdef504",
+    "pico/sdmmc.c": "cda8b632d577f769cc50faa3489e5260e86f2fc4dd7e92b55010d5254711e861",
     "pico/source_backing.h": "7e5a8a82a284dcb46c764dfd7b04ff971da518274444d3a292c5d1c0023c445d",
     "pico/source_style.h": "7242ec791002092e59701ca1e974060f4b6e55631bc629380ef2c4b94af78ecd",
     "pico/sprite.h": "97714cf8901b71657e08e30c279df359b9dda9cfd57a697e24674107f0d866c8",
     "pico/sprite_file.h": "ef69d59f658852470dfea64667277ded8ba657f20d831018b43702fa3f231926",
     "pico/sprite_ui.inc": "f957e2d961eb932242e3d9d26a27f0e44156afb5a91291fae7f91581a2f138de",
-    "pico/stack_menu.h": "a117fdc14ed6915b2fe098143573f51cf4cb5b1c16ec64d4bcce07c9dc5a3d1d",
+    "pico/stack_menu.h": "b6d1d8d8bc9adbac352a8bf4c88cab4bc192621b8190958347f475cc76e10964",
     "pico/storage.c": "104c4ba34e337476b0183b1d11b4845935222e5271c0245d587aeb1d9bb27019",
     "pico/storage.h": "b3818b11b0a1a6a6db83f7312900fbe846cfb99b1be4969f783fde727977b097",
     "pico/surface_evaluator.h": "7276235c733fa100727b2271ca2684c2c741f5546e2e958e5a7b20ff4fa8ce17",
     "pico/svg_export.h": "fd7001074aad4533b69ae587ec7eb237892361f59cad50be2fe023a95f0b1c64",
-    "pico/sysmenu.cc": "99bb87a36f3a9e5132a92380257e02aabc047f5edf472fc1ef71238d4a56b6ad",
+    "pico/sysmenu.cc": "40569c9c26532aa13669cc8379c982fbfe7cd0a158022f49c4d76e8526e3362a",
     "pico/target.cc": "f149d7e2c28f074dc682d2ed9c3cca04afff2181986527f808b05bd101ebeb14",
     "pico/target.h": "5c5d3758a71b58f3bc722c9f2f8b01da38dc2ac4704ebbe81221993cf31ff5fb",
     "pico/text_editor.h": "9fe571777fceb079fbd56edfe3e114e9cb4c1ab6f3f9719a4b4d8d0e002f8c0a",
@@ -239,7 +240,7 @@
     "pico/wireframe.h": "e6faf143eaa1a19080f996377918d51276aa06ed5bfc516ec3b14451384c9ce9",
     "pico/workbench.h": "d594c4dd0622ecf146a752c8faa897bb79c20892dcc86f6bfb2d99744f1a6d89",
     "pico/workbench_engine.h": "a5126718856856f2f3452fcddca46ee402b5ec79edd7136813d21e21ecbb972f",
-    "pico/workbench_file.h": "6c1a3c94b9ea4a252145f07c424d94cca3104b76043ef79c73cf57f4dbd74377",
+    "pico/workbench_file.h": "649f1a6d1dbfacff6886bd10e646ce32cafc895d42fe1bcc54717525fdc7c0d7",
     "pico/workbench_ui.inc": "b417d19cb8bdb2d53c4b3b0a4fd2994fec038db400bc68714c0e44a80bb7c346",
     "pico/workspace.cc": "4f0e8a20db8f3a1e4fa02ad421d256baeba9471ed6db48cba6c7ba4dd7843238",
     "pico/workspace.h": "e337e8c4d82faedd0974b4e8ec8b73dce73f85ac3eeaccf5b7348d62c5d7e2da",
@@ -267,13 +268,13 @@
     "resources/help/LumaRPL.md": "fd7676a4dbe5296df44b5d284b7425aa4b903361b04ad225a765e3f6821d0855",
     "resources/help/chip8.lri": "2610f565a07acc5e171c7abbc0976bf72719c37ec4af77825aa437ee1aacd378",
     "resources/help/chip8.lrt": "40f82036b7a66ff4ad680b6f91dd2e448a44e373ac493454e54fd8188384769b",
-    "resources/help/commands.lri": "6f367200c20c71291302e0c4ae9c1a47623b0a18290559d6c937ec223f07416c",
-    "resources/help/commands.lrt": "6d86eca968171797f7cf155c4e0e63d614cc12aba973d23345a783a32ac7294a",
-    "resources/help/db48x.idx": "845c21ca94b6da7a7282ddc1e5ae294367067e8464a32d52237e1409b8343612",
-    "resources/help/db48x.md": "70bd6528b6d53d0e0023b889cf466c7bb30d74205520b180fc5b7b1fd73d072c",
+    "resources/help/commands.lri": "848959e4f19181ba285423b3e840834b14934d626c70cdb0ab6c45ec89be1909",
+    "resources/help/commands.lrt": "af267a2fc70c9d9dc510fb9284397261a63108098a95d89ce2edb1e37a25819b",
+    "resources/help/db48x.idx": "532b76a2d51697636f6688871753519e15793eea7722bb911f44f490f98042a2",
+    "resources/help/db48x.md": "aa88d7106a8b949873d425131a271ef695fc97bab0c1fffb054fac1309820725",
     "resources/help/lua.lri": "3ebc40d8aad86cc20822ff63c25d7998b587cd089d2ca343798ab68fb219155f",
     "resources/help/lua.lrt": "72af7fb3caf6df0602f0441229e180baaba512633f442733b56b8cb89a05fcc8",
-    "resources/help/picocalc-reference.json": "d8ec7cfbd50837322f19e3fcb793c94daf6e8935e2f904d182d005afd8eb5069",
+    "resources/help/picocalc-reference.json": "f6de1ec2282ffb85e75c7be6485319b82de998a7bae326e090e276c93315d50c",
     "resources/lua/ANALYSE.lua": "6c19d64e5d77f560f83cc83b6d331c4f3d62cb231138855da7f87d4e9b9fe63d",
     "resources/lua/BALL.lua": "89e9d9736e56c15222b0c2c286b52d19eac722d1c195c77d2af40ff30cf55c8c",
     "resources/lua/DRAW.lua": "fc679e88b1979cb283b3dac6cc6520946af2157f83a1edb781a796281850d87f",
@@ -319,10 +320,10 @@
     "tests/background_network_test.cc": "15e2bf897d323a45ed70947b221559a4188a413667364e740fb6f21ee239f13f",
     "tests/battery_test.c": "ac48a65fa018d68673a23b4e2d27901891eca7d3d6899b0d66321098b1d7bbff",
     "tests/bulk_storage_test.cc": "e6a34770662a990e2dc11cca4a3a0b76e895988711cc7188f914a2458901b03e",
-    "tests/chip8_test.cc": "722fd633f6c2f2521eae108003fab9fbe656792c3d9fbc83de70ba648ab1920b",
+    "tests/chip8_test.cc": "15851f10cf2aedb98631e5bd97390415a037e34bb809ba8322613de518f782ed",
     "tests/colour332_test.cc": "41ae6715133e7edb53800b815a06925ae39995ad9f18a6d16e7a8b66615e3cee",
     "tests/colour_test.cc": "31d9c34488dbc50a6a1178d3a365979df3b017c60aeb91b3b918716f77b46494",
-    "tests/controller_test.cc": "f9284350bdb9a3441ded449d3c1071cbefe19b90b1f4552194b659d50c8d770b",
+    "tests/controller_test.cc": "832f51e5918264d57966953c9155daad384f6aa73407d55e73448b6cce93637d",
     "tests/currency_file_test.cc": "79cccb26b0ea5728bf0ec481aa11d470f1f9a49656f0be97cb3b1ab5e9362a65",
     "tests/currency_preferences_test.cc": "3b0630b63c0b8da1fc4957a2196bda17f66120413ef3bfaa86cc370a802806fa",
     "tests/currency_test.cc": "1ea181e0e2e49cf6aebd1da65ac268b20229a8fc3d52c4225e1f3cb2df0c3398",
@@ -331,6 +332,7 @@
     "tests/editor_test.cc": "543b9b0e67c1172df7b08bdaf5738041ff4e350c5eb6640c6189233f065eaf66",
     "tests/fatfs_test.c": "3da37fdeb36d13160ffe112f0bc624cf523120536f8c7681d54aa92ac5c8ee7a",
     "tests/finance_math_test.cc": "49d13bcb95af5d81c2f58ad290e734116cd448d0a3bfedbf6671d2e2139cc5b9",
+    "tests/fixture_file.h": "9a4761ef4c73ad4658c275360b10511a891609a74d5a883b98669e8f1912cbd5",
     "tests/fixtures/legacy/advanced_math.h": "4a4a86c8b470933c6c08779a55163f84482264e8c9165fb1a645a349a4f7412c",
     "tests/fixtures/legacy/exploration_documents.h": "1e898c4e4e3d1612cc9bcff049b6e928ac006086544c55a1a5ccf9afd82f4028",
     "tests/fixtures/legacy/manifest.json": "41844eda68d001c709369a73e403529cac28ebe56c8be470f177f3d802067299",
@@ -347,7 +349,7 @@
     "tests/legacy_evaluator_cases.inc": "fe04b42e487b957d4741b9971b77215804e46c32f137be55e59f088bf44670ba",
     "tests/lua_canvas_test.cc": "9998ca25f0a086cae158f083b4fa971e10d95153bdbb03d2c7700f50f5e3148c",
     "tests/lua_device_stub.c": "81353c824b3971463a0c986aedb5e5fa19f6ec4b820b1c3e71a5915ac6bb0c59",
-    "tests/lua_test.c": "3013b3ed2021f4e9edd0f1e5d8403b827c5bb0a32d53f982883ec344245cc30e",
+    "tests/lua_test.c": "5e9328da2ab8254af435cf057db89093a4f1e783a5f79bb5f54d7c76656eede3",
     "tests/math_lab_cases.inc": "c11fc70c9e9302ce23012ca6a3ca8702c343fc06595756ca52bd92e1500ada56",
     "tests/math_lab_numeric_test.cc": "51769df7ab5a8065afd4154884c94461ca1208f3c889cc7df37f7bd0aee14b11",
     "tests/matrix_arithmetic_cases.inc": "f1a6134a2c496c57125664b156de59a87fe18b0def5951e49740d5c554568dfe",
@@ -373,6 +375,7 @@
     "tests/path_test.cc": "09d8d1b4628ca76c6c1feda462397fca6a3400cf18617f6a12adfcd43dfe04f1",
     "tests/pio_stub/hardware/clocks.h": "b5f8c12371b1221cc5708f13d140cbc20bbb94f805d107510fc750ef95ebaf7e",
     "tests/pio_stub/hardware/pio.h": "1f126c17cd6f42f14063bfd87b301034da2cb0ca29d3a71b47bedc52f8acbdfe",
+    "tests/pio_stub/hardware/sync.h": "4524db149fa094050b93cdd939faf6c0299ae1272828dd1cb160b441f3b018b9",
     "tests/pio_stub/pico/stdlib.h": "67cdf25602e60b0ed4646b221c7670696ac212b1af3a9aebbd211b0a7af215ec",
     "tests/plot_analysis_test.cc": "54de24b04a4785b3c9f789f02e9a247da819b60efa8a04dfc39d6766ae9aecc6",
     "tests/plot_engine_adapter.cc": "8f13f0cca66e1a3a30aad176286431d2cdb6a8ddfaa04892b63b37245ec43b28",
@@ -386,15 +389,15 @@
     "tests/port21_feature_cases.inc": "1c81e1cd5e49fe3b2530b3f769ba019193fa1b168465afb016b74d0402fbbd62",
     "tests/port21_new_cases.inc": "ee47373bbb3402282ffa0ce753016aab7fa5b1a07dea648033af89cae8711a1c",
     "tests/port21_numeric_test.cc": "c252cc47f8b758fbb67ed1730d921a7e667e8e2b909c18541b60c6625160cf8d",
-    "tests/port305_controller_test.cc": "1f51776000b662a05d3c211ff719789a4f4377ffee6e196463b29727cc89657d",
-    "tests/port6_tools_test.cc": "3fedfb44cefa2e9ad47276b5fd831c19cd63ddeb999e9c6821e610e86e83f680",
+    "tests/port305_controller_test.cc": "ad8ef7b6c400899af097222d64c350458044ca1ec91434d1524c65235969a98f",
+    "tests/port6_tools_test.cc": "ff80a866d91d0922fe4939ed4fb62e1b4032c755cf7ebb75cb20b3cbfad3f78c",
     "tests/port_test.cc": "5c9988d7f598287d07dfe170aaaa7949aa9a5eb2772bf569db6faa87061ee83c",
     "tests/provider_chain_fixture.h": "01740373a629b0dfa10bb39eb64df265ea045929b542968ce092fe9b167ee49b",
-    "tests/psram_bus_test.cc": "49354ddb4564bb0ef196eb27701082a5af4c10fbfd9da6c4331dadb23fec6845",
+    "tests/psram_bus_test.cc": "f2bcd9d739df2e65798dae8586425c02e37ea375179fa7872aa3749da9306025",
     "tests/psram_stub/pico/stdlib.h": "bcfb3568bdd95b1ef38bce6484bc56b6ef0e0d50290d96f82af34e3c86cbebe0",
     "tests/psram_test.cc": "3aec97636722bb2162d0a0d6eab4b421a342841937d65e1a6dec08c3ad8d1ecf",
     "tests/recovery_transaction_test.cc": "8c46b50c91d99f7ba419a748624ced9221d9d6e8e4cc8935d7f29ccdd7db5689",
-    "tests/reference_store_test.cc": "c1043b7d9a4b8482cecfd037dafdb86d1450c9ebc5696b71adb322b01116866b",
+    "tests/reference_store_test.cc": "6aaeeac722248cd171d0fcbe9419055036a60989d6e4f87e0076ea7593fc78c0",
     "tests/research_cases.inc": "351c7571603bc5b3c1034d8579f0d6ab0b2ec7c1c38741431c6c7e7ab43e6453",
     "tests/research_numeric_test.cc": "fab3f50e7f802087437cc022bdd1ea2f9efecc16a64bf0b605742e6810a8d849",
     "tests/research_storage_performance_test.cc": "8f127da7e27e56b2cbb388657f27de2fedb1c7277e246b63d910c6d198bb5089",
@@ -433,10 +436,10 @@
     "tools/audit_ui.py": "16e5bec6c631753d6d8bba1fce3251c664ae7ed4e41f7f64cd9650ea4d0f1f1d",
     "tools/baselines/port301/research_engine.h": "59e889c37661d7f924ebdda537dbc838f083733a2e31a08fc17518b26f9931a5",
     "tools/baselines/port301/research_numeric.h": "7b7b253c61188c690a9610b7410d11520b312e842bd2977007c6e4b68ac202ab",
-    "tools/bootstrap.py": "f77f6ccfcf04b3d7fcee8d23a3d107f3c12631508d11c51661f48c92907ece91",
+    "tools/bootstrap.py": "48c80ca7af80b230a28f6a9a4085b007c98d8840f81ddd83d8d06382a705d2c5",
     "tools/build.sh": "84620f362425ef522bbd6fb381cb4d889033f37a4dbbd45e5540640a299b6249",
     "tools/build_colour_simulator.py": "206b4ef78f3075823ab27ca50178bc9ea75ac72c936af6d620ecd5f9a2764e94",
-    "tools/build_manuals.py": "b7a32025c0f55e6e039d1fbf32c3971703e74bdf826d80543dbfd42d63797466",
+    "tools/build_manuals.py": "9f5b68c9b1ea4aaefccef2d404e390023d5f7db384575fa9d66ed3992a18b926",
     "tools/check_release_resources.py": "a107ec529ee3ebe9fed57e99e1b8312633ad625a69316d4dae70c6ae02ddc7f4",
     "tools/compare_full_results.py": "9c43662767da0d7a20e456c1210cfea701347ccefe52d9ffb74862965a1d547e",
     "tools/generate_command_reference.py": "1587331f69093995a51cd8fb6a008eb53c82876d68c71a5c7fb0a47c86e22c9e",
@@ -447,21 +450,21 @@
     "tools/generate_language_references.py": "c0b672d759903afd6d51daa1df25c0d9f7d21116375b477169d9977e170ccfda",
     "tools/generate_math_examples.py": "440e0d07229a206ece393f8affb1c4b6c56cde6050810b57ebb8de69ff146ecf",
     "tools/generate_math_lab_demo.py": "87ee4a71adc33103f7b6a8fbb10a6f8dd8a4b75bddc7ea3eb5d9e3b77bdbb490",
-    "tools/generate_native_reference.py": "6033609e42bcc7ada6f2a0d63d70e73106829db6eaddd6ecb1cf154c409424e1",
+    "tools/generate_native_reference.py": "419fcc959298c2de2674c6e799e4e1456c279b4b6bbed989b8583eb2a603a44b",
     "tools/generate_reference_font.py": "bc5416c1a3ec9c94c54fec5da1060dfa6c644257e4bba806fe58a142727503f4",
     "tools/generate_research_demo.py": "6aa2d4be683550cf1c1b762eb3dac99f1925f7f347b7045d30d693b566a44997",
     "tools/generate_science_demo.py": "969810a6610823f33e2ce56795a41b484fd4952b667eef04fe198b760a82fbbd",
     "tools/generate_source_font.py": "c907b9cd4712eb0215c333e00fd8d83147741d0507777c051a5af00c2c7d5cf7",
     "tools/generate_ui_help.py": "2ada77b41e5fd8975f6e7fb16b098a1981683ab0c6a28cf2ad6970b560ab2240",
     "tools/help_command_metadata.py": "fb6bc18363860e64d8e658b6c3632f19b45dc28c88c656390bec39b7e6417a5a",
-    "tools/license_bundle.py": "3552e3f7cff009fd8b08aed11168dbd340e0298f8b0914e1119563a37c4efda4",
     "tools/make_form.cc": "2163a867ca353e8ad4ae4b21614209b3a7fc75b94ae529fed8c57d70c2d63c96",
     "tools/make_graph_scene.cc": "567c7fdc439f36c4fbbf97661b8a7b6d9d7bbb6de64ab7fcd589f82841334cad",
     "tools/make_notebook.cc": "136540d4c7c8661f56258010128a3594de661b265f40f3f061e4cb216c16c08a",
     "tools/make_ode.cc": "c53b26d99111444d6c9ddece0ce384211ca14c7994383dce5c972fc97938dcd9",
     "tools/make_path.cc": "1a14d0d42f9b994c488420fabef91060779e6b5bda0090ef6919aea0c0806419",
     "tools/make_workbench.cc": "f88820b872d2e0b2a69d9321834e08a07c12f4d7ada0d92174af65d64b7953f6",
-    "tools/package_release.py": "152c2be7296d434913e75b49e28068193e604846ee4e4d78822895faf9428b1b",
+    "tools/package_release.py": "08a7e98803ad5fd05f33cd4c65d0932b6f4e6480b67372670a99be1d8f54dadc",
+    "tools/patch_tree.py": "d9ad0729d44180bfb026d8fc664ae8a8ec370d6aa5383f4313aa2cf655b67d78",
     "tools/prepare_port302_baseline.py": "27e5eb4f32b228ee0e2a39dc5833a89be66873ddd93bce8007696f4d42ea2dec",
     "tools/quantize_goldens.cc": "684d68f08adbfc5619abc87c99dce0c0fb983fa9352a6be2df61a98e0df2b1da",
     "tools/quantize_goldens.pro": "6a1b74b665370558c65bebb6bdf791e13188cd719c47d733d4411a69c51073d1",
@@ -470,35 +473,35 @@
     "tools/review-captures.json": "9e09bd42b1e71b88aa8cd262c70c499ec5e78c475fc6f8caace28ddc2ddde6c1",
     "tools/review_manuals.py": "86e9d474d86551372d74e63e929398dadd804784252bc21a26c53598c55decc4",
     "tools/run_upstream_suite.py": "aafa711f904bd73f8a6c6f9269c26ee43272508618610e17e8142ac9fdb036c8",
-    "tools/simulator_checks.py": "9e7412a073f53a025bd5951bf0e28efc510bd18035ffe4519c201a891724b1a6",
-    "tools/test.sh": "00542ca4f6dab77a23976adb8c931e55d3662fe7d794cfd3a61ff7a92f60bcfc",
-    "tools/test_arm_allocation.sh": "ec2479d278632776d9486053e58115590e3d4fbd0d45b74580c3b52cb7a919c8",
+    "tools/simulator_checks.py": "634416535335859e16d1f23982ad9577f3d2605ada324a8fe268c1e32e96c2a6",
+    "tools/test.sh": "fe2bbc258f029590133ad4c6290246ca2758985ed1a934aa0532863d373e8cc1",
+    "tools/test_arm_allocation.sh": "1f610c9e4ab7d03de16414fc620c56b670208daeadf65ccf88bc435803344b0f",
     "tools/test_arm_tls.sh": "e3659d44a05ae762891fa306309624595a5c86d15705b2698cf5fe9344c53510",
-    "tools/test_bases_visual.py": "5c293103d333789c4f8d4dcd441940678c8294ccfabf5739bd51155171da0b38",
+    "tools/test_bases_visual.py": "8af3f412947063709f75f825df256772cd66798351bc6cfcb4801407c6e06553",
     "tools/test_calculator_review.py": "37b8991b2804e05a5715d1a68bbbe9a30b253090435f4175b5d7b7785269aae6",
     "tools/test_colour_calculations.py": "f182be893c3f2581ded50890ff1efaf838e10b366a81675cdd262f178ef1efbe",
     "tools/test_complex_gamma.py": "b36f327076e5c577d3f2b4caf4a1a80f51688a12c156aae82efd8a50660ad019",
-    "tools/test_controllers.py": "d5d747060138eae8237c13bee7553c68bd8d8309580b4382905737a0a2098767",
+    "tools/test_controllers.py": "149463870d06d2d4a7eda199ebc1226f1b31a22aa5858d6eb3bb686da95645ac",
     "tools/test_editor_commands.py": "d4872ea76e19e394d0950412c842dbefb1e5ff5a1150cbc711ca3990f555c5e9",
-    "tools/test_help_examples.py": "41dedf19ecbe8e12f4b8017f2e35e0e923a15aa58a5dab02a08f8df534980947",
-    "tools/test_language_examples.py": "d72e2706ca88f8fa4f7a24b34be83dccb91f2c1fe7a3acf6d44cb9b07e0fc11f",
-    "tools/test_lua.sh": "139e67b98415853e64937c6542f72bbea92d98e075caa8ac3c28c9b425a284d8",
-    "tools/test_manual_examples.py": "b3fe9c04d86532306bbf9b94b6ab4a20fbd5085aae9b7aed40e8f000a6c55b3c",
+    "tools/test_help_examples.py": "188dca86866a56edf80ed859bf7ac9a98780fe3f4f7b45e1ef99f555c58a8082",
+    "tools/test_language_examples.py": "741753b80691181bcc4e75529eafa38f2cd87b4f059a55228297345e00eaff89",
+    "tools/test_lua.sh": "128c1aad0eb5c2ea3051b5ca9131cf18dd3cb097421a7aa7ea03b2b3cb9a95bf",
+    "tools/test_manual_examples.py": "d932be4b45f14f9eb387ee5a6ea693a60cc5a394733faa98f8c204e4e757d107",
     "tools/test_picoware_flash_layout.py": "2ccc40f0a1ca3709a8aa8ab761452cb1047e6816705b6c133c32d5f2f44deb5c",
-    "tools/test_port305_controllers.py": "897d451af17610c1172b0e1ec5fe8d7aac74a8ef4ef3eaf314bf9289ef00897f",
-    "tools/test_release_tools.py": "cd41892bfd539c2918f41dce160765089a7ff70cb946535ea30368887e9847c3",
+    "tools/test_port305_controllers.py": "26e4f8b3244bf22ae6b15f8e84c758e3b99027463d9f4e7ae105df5813271822",
+    "tools/test_release_tools.py": "5eda9d178d64d94b8c503003e9578ef9c1a40791e4f32b195fca59aa6c901c3d",
     "tools/test_research_codecs.py": "645696ce770af049ea538d684637d35414efc249e4043f37818bff0075973e03",
     "tools/test_rpl_frames.py": "62259f1911c7e65a012ba88cbc183efc387126ab28d83be0046362fb43a76d27",
     "tools/test_rpl_pointer_sanitizer.py": "a46b73394aa821a37bde5db31d31672e34f16cf75c801fb59dc9a419b99e81da",
     "tools/test_science_codecs.py": "ebb2742ae1d139ac779dea4b79d0c8bec3e6322f86d5d1ffeb04e74303c0a15d",
     "tools/test_science_edge_cases.py": "ae1f0693df726654ef937529a8c0e8a3b5bf77fc54755032b97a5ad75964c1f5",
-    "tools/test_surface_engine.py": "40a4b9533ea379ce5c42a784bb54b0c08f012578215aa1798175f005a13e50c2",
+    "tools/test_surface_engine.py": "51f1dfe2ee7c474fd67765d2543742948adeffcedacb4e0151f1a02fbbbdc5a8",
     "tools/test_termial.py": "befb5a39373ce46b11f4f742965d20df8c7582c7ef83af23d1b1fac2297c85d6",
     "tools/test_timezones.py": "4138c35036de8e83cded0a9197264a0dab9a63b19d6f4ba3f25ade90e55049c4",
     "tools/ui_contact_sheet.cc": "a13aa30ec7d849f84fd7f7e33bca687afb1bf3ca7d1294d6bb2c2529197eed88",
     "tools/update_currency_rates.py": "9a3162afc5a57e5c34e0829a15d0ec1d98c4d161969b80102530581c54cdd605",
     "tools/validate_uf2.py": "ee5a9393c68e0cd618562348f4b980de061678b555556a1abf9b68d20bde2c55",
-    "tools/verify_release.py": "3cbd9cb46ec4acdb77b08ec6acfdcf8fa7603a5f832ea559d8080f79ad39ea10",
+    "tools/verify_release.py": "47276f775086ce853a73bb1754d9319e306830accba7d10f74f6770777deefde",
     "tools/verify_ui_captures.py": "bed1d6f79d913842ddd25c1f025f92424c82ae6d38743b206cccd6d1997f9a50"
   },
   "checks": [
@@ -520,7 +523,7 @@
         "additional_test_reason": "New calculator command/setting registrations and calculator regression checks extend the current suite; both full suites have zero failed checks.",
         "known_baseline_assertions": 7724,
         "baseline_assertion_reason": "The pristine upstream runtime.cc run_select_case predicate uses Returns[1] + 1 on the sentinel pointer. The existing calculator patch compares uintptr_t(Returns[1]) with uintptr_t(-1), avoiding that pointer arithmetic. Only that predicate and its recorder backtrace echoes appear in the pristine baseline. The patched suite has zero assertions.",
-        "scope": "Pristine pinned upstream monochrome simulator with its original fixtures; patched RGB332 simulator with variant-matched colour fixtures; same host compiler/Qt release configuration."
+        "scope": "Baseline: the rc.3 pristine run of the same pinned upstream commit (5d5a638) and fixtures, recorded in docs/review/rc3 and reused because the upstream pin and host toolchain are unchanged. Post: fresh patched RGB332 run of candidate d0f753f."
       },
       "evidence": [
         {
@@ -536,11 +539,11 @@
           "sha256": "c93f2d813ba7b041b64509e4490f9b5a6435afa7776f8a6bc9f391fa8c11bcb7"
         },
         {
-          "path": "docs/review/rc3/patched-full-suite.log.gz",
-          "sha256": "2519b0260f82829e97347b60c874d2264df1680a618bd761d586f2958f9633ab"
+          "path": "docs/review/rc4/patched-full-suite.log.gz",
+          "sha256": "c7b0f0b32de3570a9a523c40954f2c43e6418986cd33e482d8407447f2f75a57"
         },
         {
-          "path": "docs/review/rc3/patched-full-assertions.json",
+          "path": "docs/review/rc4/patched-full-assertions.json",
           "sha256": "98bb75c47ca261107f6d098a1682cf92101f4dd48a41c473eb747044a9908b0a"
         }
       ]
@@ -550,17 +553,16 @@
       "passed": true,
       "details": {
         "cases": 135,
-        "runtime_source_commit": "06f36d7289eb8868ae51b3337139de5904b00666",
-        "scope": "Calculator runtime sources are unchanged; candidate changes version metadata, manuals and release tooling."
+        "runtime_source_commit": "d0f753f93f08d4260de2da2c2cd09a4036626739"
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/calculator-normal.json",
-          "sha256": "d47ec8259fc0460475e57f97896c0347c23204da2436868439b63245bc8fbfbe"
+          "path": "docs/review/rc4/calculator-normal.json",
+          "sha256": "e8798771a319489d5c21473fa2d822cdfb7d99424fb49f89b6c30e37929cc679"
         },
         {
-          "path": "docs/review/rc3/calculator-normal-source.json",
-          "sha256": "e24b3a05e7cb949e166a55b9cf299df4440b183b29a76068400c68a66f22aa1f"
+          "path": "docs/review/rc4/calculator-normal.source.json",
+          "sha256": "0e90f8ec0f232f6aa5f0c1a8de458fa2d9eea8a3c02d7c4effa41769511e6697"
         }
       ]
     },
@@ -569,17 +571,17 @@
       "passed": true,
       "details": {
         "cases": 135,
-        "runtime_source_commit": "06f36d7289eb8868ae51b3337139de5904b00666",
-        "scope": "Calculator runtime sources are unchanged; candidate changes version metadata, manuals and release tooling."
+        "runtime_source_commit": "d0f753f93f08d4260de2da2c2cd09a4036626739",
+        "sanitizers": "address, undefined"
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/calculator-sanitized.json",
-          "sha256": "518ebd82806e88fb2da3c7b88da38f77bf6834fbf2387ddaf8b024ae0eb3c510"
+          "path": "docs/review/rc4/calculator-sanitized.json",
+          "sha256": "e9f444c5a1b24e0ae4c28db13c7349c069daacabdb7522f2b0c97f21f6e23b37"
         },
         {
-          "path": "docs/review/rc3/calculator-sanitized-source.json",
-          "sha256": "f645a7d4670703dfd8c5bc964b3961d6c3e7a6ac4b7ccb1c461a5bb58e833157"
+          "path": "docs/review/rc4/calculator-sanitized.source.json",
+          "sha256": "3700c12bb128abcbe43259346e0d18fcf0dda3b741e38c5d02709f805edb6cff"
         }
       ]
     },
@@ -589,25 +591,25 @@
       "details": {
         "screens": 325,
         "themes": 8,
-        "keys": 29575,
-        "frames": 32248
+        "keys": 29583,
+        "frames": 32256
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/controller-normal-assertions.json",
+          "path": "docs/review/rc4/controller-normal-assertions.json",
           "sha256": "98bb75c47ca261107f6d098a1682cf92101f4dd48a41c473eb747044a9908b0a"
         },
         {
-          "path": "docs/review/rc3/controller-normal-focus-assertions.json",
+          "path": "docs/review/rc4/controller-normal-focus-assertions.json",
           "sha256": "98bb75c47ca261107f6d098a1682cf92101f4dd48a41c473eb747044a9908b0a"
         },
         {
-          "path": "docs/review/rc3/controller-normal.log.gz",
-          "sha256": "c43b0eee91eb8245b6f0a9d71dc7ec089060f0d4cc9ee66f8e5571babfb4358d"
+          "path": "docs/review/rc4/controller-normal.log.gz",
+          "sha256": "8b9590e72c6c8f53f197121f2ad76ef21aaea3074d5acb9ec03c33eba0671ead"
         },
         {
-          "path": "docs/review/rc3/controller-normal-focus.log.gz",
-          "sha256": "7a36f51f871e792e67aeaefff5d69eb706e14c0170a8fb71abf5d2df9ec8d61d"
+          "path": "docs/review/rc4/controller-normal-focus.log.gz",
+          "sha256": "79083bdfd5a581208b6ac2725373ec8ff803c39970d1208bd701c5d08a187bf2"
         }
       ]
     },
@@ -617,25 +619,25 @@
       "details": {
         "screens": 325,
         "themes": 8,
-        "keys": 29575,
-        "frames": 32248
+        "keys": 29583,
+        "frames": 32256
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/controller-sanitized-assertions.json",
+          "path": "docs/review/rc4/controller-sanitized-assertions.json",
           "sha256": "98bb75c47ca261107f6d098a1682cf92101f4dd48a41c473eb747044a9908b0a"
         },
         {
-          "path": "docs/review/rc3/controller-sanitized-focus-assertions.json",
+          "path": "docs/review/rc4/controller-sanitized-focus-assertions.json",
           "sha256": "98bb75c47ca261107f6d098a1682cf92101f4dd48a41c473eb747044a9908b0a"
         },
         {
-          "path": "docs/review/rc3/controller-sanitized.log.gz",
-          "sha256": "15045f49db95fc8b50e3eca333babb8a9a28b394b277161d1c66526e60258b14"
+          "path": "docs/review/rc4/controller-sanitized.log.gz",
+          "sha256": "98660ed890c9ca03cbe0188d99bc97cf5ff2ac0cff0580738ec11aadbe3d2495"
         },
         {
-          "path": "docs/review/rc3/controller-sanitized-focus.log.gz",
-          "sha256": "1107e00cad9c2cfeaee2d631b838a2a9b174b5b34c34c6d5c820dd77e11dd43e"
+          "path": "docs/review/rc4/controller-sanitized-focus.log.gz",
+          "sha256": "cf1790004cb4f61a7716b61276dd26caf822db7e085d63a85411e0945c68a368"
         }
       ]
     },
@@ -644,12 +646,12 @@
       "passed": true,
       "details": {
         "result": "passed",
-        "executables": 39
+        "executables": 41
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/host.log.gz",
-          "sha256": "c964cfc1e282ac3474ab8d4e77ad15b6f37a7000f1f3ba01abb929092c7cc1cd"
+          "path": "docs/review/rc4/host.log.gz",
+          "sha256": "6a9ef994f5b1f9a7b4755e3de619039bc209368db75de91fea05139867e83604"
         }
       ]
     },
@@ -661,8 +663,8 @@
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/lua.log.gz",
-          "sha256": "aad735a1ffdcb74a4493d41505fee962deab6b1893cf241f94849dd4f2e04d7f"
+          "path": "docs/review/rc4/lua.log.gz",
+          "sha256": "298b211dcd3426d75c4bd726b47abe19a1740efa40e1599bb408abfe2faf9ed7"
         }
       ]
     },
@@ -670,12 +672,13 @@
       "name": "arm_allocation",
       "passed": true,
       "details": {
-        "result": "passed"
+        "result": "passed",
+        "toolchain": "/usr/local/bin/arm-none-eabi-gcc (the firmware toolchain)"
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/arm_allocation.log.gz",
-          "sha256": "572ca69ff713334ce0d07ac5a3b7dcadaf8bcb36ac352ca397abcf6b980cae85"
+          "path": "docs/review/rc4/arm_allocation.log.gz",
+          "sha256": "c77011c80686084d96728f66d42a129e142c0ebb52c8822728de4b5539914c46"
         }
       ]
     },
@@ -683,12 +686,13 @@
       "name": "arm_tls",
       "passed": true,
       "details": {
-        "result": "passed"
+        "result": "passed",
+        "toolchain": "/usr/local/bin/arm-none-eabi-gcc (the firmware toolchain)"
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/arm_tls.log.gz",
-          "sha256": "fc9a93ce97b2fa0ddfb848d3df9cf099b25b23217e71cba655879f536a2c652a"
+          "path": "docs/review/rc4/arm_tls.log.gz",
+          "sha256": "a335978702d4aba93f55c3709d129b405fd81b8384ec658a9074df9214213dc3"
         }
       ]
     },
@@ -700,8 +704,8 @@
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/help-examples.json",
-          "sha256": "0a752fa4c982a2a5af8655ca0b6b0b68b1a25357c8e55d93128bfd3dccdd5574"
+          "path": "docs/review/rc4/help-examples.json",
+          "sha256": "a45f5cea1fd8cc7e20339d91a5531a45153a867f3a1f15337d59f35e6f1aad3c"
         }
       ]
     },
@@ -716,8 +720,8 @@
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/manual-examples.json",
-          "sha256": "cbb6361c1f6c3bfb363f33eb6546f271ec6b840c3d3d2ec489ecc338aa4e70b3"
+          "path": "docs/review/rc4/manual-examples.json",
+          "sha256": "d6b35eb5913a4e0d6129473643be6443ac7cc3a5ef357407d8cca397c6920c12"
         }
       ]
     },
@@ -725,25 +729,17 @@
       "name": "manual_layout",
       "passed": true,
       "details": {
-        "pages": 218,
-        "visual_review": "Version-only text comparison on all pages; edition pages visually inspected; prior content review retained."
+        "pages": 219,
+        "visual_review": "All pages: zero out-of-page characters and no sparse pages. Pages with new text visually inspected; rc.4 build differs from the content-reviewed build only in the version text."
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/user-manual-layout.json",
-          "sha256": "4c55fb8c89adfda4061074fc1a9263d5549168c6040f1cbcad7e87917f970899"
+          "path": "docs/review/rc4/manual-layout.json",
+          "sha256": "46c6238aa103238e159656873bcd3fd28a08ae8e64425b9bf038473172099a11"
         },
         {
-          "path": "docs/review/rc3/programming-manual-layout.json",
-          "sha256": "efb2fe015341f6e22076b358a027b7faff82c5dcebd96056b78d00c637029711"
-        },
-        {
-          "path": "docs/review/rc3/api-manual-layout.json",
-          "sha256": "cef1d359677f40145cff5c1b6d79ead059db395282c6dd723d4751c0452583c8"
-        },
-        {
-          "path": "docs/review/rc3/pdf-version-comparison.json",
-          "sha256": "8dddf899bd065557badf39b67c782b6767b7d58c428c2a8896290d3af43ccb36"
+          "path": "docs/review/rc4/pdf-version-comparison.json",
+          "sha256": "823a7b8ea124fd558e4650d2b51603e1c1fa082aa66629543a4b924e83164f71"
         }
       ]
     },
@@ -751,18 +747,22 @@
       "name": "release_tools",
       "passed": true,
       "details": {
-        "cases": 4,
+        "cases": 9,
         "coverage": [
-          "tracked defaults only",
+          "committed defaults and verified patch files only",
+          "corresponding source excludes local edits",
+          "subprocess gates under PYTHONOPTIMIZE",
+          "reject db48x changes outside the patch",
           "missing evidence rejection",
+          "checks active under PYTHONOPTIMIZE",
           "wrong firmware rejection",
           "changed source rejection"
         ]
       },
       "evidence": [
         {
-          "path": "docs/review/rc3/release-tool-tests.json",
-          "sha256": "9efa3fa4e0a9c7950c762ed0fb3de0e92a140a7c7228e19ac3693f684be590b9"
+          "path": "docs/review/rc4/release-tool-tests.json",
+          "sha256": "a124c1daccdda749279f1946ccd4073624f888213942961a26544e5df4ca3e93"
         }
       ]
     }
@@ -782,18 +782,23 @@
     "additional_test_reason": "New calculator command/setting registrations and calculator regression checks extend the current suite; both full suites have zero failed checks.",
     "known_baseline_assertions": 7724,
     "baseline_assertion_reason": "The pristine upstream runtime.cc run_select_case predicate uses Returns[1] + 1 on the sentinel pointer. The existing calculator patch compares uintptr_t(Returns[1]) with uintptr_t(-1), avoiding that pointer arithmetic. Only that predicate and its recorder backtrace echoes appear in the pristine baseline. The patched suite has zero assertions.",
-    "scope": "Pristine pinned upstream monochrome simulator with its original fixtures; patched RGB332 simulator with variant-matched colour fixtures; same host compiler/Qt release configuration."
+    "scope": "Baseline: the rc.3 pristine run of the same pinned upstream commit (5d5a638) and fixtures, recorded in docs/review/rc3 and reused because the upstream pin and host toolchain are unchanged. Post: fresh patched RGB332 run of candidate d0f753f."
   },
   "device_acceptance": {
-    "confirmed_by": "User",
-    "confirmed_date": "2026-11-05",
-    "tested_firmware_sha256": "77c0c70f511e1904c61eaf999c6ff4abb07ff8dff098ae94454a9e9e37bc53b3",
-    "passed": [
-      "clock and alarms",
-      "save/restart and alarm restoration",
-      "30-minute mixed-use session without issues"
-    ],
-    "candidate_runtime_unchanged": true,
-    "candidate_exact_image_cold_boot": "Pending after installation of the newly versioned rc.3 image; not inferred from predecessor testing."
+    "tested_firmware_sha256": null,
+    "passed": [],
+    "pending": "No hardware testing of the rc.4 image yet. Cold boot, alarms (Enter acknowledge, Esc/Back snooze), Lua F5 and Esc, save/restart and a 30-minute mixed-use session remain to be confirmed on device.",
+    "predecessor_confirmations": {
+      "confirmed_by": "User",
+      "confirmed_date": "2026-11-05",
+      "tested_firmware_sha256": "77c0c70f511e1904c61eaf999c6ff4abb07ff8dff098ae94454a9e9e37bc53b3",
+      "passed": [
+        "clock and alarms",
+        "save/restart and alarm restoration",
+        "30-minute mixed-use session without issues"
+      ],
+      "candidate_runtime_unchanged": true,
+      "candidate_exact_image_cold_boot": "Pending after installation of the newly versioned rc.3 image; not inferred from predecessor testing."
+    }
   }
 }
