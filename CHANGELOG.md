@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Snooze reminders for five minutes with Esc/Back or a one-minute timeout; keep malformed alarm data and allocation errors out of idle error handling.
+- Package committed defaults and corresponding source while excluding local edits and private files. Keep verification subprocess checks active under optimized Python.
+
 ## 0.10.0-rc.3 (2026-11-06)
 
 - Complete calculator Fourier, probability, real-matrix and bounded symbolic commands; connect working menu actions and hide unavailable legacy interfaces.

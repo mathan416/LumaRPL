@@ -43,7 +43,7 @@ int pico_ui_host_read_key();
 #undef mark_dirty
 #undef sys_disk_ok
 [[noreturn]] static void test_abort(int line){fprintf(stderr,"FAIL: production controller check at line %d, screen %s\n",line,pico_ui::visible_screen);std::exit(1);}
-static bool host_sd=true,host_fail_save=false;static bool host_alarm_ack=false;static unsigned host_write_opens=0;
+static bool host_sd=true,host_fail_save=false;static int host_alarm_key=0,host_alarm_followup=0;static unsigned host_write_opens=0;
 static std::string host_rates_csv;
 static int host_theme=0;
 static std::string host_variant="normal";
@@ -72,7 +72,7 @@ void pico_ui_host_refresh()
 {
     ++host_frames;
     std::string id=pico_ui::visible_screen;visits[id]++;
-    if(host_alarm_ack && id=="legacy.message"){host_alarm_ack=false;key_push(0);key_push(33);}
+    if(host_alarm_key && id=="legacy.message"){key_push(0);key_push(host_alarm_key);if(host_alarm_followup)key_push(host_alarm_followup);host_alarm_key=host_alarm_followup=0;}
     unsigned rows=0;for(auto &row:host_dirty_rows){rows+=row;row=false;}host_transfers[id][rows]++;
     static std::map<std::string,bool> saved;
     std::string snapshot=host_variant+"."+std::to_string(host_theme)+"."+id;
@@ -115,6 +115,7 @@ int pico_commit_state(const char *a,const char *b){return !host_fail_save&&!rena
 FRESULT pico_f_opendir(DIR *dir,const char *name){if(!host_sd)return FR_NOT_READY;auto p=path(name);struct stat st;if(stat(p.c_str(),&st))return FR_NO_PATH;HostDirectory d;d.path=p;glob_t g{};glob((p+"/*").c_str(),0,nullptr,&g);for(size_t i=0;i<g.gl_pathc;++i){std::string n=g.gl_pathv[i];d.names.push_back(n.substr(n.find_last_of('/')+1));}globfree(&g);host_directories[dir]=d;return FR_OK;}
 FRESULT pico_ui_host_f_readdir(DIR *dir,FILINFO *info){auto it=host_directories.find(dir);if(it==host_directories.end())return FR_INVALID_OBJECT;memset(info,0,sizeof *info);auto &d=it->second;if(d.index==d.names.size())return FR_OK;auto &n=d.names[d.index++];strncpy(info->fname,n.c_str(),sizeof info->fname-1);struct stat st;if(!stat((d.path+"/"+n).c_str(),&st)){info->fsize=st.st_size;info->fattrib=S_ISDIR(st.st_mode)?AM_DIR:0;}return FR_OK;}
 FRESULT pico_ui_host_f_closedir(DIR *dir){host_directories.erase(dir);return FR_OK;}
+#include "fixture_file.h"
 pico_network_status pico_network_get_status(){return {};}
 void pico_network_time_cancel(){}
 void pico_network_credentials_saved(const char *,const char *){}
@@ -561,7 +562,7 @@ static void alarm_reminder_cases()
         if(alarm_notify()||strcmp((const char *)rt.error(),"Preserved alarm test"))test_abort(__LINE__);
         rt.clear_error();key_push(33);
         if(alarm_notify())test_abort(__LINE__);
-        key_pop_all();host_alarm_ack=true;
+        key_pop_all();host_alarm_key=13;
         if(!alarm_notify()||rt.error()||rt.depth()!=1||rt.top()->as_int32(0,false)!=42)test_abort(__LINE__);
         key_pop_all();
         if(!execute("1 RclAlarm 4 GET 1 SAME 2 RclAlarm 4 GET 0 SAME AND")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
@@ -569,9 +570,31 @@ static void alarm_reminder_cases()
         rt.reset();load_saved_keymap();
         if(!load_state_file_silent("data/ALARMS.48S")||!execute("1 RclAlarm 4 GET 1 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
     }
-    remove("data/ALARMS.48S");rt.reset();load_saved_keymap();
+    remove("data/ALARMS.48S");
+    // Malformed reminder data never raises an error from the idle check.
+    rt.reset();load_saved_keymap();key_pop_all();
+    if(!execute("\"not alarms\" 'LumaAlarms' STO"))test_abort(__LINE__);
+    sys_delay(1100);
+    if(alarm_notify()||rt.error())test_abort(__LINE__);
+    if(!execute("'LumaAlarms' PURGE"))test_abort(__LINE__);
+    // Empty labels are valid; unrelated keys cannot acknowledge a reminder.
+    if(!execute("20000101 \"\" StoAlarm DROP"))test_abort(__LINE__);
+    sys_delay(1100);host_alarm_key='A';host_alarm_followup=KEY_ENTER;
+    if(!alarm_notify()||rt.error()||host_alarm_key||host_alarm_followup)test_abort(__LINE__);
+    if(!execute("1 RclAlarm 4 GET 1 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
+    rt.drop();if(!execute("'LumaAlarms' PURGE"))test_abort(__LINE__);
+    // Snoozing retains the record and prevents an immediate repeat.
+
+    if(!execute("20000101 \"Snooze\" StoAlarm DROP"))test_abort(__LINE__);
+    sys_delay(1100);host_alarm_key=getenv("LUMARPL_ALARM_TIMEOUT_ONLY")?0:getenv("LUMARPL_ALARM_BACK")?KEY_F5:KEY_EXIT;
+    if(!alarm_notify()||rt.error()||host_alarm_key)test_abort(__LINE__);
+    if(!execute("1 RclAlarm 4 GET 0 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
+    rt.drop();sys_delay(1100);
+    if(alarm_notify()||rt.error())test_abort(__LINE__);
+    if(!execute("'LumaAlarms' PURGE"))test_abort(__LINE__);
+    rt.reset();load_saved_keymap();
     host_variant="normal";host_theme=0;apply_theme(0);
-    puts("PASS: alarm alert/acknowledgement, preserved calculator stack, future reminders and saved-session restoration in eight themes");
+    puts("PASS: alarm Enter acknowledgement, empty messages, ignored keys, snooze, silent malformed data, preserved stack and saved-session restoration in eight themes");
 }
 
 static void available_menu_cases()

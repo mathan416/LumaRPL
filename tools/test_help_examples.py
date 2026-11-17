@@ -2,6 +2,7 @@
 """Execute the help's console examples using the real DB48X engine."""
 from pathlib import Path
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
+from simulator_checks import simulator_env
 root=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--release',default='release');p.add_argument('--binary',type=Path,default=root/'build/simulator-rgb332/help-console');args=p.parse_args();binary=args.binary.resolve()
 if args.binary == root/'build/simulator-rgb332/help-console':
@@ -12,7 +13,8 @@ if args.binary == root/'build/simulator-rgb332/help-console':
  subprocess.run(['make','-C',str(out),'-f','HelpConsole.mk','help-console'],check=True)
 examples=json.loads((root/'docs/help/examples.json').read_text());examples += [dict(title=name,**e) for name,e in json.loads((root/'docs/help/command-examples.json').read_text()).items()];results=[]
 env=dict(os.environ,QT_QPA_PLATFORM='offscreen')
-with tempfile.TemporaryDirectory(prefix='lumarpl-help-') as work:
+with tempfile.TemporaryDirectory(prefix='lumarpl-help-') as work,tempfile.TemporaryDirectory(prefix='lumarpl-help-home-') as home:
+ env=simulator_env(work,env,home)
  shutil.copytree(root/'db48x/config',Path(work)/'config')
  for e in examples:
   for item in Path(work).iterdir():

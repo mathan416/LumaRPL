@@ -2529,7 +2529,7 @@
   },
   "Alarms": {
     "category": "Date and time",
-    "text": "List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session."
+    "text": "List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session. Enter acknowledges a displayed reminder. Esc/Back or a one-minute timeout snoozes reminders for five minutes."
   },
   "StoAlarm": {
     "category": "Date and time",

@@ -5676,7 +5676,7 @@ Acknowledge all currently due reminders. Future reminders remain scheduled.
 
 ## Alarms
 
-List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session.
+List clock-based reminders. Each record is { ID date/time message acknowledged due-seconds }. Up to 32 one-time reminders are saved with the calculator session. Enter acknowledges a displayed reminder. Esc/Back or a one-minute timeout snoozes reminders for five minutes.
 
 ## DelAlarm
 

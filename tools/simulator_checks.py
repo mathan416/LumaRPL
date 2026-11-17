@@ -2,9 +2,40 @@
 from pathlib import Path
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
+
+
+def simulator_env(work, base=None, home=None):
+    """Keep a simulator run inside its prepared work directory.
+
+    The DB48X simulator changes into its Qt AppDataLocation at startup
+    (sim/sim-main.cpp), so a cwd alone is ignored: relative test paths would
+    resolve in the user's real ~/Library or ~/.local data folder. A private home
+    whose AppDataLocation links to `work` keeps runs hermetic and leaves the
+    user's simulator data and preferences untouched.
+    """
+    work = Path(work).resolve()
+    home = Path(home) if home else work.parent / (work.name + '.home')
+    env = dict(os.environ if base is None else base)
+    if sys.platform == 'darwin':
+        env['CFFIXED_USER_HOME'] = str(home)
+        data = home / 'Library/Application Support'
+    else:
+        env['XDG_DATA_HOME'] = str(home / 'share')
+        env['XDG_CONFIG_HOME'] = str(home / 'config')
+        data = home / 'share'
+    env['HOME'] = str(home)
+    link = data / 'DB48X/DB48X'
+    link.parent.mkdir(parents=True, exist_ok=True)
+    if link.is_symlink() or link.is_file():
+        link.unlink()
+    elif link.exists():
+        raise SystemExit(f'{link} is a directory; remove it so it can point at {work}')
+    link.symlink_to(work, target_is_directory=True)
+    return env
 
 
 def prepare_help(root, work, colour):
@@ -37,7 +68,8 @@ def run_checked(command, cwd, report, output=None):
     """An assertion is a failure even when the simulator exits successfully."""
     output = output if output is not None else sys.stdout.buffer
     assertions = []
-    with subprocess.Popen(command, cwd=cwd, stdout=subprocess.PIPE,
+    with subprocess.Popen(command, cwd=cwd, env=simulator_env(cwd),
+                          stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT) as process:
         for line in process.stdout:
             output.write(line)

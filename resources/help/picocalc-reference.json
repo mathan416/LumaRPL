@@ -4188,3443 +4188,3443 @@
       "name": "Alarms",
       "category": "Date and time",
       "offset": 177143,
-      "length": 160,
-      "crc32": 3710194430
+      "length": 270,
+      "crc32": 1606421275
     },
     {
       "name": "DelAlarm",
       "category": "Date and time",
-      "offset": 177303,
+      "offset": 177413,
       "length": 83,
       "crc32": 1050446068
     },
     {
       "name": "FindAlarm",
       "category": "Date and time",
-      "offset": 177386,
+      "offset": 177496,
       "length": 110,
       "crc32": 355514465
     },
     {
       "name": "RclAlarm",
       "category": "Date and time",
-      "offset": 177496,
+      "offset": 177606,
       "length": 48,
       "crc32": 2427369345
     },
     {
       "name": "StoAlarm",
       "category": "Date and time",
-      "offset": 177544,
+      "offset": 177654,
       "length": 212,
       "crc32": 3046544637
     },
     {
       "name": "ChronoTime",
       "category": "Dates and time",
-      "offset": 177756,
+      "offset": 177866,
       "length": 113,
       "crc32": 2761407202
     },
     {
       "name": "Date",
       "category": "Dates and time",
-      "offset": 177869,
+      "offset": 177979,
       "length": 47,
       "crc32": 4206246015
     },
     {
       "name": "DateAdd",
       "category": "Dates and time",
-      "offset": 177916,
+      "offset": 178026,
       "length": 70,
       "crc32": 1744056596
     },
     {
       "name": "DateFromJulianDayNumber",
       "category": "Dates and time",
-      "offset": 177986,
+      "offset": 178096,
       "length": 67,
       "crc32": 2893268208
     },
     {
       "name": "DateSub",
       "category": "Dates and time",
-      "offset": 178053,
+      "offset": 178163,
       "length": 236,
       "crc32": 3685146550
     },
     {
       "name": "DateTime",
       "category": "Dates and time",
-      "offset": 178289,
+      "offset": 178399,
       "length": 38,
       "crc32": 1089843877
     },
     {
       "name": "DegreesToRadians",
       "category": "Dates and time",
-      "offset": 178327,
+      "offset": 178437,
       "length": 192,
       "crc32": 1952513008
     },
     {
       "name": "DMSAdd",
       "category": "Dates and time",
-      "offset": 178519,
+      "offset": 178629,
       "length": 66,
       "crc32": 1693122912
     },
     {
       "name": "DMSSub",
       "category": "Dates and time",
-      "offset": 178585,
+      "offset": 178695,
       "length": 67,
       "crc32": 2491542720
     },
     {
       "name": "FromDMS",
       "category": "Dates and time",
-      "offset": 178652,
+      "offset": 178762,
       "length": 128,
       "crc32": 29326324
     },
     {
       "name": "FromHMS",
       "category": "Dates and time",
-      "offset": 178780,
+      "offset": 178890,
       "length": 129,
       "crc32": 4033878873
     },
     {
       "name": "HMSAdd",
       "category": "Dates and time",
-      "offset": 178909,
+      "offset": 179019,
       "length": 64,
       "crc32": 2414942563
     },
     {
       "name": "HMSSub",
       "category": "Dates and time",
-      "offset": 178973,
+      "offset": 179083,
       "length": 65,
       "crc32": 395765947
     },
     {
       "name": "JulianDayNumber",
       "category": "Dates and time",
-      "offset": 179038,
+      "offset": 179148,
       "length": 208,
       "crc32": 950767575
     },
     {
       "name": "RadiansToDegrees",
       "category": "Dates and time",
-      "offset": 179246,
+      "offset": 179356,
       "length": 193,
       "crc32": 2327428931
     },
     {
       "name": "SetDate",
       "category": "Dates and time",
-      "offset": 179439,
+      "offset": 179549,
       "length": 144,
       "crc32": 2412247224
     },
     {
       "name": "SetTime",
       "category": "Dates and time",
-      "offset": 179583,
+      "offset": 179693,
       "length": 131,
       "crc32": 682162177
     },
     {
       "name": "Ticks",
       "category": "Dates and time",
-      "offset": 179714,
+      "offset": 179824,
       "length": 61,
       "crc32": 3915779514
     },
     {
       "name": "Time",
       "category": "Dates and time",
-      "offset": 179775,
+      "offset": 179885,
       "length": 47,
       "crc32": 156834745
     },
     {
       "name": "ToDegrees",
       "category": "Dates and time",
-      "offset": 179822,
+      "offset": 179932,
       "length": 69,
       "crc32": 2858198445
     },
     {
       "name": "ToDMS",
       "category": "Dates and time",
-      "offset": 179891,
+      "offset": 180001,
       "length": 127,
       "crc32": 3585796186
     },
     {
       "name": "ToGrads",
       "category": "Dates and time",
-      "offset": 180018,
+      "offset": 180128,
       "length": 94,
       "crc32": 3665825176
     },
     {
       "name": "ToHMS",
       "category": "Dates and time",
-      "offset": 180112,
+      "offset": 180222,
       "length": 116,
       "crc32": 3495676111
     },
     {
       "name": "ToPiRadians",
       "category": "Dates and time",
-      "offset": 180228,
+      "offset": 180338,
       "length": 109,
       "crc32": 1264421051
     },
     {
       "name": "ToRadians",
       "category": "Dates and time",
-      "offset": 180337,
+      "offset": 180447,
       "length": 69,
       "crc32": 3450045092
     },
     {
       "name": "acos",
       "category": "Functions",
-      "offset": 180406,
+      "offset": 180516,
       "length": 216,
       "crc32": 3227270744
     },
     {
       "name": "acosh",
       "category": "Functions",
-      "offset": 180622,
+      "offset": 180732,
       "length": 221,
       "crc32": 1755552106
     },
     {
       "name": "acot",
       "category": "Functions",
-      "offset": 180843,
+      "offset": 180953,
       "length": 220,
       "crc32": 3301600769
     },
     {
       "name": "acoth",
       "category": "Functions",
-      "offset": 181063,
+      "offset": 181173,
       "length": 188,
       "crc32": 340819301
     },
     {
       "name": "acsc",
       "category": "Functions",
-      "offset": 181251,
+      "offset": 181361,
       "length": 219,
       "crc32": 2211857335
     },
     {
       "name": "acsch",
       "category": "Functions",
-      "offset": 181470,
+      "offset": 181580,
       "length": 187,
       "crc32": 634480506
     },
     {
       "name": "asec",
       "category": "Functions",
-      "offset": 181657,
+      "offset": 181767,
       "length": 216,
       "crc32": 2209647906
     },
     {
       "name": "asech",
       "category": "Functions",
-      "offset": 181873,
+      "offset": 181983,
       "length": 185,
       "crc32": 4080306740
     },
     {
       "name": "asin",
       "category": "Functions",
-      "offset": 182058,
+      "offset": 182168,
       "length": 215,
       "crc32": 3346559910
     },
     {
       "name": "asinh",
       "category": "Functions",
-      "offset": 182273,
+      "offset": 182383,
       "length": 219,
       "crc32": 3290823614
     },
     {
       "name": "atan",
       "category": "Functions",
-      "offset": 182492,
+      "offset": 182602,
       "length": 217,
       "crc32": 811284550
     },
     {
       "name": "atan2",
       "category": "Functions",
-      "offset": 182709,
+      "offset": 182819,
       "length": 154,
       "crc32": 1190859236
     },
     {
       "name": "atanh",
       "category": "Functions",
-      "offset": 182863,
+      "offset": 182973,
       "length": 222,
       "crc32": 2108532866
     },
     {
       "name": "BetaI",
       "category": "Functions",
-      "offset": 183085,
+      "offset": 183195,
       "length": 166,
       "crc32": 1462263310
     },
     {
       "name": "comb",
       "category": "Functions",
-      "offset": 183251,
+      "offset": 183361,
       "length": 154,
       "crc32": 2452951564
     },
     {
       "name": "cos",
       "category": "Functions",
-      "offset": 183405,
+      "offset": 183515,
       "length": 162,
       "crc32": 751024143
     },
     {
       "name": "cosh",
       "category": "Functions",
-      "offset": 183567,
+      "offset": 183677,
       "length": 180,
       "crc32": 3045011112
     },
     {
       "name": "cot",
       "category": "Functions",
-      "offset": 183747,
+      "offset": 183857,
       "length": 167,
       "crc32": 1987901766
     },
     {
       "name": "coth",
       "category": "Functions",
-      "offset": 183914,
+      "offset": 184024,
       "length": 148,
       "crc32": 3269394011
     },
     {
       "name": "csc",
       "category": "Functions",
-      "offset": 184062,
+      "offset": 184172,
       "length": 166,
       "crc32": 3978205965
     },
     {
       "name": "csch",
       "category": "Functions",
-      "offset": 184228,
+      "offset": 184338,
       "length": 147,
       "crc32": 774567655
     },
     {
       "name": "erf",
       "category": "Functions",
-      "offset": 184375,
+      "offset": 184485,
       "length": 305,
       "crc32": 602264104
     },
     {
       "name": "erfc",
       "category": "Functions",
-      "offset": 184680,
+      "offset": 184790,
       "length": 320,
       "crc32": 3758519528
     },
     {
       "name": "exp",
       "category": "Functions",
-      "offset": 185000,
+      "offset": 185110,
       "length": 177,
       "crc32": 659084090
     },
     {
       "name": "exp10",
       "category": "Functions",
-      "offset": 185177,
+      "offset": 185287,
       "length": 208,
       "crc32": 1474455074
     },
     {
       "name": "exp2",
       "category": "Functions",
-      "offset": 185385,
+      "offset": 185495,
       "length": 206,
       "crc32": 2399969537
     },
     {
       "name": "expm1",
       "category": "Functions",
-      "offset": 185591,
+      "offset": 185701,
       "length": 204,
       "crc32": 2603760407
     },
     {
       "name": "fact",
       "category": "Functions",
-      "offset": 185795,
+      "offset": 185905,
       "length": 373,
       "crc32": 3241056229
     },
     {
       "name": "GammaP",
       "category": "Functions",
-      "offset": 186168,
+      "offset": 186278,
       "length": 138,
       "crc32": 3397462279
     },
     {
       "name": "lgamma",
       "category": "Functions",
-      "offset": 186306,
+      "offset": 186416,
       "length": 278,
       "crc32": 356028385
     },
     {
       "name": "ln",
       "category": "Functions",
-      "offset": 186584,
+      "offset": 186694,
       "length": 178,
       "crc32": 1203670405
     },
     {
       "name": "ln1p",
       "category": "Functions",
-      "offset": 186762,
+      "offset": 186872,
       "length": 214,
       "crc32": 4224624216
     },
     {
       "name": "log10",
       "category": "Functions",
-      "offset": 186976,
+      "offset": 187086,
       "length": 208,
       "crc32": 2115549623
     },
     {
       "name": "log2",
       "category": "Functions",
-      "offset": 187184,
+      "offset": 187294,
       "length": 181,
       "crc32": 3860328484
     },
     {
       "name": "perm",
       "category": "Functions",
-      "offset": 187365,
+      "offset": 187475,
       "length": 152,
       "crc32": 4187904686
     },
     {
       "name": "sec",
       "category": "Functions",
-      "offset": 187517,
+      "offset": 187627,
       "length": 163,
       "crc32": 3504072470
     },
     {
       "name": "sech",
       "category": "Functions",
-      "offset": 187680,
+      "offset": 187790,
       "length": 180,
       "crc32": 2609233906
     },
     {
       "name": "sin",
       "category": "Functions",
-      "offset": 187860,
+      "offset": 187970,
       "length": 161,
       "crc32": 1473174260
     },
     {
       "name": "sinh",
       "category": "Functions",
-      "offset": 188021,
+      "offset": 188131,
       "length": 178,
       "crc32": 1540131816
     },
     {
       "name": "tan",
       "category": "Functions",
-      "offset": 188199,
+      "offset": 188309,
       "length": 163,
       "crc32": 2610342944
     },
     {
       "name": "tanh",
       "category": "Functions",
-      "offset": 188362,
+      "offset": 188472,
       "length": 181,
       "crc32": 661857886
     },
     {
       "name": "Termial",
       "category": "Functions",
-      "offset": 188543,
+      "offset": 188653,
       "length": 727,
       "crc32": 3508661156
     },
     {
       "name": "tgamma",
       "category": "Functions",
-      "offset": 189270,
+      "offset": 189380,
       "length": 349,
       "crc32": 1945422352
     },
     {
       "name": "UTPC",
       "category": "Functions",
-      "offset": 189619,
+      "offset": 189729,
       "length": 170,
       "crc32": 485217388
     },
     {
       "name": "UTPF",
       "category": "Functions",
-      "offset": 189789,
+      "offset": 189899,
       "length": 185,
       "crc32": 798515750
     },
     {
       "name": "UTPN",
       "category": "Functions",
-      "offset": 189974,
+      "offset": 190084,
       "length": 180,
       "crc32": 2290468105
     },
     {
       "name": "UTPT",
       "category": "Functions",
-      "offset": 190154,
+      "offset": 190264,
       "length": 129,
       "crc32": 2864092240
     },
     {
       "name": "Bar",
       "category": "Graphics",
-      "offset": 190283,
+      "offset": 190393,
       "length": 63,
       "crc32": 3774405889
     },
     {
       "name": "BlankBitmap",
       "category": "Graphics",
-      "offset": 190346,
+      "offset": 190456,
       "length": 58,
       "crc32": 1765972578
     },
     {
       "name": "BlankGraphic",
       "category": "Graphics",
-      "offset": 190404,
+      "offset": 190514,
       "length": 84,
       "crc32": 576220984
     },
     {
       "name": "BlankGrob",
       "category": "Graphics",
-      "offset": 190488,
+      "offset": 190598,
       "length": 70,
       "crc32": 3925096424
     },
     {
       "name": "BlankPixmap",
       "category": "Graphics",
-      "offset": 190558,
+      "offset": 190668,
       "length": 54,
       "crc32": 3967874088
     },
     {
       "name": "Center",
       "category": "Graphics",
-      "offset": 190612,
+      "offset": 190722,
       "length": 67,
       "crc32": 3374818334
     },
     {
       "name": "Circle",
       "category": "Graphics",
-      "offset": 190679,
+      "offset": 190789,
       "length": 112,
       "crc32": 3542032963
     },
     {
       "name": "Clip",
       "category": "Graphics",
-      "offset": 190791,
+      "offset": 190901,
       "length": 65,
       "crc32": 4250481098
     },
     {
       "name": "ClLCD",
       "category": "Graphics",
-      "offset": 190856,
+      "offset": 190966,
       "length": 65,
       "crc32": 3994767226
     },
     {
       "name": "Color",
       "category": "Graphics",
-      "offset": 190921,
+      "offset": 191031,
       "length": 106,
       "crc32": 1872567977
     },
     {
       "name": "CurrentClip",
       "category": "Graphics",
-      "offset": 191027,
+      "offset": 191137,
       "length": 51,
       "crc32": 2277451919
     },
     {
       "name": "Depnd",
       "category": "Graphics",
-      "offset": 191078,
+      "offset": 191188,
       "length": 91,
       "crc32": 557678781
     },
     {
       "name": "Disp",
       "category": "Graphics",
-      "offset": 191169,
+      "offset": 191279,
       "length": 103,
       "crc32": 1031312632
     },
     {
       "name": "DispXY",
       "category": "Graphics",
-      "offset": 191272,
+      "offset": 191382,
       "length": 104,
       "crc32": 1591094430
     },
     {
       "name": "Draw",
       "category": "Graphics",
-      "offset": 191376,
+      "offset": 191486,
       "length": 143,
       "crc32": 3747291950
     },
     {
       "name": "Drax",
       "category": "Graphics",
-      "offset": 191519,
+      "offset": 191629,
       "length": 95,
       "crc32": 3329397330
     },
     {
       "name": "Ellipse",
       "category": "Graphics",
-      "offset": 191614,
+      "offset": 191724,
       "length": 104,
       "crc32": 3002662554
     },
     {
       "name": "Freeze",
       "category": "Graphics",
-      "offset": 191718,
+      "offset": 191828,
       "length": 102,
       "crc32": 2743887809
     },
     {
       "name": "FromLCD",
       "category": "Graphics",
-      "offset": 191820,
+      "offset": 191930,
       "length": 95,
       "crc32": 3976241293
     },
     {
       "name": "Function",
       "category": "Graphics",
-      "offset": 191915,
+      "offset": 192025,
       "length": 90,
       "crc32": 965701740
     },
     {
       "name": "GAnd",
       "category": "Graphics",
-      "offset": 192005,
+      "offset": 192115,
       "length": 67,
       "crc32": 2649227675
     },
     {
       "name": "GOr",
       "category": "Graphics",
-      "offset": 192072,
+      "offset": 192182,
       "length": 65,
       "crc32": 424975503
     },
     {
       "name": "GraphicAppend",
       "category": "Graphics",
-      "offset": 192137,
+      "offset": 192247,
       "length": 35,
       "crc32": 3153484339
     },
     {
       "name": "GraphicExponent",
       "category": "Graphics",
-      "offset": 192172,
+      "offset": 192282,
       "length": 43,
       "crc32": 2916037714
     },
     {
       "name": "GraphicIntegral",
       "category": "Graphics",
-      "offset": 192215,
+      "offset": 192325,
       "length": 49,
       "crc32": 1551873996
     },
     {
       "name": "GraphicNorm",
       "category": "Graphics",
-      "offset": 192264,
+      "offset": 192374,
       "length": 42,
       "crc32": 1812211116
     },
     {
       "name": "GraphicParentheses",
       "category": "Graphics",
-      "offset": 192306,
+      "offset": 192416,
       "length": 44,
       "crc32": 1832241167
     },
     {
       "name": "GraphicProduct",
       "category": "Graphics",
-      "offset": 192350,
+      "offset": 192460,
       "length": 48,
       "crc32": 1712109027
     },
     {
       "name": "GraphicRatio",
       "category": "Graphics",
-      "offset": 192398,
+      "offset": 192508,
       "length": 39,
       "crc32": 1752407820
     },
     {
       "name": "GraphicRoot",
       "category": "Graphics",
-      "offset": 192437,
+      "offset": 192547,
       "length": 43,
       "crc32": 274420503
     },
     {
       "name": "GraphicStack",
       "category": "Graphics",
-      "offset": 192480,
+      "offset": 192590,
       "length": 71,
       "crc32": 1846571152
     },
     {
       "name": "GraphicSubscript",
       "category": "Graphics",
-      "offset": 192551,
+      "offset": 192661,
       "length": 43,
       "crc32": 2235418053
     },
     {
       "name": "GraphicSum",
       "category": "Graphics",
-      "offset": 192594,
+      "offset": 192704,
       "length": 50,
       "crc32": 3415356680
     },
     {
       "name": "Gray",
       "category": "Graphics",
-      "offset": 192644,
+      "offset": 192754,
       "length": 115,
       "crc32": 3420652273
     },
     {
       "name": "GXor",
       "category": "Graphics",
-      "offset": 192759,
+      "offset": 192869,
       "length": 76,
       "crc32": 1491077488
     },
     {
       "name": "Histogram",
       "category": "Graphics",
-      "offset": 192835,
+      "offset": 192945,
       "length": 69,
       "crc32": 3269716377
     },
     {
       "name": "HSV",
       "category": "Graphics",
-      "offset": 192904,
+      "offset": 193014,
       "length": 88,
       "crc32": 3567576653
     },
     {
       "name": "Indep",
       "category": "Graphics",
-      "offset": 192992,
+      "offset": 193102,
       "length": 95,
       "crc32": 1618022909
     },
     {
       "name": "Line",
       "category": "Graphics",
-      "offset": 193087,
+      "offset": 193197,
       "length": 95,
       "crc32": 1317509810
     },
     {
       "name": "Parametric",
       "category": "Graphics",
-      "offset": 193182,
+      "offset": 193292,
       "length": 94,
       "crc32": 4239263592
     },
     {
       "name": "Pict",
       "category": "Graphics",
-      "offset": 193276,
+      "offset": 193386,
       "length": 79,
       "crc32": 3729512513
     },
     {
       "name": "PixColor",
       "category": "Graphics",
-      "offset": 193355,
+      "offset": 193465,
       "length": 92,
       "crc32": 1953820672
     },
     {
       "name": "PixOff",
       "category": "Graphics",
-      "offset": 193447,
+      "offset": 193557,
       "length": 121,
       "crc32": 368939579
     },
     {
       "name": "PixOn",
       "category": "Graphics",
-      "offset": 193568,
+      "offset": 193678,
       "length": 109,
       "crc32": 3418882804
     },
     {
       "name": "PixTest",
       "category": "Graphics",
-      "offset": 193677,
+      "offset": 193787,
       "length": 92,
       "crc32": 3990525661
     },
     {
       "name": "PlotMax",
       "category": "Graphics",
-      "offset": 193769,
+      "offset": 193879,
       "length": 64,
       "crc32": 3061197423
     },
     {
       "name": "PlotMin",
       "category": "Graphics",
-      "offset": 193833,
+      "offset": 193943,
       "length": 64,
       "crc32": 672870626
     },
     {
       "name": "PlotParameters",
       "category": "Graphics",
-      "offset": 193897,
+      "offset": 194007,
       "length": 107,
       "crc32": 2921624003
     },
     {
       "name": "Polar",
       "category": "Graphics",
-      "offset": 194004,
+      "offset": 194114,
       "length": 84,
       "crc32": 332673959
     },
     {
       "name": "Rect",
       "category": "Graphics",
-      "offset": 194088,
+      "offset": 194198,
       "length": 78,
       "crc32": 3861069796
     },
     {
       "name": "Res",
       "category": "Graphics",
-      "offset": 194166,
+      "offset": 194276,
       "length": 64,
       "crc32": 4201752913
     },
     {
       "name": "RGB",
       "category": "Graphics",
-      "offset": 194230,
+      "offset": 194340,
       "length": 190,
       "crc32": 715407556
     },
     {
       "name": "RRect",
       "category": "Graphics",
-      "offset": 194420,
+      "offset": 194530,
       "length": 108,
       "crc32": 925557607
     },
     {
       "name": "Scale",
       "category": "Graphics",
-      "offset": 194528,
+      "offset": 194638,
       "length": 65,
       "crc32": 2959386018
     },
     {
       "name": "Scatter",
       "category": "Graphics",
-      "offset": 194593,
+      "offset": 194703,
       "length": 94,
       "crc32": 1954972508
     },
     {
       "name": "Show",
       "category": "Graphics",
-      "offset": 194687,
+      "offset": 194797,
       "length": 114,
       "crc32": 2669710173
     },
     {
       "name": "ToBitmap",
       "category": "Graphics",
-      "offset": 194801,
+      "offset": 194911,
       "length": 70,
       "crc32": 1437772896
     },
     {
       "name": "ToGrob",
       "category": "Graphics",
-      "offset": 194871,
+      "offset": 194981,
       "length": 80,
       "crc32": 3354244542
     },
     {
       "name": "ToHPGrob",
       "category": "Graphics",
-      "offset": 194951,
+      "offset": 195061,
       "length": 76,
       "crc32": 1437775248
     },
     {
       "name": "ToLCD",
       "category": "Graphics",
-      "offset": 195027,
+      "offset": 195137,
       "length": 98,
       "crc32": 2536592358
     },
     {
       "name": "ToPixmap",
       "category": "Graphics",
-      "offset": 195125,
+      "offset": 195235,
       "length": 59,
       "crc32": 3646726834
     },
     {
       "name": "Truth",
       "category": "Graphics",
-      "offset": 195184,
+      "offset": 195294,
       "length": 84,
       "crc32": 3063967806
     },
     {
       "name": "XRange",
       "category": "Graphics",
-      "offset": 195268,
+      "offset": 195378,
       "length": 79,
       "crc32": 1297111600
     },
     {
       "name": "XScale",
       "category": "Graphics",
-      "offset": 195347,
+      "offset": 195457,
       "length": 86,
       "crc32": 3610469521
     },
     {
       "name": "YRange",
       "category": "Graphics",
-      "offset": 195433,
+      "offset": 195543,
       "length": 77,
       "crc32": 2443200543
     },
     {
       "name": "YScale",
       "category": "Graphics",
-      "offset": 195510,
+      "offset": 195620,
       "length": 84,
       "crc32": 3076947040
     },
     {
       "name": "CharToUnicode",
       "category": "Lists and text",
-      "offset": 195594,
+      "offset": 195704,
       "length": 151,
       "crc32": 2356232303
     },
     {
       "name": "DoList",
       "category": "Lists and text",
-      "offset": 195745,
+      "offset": 195855,
       "length": 126,
       "crc32": 897713246
     },
     {
       "name": "DoSubs",
       "category": "Lists and text",
-      "offset": 195871,
+      "offset": 195981,
       "length": 93,
       "crc32": 1223549157
     },
     {
       "name": "Explode",
       "category": "Lists and text",
-      "offset": 195964,
+      "offset": 196074,
       "length": 85,
       "crc32": 3693699393
     },
     {
       "name": "Filter",
       "category": "Lists and text",
-      "offset": 196049,
+      "offset": 196159,
       "length": 109,
       "crc32": 3907606913
     },
     {
       "name": "Find",
       "category": "Lists and text",
-      "offset": 196158,
+      "offset": 196268,
       "length": 203,
       "crc32": 2810612327
     },
     {
       "name": "FromList",
       "category": "Lists and text",
-      "offset": 196361,
+      "offset": 196471,
       "length": 226,
       "crc32": 3987221324
     },
     {
       "name": "Get",
       "category": "Lists and text",
-      "offset": 196587,
+      "offset": 196697,
       "length": 113,
       "crc32": 2788399469
     },
     {
       "name": "GetI",
       "category": "Lists and text",
-      "offset": 196700,
+      "offset": 196810,
       "length": 125,
       "crc32": 679878657
     },
     {
       "name": "Head",
       "category": "Lists and text",
-      "offset": 196825,
+      "offset": 196935,
       "length": 81,
       "crc32": 535896860
     },
     {
       "name": "ListDifferences",
       "category": "Lists and text",
-      "offset": 196906,
+      "offset": 197016,
       "length": 142,
       "crc32": 3709493029
     },
     {
       "name": "ListProduct",
       "category": "Lists and text",
-      "offset": 197048,
+      "offset": 197158,
       "length": 112,
       "crc32": 3766514226
     },
     {
       "name": "ListSum",
       "category": "Lists and text",
-      "offset": 197160,
+      "offset": 197270,
       "length": 101,
       "crc32": 338082396
     },
     {
       "name": "Map",
       "category": "Lists and text",
-      "offset": 197261,
+      "offset": 197371,
       "length": 128,
       "crc32": 2834557483
     },
     {
       "name": "Put",
       "category": "Lists and text",
-      "offset": 197389,
+      "offset": 197499,
       "length": 127,
       "crc32": 3354177420
     },
     {
       "name": "PutI",
       "category": "Lists and text",
-      "offset": 197516,
+      "offset": 197626,
       "length": 126,
       "crc32": 3991142871
     },
     {
       "name": "QuickSort",
       "category": "Lists and text",
-      "offset": 197642,
+      "offset": 197752,
       "length": 151,
       "crc32": 1675692289
     },
     {
       "name": "QuickUnique",
       "category": "Lists and text",
-      "offset": 197793,
+      "offset": 197903,
       "length": 123,
       "crc32": 971723777
     },
     {
       "name": "Reduce",
       "category": "Lists and text",
-      "offset": 197916,
+      "offset": 198026,
       "length": 132,
       "crc32": 2417476364
     },
     {
       "name": "ReverseList",
       "category": "Lists and text",
-      "offset": 198048,
+      "offset": 198158,
       "length": 118,
       "crc32": 2669165732
     },
     {
       "name": "ReverseQuickSort",
       "category": "Lists and text",
-      "offset": 198166,
+      "offset": 198276,
       "length": 110,
       "crc32": 3297241426
     },
     {
       "name": "ReverseSort",
       "category": "Lists and text",
-      "offset": 198276,
+      "offset": 198386,
       "length": 96,
       "crc32": 2391049597
     },
     {
       "name": "Size",
       "category": "Lists and text",
-      "offset": 198372,
+      "offset": 198482,
       "length": 113,
       "crc32": 833825743
     },
     {
       "name": "Sort",
       "category": "Lists and text",
-      "offset": 198485,
+      "offset": 198595,
       "length": 88,
       "crc32": 2515058331
     },
     {
       "name": "Tail",
       "category": "Lists and text",
-      "offset": 198573,
+      "offset": 198683,
       "length": 102,
       "crc32": 1234261151
     },
     {
       "name": "TextToUnicode",
       "category": "Lists and text",
-      "offset": 198675,
+      "offset": 198785,
       "length": 136,
       "crc32": 1000242454
     },
     {
       "name": "ToList",
       "category": "Lists and text",
-      "offset": 198811,
+      "offset": 198921,
       "length": 160,
       "crc32": 666393007
     },
     {
       "name": "ToText",
       "category": "Lists and text",
-      "offset": 198971,
+      "offset": 199081,
       "length": 142,
       "crc32": 75933423
     },
     {
       "name": "UnicodeToText",
       "category": "Lists and text",
-      "offset": 199113,
+      "offset": 199223,
       "length": 143,
       "crc32": 1900374727
     },
     {
       "name": "Unique",
       "category": "Lists and text",
-      "offset": 199256,
+      "offset": 199366,
       "length": 83,
       "crc32": 3698319781
     },
     {
       "name": "And",
       "category": "Logic and programs",
-      "offset": 199339,
+      "offset": 199449,
       "length": 155,
       "crc32": 1689648762
     },
     {
       "name": "BinaryToFlags",
       "category": "Logic and programs",
-      "offset": 199494,
+      "offset": 199604,
       "length": 120,
       "crc32": 3874214268
     },
     {
       "name": "ClearFlag",
       "category": "Logic and programs",
-      "offset": 199614,
+      "offset": 199724,
       "length": 76,
       "crc32": 436031710
     },
     {
       "name": "Compile",
       "category": "Logic and programs",
-      "offset": 199690,
+      "offset": 199800,
       "length": 166,
       "crc32": 1665450294
     },
     {
       "name": "CompileToAlgebraic",
       "category": "Logic and programs",
-      "offset": 199856,
+      "offset": 199966,
       "length": 89,
       "crc32": 813114001
     },
     {
       "name": "CompileToExpression",
       "category": "Logic and programs",
-      "offset": 199945,
+      "offset": 200055,
       "length": 84,
       "crc32": 1868335423
     },
     {
       "name": "CompileToInteger",
       "category": "Logic and programs",
-      "offset": 200029,
+      "offset": 200139,
       "length": 128,
       "crc32": 3638390090
     },
     {
       "name": "CompileToNumber",
       "category": "Logic and programs",
-      "offset": 200157,
+      "offset": 200267,
       "length": 124,
       "crc32": 2041731094
     },
     {
       "name": "CompileToObject",
       "category": "Logic and programs",
-      "offset": 200281,
+      "offset": 200391,
       "length": 138,
       "crc32": 3641661816
     },
     {
       "name": "CompileToPositive",
       "category": "Logic and programs",
-      "offset": 200419,
+      "offset": 200529,
       "length": 136,
       "crc32": 2613225837
     },
     {
       "name": "CompileToReal",
       "category": "Logic and programs",
-      "offset": 200555,
+      "offset": 200665,
       "length": 128,
       "crc32": 3696848816
     },
     {
       "name": "Continue",
       "category": "Logic and programs",
-      "offset": 200683,
+      "offset": 200793,
       "length": 55,
       "crc32": 1411208980
     },
     {
       "name": "Debug",
       "category": "Logic and programs",
-      "offset": 200738,
+      "offset": 200848,
       "length": 74,
       "crc32": 3336495416
     },
     {
       "name": "EndSub",
       "category": "Logic and programs",
-      "offset": 200812,
+      "offset": 200922,
       "length": 59,
       "crc32": 377635696
     },
     {
       "name": "False",
       "category": "Logic and programs",
-      "offset": 200871,
+      "offset": 200981,
       "length": 76,
       "crc32": 4154466115
     },
     {
       "name": "FlagsToBinary",
       "category": "Logic and programs",
-      "offset": 200947,
+      "offset": 201057,
       "length": 101,
       "crc32": 2622047893
     },
     {
       "name": "FlipFlag",
       "category": "Logic and programs",
-      "offset": 201048,
+      "offset": 201158,
       "length": 77,
       "crc32": 1399828037
     },
     {
       "name": "Halt",
       "category": "Logic and programs",
-      "offset": 201125,
+      "offset": 201235,
       "length": 51,
       "crc32": 2551885008
     },
     {
       "name": "IFT",
       "category": "Logic and programs",
-      "offset": 201176,
+      "offset": 201286,
       "length": 138,
       "crc32": 3778293636
     },
     {
       "name": "IFTE",
       "category": "Logic and programs",
-      "offset": 201314,
+      "offset": 201424,
       "length": 198,
       "crc32": 776069203
     },
     {
       "name": "Input",
       "category": "Logic and programs",
-      "offset": 201512,
+      "offset": 201622,
       "length": 65,
       "crc32": 1784240738
     },
     {
       "name": "Kill",
       "category": "Logic and programs",
-      "offset": 201577,
+      "offset": 201687,
       "length": 26,
       "crc32": 2633496466
     },
     {
       "name": "MultipleSteps",
       "category": "Logic and programs",
-      "offset": 201603,
+      "offset": 201713,
       "length": 46,
       "crc32": 1375348935
     },
     {
       "name": "Not",
       "category": "Logic and programs",
-      "offset": 201649,
+      "offset": 201759,
       "length": 135,
       "crc32": 529377005
     },
     {
       "name": "NSub",
       "category": "Logic and programs",
-      "offset": 201784,
+      "offset": 201894,
       "length": 114,
       "crc32": 2731591281
     },
     {
       "name": "Or",
       "category": "Logic and programs",
-      "offset": 201898,
+      "offset": 202008,
       "length": 151,
       "crc32": 1659185699
     },
     {
       "name": "Prompt",
       "category": "Logic and programs",
-      "offset": 202049,
+      "offset": 202159,
       "length": 49,
       "crc32": 1961187332
     },
     {
       "name": "Quote",
       "category": "Logic and programs",
-      "offset": 202098,
+      "offset": 202208,
       "length": 76,
       "crc32": 11742506
     },
     {
       "name": "Run",
       "category": "Logic and programs",
-      "offset": 202174,
+      "offset": 202284,
       "length": 98,
       "crc32": 2878551651
     },
     {
       "name": "same",
       "category": "Logic and programs",
-      "offset": 202272,
+      "offset": 202382,
       "length": 128,
       "crc32": 3938717532
     },
     {
       "name": "SetFlag",
       "category": "Logic and programs",
-      "offset": 202400,
+      "offset": 202510,
       "length": 74,
       "crc32": 1693193715
     },
     {
       "name": "SingleStep",
       "category": "Logic and programs",
-      "offset": 202474,
+      "offset": 202584,
       "length": 79,
       "crc32": 2745661680
     },
     {
       "name": "StepOut",
       "category": "Logic and programs",
-      "offset": 202553,
+      "offset": 202663,
       "length": 50,
       "crc32": 3448502778
     },
     {
       "name": "StepOver",
       "category": "Logic and programs",
-      "offset": 202603,
+      "offset": 202713,
       "length": 64,
       "crc32": 2511240618
     },
     {
       "name": "TestEQ",
       "category": "Logic and programs",
-      "offset": 202667,
+      "offset": 202777,
       "length": 107,
       "crc32": 2835516947
     },
     {
       "name": "TestFlagClear",
       "category": "Logic and programs",
-      "offset": 202774,
+      "offset": 202884,
       "length": 71,
       "crc32": 4027125562
     },
     {
       "name": "TestFlagClearThenClear",
       "category": "Logic and programs",
-      "offset": 202845,
+      "offset": 202955,
       "length": 83,
       "crc32": 635452163
     },
     {
       "name": "TestFlagClearThenSet",
       "category": "Logic and programs",
-      "offset": 202928,
+      "offset": 203038,
       "length": 75,
       "crc32": 937892749
     },
     {
       "name": "TestFlagSet",
       "category": "Logic and programs",
-      "offset": 203003,
+      "offset": 203113,
       "length": 69,
       "crc32": 2833478876
     },
     {
       "name": "TestFlagSetThenClear",
       "category": "Logic and programs",
-      "offset": 203072,
+      "offset": 203182,
       "length": 75,
       "crc32": 2753013462
     },
     {
       "name": "TestFlagSetThenSet",
       "category": "Logic and programs",
-      "offset": 203147,
+      "offset": 203257,
       "length": 79,
       "crc32": 3212306554
     },
     {
       "name": "TestGE",
       "category": "Logic and programs",
-      "offset": 203226,
+      "offset": 203336,
       "length": 104,
       "crc32": 2144928173
     },
     {
       "name": "TestGT",
       "category": "Logic and programs",
-      "offset": 203330,
+      "offset": 203440,
       "length": 126,
       "crc32": 1671820528
     },
     {
       "name": "TestLE",
       "category": "Logic and programs",
-      "offset": 203456,
+      "offset": 203566,
       "length": 101,
       "crc32": 3298819521
     },
     {
       "name": "TestLT",
       "category": "Logic and programs",
-      "offset": 203557,
+      "offset": 203667,
       "length": 123,
       "crc32": 986507770
     },
     {
       "name": "TestNE",
       "category": "Logic and programs",
-      "offset": 203680,
+      "offset": 203790,
       "length": 106,
       "crc32": 877285330
     },
     {
       "name": "TestSame",
       "category": "Logic and programs",
-      "offset": 203786,
+      "offset": 203896,
       "length": 154,
       "crc32": 657033851
     },
     {
       "name": "TimedEval",
       "category": "Logic and programs",
-      "offset": 203940,
+      "offset": 204050,
       "length": 75,
       "crc32": 4122550024
     },
     {
       "name": "ToInteger",
       "category": "Logic and programs",
-      "offset": 204015,
+      "offset": 204125,
       "length": 89,
       "crc32": 2965309419
     },
     {
       "name": "ToProgram",
       "category": "Logic and programs",
-      "offset": 204104,
+      "offset": 204214,
       "length": 138,
       "crc32": 1950884953
     },
     {
       "name": "True",
       "category": "Logic and programs",
-      "offset": 204242,
+      "offset": 204352,
       "length": 73,
       "crc32": 1873087276
     },
     {
       "name": "Wait",
       "category": "Logic and programs",
-      "offset": 204315,
+      "offset": 204425,
       "length": 149,
       "crc32": 75473520
     },
     {
       "name": "Where",
       "category": "Logic and programs",
-      "offset": 204464,
+      "offset": 204574,
       "length": 78,
       "crc32": 2860748962
     },
     {
       "name": "Xor",
       "category": "Logic and programs",
-      "offset": 204542,
+      "offset": 204652,
       "length": 163,
       "crc32": 1744468547
     },
     {
       "name": "abs",
       "category": "Numbers and arithmetic",
-      "offset": 204705,
+      "offset": 204815,
       "length": 125,
       "crc32": 1755272509
     },
     {
       "name": "add",
       "category": "Numbers and arithmetic",
-      "offset": 204830,
+      "offset": 204940,
       "length": 117,
       "crc32": 3651900788
     },
     {
       "name": "BinaryToReal",
       "category": "Numbers and arithmetic",
-      "offset": 204947,
+      "offset": 205057,
       "length": 116,
       "crc32": 570021416
     },
     {
       "name": "cbrt",
       "category": "Numbers and arithmetic",
-      "offset": 205063,
+      "offset": 205173,
       "length": 108,
       "crc32": 2822521994
     },
     {
       "name": "ceil",
       "category": "Numbers and arithmetic",
-      "offset": 205171,
+      "offset": 205281,
       "length": 66,
       "crc32": 3951392783
     },
     {
       "name": "cubed",
       "category": "Numbers and arithmetic",
-      "offset": 205237,
+      "offset": 205347,
       "length": 108,
       "crc32": 1558472011
     },
     {
       "name": "DFC",
       "category": "Numbers and arithmetic",
-      "offset": 205345,
+      "offset": 205455,
       "length": 103,
       "crc32": 1881311722
     },
     {
       "name": "DFC2F",
       "category": "Numbers and arithmetic",
-      "offset": 205448,
+      "offset": 205558,
       "length": 108,
       "crc32": 606649821
     },
     {
       "name": "Div2",
       "category": "Numbers and arithmetic",
-      "offset": 205556,
+      "offset": 205666,
       "length": 118,
       "crc32": 2407497306
     },
     {
       "name": "divide",
       "category": "Numbers and arithmetic",
-      "offset": 205674,
+      "offset": 205784,
       "length": 79,
       "crc32": 1513775784
     },
     {
       "name": "EulerianNumber",
       "category": "Numbers and arithmetic",
-      "offset": 205753,
+      "offset": 205863,
       "length": 114,
       "crc32": 2885612296
     },
     {
       "name": "Extract",
       "category": "Numbers and arithmetic",
-      "offset": 205867,
+      "offset": 205977,
       "length": 107,
       "crc32": 3509325540
     },
     {
       "name": "Factors",
       "category": "Numbers and arithmetic",
-      "offset": 205974,
+      "offset": 206084,
       "length": 180,
       "crc32": 1493507405
     },
     {
       "name": "floor",
       "category": "Numbers and arithmetic",
-      "offset": 206154,
+      "offset": 206264,
       "length": 73,
       "crc32": 2798544824
     },
     {
       "name": "FracPart",
       "category": "Numbers and arithmetic",
-      "offset": 206227,
+      "offset": 206337,
       "length": 138,
       "crc32": 748741691
     },
     {
       "name": "GCD",
       "category": "Numbers and arithmetic",
-      "offset": 206365,
+      "offset": 206475,
       "length": 134,
       "crc32": 3497603506
     },
     {
       "name": "hypot",
       "category": "Numbers and arithmetic",
-      "offset": 206499,
+      "offset": 206609,
       "length": 121,
       "crc32": 3624880767
     },
     {
       "name": "Infinity",
       "category": "Numbers and arithmetic",
-      "offset": 206620,
+      "offset": 206730,
       "length": 182,
       "crc32": 658050304
     },
     {
       "name": "IntPart",
       "category": "Numbers and arithmetic",
-      "offset": 206802,
+      "offset": 206912,
       "length": 120,
       "crc32": 1440228425
     },
     {
       "name": "inv",
       "category": "Numbers and arithmetic",
-      "offset": 206922,
+      "offset": 207032,
       "length": 168,
       "crc32": 4046125025
     },
     {
       "name": "IsPrime",
       "category": "Numbers and arithmetic",
-      "offset": 207090,
+      "offset": 207200,
       "length": 84,
       "crc32": 1771389222
     },
     {
       "name": "LCM",
       "category": "Numbers and arithmetic",
-      "offset": 207174,
+      "offset": 207284,
       "length": 125,
       "crc32": 102932231
     },
     {
       "name": "mant",
       "category": "Numbers and arithmetic",
-      "offset": 207299,
+      "offset": 207409,
       "length": 112,
       "crc32": 2076219113
     },
     {
       "name": "Max",
       "category": "Numbers and arithmetic",
-      "offset": 207411,
+      "offset": 207521,
       "length": 73,
       "crc32": 1427881231
     },
     {
       "name": "Min",
       "category": "Numbers and arithmetic",
-      "offset": 207484,
+      "offset": 207594,
       "length": 74,
       "crc32": 482100773
     },
     {
       "name": "mod",
       "category": "Numbers and arithmetic",
-      "offset": 207558,
+      "offset": 207668,
       "length": 149,
       "crc32": 2825792968
     },
     {
       "name": "multiply",
       "category": "Numbers and arithmetic",
-      "offset": 207707,
+      "offset": 207817,
       "length": 62,
       "crc32": 914049528
     },
     {
       "name": "neg",
       "category": "Numbers and arithmetic",
-      "offset": 207769,
+      "offset": 207879,
       "length": 96,
       "crc32": 1876108158
     },
     {
       "name": "NegativeInfinity",
       "category": "Numbers and arithmetic",
-      "offset": 207865,
+      "offset": 207975,
       "length": 196,
       "crc32": 3495614732
     },
     {
       "name": "NextPrime",
       "category": "Numbers and arithmetic",
-      "offset": 208061,
+      "offset": 208171,
       "length": 117,
       "crc32": 1854071089
     },
     {
       "name": "Percent",
       "category": "Numbers and arithmetic",
-      "offset": 208178,
+      "offset": 208288,
       "length": 155,
       "crc32": 395497867
     },
     {
       "name": "PercentChange",
       "category": "Numbers and arithmetic",
-      "offset": 208333,
+      "offset": 208443,
       "length": 138,
       "crc32": 703508943
     },
     {
       "name": "PercentTotal",
       "category": "Numbers and arithmetic",
-      "offset": 208471,
+      "offset": 208581,
       "length": 134,
       "crc32": 1913872940
     },
     {
       "name": "Pi",
       "category": "Numbers and arithmetic",
-      "offset": 208605,
+      "offset": 208715,
       "length": 125,
       "crc32": 1950746689
     },
     {
       "name": "pow",
       "category": "Numbers and arithmetic",
-      "offset": 208730,
+      "offset": 208840,
       "length": 332,
       "crc32": 105610025
     },
     {
       "name": "PreviousPrime",
       "category": "Numbers and arithmetic",
-      "offset": 209062,
+      "offset": 209172,
       "length": 127,
       "crc32": 2191768807
     },
     {
       "name": "Random",
       "category": "Numbers and arithmetic",
-      "offset": 209189,
+      "offset": 209299,
       "length": 106,
       "crc32": 3791116636
     },
     {
       "name": "RandomNumber",
       "category": "Numbers and arithmetic",
-      "offset": 209295,
+      "offset": 209405,
       "length": 86,
       "crc32": 340424658
     },
     {
       "name": "RandomSeed",
       "category": "Numbers and arithmetic",
-      "offset": 209381,
+      "offset": 209491,
       "length": 120,
       "crc32": 2641557542
     },
     {
       "name": "RealToBinary",
       "category": "Numbers and arithmetic",
-      "offset": 209501,
+      "offset": 209611,
       "length": 194,
       "crc32": 844131782
     },
     {
       "name": "rem",
       "category": "Numbers and arithmetic",
-      "offset": 209695,
+      "offset": 209805,
       "length": 122,
       "crc32": 1555062752
     },
     {
       "name": "Round",
       "category": "Numbers and arithmetic",
-      "offset": 209817,
+      "offset": 209927,
       "length": 183,
       "crc32": 2481355739
     },
     {
       "name": "SigDig",
       "category": "Numbers and arithmetic",
-      "offset": 210000,
+      "offset": 210110,
       "length": 88,
       "crc32": 4202671428
     },
     {
       "name": "sign",
       "category": "Numbers and arithmetic",
-      "offset": 210088,
+      "offset": 210198,
       "length": 131,
       "crc32": 333881453
     },
     {
       "name": "sq",
       "category": "Numbers and arithmetic",
-      "offset": 210219,
+      "offset": 210329,
       "length": 56,
       "crc32": 2315050803
     },
     {
       "name": "sqrt",
       "category": "Numbers and arithmetic",
-      "offset": 210275,
+      "offset": 210385,
       "length": 193,
       "crc32": 1064356778
     },
     {
       "name": "subtract",
       "category": "Numbers and arithmetic",
-      "offset": 210468,
+      "offset": 210578,
       "length": 81,
       "crc32": 1046686451
     },
     {
       "name": "ToDecimal",
       "category": "Numbers and arithmetic",
-      "offset": 210549,
+      "offset": 210659,
       "length": 175,
       "crc32": 2889509828
     },
     {
       "name": "ToFraction",
       "category": "Numbers and arithmetic",
-      "offset": 210724,
+      "offset": 210834,
       "length": 160,
       "crc32": 2452774024
     },
     {
       "name": "ToQuotient",
       "category": "Numbers and arithmetic",
-      "offset": 210884,
+      "offset": 210994,
       "length": 158,
       "crc32": 643402433
     },
     {
       "name": "Truncate",
       "category": "Numbers and arithmetic",
-      "offset": 211042,
+      "offset": 211152,
       "length": 141,
       "crc32": 1905294023
     },
     {
       "name": "xpon",
       "category": "Numbers and arithmetic",
-      "offset": 211183,
+      "offset": 211293,
       "length": 108,
       "crc32": 2921474232
     },
     {
       "name": "xroot",
       "category": "Numbers and arithmetic",
-      "offset": 211291,
+      "offset": 211401,
       "length": 103,
       "crc32": 184565976
     },
     {
       "name": "ClearStack",
       "category": "Stack and variables",
-      "offset": 211394,
+      "offset": 211504,
       "length": 229,
       "crc32": 4254750726
     },
     {
       "name": "Clone",
       "category": "Stack and variables",
-      "offset": 211623,
+      "offset": 211733,
       "length": 90,
       "crc32": 2412760137
     },
     {
       "name": "Copy",
       "category": "Stack and variables",
-      "offset": 211713,
+      "offset": 211823,
       "length": 125,
       "crc32": 2005963201
     },
     {
       "name": "CrDir",
       "category": "Stack and variables",
-      "offset": 211838,
+      "offset": 211948,
       "length": 107,
       "crc32": 2923645129
     },
     {
       "name": "CurrentDirectory",
       "category": "Stack and variables",
-      "offset": 211945,
+      "offset": 212055,
       "length": 108,
       "crc32": 2615291737
     },
     {
       "name": "Decrement",
       "category": "Stack and variables",
-      "offset": 212053,
+      "offset": 212163,
       "length": 80,
       "crc32": 4223620464
     },
     {
       "name": "Depth",
       "category": "Stack and variables",
-      "offset": 212133,
+      "offset": 212243,
       "length": 96,
       "crc32": 428287255
     },
     {
       "name": "Drop",
       "category": "Stack and variables",
-      "offset": 212229,
+      "offset": 212339,
       "length": 154,
       "crc32": 2940432093
     },
     {
       "name": "Drop2",
       "category": "Stack and variables",
-      "offset": 212383,
+      "offset": 212493,
       "length": 148,
       "crc32": 4061937835
     },
     {
       "name": "DropN",
       "category": "Stack and variables",
-      "offset": 212531,
+      "offset": 212641,
       "length": 227,
       "crc32": 2092207974
     },
     {
       "name": "Dup",
       "category": "Stack and variables",
-      "offset": 212758,
+      "offset": 212868,
       "length": 213,
       "crc32": 1351526707
     },
     {
       "name": "Dup2",
       "category": "Stack and variables",
-      "offset": 212971,
+      "offset": 213081,
       "length": 203,
       "crc32": 3042766728
     },
     {
       "name": "DupDup",
       "category": "Stack and variables",
-      "offset": 213174,
+      "offset": 213284,
       "length": 208,
       "crc32": 2079693006
     },
     {
       "name": "DupN",
       "category": "Stack and variables",
-      "offset": 213382,
+      "offset": 213492,
       "length": 219,
       "crc32": 774566025
     },
     {
       "name": "Eval",
       "category": "Stack and variables",
-      "offset": 213601,
+      "offset": 213711,
       "length": 111,
       "crc32": 47224781
     },
     {
       "name": "Home",
       "category": "Stack and variables",
-      "offset": 213712,
+      "offset": 213822,
       "length": 76,
       "crc32": 154550703
     },
     {
       "name": "Increment",
       "category": "Stack and variables",
-      "offset": 213788,
+      "offset": 213898,
       "length": 80,
       "crc32": 3086485393
     },
     {
       "name": "LastArg",
       "category": "Stack and variables",
-      "offset": 213868,
+      "offset": 213978,
       "length": 143,
       "crc32": 2902755905
     },
     {
       "name": "LastX",
       "category": "Stack and variables",
-      "offset": 214011,
+      "offset": 214121,
       "length": 37,
       "crc32": 3258503512
     },
     {
       "name": "LName",
       "category": "Stack and variables",
-      "offset": 214048,
+      "offset": 214158,
       "length": 81,
       "crc32": 4039780951
     },
     {
       "name": "NDupN",
       "category": "Stack and variables",
-      "offset": 214129,
+      "offset": 214239,
       "length": 90,
       "crc32": 428741189
     },
     {
       "name": "Nip",
       "category": "Stack and variables",
-      "offset": 214219,
+      "offset": 214329,
       "length": 165,
       "crc32": 2852768454
     },
     {
       "name": "Order",
       "category": "Stack and variables",
-      "offset": 214384,
+      "offset": 214494,
       "length": 61,
       "crc32": 830409084
     },
     {
       "name": "Over",
       "category": "Stack and variables",
-      "offset": 214445,
+      "offset": 214555,
       "length": 191,
       "crc32": 2561383555
     },
     {
       "name": "Path",
       "category": "Stack and variables",
-      "offset": 214636,
+      "offset": 214746,
       "length": 117,
       "crc32": 2055922125
     },
     {
       "name": "PgDir",
       "category": "Stack and variables",
-      "offset": 214753,
+      "offset": 214863,
       "length": 98,
       "crc32": 527592254
     },
     {
       "name": "Pick",
       "category": "Stack and variables",
-      "offset": 214851,
+      "offset": 214961,
       "length": 236,
       "crc32": 962473529
     },
     {
       "name": "Pick3",
       "category": "Stack and variables",
-      "offset": 215087,
+      "offset": 215197,
       "length": 162,
       "crc32": 1570043703
     },
     {
       "name": "Purge",
       "category": "Stack and variables",
-      "offset": 215249,
+      "offset": 215359,
       "length": 195,
       "crc32": 670209608
     },
     {
       "name": "Rcl",
       "category": "Stack and variables",
-      "offset": 215444,
+      "offset": 215554,
       "length": 277,
       "crc32": 1401179150
     },
     {
       "name": "RecallAdd",
       "category": "Stack and variables",
-      "offset": 215721,
+      "offset": 215831,
       "length": 147,
       "crc32": 1773869130
     },
     {
       "name": "RecallDiv",
       "category": "Stack and variables",
-      "offset": 215868,
+      "offset": 215978,
       "length": 167,
       "crc32": 1156753185
     },
     {
       "name": "RecallMul",
       "category": "Stack and variables",
-      "offset": 216035,
+      "offset": 216145,
       "length": 169,
       "crc32": 1649646757
     },
     {
       "name": "RecallSub",
       "category": "Stack and variables",
-      "offset": 216204,
+      "offset": 216314,
       "length": 152,
       "crc32": 3869350818
     },
     {
       "name": "Roll",
       "category": "Stack and variables",
-      "offset": 216356,
+      "offset": 216466,
       "length": 228,
       "crc32": 3172254631
     },
     {
       "name": "RollD",
       "category": "Stack and variables",
-      "offset": 216584,
+      "offset": 216694,
       "length": 240,
       "crc32": 3232234012
     },
     {
       "name": "Rot",
       "category": "Stack and variables",
-      "offset": 216824,
+      "offset": 216934,
       "length": 194,
       "crc32": 3264855292
     },
     {
       "name": "Sto",
       "category": "Stack and variables",
-      "offset": 217018,
+      "offset": 217128,
       "length": 290,
       "crc32": 2075895220
     },
     {
       "name": "StoreAdd",
       "category": "Stack and variables",
-      "offset": 217308,
+      "offset": 217418,
       "length": 210,
       "crc32": 3415364120
     },
     {
       "name": "StoreDiv",
       "category": "Stack and variables",
-      "offset": 217518,
+      "offset": 217628,
       "length": 318,
       "crc32": 2561340486
     },
     {
       "name": "StoreMul",
       "category": "Stack and variables",
-      "offset": 217836,
+      "offset": 217946,
       "length": 231,
       "crc32": 665602830
     },
     {
       "name": "StoreSub",
       "category": "Stack and variables",
-      "offset": 218067,
+      "offset": 218177,
       "length": 289,
       "crc32": 3842730648
     },
     {
       "name": "Swap",
       "category": "Stack and variables",
-      "offset": 218356,
+      "offset": 218466,
       "length": 181,
       "crc32": 477946566
     },
     {
       "name": "TVars",
       "category": "Stack and variables",
-      "offset": 218537,
+      "offset": 218647,
       "length": 106,
       "crc32": 2502386356
     },
     {
       "name": "Undo",
       "category": "Stack and variables",
-      "offset": 218643,
+      "offset": 218753,
       "length": 96,
       "crc32": 1085385079
     },
     {
       "name": "UnPick",
       "category": "Stack and variables",
-      "offset": 218739,
+      "offset": 218849,
       "length": 90,
       "crc32": 680867921
     },
     {
       "name": "UnRot",
       "category": "Stack and variables",
-      "offset": 218829,
+      "offset": 218939,
       "length": 183,
       "crc32": 3083791400
     },
     {
       "name": "UpDir",
       "category": "Stack and variables",
-      "offset": 219012,
+      "offset": 219122,
       "length": 74,
       "crc32": 2446926335
     },
     {
       "name": "Vars",
       "category": "Stack and variables",
-      "offset": 219086,
+      "offset": 219196,
       "length": 79,
       "crc32": 1363619945
     },
     {
       "name": "XVars",
       "category": "Stack and variables",
-      "offset": 219165,
+      "offset": 219275,
       "length": 89,
       "crc32": 4093092193
     },
     {
       "name": "AddData",
       "category": "Statistics and finance",
-      "offset": 219254,
+      "offset": 219364,
       "length": 83,
       "crc32": 3997718551
     },
     {
       "name": "Average",
       "category": "Statistics and finance",
-      "offset": 219337,
+      "offset": 219447,
       "length": 297,
       "crc32": 115396752
     },
     {
       "name": "BestFit",
       "category": "Statistics and finance",
-      "offset": 219634,
+      "offset": 219744,
       "length": 65,
       "crc32": 1714096788
     },
     {
       "name": "ChiSquare",
       "category": "Statistics and finance",
-      "offset": 219699,
+      "offset": 219809,
       "length": 166,
       "crc32": 342047287
     },
     {
       "name": "ClearData",
       "category": "Statistics and finance",
-      "offset": 219865,
+      "offset": 219975,
       "length": 205,
       "crc32": 3757996284
     },
     {
       "name": "Correlation",
       "category": "Statistics and finance",
-      "offset": 220070,
+      "offset": 220180,
       "length": 273,
       "crc32": 3971549347
     },
     {
       "name": "Covariance",
       "category": "Statistics and finance",
-      "offset": 220343,
+      "offset": 220453,
       "length": 260,
       "crc32": 2072088294
     },
     {
       "name": "DataColumns",
       "category": "Statistics and finance",
-      "offset": 220603,
+      "offset": 220713,
       "length": 97,
       "crc32": 3587788599
     },
     {
       "name": "DataSize",
       "category": "Statistics and finance",
-      "offset": 220700,
+      "offset": 220810,
       "length": 244,
       "crc32": 3763308794
     },
     {
       "name": "DataTotal",
       "category": "Statistics and finance",
-      "offset": 220944,
+      "offset": 221054,
       "length": 82,
       "crc32": 3646677643
     },
     {
       "name": "DependentColumn",
       "category": "Statistics and finance",
-      "offset": 221026,
+      "offset": 221136,
       "length": 72,
       "crc32": 742925976
     },
     {
       "name": "ExponentialFit",
       "category": "Statistics and finance",
-      "offset": 221098,
+      "offset": 221208,
       "length": 76,
       "crc32": 3142805976
     },
     {
       "name": "FDistribution",
       "category": "Statistics and finance",
-      "offset": 221174,
+      "offset": 221284,
       "length": 204,
       "crc32": 2879363859
     },
     {
       "name": "FrequencyBins",
       "category": "Statistics and finance",
-      "offset": 221378,
+      "offset": 221488,
       "length": 77,
       "crc32": 238022589
     },
     {
       "name": "IndependentColumn",
       "category": "Statistics and finance",
-      "offset": 221455,
+      "offset": 221565,
       "length": 74,
       "crc32": 1039050958
     },
     {
       "name": "Intercept",
       "category": "Statistics and finance",
-      "offset": 221529,
+      "offset": 221639,
       "length": 289,
       "crc32": 1208910041
     },
     {
       "name": "InvChiSquare",
       "category": "Statistics and finance",
-      "offset": 221818,
+      "offset": 221928,
       "length": 114,
       "crc32": 3487473107
     },
     {
       "name": "InvFDistribution",
       "category": "Statistics and finance",
-      "offset": 221932,
+      "offset": 222042,
       "length": 161,
       "crc32": 1646496186
     },
     {
       "name": "InvNormal",
       "category": "Statistics and finance",
-      "offset": 222093,
+      "offset": 222203,
       "length": 155,
       "crc32": 4261467989
     },
     {
       "name": "InvStudent",
       "category": "Statistics and finance",
-      "offset": 222248,
+      "offset": 222358,
       "length": 111,
       "crc32": 2162788681
     },
     {
       "name": "LinearFit",
       "category": "Statistics and finance",
-      "offset": 222359,
+      "offset": 222469,
       "length": 71,
       "crc32": 2350108185
     },
     {
       "name": "LinearRegression",
       "category": "Statistics and finance",
-      "offset": 222430,
+      "offset": 222540,
       "length": 79,
       "crc32": 614190986
     },
     {
       "name": "LogarithmicFit",
       "category": "Statistics and finance",
-      "offset": 222509,
+      "offset": 222619,
       "length": 76,
       "crc32": 2597655324
     },
     {
       "name": "MaxData",
       "category": "Statistics and finance",
-      "offset": 222585,
+      "offset": 222695,
       "length": 260,
       "crc32": 4250073252
     },
     {
       "name": "Median",
       "category": "Statistics and finance",
-      "offset": 222845,
+      "offset": 222955,
       "length": 216,
       "crc32": 162021054
     },
     {
       "name": "MinData",
       "category": "Statistics and finance",
-      "offset": 223061,
+      "offset": 223171,
       "length": 260,
       "crc32": 1675323617
     },
     {
       "name": "Normal",
       "category": "Statistics and finance",
-      "offset": 223321,
+      "offset": 223431,
       "length": 154,
       "crc32": 3931544951
     },
     {
       "name": "PopulationCovariance",
       "category": "Statistics and finance",
-      "offset": 223475,
+      "offset": 223585,
       "length": 56,
       "crc32": 641784539
     },
     {
       "name": "PopulationStandardDeviation",
       "category": "Statistics and finance",
-      "offset": 223531,
+      "offset": 223641,
       "length": 65,
       "crc32": 2639631347
     },
     {
       "name": "PopulationVariance",
       "category": "Statistics and finance",
-      "offset": 223596,
+      "offset": 223706,
       "length": 293,
       "crc32": 620813499
     },
     {
       "name": "PowerFit",
       "category": "Statistics and finance",
-      "offset": 223889,
+      "offset": 223999,
       "length": 74,
       "crc32": 3111545192
     },
     {
       "name": "PredictX",
       "category": "Statistics and finance",
-      "offset": 223963,
+      "offset": 224073,
       "length": 92,
       "crc32": 4279311275
     },
     {
       "name": "PredictY",
       "category": "Statistics and finance",
-      "offset": 224055,
+      "offset": 224165,
       "length": 92,
       "crc32": 4125108026
     },
     {
       "name": "RecallData",
       "category": "Statistics and finance",
-      "offset": 224147,
+      "offset": 224257,
       "length": 236,
       "crc32": 3710964854
     },
     {
       "name": "RegressionFormula",
       "category": "Statistics and finance",
-      "offset": 224383,
+      "offset": 224493,
       "length": 125,
       "crc32": 1604186676
     },
     {
       "name": "RemoveData",
       "category": "Statistics and finance",
-      "offset": 224508,
+      "offset": 224618,
       "length": 88,
       "crc32": 1812174667
     },
     {
       "name": "Slope",
       "category": "Statistics and finance",
-      "offset": 224596,
+      "offset": 224706,
       "length": 285,
       "crc32": 3636648642
     },
     {
       "name": "StandardDeviation",
       "category": "Statistics and finance",
-      "offset": 224881,
+      "offset": 224991,
       "length": 276,
       "crc32": 3331207111
     },
     {
       "name": "StatsData",
       "category": "Statistics and finance",
-      "offset": 225157,
+      "offset": 225267,
       "length": 120,
       "crc32": 335606130
     },
     {
       "name": "StatsParameters",
       "category": "Statistics and finance",
-      "offset": 225277,
+      "offset": 225387,
       "length": 83,
       "crc32": 2720775477
     },
     {
       "name": "StoreData",
       "category": "Statistics and finance",
-      "offset": 225360,
+      "offset": 225470,
       "length": 305,
       "crc32": 2978535786
     },
     {
       "name": "Student",
       "category": "Statistics and finance",
-      "offset": 225665,
+      "offset": 225775,
       "length": 137,
       "crc32": 1773887701
     },
     {
       "name": "SumOfX",
       "category": "Statistics and finance",
-      "offset": 225802,
+      "offset": 225912,
       "length": 250,
       "crc32": 2967841670
     },
     {
       "name": "SumOfXSquares",
       "category": "Statistics and finance",
-      "offset": 226052,
+      "offset": 226162,
       "length": 245,
       "crc32": 4085806004
     },
     {
       "name": "SumOfXY",
       "category": "Statistics and finance",
-      "offset": 226297,
+      "offset": 226407,
       "length": 233,
       "crc32": 1594137614
     },
     {
       "name": "SumOfY",
       "category": "Statistics and finance",
-      "offset": 226530,
+      "offset": 226640,
       "length": 249,
       "crc32": 27033602
     },
     {
       "name": "SumOfYSquares",
       "category": "Statistics and finance",
-      "offset": 226779,
+      "offset": 226889,
       "length": 245,
       "crc32": 1856658456
     },
     {
       "name": "TVMAmort",
       "category": "Statistics and finance",
-      "offset": 227024,
+      "offset": 227134,
       "length": 91,
       "crc32": 1286892059
     },
     {
       "name": "TVMAmortTable",
       "category": "Statistics and finance",
-      "offset": 227115,
+      "offset": 227225,
       "length": 132,
       "crc32": 2048651192
     },
     {
       "name": "TVMEquation",
       "category": "Statistics and finance",
-      "offset": 227247,
+      "offset": 227357,
       "length": 100,
       "crc32": 3216968140
     },
     {
       "name": "TVMRoot",
       "category": "Statistics and finance",
-      "offset": 227347,
+      "offset": 227457,
       "length": 71,
       "crc32": 1895451122
     },
     {
       "name": "Variance",
       "category": "Statistics and finance",
-      "offset": 227418,
+      "offset": 227528,
       "length": 258,
       "crc32": 3849911138
     },
     {
       "name": "AssignKey",
       "category": "System and libraries",
-      "offset": 227676,
+      "offset": 227786,
       "length": 77,
       "crc32": 607671336
     },
     {
       "name": "Attach",
       "category": "System and libraries",
-      "offset": 227753,
+      "offset": 227863,
       "length": 36,
       "crc32": 791557728
     },
     {
       "name": "BatteryVoltage",
       "category": "System and libraries",
-      "offset": 227789,
+      "offset": 227899,
       "length": 154,
       "crc32": 1194256927
     },
     {
       "name": "Beep",
       "category": "System and libraries",
-      "offset": 227943,
+      "offset": 228053,
       "length": 116,
       "crc32": 580744432
     },
     {
       "name": "Bytes",
       "category": "System and libraries",
-      "offset": 228059,
+      "offset": 228169,
       "length": 81,
       "crc32": 1864198940
     },
     {
       "name": "Catalog",
       "category": "System and libraries",
-      "offset": 228140,
+      "offset": 228250,
       "length": 100,
       "crc32": 1325625213
     },
     {
       "name": "Const",
       "category": "System and libraries",
-      "offset": 228240,
+      "offset": 228350,
       "length": 124,
       "crc32": 1133106384
     },
     {
       "name": "ConstantName",
       "category": "System and libraries",
-      "offset": 228364,
+      "offset": 228474,
       "length": 83,
       "crc32": 1705726748
     },
     {
       "name": "ConstantRange",
       "category": "System and libraries",
-      "offset": 228447,
+      "offset": 228557,
       "length": 80,
       "crc32": 1671469604
     },
     {
       "name": "Constants",
       "category": "System and libraries",
-      "offset": 228527,
+      "offset": 228637,
       "length": 36,
       "crc32": 566946908
     },
     {
       "name": "ConstantValue",
       "category": "System and libraries",
-      "offset": 228563,
+      "offset": 228673,
       "length": 86,
       "crc32": 916124567
     },
     {
       "name": "CustomMenu",
       "category": "System and libraries",
-      "offset": 228649,
+      "offset": 228759,
       "length": 99,
       "crc32": 516082141
     },
     {
       "name": "Cycle",
       "category": "System and libraries",
-      "offset": 228748,
+      "offset": 228858,
       "length": 54,
       "crc32": 2300567215
     },
     {
       "name": "DeleteKeys",
       "category": "System and libraries",
-      "offset": 228802,
+      "offset": 228912,
       "length": 78,
       "crc32": 1436549524
     },
     {
       "name": "Detach",
       "category": "System and libraries",
-      "offset": 228880,
+      "offset": 228990,
       "length": 36,
       "crc32": 40561121
     },
     {
       "name": "DMCPLowBattery",
       "category": "System and libraries",
-      "offset": 228916,
+      "offset": 229026,
       "length": 68,
       "crc32": 3842159438
     },
     {
       "name": "doerr",
       "category": "System and libraries",
-      "offset": 228984,
+      "offset": 229094,
       "length": 86,
       "crc32": 212986413
     },
     {
       "name": "DTag",
       "category": "System and libraries",
-      "offset": 229070,
+      "offset": 229180,
       "length": 99,
       "crc32": 1437616105
     },
     {
       "name": "Edit",
       "category": "System and libraries",
-      "offset": 229169,
+      "offset": 229279,
       "length": 122,
       "crc32": 693772401
     },
     {
       "name": "err0",
       "category": "System and libraries",
-      "offset": 229291,
+      "offset": 229401,
       "length": 104,
       "crc32": 3924806654
     },
     {
       "name": "errm",
       "category": "System and libraries",
-      "offset": 229395,
+      "offset": 229505,
       "length": 83,
       "crc32": 2169368678
     },
     {
       "name": "errn",
       "category": "System and libraries",
-      "offset": 229478,
+      "offset": 229588,
       "length": 81,
       "crc32": 3664160406
     },
     {
       "name": "FinanceSolverMenu",
       "category": "System and libraries",
-      "offset": 229559,
+      "offset": 229669,
       "length": 126,
       "crc32": 1275813886
     },
     {
       "name": "FlightRecorderConfigure",
       "category": "System and libraries",
-      "offset": 229685,
+      "offset": 229795,
       "length": 125,
       "crc32": 1314401942
     },
     {
       "name": "FlightRecorderDump",
       "category": "System and libraries",
-      "offset": 229810,
+      "offset": 229920,
       "length": 90,
       "crc32": 3863984541
     },
     {
       "name": "FlightRecorderDumpSome",
       "category": "System and libraries",
-      "offset": 229900,
+      "offset": 230010,
       "length": 85,
       "crc32": 3005924792
     },
     {
       "name": "FreeMemory",
       "category": "System and libraries",
-      "offset": 229985,
+      "offset": 230095,
       "length": 38,
       "crc32": 2023548946
     },
     {
       "name": "FromTag",
       "category": "System and libraries",
-      "offset": 230023,
+      "offset": 230133,
       "length": 233,
       "crc32": 938882660
     },
     {
       "name": "GarbageCollect",
       "category": "System and libraries",
-      "offset": 230256,
+      "offset": 230366,
       "length": 65,
       "crc32": 2623868154
     },
     {
       "name": "GarbageCollectorStatistics",
       "category": "System and libraries",
-      "offset": 230321,
+      "offset": 230431,
       "length": 74,
       "crc32": 2322436338
     },
     {
       "name": "Header",
       "category": "System and libraries",
-      "offset": 230395,
+      "offset": 230505,
       "length": 92,
       "crc32": 1237660796
     },
     {
       "name": "Help",
       "category": "System and libraries",
-      "offset": 230487,
+      "offset": 230597,
       "length": 124,
       "crc32": 2026191018
     },
     {
       "name": "KeyCode",
       "category": "System and libraries",
-      "offset": 230611,
+      "offset": 230721,
       "length": 155,
       "crc32": 157664001
     },
     {
       "name": "KeyEval",
       "category": "System and libraries",
-      "offset": 230766,
+      "offset": 230876,
       "length": 121,
       "crc32": 3975689058
     },
     {
       "name": "KeyMap",
       "category": "System and libraries",
-      "offset": 230887,
+      "offset": 230997,
       "length": 195,
       "crc32": 238328598
     },
     {
       "name": "LastMenu",
       "category": "System and libraries",
-      "offset": 231082,
+      "offset": 231192,
       "length": 119,
       "crc32": 2022736073
     },
     {
       "name": "LibEq",
       "category": "System and libraries",
-      "offset": 231201,
+      "offset": 231311,
       "length": 110,
       "crc32": 2425173422
     },
     {
       "name": "Libs",
       "category": "System and libraries",
-      "offset": 231311,
+      "offset": 231421,
       "length": 63,
       "crc32": 2321351934
     },
     {
       "name": "LowBattery",
       "category": "System and libraries",
-      "offset": 231374,
+      "offset": 231484,
       "length": 104,
       "crc32": 2197582172
     },
     {
       "name": "Mem",
       "category": "System and libraries",
-      "offset": 231478,
+      "offset": 231588,
       "length": 80,
       "crc32": 2750881787
     },
     {
       "name": "Menu",
       "category": "System and libraries",
-      "offset": 231558,
+      "offset": 231668,
       "length": 56,
       "crc32": 2188506958
     },
     {
       "name": "Modes",
       "category": "System and libraries",
-      "offset": 231614,
+      "offset": 231724,
       "length": 166,
       "crc32": 4180302680
     },
     {
       "name": "Off",
       "category": "System and libraries",
-      "offset": 231780,
+      "offset": 231890,
       "length": 121,
       "crc32": 212705274
     },
     {
       "name": "OffWithImage",
       "category": "System and libraries",
-      "offset": 231901,
+      "offset": 232011,
       "length": 148,
       "crc32": 1167342066
     },
     {
       "name": "PowerVoltage",
       "category": "System and libraries",
-      "offset": 232049,
+      "offset": 232159,
       "length": 108,
       "crc32": 1770147867
     },
     {
       "name": "PurgeAll",
       "category": "System and libraries",
-      "offset": 232157,
+      "offset": 232267,
       "length": 118,
       "crc32": 2511390772
     },
     {
       "name": "RecallKeys",
       "category": "System and libraries",
-      "offset": 232275,
+      "offset": 232385,
       "length": 68,
       "crc32": 3282798206
     },
     {
       "name": "RecallMenu",
       "category": "System and libraries",
-      "offset": 232343,
+      "offset": 232453,
       "length": 61,
       "crc32": 2876661424
     },
     {
       "name": "ResetModes",
       "category": "System and libraries",
-      "offset": 232404,
+      "offset": 232514,
       "length": 136,
       "crc32": 2178432061
     },
     {
       "name": "RuntimeStatistics",
       "category": "System and libraries",
-      "offset": 232540,
+      "offset": 232650,
       "length": 66,
       "crc32": 3081748164
     },
     {
       "name": "SaveState",
       "category": "System and libraries",
-      "offset": 232606,
+      "offset": 232716,
       "length": 121,
       "crc32": 1124605386
     },
     {
       "name": "ScreenCapture",
       "category": "System and libraries",
-      "offset": 232727,
+      "offset": 232837,
       "length": 123,
       "crc32": 1955094938
     },
     {
       "name": "SolvingMenu",
       "category": "System and libraries",
-      "offset": 232850,
+      "offset": 232960,
       "length": 105,
       "crc32": 3151914137
     },
     {
       "name": "StackEditor",
       "category": "System and libraries",
-      "offset": 232955,
+      "offset": 233065,
       "length": 128,
       "crc32": 2420338029
     },
     {
       "name": "StandardKey",
       "category": "System and libraries",
-      "offset": 233083,
+      "offset": 233193,
       "length": 85,
       "crc32": 1862514709
     },
     {
       "name": "StoreKeys",
       "category": "System and libraries",
-      "offset": 233168,
+      "offset": 233278,
       "length": 68,
       "crc32": 3793505434
     },
     {
       "name": "SystemMemory",
       "category": "System and libraries",
-      "offset": 233236,
+      "offset": 233346,
       "length": 155,
       "crc32": 3990794192
     },
     {
       "name": "SystemSetup",
       "category": "System and libraries",
-      "offset": 233391,
+      "offset": 233501,
       "length": 86,
       "crc32": 254852760
     },
     {
       "name": "TemporaryMenu",
       "category": "System and libraries",
-      "offset": 233477,
+      "offset": 233587,
       "length": 87,
       "crc32": 1670835528
     },
     {
       "name": "ToggleCustomMenu",
       "category": "System and libraries",
-      "offset": 233564,
+      "offset": 233674,
       "length": 45,
       "crc32": 2519882929
     },
     {
       "name": "ToggleUserMode",
       "category": "System and libraries",
-      "offset": 233609,
+      "offset": 233719,
       "length": 99,
       "crc32": 1912237991
     },
     {
       "name": "ToolsMenu",
       "category": "System and libraries",
-      "offset": 233708,
+      "offset": 233818,
       "length": 80,
       "crc32": 4122470253
     },
     {
       "name": "ToTag",
       "category": "System and libraries",
-      "offset": 233788,
+      "offset": 233898,
       "length": 121,
       "crc32": 4227242617
     },
     {
       "name": "Type",
       "category": "System and libraries",
-      "offset": 233909,
+      "offset": 234019,
       "length": 160,
       "crc32": 1967051835
     },
     {
       "name": "TypeName",
       "category": "System and libraries",
-      "offset": 234069,
+      "offset": 234179,
       "length": 91,
       "crc32": 3527076861
     },
     {
       "name": "Unimplemented",
       "category": "System and libraries",
-      "offset": 234160,
+      "offset": 234270,
       "length": 68,
       "crc32": 934453979
     },
     {
       "name": "USBPowered",
       "category": "System and libraries",
-      "offset": 234228,
+      "offset": 234338,
       "length": 245,
       "crc32": 2026608875
     },
     {
       "name": "VariablesMenu",
       "category": "System and libraries",
-      "offset": 234473,
+      "offset": 234583,
       "length": 96,
       "crc32": 2403102059
     },
     {
       "name": "Version",
       "category": "System and libraries",
-      "offset": 234569,
+      "offset": 234679,
       "length": 90,
       "crc32": 959828640
     },
     {
       "name": "XLib",
       "category": "System and libraries",
-      "offset": 234659,
+      "offset": 234769,
       "length": 96,
       "crc32": 1962635373
     },
     {
       "name": "ApplyInverseUnit",
       "category": "Units and ranges",
-      "offset": 234755,
+      "offset": 234865,
       "length": 72,
       "crc32": 1874814338
     },
     {
       "name": "ApplyUnit",
       "category": "Units and ranges",
-      "offset": 234827,
+      "offset": 234937,
       "length": 133,
       "crc32": 2298036788
     },
     {
       "name": "Convert",
       "category": "Units and ranges",
-      "offset": 234960,
+      "offset": 235070,
       "length": 131,
       "crc32": 2512955761
     },
     {
       "name": "ConvertToUnit",
       "category": "Units and ranges",
-      "offset": 235091,
+      "offset": 235201,
       "length": 107,
       "crc32": 2455674522
     },
     {
       "name": "ConvertToUnitPrefix",
       "category": "Units and ranges",
-      "offset": 235198,
+      "offset": 235308,
       "length": 68,
       "crc32": 3990088630
     },
     {
       "name": "FromRange",
       "category": "Units and ranges",
-      "offset": 235266,
+      "offset": 235376,
       "length": 135,
       "crc32": 3577771541
     },
     {
       "name": "PrecisionRound",
       "category": "Units and ranges",
-      "offset": 235401,
+      "offset": 235511,
       "length": 220,
       "crc32": 2146942857
     },
     {
       "name": "RangeIntersect",
       "category": "Units and ranges",
-      "offset": 235621,
+      "offset": 235731,
       "length": 223,
       "crc32": 3087275673
     },
     {
       "name": "RangeUnion",
       "category": "Units and ranges",
-      "offset": 235844,
+      "offset": 235954,
       "length": 233,
       "crc32": 2777871252
     },
     {
       "name": "RelativeRound",
       "category": "Units and ranges",
-      "offset": 236077,
+      "offset": 236187,
       "length": 233,
       "crc32": 3949434571
     },
     {
       "name": "RelativeUncertainty",
       "category": "Units and ranges",
-      "offset": 236310,
+      "offset": 236420,
       "length": 69,
       "crc32": 1872091187
     },
     {
       "name": "StandardRound",
       "category": "Units and ranges",
-      "offset": 236379,
+      "offset": 236489,
       "length": 235,
       "crc32": 4064409386
     },
     {
       "name": "StandardUncertainty",
       "category": "Units and ranges",
-      "offset": 236614,
+      "offset": 236724,
       "length": 78,
       "crc32": 3446888583
     },
     {
       "name": "ToDeltaRange",
       "category": "Units and ranges",
-      "offset": 236692,
+      "offset": 236802,
       "length": 144,
       "crc32": 3966629017
     },
     {
       "name": "ToPercentRange",
       "category": "Units and ranges",
-      "offset": 236836,
+      "offset": 236946,
       "length": 232,
       "crc32": 1431795312
     },
     {
       "name": "ToRange",
       "category": "Units and ranges",
-      "offset": 237068,
+      "offset": 237178,
       "length": 122,
       "crc32": 3451656560
     },
     {
       "name": "ToRelativeUncertainty",
       "category": "Units and ranges",
-      "offset": 237190,
+      "offset": 237300,
       "length": 264,
       "crc32": 1369118834
     },
     {
       "name": "ToStandardUncertainty",
       "category": "Units and ranges",
-      "offset": 237454,
+      "offset": 237564,
       "length": 266,
       "crc32": 54196020
     },
     {
       "name": "ToUncertain",
       "category": "Units and ranges",
-      "offset": 237720,
+      "offset": 237830,
       "length": 246,
       "crc32": 1077662962
     },
     {
       "name": "ToUnit",
       "category": "Units and ranges",
-      "offset": 237966,
+      "offset": 238076,
       "length": 186,
       "crc32": 1983332255
     },
     {
       "name": "UBase",
       "category": "Units and ranges",
-      "offset": 238152,
+      "offset": 238262,
       "length": 118,
       "crc32": 1019483914
     },
     {
       "name": "UFact",
       "category": "Units and ranges",
-      "offset": 238270,
+      "offset": 238380,
       "length": 90,
       "crc32": 2125838075
     },
     {
       "name": "UnitsSIPrefixCycle",
       "category": "Units and ranges",
-      "offset": 238360,
+      "offset": 238470,
       "length": 49,
       "crc32": 1839058988
     },
     {
       "name": "UVal",
       "category": "Units and ranges",
-      "offset": 238409,
+      "offset": 238519,
       "length": 117,
       "crc32": 2985713188
     },
     {
       "name": "Algebraic expressions",
       "category": "Using RPL",
-      "offset": 238526,
+      "offset": 238636,
       "length": 396,
       "crc32": 538020974
     },
     {
       "name": "Arrays",
       "category": "Using RPL",
-      "offset": 238922,
+      "offset": 239032,
       "length": 330,
       "crc32": 639497550
     },
     {
       "name": "Based numbers",
       "category": "Using RPL",
-      "offset": 239252,
+      "offset": 239362,
       "length": 608,
       "crc32": 1996406643
     },
     {
       "name": "DO UNTIL END",
       "category": "Using RPL",
-      "offset": 239860,
+      "offset": 239970,
       "length": 236,
       "crc32": 350794628
     },
     {
       "name": "FOR NEXT",
       "category": "Using RPL",
-      "offset": 240096,
+      "offset": 240206,
       "length": 311,
       "crc32": 109400561
     },
     {
       "name": "IF THEN ELSE END",
       "category": "Using RPL",
-      "offset": 240407,
+      "offset": 240517,
       "length": 310,
       "crc32": 2372314092
     },
     {
       "name": "Library programs",
       "category": "Using RPL",
-      "offset": 240717,
+      "offset": 240827,
       "length": 467,
       "crc32": 1493924143
     },
     {
       "name": "Lists",
       "category": "Using RPL",
-      "offset": 241184,
+      "offset": 241294,
       "length": 307,
       "crc32": 1049151809
     },
     {
       "name": "Local variables",
       "category": "Using RPL",
-      "offset": 241491,
+      "offset": 241601,
       "length": 350,
       "crc32": 2948677338
     },
     {
       "name": "Reading command pages",
       "category": "Using RPL",
-      "offset": 241841,
+      "offset": 241951,
       "length": 458,
       "crc32": 3425504635
     },
     {
       "name": "RPL Programming",
       "category": "Using RPL",
-      "offset": 242299,
+      "offset": 242409,
       "length": 524,
       "crc32": 2330502710
     },
     {
       "name": "Settings and saving",
       "category": "Using RPL",
-      "offset": 242823,
+      "offset": 242933,
       "length": 438,
       "crc32": 3426171817
     },
     {
       "name": "Stack order",
       "category": "Using RPL",
-      "offset": 243261,
+      "offset": 243371,
       "length": 372,
       "crc32": 3187673662
     },
     {
       "name": "START NEXT",
       "category": "Using RPL",
-      "offset": 243633,
+      "offset": 243743,
       "length": 233,
       "crc32": 4152600414
     },
     {
       "name": "Units and conversions",
       "category": "Using RPL",
-      "offset": 243866,
+      "offset": 243976,
       "length": 321,
       "crc32": 3883516296
     },
     {
       "name": "WHILE REPEAT END",
       "category": "Using RPL",
-      "offset": 244187,
+      "offset": 244297,
       "length": 273,
       "crc32": 2879340233
     }

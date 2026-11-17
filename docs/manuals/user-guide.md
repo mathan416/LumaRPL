@@ -187,12 +187,12 @@ local clock first. Enter `20261225.093000 "Check the oven"` and choose **→Alar
 **Alarm→** recalls an ID; **DelAlm** deletes an ID. **Ack** dismisses the oldest
 due reminder; **AckAll** dismisses all due reminders and preserves future ones.
 
-A due reminder displays at an idle boundary; press Enter to acknowledge it.
-Alerts wait for programs and INPUT prompts. Save the session to retain alarms
-across restarts. Up to 32 records, including acknowledged ones, are retained.
-The device cannot alert while switched off; overdue reminders appear after
-restoring the session with the correct clock. Recurring alarms and hardware
-wake-up are not supported.
+A due reminder appears when idle. Enter acknowledges it; Esc/Back or a minute
+without an answer snoozes reminders for five minutes. Alerts wait for programs
+and INPUT prompts. Save the session to retain alarms across restarts. Up to 32
+records, including acknowledged ones, are retained. Powered-off devices cannot
+alert; overdue reminders appear after restoring the session with the correct
+clock. Recurring alarms and hardware wake-up are not supported.
 
 PicoCalc menus omit inherited unavailable actions, including IR printing,
 legacy file-handle commands and unimplemented branch labels.

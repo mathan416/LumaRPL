@@ -338,10 +338,10 @@ index 5d55cae3e70cb314ab5f3bce5b9a337af91cefa3..1e333dce5675c62f1ebf5e9cfde65791
  ## SYLVESTER
 
 diff --git a/doc/commands/system.md b/doc/commands/system.md
-index 7e4ca5471b59345c03a26cb8fc902c105d1f7dff..3a18108c6ffc4c8277d37c7719b08f5e25c5068e 100644
+index 7e4ca5471b59345c03a26cb8fc902c105d1f7dff..7345d168f47836839cff899dceaba09ee77fc0e3 100644
 --- a/doc/commands/system.md
 +++ b/doc/commands/system.md
-@@ -2,51 +2,51 @@
+@@ -2,51 +2,52 @@
 
  Date and time commands are documented in `datetime.md`.
 
@@ -354,7 +354,8 @@ index 7e4ca5471b59345c03a26cb8fc902c105d1f7dff..3a18108c6ffc4c8277d37c7719b08f5e
 +Save the session to retain changes across a restart. Do not edit this variable.
 
 +On PicoCalc an overdue reminder appears when the calculator is idle. Press Enter
-+to acknowledge it. Reminders wait while a program or INPUT prompt is active.
++to acknowledge it. Esc/Back, or no answer within a minute, snoozes reminders for five
++minutes. Reminders wait while a program or INPUT prompt is active.
 +A switched-off calculator cannot sound an alert; an unacknowledged overdue
 +reminder appears after the saved session is restored with the correct clock.
 +Acknowledgement retains the record until `DelAlarm` removes it. No recurring
@@ -478,10 +479,10 @@ index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183
                              if (y >= 23 && y < 217)
 diff --git a/src/alarms.inc b/src/alarms.inc
 new file mode 100644
-index 0000000000000000000000000000000000000000..d828a8bdc2a676505dccc215e6d224fe34edf869
+index 0000000000000000000000000000000000000000..6a808138b033afa4221d3f947e689144149c3574
 --- /dev/null
 +++ b/src/alarms.inc
-@@ -0,0 +1,233 @@
+@@ -0,0 +1,279 @@
 +// Clock reminders are ordinary HOME data, included in calculator session saves.
 +namespace {
 +constexpr cstring alarm_data_name = "LumaAlarms";
@@ -696,24 +697,70 @@ index 0000000000000000000000000000000000000000..d828a8bdc2a676505dccc215e6d224fe
 +
 +bool alarm_notify()
 +{
-+    // Called only between calculations; never replace an existing error.
-+    static uint32_t last_check;
++    // Called only between calculations. It runs unprompted while idle, so it
++    // must never leave an error behind: the user did not ask for anything.
++    static uint32_t last_check, snoozed_until;
++    const uint32_t snooze_ms = 5 * 60 * 1000;
++    const uint32_t prompt_timeout_ms = 60 * 1000;
 +    uint32_t now = sys_current_ms();
 +    if (uint32_t(now - last_check) < 1000 || rt.error() || !key_empty()) return false;
++    if (snoozed_until && int32_t(now - snoozed_until) < 0) return false;
 +    last_check = now;
-+    // Avoid allocations during the common no-alarm case.
++    snoozed_until = 0;
 +    symbol_g name = symbol::make(alarm_data_name);
-+    if (!name || !rt.homedir()->recall(+name)) return false;
++    if (!name || !rt.homedir()->recall(+name))
++    {
++        rt.clear_error();
++        return false;
++    }
 +    list_g rows = alarm_data();
-+    if (!rows) return false;
++    if (!rows)
++    {
++        // Malformed LumaAlarms data is reported by the explicit alarm commands.
++        rt.clear_error();
++        return false;
++    }
 +    int index = alarm_due(rows, alarm_now());
 +    if (index < 0) return false;
 +    list_g entry = rows->at(index)->as<list>();
 +    text_g message = entry->at(2)->as<text>();
-+    ui.draw_message("Alarm reminder", message->null_terminated_value(),
-+                    "Press Enter to acknowledge");
-+    wait_for_key_press();
-+    return alarm_change(rows, index, false);
++    cstring label = message->length() ? message->null_terminated_value() : "";
++    if (rt.error())
++    {
++        rt.clear_error();
++        return false;
++    }
++    if (!ui.draw_message("Alarm reminder", label,
++                         "Enter: acknowledge   Esc/Back: snooze 5 min") ||
++        rt.error())
++    {
++        rt.clear_error();
++        return false;
++    }
++    // Only Enter acknowledges. Esc/Back or the timeout snoozes
++    // so the reminder is shown again later instead of being lost.
++    uint32_t shown = sys_current_ms();
++    for (;;)
++    {
++        if (uint32_t(sys_current_ms() - shown) >= prompt_timeout_ms) break;
++        if (key_empty())
++        {
++            sys_delay(5);
++            continue;
++        }
++        int key = key_pop();
++        if (key == KEY_ENTER)
++        {
++            // A failed store (out of memory) leaves it due; never surface it.
++            alarm_change(rows, index, false);
++            rt.clear_error();
++            return true;
++        }
++        if (key == KEY_EXIT || key == KEY_F5) break;
++    }
++    snoozed_until = sys_current_ms() + snooze_ms;
++    if (!snoozed_until) snoozed_until = 1;
++    return true;
 +}
 diff --git a/src/array-extended.inc b/src/array-extended.inc
 new file mode 100644

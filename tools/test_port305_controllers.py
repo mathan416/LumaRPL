@@ -18,7 +18,7 @@ original=(root/'db48x/src/dmcp/main.cc').read_text()
 UI_FLAGS=-I../../tests/ui_stub -I../../pico -I../../pico/fatfs -I../../tests -DPICOCALC_UI_HOST=1
 controller-probe-main.o: controller-probe-main.cc
 \t$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
-controller.o: ../../tests/port305_controller_test.cc ../../tests/math_lab_cases.inc ../../tests/advanced_math_cases.inc ../../tests/science_cases.inc ../../tests/research_cases.inc ../../tests/legacy_evaluator_cases.inc ../../tests/advanced_settings_cases.inc ../../tests/port21_feature_cases.inc ../../tests/matrix_arithmetic_cases.inc ../../tests/port21_new_cases.inc ../../pico/desktop.cc $(wildcard ../../pico/*.inc ../../pico/*.h ../../pico/ui/*.inc ../../pico/ui/*.h)
+controller.o: ../../tests/port305_controller_test.cc ../../tests/fixture_file.h ../../tests/math_lab_cases.inc ../../tests/advanced_math_cases.inc ../../tests/science_cases.inc ../../tests/research_cases.inc ../../tests/legacy_evaluator_cases.inc ../../tests/advanced_settings_cases.inc ../../tests/port21_feature_cases.inc ../../tests/matrix_arithmetic_cases.inc ../../tests/port21_new_cases.inc ../../pico/desktop.cc $(wildcard ../../pico/*.inc ../../pico/*.h ../../pico/ui/*.inc ../../pico/ui/*.h)
 \t$(CXX) -c $(CXXFLAGS) $(UI_FLAGS) -include ../../pico/target.h $(INCPATH) -o $@ $<
 firmware-help-font.o: ../../db48x/fonts/HelpFont.cc
 \t$(CXX) -c $(CXXFLAGS) $(UI_FLAGS) -include ../../pico/target.h $(INCPATH) -o $@ $<

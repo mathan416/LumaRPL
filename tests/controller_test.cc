@@ -112,6 +112,7 @@ int pico_commit_state(const char *a,const char *b){return !host_fail_save&&!rena
 FRESULT pico_f_opendir(DIR *dir,const char *name){if(!host_sd)return FR_NOT_READY;auto p=path(name);struct stat st;if(stat(p.c_str(),&st))return FR_NO_PATH;HostDirectory d;d.path=p;glob_t g{};glob((p+"/*").c_str(),0,nullptr,&g);for(size_t i=0;i<g.gl_pathc;++i){std::string n=g.gl_pathv[i];d.names.push_back(n.substr(n.find_last_of('/')+1));}globfree(&g);host_directories[dir]=d;return FR_OK;}
 FRESULT pico_ui_host_f_readdir(DIR *dir,FILINFO *info){auto it=host_directories.find(dir);if(it==host_directories.end())return FR_INVALID_OBJECT;memset(info,0,sizeof *info);auto &d=it->second;if(d.index==d.names.size())return FR_OK;auto &n=d.names[d.index++];strncpy(info->fname,n.c_str(),sizeof info->fname-1);struct stat st;if(!stat((d.path+"/"+n).c_str(),&st)){info->fsize=st.st_size;info->fattrib=S_ISDIR(st.st_mode)?AM_DIR:0;}return FR_OK;}
 FRESULT pico_ui_host_f_closedir(DIR *dir){host_directories.erase(dir);return FR_OK;}
+#include "fixture_file.h"
 pico_network_status pico_network_get_status(){return {};}
 void pico_network_time_cancel(){}
 void pico_network_credentials_saved(const char *,const char *){}
@@ -301,7 +302,7 @@ static void language_reference_cases()
 
 static void command_reference_cases()
 {
- pico_reference::store store;if(!store.open()||store.count!=1042)test_abort(__LINE__);
+ pico_reference::store store;if(!store.open()||store.count!=pico_reference_data::record_count)test_abort(__LINE__);
  for(auto sample:{std::pair<const char*,const char*>{"Fix","Fix"},{"FixedDisplay","Fix"},{"Grad","Grad"},{"Grads","Grad"},{"Prec","Precision"}}){pico_reference::entry e;if(!store.exact(sample.first,e)||strcmp(e.title,sample.second))test_abort(__LINE__);}
  char body[4097];pico_reference::entry e;for(unsigned i=0;i<store.count;++i)if(!store.read(i,e)||!store.topic(e,body,sizeof body))test_abort(__LINE__);
  for(int theme=0;theme<int(pico_themes::count);++theme)
@@ -320,7 +321,7 @@ static void command_reference_cases()
   ui.clear_menu();rt.reset();
  }
  host_theme=0;apply_theme(0);host_variant="normal";
- puts("PASS: all 1042 native reference records/CRC/UTF8, real engine Help aliases, standard arrows/page/Back controls, find/no-match/missing SD and stack/entry preservation in eight themes");
+ puts("PASS: all generated native reference records/CRC/UTF8, real engine Help aliases, standard arrows/page/Back controls, find/no-match/missing SD and stack/entry preservation in eight themes");
 }
 
 static unsigned softkey_count=0,softkey_total=0;
@@ -696,7 +697,7 @@ void release_controller_cases()
 
     {auto press=[](int key){pico_stack_menu_key(ui,Stack,key,false,false);pico_stack_menu_key(ui,Stack,0,false,false);};
      rt.reset();load_saved_keymap();ui.clear_shift();object::static_object(object::ID_ModesMenu)->evaluate();press(28);if(ui.shift_plane()!=1)test_abort(__LINE__);bool beep=Settings.BeepOn();press(40);if(Settings.BeepOn()==beep||ui.shift_plane()!=1)test_abort(__LINE__);press(40);if(Settings.BeepOn()!=beep||ui.shift_plane()!=1)test_abort(__LINE__);
-     ui.insert(utf8("« 1 2 "),user_interface::DIRECT);object::static_object(object::ID_Catalog)->evaluate();ui.clear_shift();press(28);press(28);unsigned plane=ui.shift_plane();char selected[40]={};ui.object_for_key(38)->render(selected,sizeof selected);if(strcmp(selected,"<"))test_abort(__LINE__);press(38);if(ui.shift_plane()!=plane||!rt.editing()||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing()).find('<')==std::string::npos)test_abort(__LINE__);if(rt.editing())press(33);if(!ui.menu()||ui.menu()->type()!=object::ID_ModesMenu||ui.shift_plane()||!rt.editing())test_abort(__LINE__);press(33);if(ui.menu()||!rt.editing())test_abort(__LINE__);press(33);if(rt.editing())test_abort(__LINE__);rt.clear_error();ui.clear_shift();
+     ui.insert(utf8("« 1 2 "),user_interface::DIRECT);object::static_object(object::ID_Catalog)->evaluate();ui.clear_shift();press(28);press(28);unsigned plane=ui.shift_plane();char selected[40]={};ui.object_for_key(38)->render(selected,sizeof selected);if(strcmp(selected,"<"))test_abort(__LINE__);press(38);if(ui.shift_plane()!=plane||!rt.editing()||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing()).find('<')==std::string::npos)test_abort(__LINE__);if(rt.editing())press(33);if(!ui.menu()||ui.menu()->type()!=object::ID_ModesMenu||ui.shift_plane()!=1||!rt.editing())test_abort(__LINE__);press(33);if(ui.menu()||!rt.editing())test_abort(__LINE__);press(33);if(rt.editing())test_abort(__LINE__);rt.clear_error();ui.clear_shift();
      rt.reset();load_saved_keymap();ui.clear_shift();object::static_object(object::ID_ModesMenu)->evaluate();ui.shift_plane(0);press(43);if(!ui.menu()||ui.menu()->type()!=object::ID_UserInterfaceModesMenu)test_abort(__LINE__);
      puts("PASS: sixth RPL soft key dispatches UI settings; physical Ctrl+F5 translation remains unchanged");
      puts("PASS: actual Modes/Beep and Catalog F1 preserve Tab row across dispatch and release");}

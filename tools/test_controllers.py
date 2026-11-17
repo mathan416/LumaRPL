@@ -2,6 +2,7 @@
 """Compile production controllers with host device/storage I/O, at Pico dimensions."""
 from pathlib import Path
 import subprocess,shutil,hashlib,json,os
+from simulator_checks import simulator_env
 root=Path(__file__).resolve().parents[1];out=root/'build/simulator-rgb332'
 (root/'reports').mkdir(exist_ok=True)
 if not (out/'Makefile').exists():
@@ -22,7 +23,7 @@ original=(root/'db48x/src/dmcp/main.cc').read_text()
 UI_FLAGS=-I../../tests/ui_stub -I../../pico -I../../pico/fatfs -I../../tests -DPICOCALC_UI_HOST=1
 controller-probe-main.o: controller-probe-main.cc
 \t$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
-controller.o: ../../tests/controller_test.cc ../../tests/math_lab_cases.inc ../../tests/advanced_math_cases.inc ../../tests/science_cases.inc ../../tests/research_cases.inc ../../tests/legacy_evaluator_cases.inc ../../tests/advanced_settings_cases.inc ../../tests/port21_feature_cases.inc ../../tests/matrix_arithmetic_cases.inc ../../tests/port21_new_cases.inc ../../pico/desktop.cc $(wildcard ../../pico/*.inc ../../pico/*.h ../../pico/ui/*.inc ../../pico/ui/*.h)
+controller.o: ../../tests/controller_test.cc ../../tests/fixture_file.h ../../tests/math_lab_cases.inc ../../tests/advanced_math_cases.inc ../../tests/science_cases.inc ../../tests/research_cases.inc ../../tests/legacy_evaluator_cases.inc ../../tests/advanced_settings_cases.inc ../../tests/port21_feature_cases.inc ../../tests/matrix_arithmetic_cases.inc ../../tests/port21_new_cases.inc ../../pico/desktop.cc $(wildcard ../../pico/*.inc ../../pico/*.h ../../pico/ui/*.inc ../../pico/ui/*.h)
 \t$(CXX) -c $(CXXFLAGS) $(UI_FLAGS) -include ../../pico/target.h $(INCPATH) -o $@ $<
 firmware-help-font.o: ../../db48x/fonts/HelpFont.cc
 \t$(CXX) -c $(CXXFLAGS) $(UI_FLAGS) -include ../../pico/target.h $(INCPATH) -o $@ $<
@@ -89,7 +90,7 @@ shutil.copytree(root/'resources',work,dirs_exist_ok=True)
 captures=root/'reports/release-controllers'
 if captures.exists():shutil.rmtree(captures)
 captures.mkdir()
-subprocess.run([str(out/binary),'-H','-Z','-m208'],cwd=work,check=True,timeout=300)
+subprocess.run([str(out/binary),'-H','-Z','-m208'],cwd=work,env=simulator_env(work),check=True,timeout=300)
 
 assert reference_state()==initial_reference,"Reference changed during verification"
 (root/"reports/release-reference-source.json").write_text(json.dumps(initial_reference,indent=2)+"\n")

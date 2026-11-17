@@ -7,6 +7,7 @@ This does not assert physical-device acceptance or exact LCD/sound timing.
 """
 from pathlib import Path
 import hashlib,json,re,shutil,subprocess,tempfile,unicodedata
+from simulator_checks import simulator_env
 root=Path(__file__).resolve().parents[1];work=root/'build/manual-examples';work.mkdir(parents=True,exist_ok=True)
 reports=[]
 def canonical(s):
@@ -32,9 +33,9 @@ cases=[
 binary=root/'build/simulator-rgb332/help-console'
 assert binary.exists(),'Build production controllers and test_help_examples.py first'
 for name,source,expected in cases:
- with tempfile.TemporaryDirectory(prefix='lumarpl-manual-') as directory:
+ with tempfile.TemporaryDirectory(prefix='lumarpl-manual-') as directory,tempfile.TemporaryDirectory(prefix='lumarpl-manual-home-') as home:
   path=Path(directory);shutil.copytree(root/'db48x/config',path/'config');(path/'example.48s').write_text(source)
-  r=subprocess.run([str(binary),'-H','-Z','-m208','-F',str(path/'example.48s')],cwd=path,capture_output=True,text=True,timeout=30)
+  r=subprocess.run([str(binary),'-H','-Z','-m208','-F',str(path/'example.48s')],cwd=path,env=simulator_env(path,home=home),capture_output=True,text=True,timeout=30)
   ok=r.returncode==0 and not r.stderr.strip() and canonical(r.stdout)==canonical(expected)
   reports.append(dict(language='RPL',name=name,source=source,expected=expected,actual=r.stdout,passed=ok))
   print(('PASS' if ok else 'FAIL'),name,repr(r.stdout),flush=True)
@@ -99,7 +100,7 @@ manual-probe: manual-main.o manual-cases.o calculator-bridge.o lua-probe.a $(fil
 subprocess.run(['make','-j4','-f','ManualProbe.mk','manual-probe'],cwd=out,check=True)
 private=work/'runtime';private.mkdir(exist_ok=True)
 shutil.copytree(root/'db48x/config',private/'config',dirs_exist_ok=True)
-r=subprocess.run([str(out/'manual-probe'),'-H','-Z','-m208'],cwd=private,capture_output=True,text=True,timeout=120)
+r=subprocess.run([str(out/'manual-probe'),'-H','-Z','-m208'],cwd=private,env=simulator_env(private),capture_output=True,text=True,timeout=120)
 print(r.stdout);assert r.returncode==0,r.stderr
 reports += [dict(language='Lua',name=c['name'],passed=True,checks='production runner + calculator bridge; host device I/O; production plot sampler; exact stdout where specified') for c in luacases]
 
