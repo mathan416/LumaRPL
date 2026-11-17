@@ -82,6 +82,7 @@ with tempfile.TemporaryDirectory(prefix='lumarpl-package-check-') as directory:
     evidence=json.loads((root/'docs/review/release-evidence.json').read_text())
     # The published evidence is intentionally stale after unreleased changes;
     # isolate each rejection test from that independent mismatch.
+    evidence['version']=(root/'VERSION').read_text().strip()
     evidence['firmware_sha256']=__import__('hashlib').sha256((root/'build/pico/db48x-picocalc-pico2w.uf2').read_bytes()).hexdigest()
     # Bind the same file set verify_release.py requires, so newly tracked files
     # do not mask the rejection under test.

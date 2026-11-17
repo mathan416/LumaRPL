@@ -2,6 +2,8 @@
 set -eu
 cd "$(dirname "$0")/.."
 mkdir -p build/arm-allocation
+# The link takes every object here; drop objects left by older source lists.
+rm -f build/arm-allocation/*.o
 armcc=${ARM_CC:-arm-none-eabi-gcc}
 armcxx=${ARM_CXX:-arm-none-eabi-g++}
 "$armcc" -mcpu=cortex-m3 -mthumb -Os -c pico/heap.c -o build/arm-allocation/heap.o
