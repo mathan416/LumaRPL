@@ -4,16 +4,23 @@
 #include <string>
 #include <vector>
 #include "../pico/reference_store.h"
+#include "../pico/ui/reference_data.h"
 static std::map<FIL*,FILE*> files;
 extern "C" FRESULT pico_f_open(FIL *f,const char *p,BYTE){FILE *v=fopen(p,"rb");if(!v)return FR_NO_FILE;fseek(v,0,SEEK_END);f->obj.objsize=ftell(v);rewind(v);files[f]=v;return FR_OK;}
 extern "C" FRESULT pico_f_read(FIL *f,void *p,UINT n,UINT *got){auto i=files.find(f);if(i==files.end())return FR_INVALID_OBJECT;*got=fread(p,1,n,i->second);return ferror(i->second)?FR_DISK_ERR:FR_OK;}
 extern "C" FRESULT pico_f_close(FIL *f){auto i=files.find(f);if(i==files.end())return FR_INVALID_OBJECT;int n=fclose(i->second);files.erase(i);return n?FR_DISK_ERR:FR_OK;}
-extern "C" FRESULT f_lseek(FIL *f,FSIZE_t p){auto i=files.find(f);return i==files.end()||fseek(i->second,p,SEEK_SET)?FR_DISK_ERR:FR_OK;}
+static unsigned seeks;
+extern "C" FRESULT f_lseek(FIL *f,FSIZE_t p){++seeks;auto i=files.find(f);return i==files.end()||fseek(i->second,p,SEEK_SET)?FR_DISK_ERR:FR_OK;}
 static std::vector<char> read(const char *p){FILE *f=fopen(p,"rb");assert(f);fseek(f,0,SEEK_END);std::vector<char> v(ftell(f));rewind(f);assert(fread(v.data(),1,v.size(),f)==v.size());fclose(f);return v;}
 static void write(const char *p,const std::vector<char>&v){FILE *f=fopen(p,"wb");assert(f&&fwrite(v.data(),1,v.size(),f)==v.size());fclose(f);}
 int main(){
  const char *idx="help/commands.lri",*txt="help/commands.lrt";auto index=read(idx),text=read(txt);
- for(unsigned cycle=0;cycle<20;++cycle){pico_reference::store s;assert(s.open()&&s.count==1042);pico_reference::entry e;char buffer[4097];for(unsigned i=0;i<s.count;++i)assert(s.read(i,e)&&s.topic(e,buffer,sizeof buffer));assert(!s.read(s.count,e));assert(s.exact("FixedDisplay",e)&&std::string(e.title)=="Fix");assert(s.exact("sIN",e)&&std::string(e.title)=="sin");assert(!s.topic(e,buffer,1));}
+ for(unsigned cycle=0;cycle<20;++cycle){pico_reference::store s;assert(s.open()&&s.count==pico_reference_data::record_count);pico_reference::entry e;char buffer[4097];for(unsigned i=0;i<s.count;++i)assert(s.read(i,e)&&s.topic(e,buffer,sizeof buffer));assert(!s.read(s.count,e));assert(s.exact("FixedDisplay",e)&&std::string(e.title)=="Fix");assert(s.exact("sIN",e)&&std::string(e.title)=="sin");assert(!s.topic(e,buffer,1));}
+ assert(files.empty());
+ // Repeated exact lookups use the remembered record instead of a full index scan.
+ {pico_reference::store s;assert(s.open());pico_reference::entry e;unsigned first=0,again=0;
+  assert(s.exact("Ack",e,&first));seeks=0;assert(s.exact("Ack",e,&again)&&again==first&&seeks==1);
+  assert(!s.exact("NoSuchCommandName",e));}
  assert(files.empty());
  assert(rename(idx,"help/commands.away")==0);{pico_reference::store s;assert(!s.open());}assert(rename("help/commands.away",idx)==0);
  {auto bad=index;bad[0]='X';write(idx,bad);pico_reference::store s;assert(!s.open());}write(idx,index);

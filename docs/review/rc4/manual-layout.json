@@ -1,0 +1,29 @@
+[
+  {
+    "file": "LumaRPL-User-Guide.pdf",
+    "pages": 64,
+    "outline_entries": 54,
+    "out_of_page_characters": [],
+    "sparse_pages": [],
+    "visual_review_required": true,
+    "sha256": "af35480a4d9037179514eef20984d7da75da28fddd720b7447febbcd4a0627c7"
+  },
+  {
+    "file": "LumaRPL-Programming-Guide.pdf",
+    "pages": 84,
+    "outline_entries": 55,
+    "out_of_page_characters": [],
+    "sparse_pages": [],
+    "visual_review_required": true,
+    "sha256": "6edab425201faf13eee82957d0289fc0cb2ffdfafd8d1f412be6af98bb5f5449"
+  },
+  {
+    "file": "LumaRPL-API-Assembly-Reference.pdf",
+    "pages": 71,
+    "outline_entries": 31,
+    "out_of_page_characters": [],
+    "sparse_pages": [],
+    "visual_review_required": true,
+    "sha256": "79076576191d0833199c35e2a803647071127b97f1e072a6ad0b3af106f1e3ac"
+  }
+]

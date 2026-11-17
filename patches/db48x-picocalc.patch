@@ -479,10 +479,10 @@ index d9de68d3657f85fde2840cd7239a1119781a6ae1..9c4939892cbad2bb77ad54630680f183
                              if (y >= 23 && y < 217)
 diff --git a/src/alarms.inc b/src/alarms.inc
 new file mode 100644
-index 0000000000000000000000000000000000000000..6a808138b033afa4221d3f947e689144149c3574
+index 0000000000000000000000000000000000000000..3727936997aab7f3cd0db8dfe59990f27b61d4a8
 --- /dev/null
 +++ b/src/alarms.inc
-@@ -0,0 +1,279 @@
+@@ -0,0 +1,292 @@
 +// Clock reminders are ordinary HOME data, included in calculator session saves.
 +namespace {
 +constexpr cstring alarm_data_name = "LumaAlarms";
@@ -702,17 +702,24 @@ index 0000000000000000000000000000000000000000..6a808138b033afa4221d3f947e689144
 +    static uint32_t last_check, snoozed_until;
 +    const uint32_t snooze_ms = 5 * 60 * 1000;
 +    const uint32_t prompt_timeout_ms = 60 * 1000;
++    // After a failure (low memory), wait before retrying instead of
++    // re-showing the same reminder at every one-second check.
++    const uint32_t retry_ms = 60 * 1000;
++    auto snooze = [](uint32_t ms)
++    {
++        snoozed_until = sys_current_ms() + ms;
++        if (!snoozed_until)
++            snoozed_until = 1;
++    };
 +    uint32_t now = sys_current_ms();
 +    if (uint32_t(now - last_check) < 1000 || rt.error() || !key_empty()) return false;
 +    if (snoozed_until && int32_t(now - snoozed_until) < 0) return false;
 +    last_check = now;
 +    snoozed_until = 0;
-+    symbol_g name = symbol::make(alarm_data_name);
-+    if (!name || !rt.homedir()->recall(+name))
-+    {
-+        rt.clear_error();
++    // Look the variable up by name without allocating: most idle checks find
++    // no reminders, and this runs about once a second.
++    if (!rt.homedir()->lookup(utf8(alarm_data_name), strlen(alarm_data_name)))
 +        return false;
-+    }
 +    list_g rows = alarm_data();
 +    if (!rows)
 +    {
@@ -728,13 +735,17 @@ index 0000000000000000000000000000000000000000..6a808138b033afa4221d3f947e689144
 +    if (rt.error())
 +    {
 +        rt.clear_error();
++        snooze(retry_ms);
 +        return false;
 +    }
 +    if (!ui.draw_message("Alarm reminder", label,
 +                         "Enter: acknowledge   Esc/Back: snooze 5 min") ||
 +        rt.error())
 +    {
++        // Nothing is drawn while the display is frozen (Freeze); keep that
++        // display intact and retry later instead of every second.
 +        rt.clear_error();
++        snooze(retry_ms);
 +        return false;
 +    }
 +    // Only Enter acknowledges. Esc/Back or the timeout snoozes
@@ -751,15 +762,17 @@ index 0000000000000000000000000000000000000000..6a808138b033afa4221d3f947e689144
 +        int key = key_pop();
 +        if (key == KEY_ENTER)
 +        {
-+            // A failed store (out of memory) leaves it due; never surface it.
-+            alarm_change(rows, index, false);
++            // A failed store (out of memory) leaves it due; never surface
++            // it, but retry later rather than at the next one-second check.
++            if (!alarm_change(rows, index, false))
++                snooze(retry_ms);
 +            rt.clear_error();
 +            return true;
 +        }
-+        if (key == KEY_EXIT || key == KEY_F5) break;
++        if (key == KEY_EXIT || key == KEY_F5)
++            break;
 +    }
-+    snoozed_until = sys_current_ms() + snooze_ms;
-+    if (!snoozed_until) snoozed_until = 1;
++    snooze(snooze_ms);
 +    return true;
 +}
 diff --git a/src/array-extended.inc b/src/array-extended.inc

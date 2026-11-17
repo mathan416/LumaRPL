@@ -2,10 +2,12 @@
 set -eu
 cd "$(dirname "$0")/.."
 mkdir -p build/arm-allocation
+# The link takes every object here; drop objects left by older source lists.
+rm -f build/arm-allocation/*.o
 armcc=${ARM_CC:-arm-none-eabi-gcc}
 armcxx=${ARM_CXX:-arm-none-eabi-g++}
 "$armcc" -mcpu=cortex-m3 -mthumb -Os -c pico/heap.c -o build/arm-allocation/heap.o
-for source in dependencies/lua-5.4.9/src/*.c pico/lua_runner.c tests/lua_device_stub.c; do
+for source in $(ls dependencies/lua-5.4.9/src/*.c | grep -v /lstrlib.c) pico/lua_strlib.c pico/lua_runner.c tests/lua_device_stub.c; do
  case "$source" in */lua.c|*/luac.c) continue;; esac
  name=$(basename "$source" .c)
  "$armcc" -std=gnu11 -mcpu=cortex-m3 -mthumb -Os -ffunction-sections -fdata-sections -DLUAI_MAXCCALLS=40 -Idependencies/lua-5.4.9/src -Ipico -c "$source" -o "build/arm-allocation/$name.o"

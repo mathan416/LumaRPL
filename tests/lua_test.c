@@ -46,6 +46,16 @@ int main(void)
     for(int i=0;i<200;++i)deep[used++]='(';deep[used++]='1';for(int i=0;i<200;++i)deep[used++]=')';deep[used]=0;
     assert(!pico_lua_run(deep,used,&r));
     checks=0;stop_after=5;script="while true do end";assert(!pico_lua_run(script,strlen(script),&r)&&r.cancelled);stop_after=0;
+    // Esc also interrupts a backtracking pattern search, which runs in C.
+    checks=0;stop_after=3;script="string.find(string.rep('a',3000),'.-.-.-.-b')";assert(!pico_lua_run(script,strlen(script),&r)&&r.cancelled&&strstr(r.output,"Interrupted"));stop_after=0;
+    // Guarded string functions keep the standard error names and locations.
+    script="string.rep()";assert(!pico_lua_run(script,strlen(script),&r)&&strstr(r.output,"script:1:")&&strstr(r.output,"'rep'")&&r.error_line==1);
+    // Bytecode is refused; string.dump is unavailable; text load still works.
+    script="local f,e=load('\\27Lua') print(f,e~=nil and e:find('binary')~=nil) print(string.dump) print(load('return 6*7')())";
+    assert(pico_lua_run(script,strlen(script),&r)&&strstr(r.output,"nil\ttrue\nnil\n42\n"));
+    // Coroutines, callbacks, iterators and numeric-string arithmetic still work.
+    script="print((('abc'):gsub('%w',function(c) return coroutine.wrap(function() coroutine.yield(c:upper()) end)() end))) local n=0 for w in ('a b c'):gmatch('%a') do n=n+1 end print(n,'10'+1)";
+    assert(pico_lua_run(script,strlen(script),&r)&&!strcmp(r.output,"ABC\n3\t11\n"));
     for(int i=0;i<20;++i)
     {
         struct reader_state reader={"plot.function2d(function(x) return x*x end);plot.show()",0,0};assert(pico_lua_run_stream(stream_read,&reader,&r));

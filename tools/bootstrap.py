@@ -2,6 +2,7 @@
 """Fetch pinned sources and verify the complete LumaRPL patch."""
 import argparse, hashlib, json, subprocess, tarfile, tempfile, urllib.request
 from pathlib import Path
+from patch_tree import unexpected_changes
 root = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--source-cache', type=Path, help='Existing checkout; Git objects only are reused')
@@ -52,9 +53,7 @@ if not all((source / name).is_file() and digest(source / name) == expected
     run('git', 'apply', str(patch), cwd=source)
 if not all(digest(source / name) == expected for name, expected in manifest['files'].items()):
     raise SystemExit('Patched source checksum mismatch')
-changed = set(subprocess.check_output(['git','diff','--name-only','HEAD'],cwd=source,text=True).splitlines())
-# The upstream simulator build regenerates these tracked documentation files.
-if changed - set(manifest['files']) - {'doc/8-menus-tree-dm42.md','help/db48x.md'}:
+if unexpected_changes(source, manifest):
     raise SystemExit('Unexpected upstream modifications outside the verified patch')
 item = lock['lua']
 dest = root / item['directory']

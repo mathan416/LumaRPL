@@ -15,8 +15,13 @@ struct assembler {
     int number(const char *s,int pass)
     {
         for(unsigned i=0;i<count;++i)if(!strcmp(s,labels[i].name))return labels[i].address;
-        char *end;long value=strtol(s,&end,0);
-        if(*s && !*end && value>=0 && value<=65535)return int(value);
+        // Decimal, or 0x hexadecimal / 0b binary. A leading zero stays decimal:
+        // strtol's base-0 octal would silently turn 010 into 8.
+        int base=10;const char *digits=s;
+        if(s[0]=='0'&&(s[1]=='x'||s[1]=='X')){base=16;digits=s+2;}
+        else if(s[0]=='0'&&(s[1]=='b'||s[1]=='B')){base=2;digits=s+2;}
+        char *end;long value=std::isalnum((unsigned char)*digits)?strtol(digits,&end,base):-1;
+        if(value>=0 && !*end && value<=65535)return int(value);
         if(pass==0 && (std::isalpha((unsigned char)*s)||*s=='_'))return 0;
         error="Unknown label or invalid number";return -1;
     }

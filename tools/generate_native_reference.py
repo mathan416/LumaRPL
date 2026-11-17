@@ -68,7 +68,10 @@ for name,c in meta.items():
  elif kind=='preset':
   body+='\n\nTry it\n'+('3 ' if name in ('Sig','Fix','Sci','Eng') else '')+name+'\n\n'+('Shows three digits using this display style.' if name in ('Sig','Fix','Sci','Eng') else 'Applies the display or angle choice described above.')
  rows.append(dict(name=name,category=category,text=body,spellings=list(dict.fromkeys([name]+aliases))))
-assert len(rows)==sum(c["parseable"] for c in meta.values())
+# Every documented command must still exist; a stale entry means the engine
+# renamed or dropped a command that the reference still describes.
+stale=sorted(set(written)-{r['name'] for r in rows})
+assert not stale,('Documented commands missing from the engine',stale)
 command_count=len(rows)
 for name,text in json.loads((root/'docs/help/topics.json').read_text()).items():rows.append(dict(name=name,category='Using RPL',text=text,spellings=[name]))
 categories=sorted({r['category'] for r in rows});assert len(categories)<=32

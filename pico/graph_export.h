@@ -21,7 +21,9 @@ struct pico_graph_export
     bool commit()
     {
         if(!opened)return false;if(pico_f_close(&file)!=FR_OK)failed=true;opened=false;
-        return !failed&&!pico_io_failed()&&pico_commit_state(temporary,destination);
+        bool ok=!failed&&!pico_io_failed()&&pico_commit_state(temporary,destination);
+        if(!ok)pico_f_unlink(temporary); // cancelled or failed: keep only the previous export
+        return ok;
     }
-    ~pico_graph_export(){if(opened)pico_f_close(&file);}
+    ~pico_graph_export(){if(opened){pico_f_close(&file);pico_f_unlink(temporary);}}
 };

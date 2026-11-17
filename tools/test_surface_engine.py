@@ -6,7 +6,7 @@ parser=argparse.ArgumentParser();parser.add_argument('--indexed',action='store_t
 root=Path(__file__).resolve().parents[1];out=root/('build/simulator-rgb332' if args.indexed else 'build/simulator-colour')
 # Link the same pinned Lua runner to the real calculator bridge for integration.
 lua_obj=out/'lua-objects';lua_obj.mkdir(exist_ok=True)
-lua_sources=[p for p in (root/'dependencies/lua-5.4.9/src').glob('*.c') if p.name not in ('lua.c','luac.c')]+[root/'pico/lua_runner.c',root/'tests/lua_device_stub.c']
+lua_sources=[p for p in (root/'dependencies/lua-5.4.9/src').glob('*.c') if p.name not in ('lua.c','luac.c','lstrlib.c')]+[root/'pico/lua_strlib.c',root/'pico/lua_runner.c',root/'tests/lua_device_stub.c']
 objects=[]
 for source in lua_sources:
     obj=lua_obj/(source.stem+'.o');objects.append(str(obj))

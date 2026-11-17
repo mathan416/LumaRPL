@@ -34,6 +34,9 @@ int main()
     m.load(rom,n,schip);for(int i=0;i<8&&!m.exited;++i)m.step();assert(m.exited&&m.v[0]==15&&m.pixel(30,16));
     assert(!a.assemble("JP missing\n",rom,sizeof rom,n)&&a.line==1);
     assert(!a.assemble("LD V0, 256\n",rom,sizeof rom,n));
+    // Leading zeros are decimal; 0x and 0b select hexadecimal and binary.
+    assert(a.assemble("LD V0, 010\nLD V1, 09\nLD V2, 0x1F\nLD V3, 0b101\n",rom,sizeof rom,n)&&n==8&&rom[1]==10&&rom[3]==9&&rom[5]==31&&rom[7]==5);
+    assert(!a.assemble("LD V0, 0x\n",rom,sizeof rom,n)&&!a.assemble("LD V0, 0b2\n",rom,sizeof rom,n)&&!a.assemble("LD V0, -1\n",rom,sizeof rom,n));
     assert(!a.assemble("x:\nx:\nCLS\n",rom,sizeof rom,n));
     assert(!a.assemble("DB 1\nCLS\n",rom,sizeof rom,n));
     assert(!a.assemble("DW 0xFFFF\n",rom,1,n));

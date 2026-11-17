@@ -2,6 +2,7 @@
 """Check current firmware and source evidence; physical acceptance stays separate."""
 from pathlib import Path
 import argparse,os,hashlib,json,subprocess
+from patch_tree import unexpected_changes
 root=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--loader',type=Path);p.add_argument('--evidence',type=Path,default=root/'docs/review/release-evidence.json');args=p.parse_args()
 python_env=dict(os.environ)
@@ -14,6 +15,9 @@ def require(condition,message='Release check failed'):
     if not condition:raise SystemExit(message)
 require(sha(root/'patches/db48x-picocalc.patch')==manifest['patch_sha256'],'Patch checksum mismatch')
 for name,digest in manifest['files'].items():require(sha(root/'db48x'/name)==digest,name)
+# Firmware is built from this tree; released source is upstream HEAD plus the patch.
+extra=unexpected_changes(root/'db48x',manifest)
+require(not extra,'db48x changes outside the verified patch: '+', '.join(extra))
 for name in ('research_engine.h','research_numeric.h'):
  require((root/'pico'/name).read_bytes()==(root/'tools/baselines/port301'/name).read_bytes(),name)
 for generator in ('generate_ui_help.py','generate_command_reference.py','generate_reference_font.py','generate_editor_commands.py'):

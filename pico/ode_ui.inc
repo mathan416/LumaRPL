@@ -39,7 +39,7 @@ void pico_ode_menu()
         if(action==3){double next[4];memcpy(next,ode_scene->window,sizeof next);static const char *const titles[]={"X minimum","X maximum","Y minimum","Y maximum"};bool ok=true;for(int i=0;i<4&&ok;++i)ok=analysis_number(titles[i],next[i]);if(ok){if(pico_graph_scene::bounds(next))memcpy(ode_scene->window,next,sizeof next);else notice("Window","Use ordered finite bounds");}}
         if(action==4)
         {
-            static const char *const examples[]={"Exponential: y'=y","Logistic: y'=y*(1-y)","Driven: y'=X-Y","Back"};int which=screen_menu("ode_ui.pico_ode_menu.choose2","ODE examples",examples,4);if(which<0||which==3)continue;*ode_scene=pico_ode_scene();ode_scene->angle=angle_number();
+            static const char *const examples[]={"Exponential: y'=y","Logistic: y'=y*(1-y)","Driven: y'=X-Y","Back"};int which=screen_menu("ode_ui.pico_ode_menu.choose2","ODE examples",examples,4);if(which<0||which==3)continue;if(ode_revision.dirty&&!confirm("Replace unsaved equation with this example?"))continue;*ode_scene=pico_ode_scene();ode_scene->angle=angle_number();
             if(which==1){strcpy(ode_scene->formula,"Y*(1-Y)");ode_scene->y0=.1;double w[]={-2,8,-.2,1.2};memcpy(ode_scene->window,w,sizeof w);}
             if(which==2){strcpy(ode_scene->formula,"X-Y");double w[]={-2,4,-2,5};memcpy(ode_scene->window,w,sizeof w);}
         }

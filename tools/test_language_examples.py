@@ -55,7 +55,7 @@ src+='}\n';(out/'chip8.cc').write_text(src)
 def run(args):subprocess.run(args,cwd=root,check=True)
 flags=['-O1','-g','-fsanitize=address,undefined','-fno-omit-frame-pointer','-Ipico']
 run(['clang++','-std=c++17',*flags,'-c','tests/plot_engine_adapter.cc','-o',str(out/'plot.o')])
-lua=[str(p) for p in (root/'dependencies/lua-5.4.9/src').glob('*.c') if p.name not in ('lua.c','luac.c')]
+lua=[str(p) for p in (root/'dependencies/lua-5.4.9/src').glob('*.c') if p.name not in ('lua.c','luac.c','lstrlib.c')]+[str(root/'pico/lua_strlib.c')]
 run(['clang','-std=c11','-DLUAI_MAXCCALLS=40',*flags,'-Idependencies/lua-5.4.9/src',*lua,'pico/lua_runner.c','tests/lua_device_stub.c',str(out/'lua.c'),str(out/'plot.o'),'-lc++','-lm','-o',str(out/'lua')])
 run([str(out/'lua')]);run(['clang++','-std=c++17',*flags,str(out/'chip8.cc'),'-o',str(out/'chip8')]);run([str(out/'chip8')])
 report=dict(lua_examples=len(rows),chip8_examples_assembled=len(chip),chip8_state_examples=len(set(checks)|{r['name'] for r in chip if r['example_kind']=='program'}|{'SAVE','Fonts and BCD','DRW'}),sanitizers=['address','undefined'],error_location_checks=4,scope='Production Lua runtime and native sampler/assembler/VM; Lua hardware drawing, keyboard, clock, sound and calculator bridge boundaries use host fixtures. Device appearance/timing are not established.',source_sha256={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [root/'docs/help/lua-reference.json',root/'docs/help/chip8-reference.json']})

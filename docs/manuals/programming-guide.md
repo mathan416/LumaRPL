@@ -434,7 +434,7 @@ Call plot.clear() before changing to a new plot definition. Plot windows and cal
 
 ## Read a key without blocking
 
-keyboard.poll() returns a queued key name, or nil if none is available. keyboard.down(name) checks whether a key is held. keyboard.wait() waits; an optional positive timeout is in milliseconds. Esc remains interruption rather than an ordinary application key event.
+keyboard.poll() returns a queued key name, or nil if none is available. keyboard.down(name) checks whether a key is held. keyboard.wait() waits; an optional positive timeout is in milliseconds. Esc remains interruption rather than an ordinary application key event; F1-F5 are ordinary keys that a script can read.
 
 Named keys include left, right, up, down, enter, space, backspace and f1-f5. Printable single characters can also be used. system.sleep(ms) delays cooperatively; system.millis() reads the millisecond counter. Use elapsed-time differences, not assumptions about an exact display frame rate.
 
@@ -489,7 +489,7 @@ The output is false and string. Use pcall around a failure you can usefully reco
 
 The runner bounds Lua allocations to 48 KiB. Long output is bounded too. Reduce a table, avoid repeated string concatenation in a large loop, and release references you no longer need. Save source before closing an editor or restarting.
 
-A program can be syntactically valid and still exceed memory or computation limits. Test a small input first. The built-in Esc hook supports interruption during Lua execution, waits and native plotting callbacks.
+A program can be syntactically valid and still exceed memory or computation limits. Test a small input first. The built-in Esc hook supports interruption during Lua execution, waits, string pattern searches and native plotting callbacks.
 
 # 16 Your first CHIP-8 assembly program
 
@@ -526,7 +526,7 @@ The supplied MOVE.asm and BEEP.asm are original local demos. No proprietary HP i
 
 V0 through VF are eight-bit registers. I is the memory index; PC is the instruction pointer. VF is also used for carry, borrow or drawing collision by instructions that specify it. Do not keep an unrelated long-lived value in VF across such an operation.
 
-Assembler numbers use decimal or prefixes such as `0x` for hexadecimal. RPL's `#FFD2h` notation belongs to the calculator, not this assembler. Opcodes/register spellings are case-insensitive; label spelling is retained and labels are case-sensitive.
+Assembler numbers are decimal (a leading zero is still decimal, so `010` is ten), `0x` hexadecimal or `0b` binary. RPL's `#FFD2h` notation belongs to the calculator, not this assembler. Opcodes/register spellings are case-insensitive; label spelling is retained and labels are case-sensitive.
 
 ## Labels and data
 
@@ -623,7 +623,7 @@ Lua screen drawing is suited to a custom canvas. plot.function2d and plot.surfac
 | Lua allocations are bounded | Test small tables and short strings first |
 | Output is bounded | Print summaries, not an unbounded trace |
 | Assembled CHIP-8 code/data fits 3584 bytes | Count data as well as instructions |
-| Undo/clipboard edits are bounded | Save before a large replacement |
+| Undo/clipboard edits are bounded | Save before a large replacement; Replace all with more than 8 matches asks first and cannot be undone |
 | PSRAM is volatile | Save to SD before power-off |
 
 ## A three-language restart test

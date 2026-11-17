@@ -1,0 +1,26 @@
+{
+  "comparison": "Text of each page after replacing 0.10.0-rc.3 with 0.10.0-rc.4, against the content-reviewed build of the same sources",
+  "books": [
+    {
+      "file": "LumaRPL-User-Guide.pdf",
+      "pages": 64,
+      "pages_differing_beyond_version": [],
+      "previous_sha256": "60fe6826f0ab842c15b8753e751432964dfbeedec301b5c4cce89eca66d3ce24",
+      "sha256": "af35480a4d9037179514eef20984d7da75da28fddd720b7447febbcd4a0627c7"
+    },
+    {
+      "file": "LumaRPL-Programming-Guide.pdf",
+      "pages": 84,
+      "pages_differing_beyond_version": [],
+      "previous_sha256": "89d246ab2cbb7b3ae65ce3464639ab6a791c59b5a4602fccf49971fbc771cced",
+      "sha256": "6edab425201faf13eee82957d0289fc0cb2ffdfafd8d1f412be6af98bb5f5449"
+    },
+    {
+      "file": "LumaRPL-API-Assembly-Reference.pdf",
+      "pages": 71,
+      "pages_differing_beyond_version": [],
+      "previous_sha256": "3944bbd88e7ecad0f922ec661232f2ca7dc62ec8e69d037c6711c75f184a4a51",
+      "sha256": "79076576191d0833199c35e2a803647071127b97f1e072a6ad0b3af106f1e3ac"
+    }
+  ]
+}

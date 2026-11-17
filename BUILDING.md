@@ -36,16 +36,24 @@ sh tools/test.sh
 sh tools/test_lua.sh
 python3 tools/build_colour_simulator.py --indexed
 python3 tools/test_surface_engine.py --indexed
+python3 tools/test_port305_controllers.py
+LUMARPL_UI_SANITIZERS=1 python3 tools/test_port305_controllers.py
 python3 tools/test_controllers.py
+python3 tools/test_calculator_review.py
 python3 tools/test_help_examples.py
+python3 tools/test_manual_examples.py
 python3 tools/render_review.py
 python3 tools/verify_ui_captures.py
 python3 tools/check_release_resources.py
+python3 tools/test_release_tools.py
 sh tools/test_arm_allocation.sh
 sh tools/test_arm_tls.sh
 ```
 
-Run these sequentially: simulator/controller probes share build objects.
+Run these sequentially: simulator/controller probes share build objects. Each
+simulator run uses a private home whose data folder is the prepared work folder
+(see `tools/simulator_checks.py`), so runs never read or change your own DB48X
+simulator data.
 Controller tests execute production controllers and the upstream engine with
 scripted device I/O. Captures and reports go under ignored `reports/` and `build/`.
 They do not establish physical device acceptance.
@@ -57,6 +65,29 @@ fixtures. Run both full headless suites using `tools/run_upstream_suite.py
 Use `tools/compare_full_results.py BASELINE.log POST.log` to compare failures and
 assertions. Baseline failures must be documented, never silently accepted by
 changing expected images.
+
+### Release evidence
+
+`tools/verify_release.py`, which packaging runs first, accepts a candidate only
+when `docs/review/release-evidence.json` matches it. Record that file after the
+checks above pass on the committed candidate:
+
+- `version` and `firmware_sha256` (from `tools/validate_uf2.py`) of the build.
+- `runtime_source_commit`: the commit whose `pico/`, `resources/`, `patches/`
+  and `tests/` the full suite ran against.
+- `source_hashes`: SHA-256 of `VERSION`, `SOURCES.lock.json`, both patch files
+  and every tracked file under `pico/`, `resources/`, `tests/`, `tools/`,
+  `docs/help/`, `docs/ui/` and `docs/manuals/`.
+- `checks`: passing entries named `full_simulator`, `calculator_normal`,
+  `calculator_sanitized`, `controller_normal`, `controller_sanitized`, `host`,
+  `lua`, `arm_allocation`, `arm_tls`, `help_examples`, `manual_examples`,
+  `manual_layout` and `release_tools`, each with the hashed logs it relied on.
+- `upstream_comparison`: baseline and patched full-suite counts, as described above.
+- `device_acceptance`: what was confirmed on hardware, and for which firmware hash.
+
+Verification also requires the `db48x/` checkout to equal the pinned upstream
+plus the verified patch (`tools/patch_tree.py`), so the published source matches
+the firmware.
 
 ```sh
 python3 tools/package_release.py

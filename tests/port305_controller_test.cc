@@ -571,6 +571,18 @@ static void alarm_reminder_cases()
         if(!load_state_file_silent("data/ALARMS.48S")||!execute("1 RclAlarm 4 GET 1 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
     }
     remove("data/ALARMS.48S");
+    // A frozen display cannot show the reminder: it stays due, nothing is
+    // redrawn, and the check backs off instead of retrying every second.
+    rt.reset();load_saved_keymap();key_pop_all();
+    if(!execute("20000101 \"Frozen\" StoAlarm DROP"))test_abort(__LINE__);
+    ui.freeze(2);sys_delay(1100);host_alarm_key=KEY_ENTER;
+    if(alarm_notify()||rt.error()||host_alarm_key!=KEY_ENTER)test_abort(__LINE__);
+    host_alarm_key=0;ui.key(KEY_SHIFT,false,false);ui.clear_shift();key_pop_all();
+    sys_delay(1100);
+    if(alarm_notify()||rt.error())test_abort(__LINE__);
+    if(!execute("1 RclAlarm 4 GET 0 SAME")||rt.top()->type()!=object::ID_True)test_abort(__LINE__);
+    rt.drop();if(!execute("'LumaAlarms' PURGE"))test_abort(__LINE__);
+    sys_delay(60000);
     // Malformed reminder data never raises an error from the idle check.
     rt.reset();load_saved_keymap();key_pop_all();
     if(!execute("\"not alarms\" 'LumaAlarms' STO"))test_abort(__LINE__);
@@ -594,7 +606,7 @@ static void alarm_reminder_cases()
     if(!execute("'LumaAlarms' PURGE"))test_abort(__LINE__);
     rt.reset();load_saved_keymap();
     host_variant="normal";host_theme=0;apply_theme(0);
-    puts("PASS: alarm Enter acknowledgement, empty messages, ignored keys, snooze, silent malformed data, preserved stack and saved-session restoration in eight themes");
+    puts("PASS: alarm Enter acknowledgement, empty messages, ignored keys, snooze, frozen-display back-off, silent malformed data, preserved stack and saved-session restoration in eight themes");
 }
 
 static void available_menu_cases()
@@ -806,7 +818,7 @@ static void power_entry_cases()
     {
         Settings=settings();ui.clear_help();ui.clear_menu();ui.clear_shift();host_theme=theme;apply_theme(theme);
         struct Case{const char *input;int expected;};
-        for(auto c:{Case{"0^0",1},Case{"2^3",8},Case{"0^3",0},Case{"3^0",1},Case{"-2^3",-8},Case{"0.0^0.0",1},Case{"2e1^2",400},Case{"2^+3",8}})
+        for(auto c:{Case{"0^0",1},Case{"2^3",8},Case{"0^3",0},Case{"3^0",1},Case{"-2^3",-8},Case{"-2^2",4},Case{"-3^2",9},Case{"-2^0",1},Case{"0.0^0.0",1},Case{"2e1^2",400},Case{"2^+3",8}})
         {
             while(rt.depth())rt.drop();rt.clear_error();
             text(c.input);enter();
@@ -814,6 +826,11 @@ static void power_entry_cases()
         }
         while(rt.depth())rt.drop();text("2^-3");enter();
         if(rt.error()||rt.depth()!=1||!execute("8 *")||!rt.top()->is_one(false))test_abort(__LINE__);
+        // A failed signed power restores exactly what was typed, without the
+        // internal parentheses, and leaves no partial result on the stack.
+        while(rt.depth())rt.drop();rt.clear_error();text("-0^-1");enter();
+        if(!rt.error()||rt.depth()||std::string(reinterpret_cast<const char *>(rt.editor()),rt.editing())!="-0^-1")test_abort(__LINE__);
+        rt.clear_error();ui.clear_editor();
         while(rt.depth())rt.drop();text("0^0");enter();
         host_variant="zero-power-zero";calculator_frame("calculator.stack","0^0 = 1");
         while(rt.depth())rt.drop();text("2^3");enter();

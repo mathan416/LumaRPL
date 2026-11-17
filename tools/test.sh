@@ -142,3 +142,22 @@ UBSAN_OPTIONS=halt_on_error=1 build/wall-clock-test
 
 "$cxx" -std=c++17 -g -O1 -fsanitize=address,undefined -Ipico -Ipico/fatfs tests/currency_preferences_test.cc build/storage-test.o build/workbench-ff.o build/workbench-ffunicode.o -o build/currency-preferences-test
 UBSAN_OPTIONS=halt_on_error=1 build/currency-preferences-test
+
+# PSRAM bus driver against stub PIO hardware. It needs the PIO header that the
+# firmware build generates; skip clearly when the firmware is not built yet.
+if [ -f build/pico/psram_spi.pio.h ]; then
+  "$cc" -std=c11 -g -O1 -fsanitize=address,undefined -Itests/pio_stub -Ipico -Ibuild/pico \
+    -c pico/psram_bus.c -o build/psram-bus.o
+  "$cxx" -std=c++17 -g -O1 -fsanitize=address,undefined -Itests/pio_stub -Ipico -Ibuild/pico \
+    tests/psram_bus_test.cc build/psram-bus.o -o build/psram-bus-test
+  UBSAN_OPTIONS=halt_on_error=1 build/psram-bus-test
+else
+  echo "SKIP: PSRAM bus test needs build/pico/psram_spi.pio.h (run tools/build.sh first)"
+fi
+
+# Reference store, run on a scratch copy because it rewrites its help files.
+"$cxx" -std=c++17 -g -O1 -fsanitize=address,undefined -Ipico -Ipico/fatfs \
+  tests/reference_store_test.cc -o build/reference-store-test
+rm -rf build/reference-store-work && mkdir -p build/reference-store-work
+cp -R resources/help build/reference-store-work/help
+(cd build/reference-store-work && UBSAN_OPTIONS=halt_on_error=1 ../reference-store-test)
