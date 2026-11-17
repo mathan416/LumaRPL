@@ -1,6 +1,6 @@
 # API & Assembly Reference audit
 
-API baseline: LumaRPL 0.10.0-rc.2; unchanged interfaces rechecked for 0.10.0-rc.3.
+API baseline: LumaRPL 0.10.0-rc.2; rechecked for 0.10.0-rc.4. Changed in rc.4: `load` accepts source text only and `string.dump` is removed; F5 is an ordinary key (only Esc interrupts); Esc also interrupts string pattern searches. Other interfaces are unchanged.
 
 The 71-page companion covers production Lua APIs, the implemented CHIP-8 and SUPER-CHIP interfaces, and six reusable routines supplied as assembly source. Native Arm development is excluded. Nine complete example files accompany the reference.
 

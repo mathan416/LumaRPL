@@ -42,6 +42,7 @@
 #include "sd_read.h"
 #include "sd_deadline.h"
 #include <stdbool.h>
+#include <stdint.h>
 static bool initializing;
 static pico_sd_deadline initialization_deadline;
 static uint32_t sd_now(void){return to_ms_since_boot(get_absolute_time());}
@@ -342,7 +343,7 @@ bool MMC_disk_initialize(void)
     { /* SDv1 or MMCv3 */
       if (send_cmd(ACMD41, 0) <= 1)
       {
-        ty = CT_SDC2;
+        ty = CT_SDC1;
         cmd = ACMD41; /* SDv1 */
       }
       else
@@ -436,7 +437,7 @@ int32_t MMC_get_sector_count(void)
 {
   uint8_t n, csd[16];
   uint32_t cs;
-  int32_t count = -1;
+  uint64_t sectors = 0;
 
   if (!MMC_disk_ready()) return -1;
 
@@ -445,19 +446,21 @@ int32_t MMC_get_sector_count(void)
     if ((csd[0] >> 6) == 1)
     { /* SDC ver 2.00 */
       cs = csd[9] + ((uint16_t)csd[8] << 8) + ((uint32_t)(csd[7] & 63) << 16) + 1;
-      count = cs << 10;
+      sectors = (uint64_t)cs << 10;
     }
     else
     { /* SDC ver 1.XX or MMC */
       n = (csd[5] & 15) + ((csd[10] & 128) >> 7) + ((csd[9] & 3) << 1) + 2;
       cs = (csd[8] >> 6) + ((uint16_t)csd[7] << 2) + ((uint16_t)(csd[6] & 3) << 10) + 1;
-      count = cs << (n - 9);
+      sectors = (uint64_t)cs << (n - 9);
     }
   }
 
   deselect();
 
-  return count;
+  // The loader's int32_t interface cannot represent 1 TiB or larger cards;
+  // report failure rather than a negative or truncated count.
+  return sectors && sectors <= INT32_MAX ? (int32_t)sectors : -1;
 }
 
 bool MMC_sync(void)

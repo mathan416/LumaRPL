@@ -6,7 +6,8 @@ struct pico_lua_input {
     void feed(int c,int state)
     {
         if(c<0||c>255)return;
-        if((c==27||c==0xb1||c==0x85)&&state==1){cancelled=true;return;}
+        // Esc interrupts. F1-F5 stay ordinary keys that scripts can read.
+        if((c==27||c==0xb1)&&state==1){cancelled=true;return;}
         c=normalized(c);uint32_t bit=1u<<(c%32);
         if(state==3)down[c/32]&=~bit;
         else if(state==1||state==2)down[c/32]|=bit;

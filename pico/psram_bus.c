@@ -2,6 +2,7 @@
 #include "pico/stdlib.h"
 #include "hardware/pio.h"
 #include "hardware/clocks.h"
+#include "hardware/sync.h"
 #include "psram_spi.pio.h"
 static PIO bus;
 static int machine=-1;
@@ -36,17 +37,22 @@ int pico_psram_bus_transfer(const uint8_t *tx,uint8_t *rx,size_t length)
     pio_sm_exec(bus,machine,pio_encode_set(pio_x,length-1)|pio_encode_sideset(2,1));
     pio_sm_exec(bus,machine,pio_encode_jmp(program_offset)|pio_encode_sideset(2,1));
     for(size_t i=0;i<length;i+=4){uint32_t word=0;for(unsigned j=0;j<4&&i+j<length;++j)word|=(uint32_t)tx[i+j]<<(24-j*8);pio_sm_put(bus,machine,word);}
+    // A transfer takes under 6 us. Mask interrupts so that an interrupt
+    // handler cannot stretch the wait past the 50 us bound and make a healthy
+    // chip look failed (a timeout disables PSRAM until the next boot).
+    uint32_t interrupts=save_and_disable_interrupts();
     uint32_t start=time_us_32();pio_sm_set_enabled(bus,machine,true);
     while(pio_sm_get_pc(bus,machine)!=program_offset+picocalc_psram_offset_idle)
     {
         if((uint32_t)(time_us_32()-start)>50)
         {
+            restore_interrupts(interrupts);
             pio_sm_set_enabled(bus,machine,false);
             gpio_init(20);gpio_set_dir(20,GPIO_OUT);gpio_put(20,1);gpio_init(21);gpio_set_dir(21,GPIO_OUT);gpio_put(21,0);
             pio_remove_program(bus,&picocalc_psram_program,program_offset);pio_sm_unclaim(bus,machine);machine=-1;return 0;
         }
     }
-    pio_sm_set_enabled(bus,machine,false);
+    pio_sm_set_enabled(bus,machine,false);restore_interrupts(interrupts);
     for(size_t i=0;i<length;i+=4)
     {
         if(pio_sm_is_rx_fifo_empty(bus,machine))return 0;

@@ -371,13 +371,15 @@ void power_check(bool running, bool showimage)
             if (last_awake)
                 program::active_time += tin - last_awake;
             sys_sleep();
-            if (!running && !ST(STAT_PGM_END) && !rt.error() &&
-                !ui.in_input() && alarm_notify())
-                redraw_lcd(true);
             uint tout = sys_current_ms();
             last_awake = tout;
             program::sleeping_time += tout - tin;
             program::run_cycles++;
+            // An alarm prompt can wait for the user; that time is active, not
+            // sleep, so it is measured after the sleep statistics are updated.
+            if (!running && !ST(STAT_PGM_END) && !rt.error() &&
+                !ui.in_input() && alarm_notify())
+                redraw_lcd(true);
         }
         if (ST(STAT_PGM_END) || ST(STAT_SUSPENDED))
         {

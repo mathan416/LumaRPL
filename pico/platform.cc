@@ -58,6 +58,13 @@ static void enqueue(int key)
     int next = (head+1)%64;
     if (next != tail) { queue[head] = key; head = next; }
 }
+// A key press is queued only with its release, so a full queue can never keep
+// a press whose release was dropped (which would leave the key held).
+static void enqueue_press(int key)
+{
+    if ((head+2)%64 == tail || (head+1)%64 == tail) return;
+    enqueue(key); enqueue(0);
+}
 
 extern "C" void pico_poll_background(void)
 {
@@ -80,7 +87,7 @@ static void poll()
             if (key != KB_ESC) return;
             CLR_ST(STAT_PGM_END); CLR_ST(STAT_SUSPENDED);
         }
-        enqueue(key); enqueue(0);
+        enqueue_press(key);
     }
 }
 

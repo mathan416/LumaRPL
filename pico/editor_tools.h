@@ -83,14 +83,29 @@ memmove(history,history+1,(depth-1)*sizeof(change));
         if(!*needle)return false;const char *p=strstr(e.text+e.cursor,needle);if(!p)p=strstr(e.text,needle);
         if(!p)return false;anchor=p-e.text;e.cursor=anchor+strlen(needle);break_group();return true;
     }
-    int replace_all(const char *needle,const char *replacement)
+    size_t count_matches(const char *needle)const
+    {size_t a=strlen(needle),matches=0;if(a)for(const char *p=e.text;(p=strstr(p,needle));p+=a)++matches;return matches;}
+    // Replace every match. Up to `depth` matches stay individually undoable and
+    // a failure part-way rolls back the edits already made. Larger replacements
+    // need `irreversible`: they are applied in one pass and clear the undo
+    // history, because a partial undo would leave a half-replaced source.
+    // Returns the match count, -1 on failure, or -2 when confirmation is needed.
+    int replace_all(const char *needle,const char *replacement,bool irreversible=false)
     {
-        size_t a=strlen(needle),b=strlen(replacement);if(!a||a>limit||b>limit)return -1;
-        size_t matches=0;for(const char *p=e.text;(p=strstr(p,needle));p+=a)++matches;
+        size_t a=strlen(needle),b=strlen(replacement);if(!a||a>limit||b>limit||!ready())return -1;
+        size_t matches=count_matches(needle);
         int64_t total=int64_t(e.length)+int64_t(matches)*(int64_t(b)-int64_t(a));
         if(total<0||uint64_t(total)>=e.capacity)return -1;
-        size_t pos=0;for(size_t n=0;n<matches;++n)
-        {const char *p=strstr(e.text+pos,needle);size_t at=p-e.text;if(!replace(at,at+a,replacement,b))return -1;pos=at+b;}
-        return int(matches);
+        if(matches>depth&&!irreversible)return -2;
+        break_group();size_t pos=0,done=0;
+        for(size_t n=0;n<matches;++n)
+        {
+            const char *p=strstr(e.text+pos,needle);size_t at=p-e.text;
+            if(matches>depth)raw(at,a,replacement,b);
+            else if(!replace(at,at+a,replacement,b)){while(done--)undo();return -1;}
+            ++done;pos=at+b;
+        }
+        if(matches>depth){count=applied=0;anchor=none;}
+        break_group();return int(matches);
     }
 };

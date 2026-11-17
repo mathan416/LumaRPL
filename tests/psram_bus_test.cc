@@ -11,6 +11,9 @@ static constexpr unsigned idle_pc=4+picocalc_psram_offset_idle;
 static bool sm_available=true,program_available=true,claimed=false,stall=false,empty=false,cs_high=false;
 static unsigned pc=0,length=0,tx_count=0,rx_count=0,rx_pos=0,ticks=0,removed=0;
 static uint32_t tx[4],rx[4];
+static int masked=0;
+uint32_t save_and_disable_interrupts(void){assert(!masked);masked=1;return 0x5a;}
+void restore_interrupts(uint32_t status){assert(masked&&status==0x5a);masked=0;}
 int pio_claim_unused_sm(PIO,bool panic){assert(!panic);if(!sm_available)return -1;claimed=true;return 0;}
 void pio_sm_unclaim(PIO,uint){assert(claimed);claimed=false;}
 bool pio_can_add_program(PIO,const pio_program *){return program_available;}

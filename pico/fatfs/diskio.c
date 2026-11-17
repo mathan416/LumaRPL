@@ -121,6 +121,7 @@ DRESULT disk_ioctl(BYTE pdrv, /* Physical drive number (0..) */
         *(int32_t*)buff = count;
         return RES_OK;
       }
+      return RES_ERROR; // never fall through to the block-size reply
     }
     case GET_BLOCK_SIZE: /* Get erase block size in unit of sector (uint32_t) */
       *(uint32_t *)buff = 128;

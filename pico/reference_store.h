@@ -33,7 +33,15 @@ class store {
   bool ok=f_size(&f)==data_size&&f_lseek(&f,e.offset)==FR_OK&&pico_f_read(&f,out,e.length,&n)==FR_OK&&n==e.length;
   if(pico_f_close(&f)!=FR_OK)ok=false;
   if(!ok||crc32(out,e.length)!=e.crc||!pico_text_editor::valid_utf8(out,e.length))return false;out[e.length]=0;return true;}
+ // A full scan reads the whole ~500 KB index from SD. Remember recent hits and
+ // verify the cached record before trusting it, so repeated lookups (Ctrl+K,
+ // Help on the same command) read one record instead of all of them.
+ struct remembered {uint32_t key=0,data_size=0;unsigned ordinal=0,count=0;};
+ static remembered *recent(){static remembered cache[8];return cache;}
  bool exact(const char *name,entry &e,unsigned *ordinal=nullptr){char match[386];if(snprintf(match,sizeof match,"\x1f%s\x1f",name)>=int(sizeof match))return false;
-  for(unsigned i=0;i<count;++i){if(!read(i,e))return false;if(contains(e.keys,match)){if(ordinal)*ordinal=i;return true;}}return false;}
+  uint32_t key=crc32(match,strlen(match));remembered *cache=recent();
+  for(unsigned n=0;n<8;++n)if(cache[n].key==key&&cache[n].count==count&&cache[n].data_size==data_size&&cache[n].ordinal<count&&read(cache[n].ordinal,e)&&contains(e.keys,match)){if(ordinal)*ordinal=cache[n].ordinal;return true;}
+  for(unsigned i=0;i<count;++i){if(!read(i,e))return false;if(contains(e.keys,match)){if(ordinal)*ordinal=i;
+   static unsigned next=0;cache[next]={key,data_size,i,count};next=(next+1)%8;return true;}}return false;}
 };
 }

@@ -228,7 +228,8 @@ extern "C" pico_network_status pico_network_get_status(void)
 }
 extern "C" int pico_network_rates_dated(const char *ssid,const char *password,int64_t utc,const char *rate_date,char *body,size_t capacity,pico_network_result *result,pico_network_cancel_fn cancel,pico_network_progress_fn progress,void *context)
 {
-    if(compute_gate.active){if(result){*result={};result->code=10;snprintf(result->message,sizeof result->message,"Calculation in progress; retry after it finishes");}return 0;}
+    if(!result)return 0; // every outcome, including failures, is reported here
+    if(compute_gate.active){{*result={};result->code=10;snprintf(result->message,sizeof result->message,"Calculation in progress; retry after it finishes");}return 0;}
     *result={};if(!ssid||!*ssid||!password||!body||!capacity||(utc&&(utc<1577836800||utc>2145916799))||(rate_date&&*rate_date&&!pico_currency_rates::date_valid(rate_date))||active){result->code=9;snprintf(result->message,sizeof result->message,"Check Wi-Fi setup and UTC date/time (2020-2037)");return 0;}
     if(!pico_tls_budget_reset()){result->code=6;snprintf(result->message,sizeof result->message,"TLS memory still in use");return 0;}
     session *state=new(std::nothrow) session(cancel,progress,context);if(!state){result->code=6;snprintf(result->message,sizeof result->message,"Not enough free heap for networking");return 0;}

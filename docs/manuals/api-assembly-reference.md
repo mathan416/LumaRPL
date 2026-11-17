@@ -1,6 +1,6 @@
 # 1 Using this reference
 
-Keep this book beside the Programming Guide when you need an exact signature, a limit or the register contract for a subroutine. It describes the APIs shipped in LumaRPL **0.10.0-rc.3**. It does not introduce new firmware services.
+Keep this book beside the Programming Guide when you need an exact signature, a limit or the register contract for a subroutine. It describes the APIs shipped in LumaRPL **0.10.0-rc.4**. It does not introduce new firmware services.
 
 There are three distinct interfaces:
 
@@ -32,7 +32,7 @@ Save source and important calculator work before experimenting. A saved script i
 
 ## Available language and libraries
 
-The embedded language is Lua 5.4.9. LumaRPL opens base functions and the table, string, math, utf8 and coroutine libraries. Functions such as pcall, pairs, ipairs, tonumber and tostring are available through the base library. The standard io, os, package and debug libraries are not opened. dofile and loadfile are removed.
+The embedded language is Lua 5.4.9. LumaRPL opens base functions and the table, string, math, utf8 and coroutine libraries. Functions such as pcall, pairs, ipairs, tonumber and tostring are available through the base library. The standard io, os, package and debug libraries are not opened. dofile and loadfile are removed. load accepts source text only, never precompiled bytecode, and string.dump is unavailable.
 
 Use the source editor to open and save programs. There is no general Lua filesystem API, require-based module loader, socket API or arbitrary operating-system interface. screen.sprite is a deliberately narrow file operation for validated calculator sprite documents.
 
@@ -52,7 +52,7 @@ The Lua math library uses radians. Calculator angle settings apply when using ca
 
 These budgets are not an invitation to allocate a table of exactly 48 KiB: the runtime already consumes part of the budget. Build data incrementally and release references when they are no longer useful. A table with many small objects has overhead beyond its raw values.
 
-Esc interrupts supported execution, waits and native plots. The instruction hook checks cancellation every 1,000 Lua instructions; drawing and device operations also cooperate. This is not a promise of a fixed latency for an arbitrary long C-library operation. Do not catch an interruption and immediately restart the same long operation.
+Esc interrupts supported execution, waits, string pattern searches and native plots. The instruction hook checks cancellation every 1,000 Lua instructions; string-library work checks every few thousand matching steps; drawing and device operations also cooperate. This is not a promise of a fixed latency for every C-library operation. Do not catch an interruption and immediately restart the same long operation.
 
 ## Script and console lifetime
 
@@ -135,7 +135,7 @@ Only use tonumber on returned text when you know it is a plain Lua numeric spell
 | keyboard.down(key) | Boolean held state for the named key or single-byte character |
 | keyboard.wait([timeout_ms]) | A queued key name/character; nil on timeout |
 
-Named keys are left, right, up, down, enter, space, backspace and f1 through f5. Ordinary printable characters are single-character strings. Names are lower-case and case-sensitive. Unknown names raise errors in keyboard.down. The physical Esc key is reserved for interruption; do not depend on receiving an "esc" event.
+Named keys are left, right, up, down, enter, space, backspace and f1 through f5 (F5 is an ordinary key while a script runs; only Esc interrupts). Ordinary printable characters are single-character strings. Names are lower-case and case-sensitive. Unknown names raise errors in keyboard.down. The physical Esc key is reserved for interruption; do not depend on receiving an "esc" event.
 
 keyboard.wait with no argument, nil or zero waits without a timeout. A positive integer timeout may be at most 600,000 ms. Waiting cooperates with device polling and interruption. A queued event and a current held state answer different questions; do not substitute keyboard.poll for keyboard.down when implementing continuous movement.
 

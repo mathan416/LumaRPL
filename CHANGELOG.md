@@ -1,9 +1,15 @@
 # Changelog
 
-## Unreleased
+## 0.10.0-rc.4 (2026-11-17)
 
 - Snooze reminders for five minutes with Esc/Back or a one-minute timeout; keep malformed alarm data and allocation errors out of idle error handling.
 - Package committed defaults and corresponding source while excluding local edits and private files. Keep verification subprocess checks active under optimized Python.
+- Keep a leading minus with its number in typed powers (`-2^2` gives 4); stop operator keys editing a hidden entry under help, graphics or stack browsing.
+- Make F5 an ordinary Lua key, interrupt long Lua pattern searches with Esc, and refuse Lua bytecode in `load`.
+- Make Replace all fully undoable up to eight matches and confirm larger replacements; read CHIP-8 assembler numbers with leading zeros as decimal; confirm before ODE examples replace unsaved work.
+- Remove temporary files after failed saves, report a recovered startup session, and back off alarm retries after a failed draw or save.
+- Fix SD v1 card detection, large-card sector counts, PSRAM transfer timing under interrupts and key-queue press/release pairing.
+- Verify the `db48x` tree against the patch before release, isolate simulator test runs, and document release evidence.
 
 ## 0.10.0-rc.3 (2026-11-06)
 

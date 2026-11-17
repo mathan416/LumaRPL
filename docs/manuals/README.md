@@ -22,8 +22,10 @@ Use Python with reportlab, Pillow and pypdf. PDF layout review additionally uses
 pdfplumber and Poppler's pdftoppm. The tested package versions are recorded in
 requirements-pdf.txt. Set LUMARPL_PDF_FONTS to an installed DejaVu font directory
 containing DejaVuSans.ttf, DejaVuSans-Bold.ttf, DejaVuSans-Oblique.ttf and
-DejaVuSansMono.ttf. The builder also discovers the Codex bundled fonts on this
-workstation. Font licenses remain in this folder and in the PDFs.
+DejaVuSansMono.ttf. Without it, the builder looks in standard DejaVu install
+locations (Linux font folders, Homebrew, ~/Library/Fonts and /Library/Fonts) and
+stops with a clear message if none is found. Font licenses remain in this folder
+and in the PDFs.
 
 From the repository root:
 
@@ -52,7 +54,7 @@ The manuals acknowledge runtime components, hardware/driver origins, fonts and
 build/validation tools separately. The on-device credits source now includes
 Pixel Operator Mono and FogSans authors. NOTICE.md removes obsolete port/report
 paths. Complete direct component notices are maintained in licenses/, and the
-release packager copies them into /db48x/licenses/ through tools/license_bundle.py.
+release packager copies the committed licenses/ folder, NOTICE.md and SOURCES.lock.json into /db48x/licenses/.
 
 Two stale help statements were corrected at their generator source: decimal
 integers convert directly with Bin/Oct/Dec/Hex, and CSV observations live under

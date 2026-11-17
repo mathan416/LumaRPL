@@ -242,6 +242,78 @@ static void initialize_plot(lua_State *L)
     lua_pushboolean(L,1);lua_pushcclosure(L,plot_function,1);lua_setfield(L,-2,"surface");
     lua_pushcfunction(L,plot_show);lua_setfield(L,-2,"show");lua_setglobal(L,"plot");
 }
+/* Scripts are text only: load() never accepts precompiled bytecode, which Lua
+   does not verify and which could corrupt memory. Chunk name and environment
+   behave as in the standard load(). */
+static int text_load(lua_State *L)
+{
+    if(lua_gettop(L)<3)lua_settop(L,3);
+    lua_pushliteral(L,"t");lua_replace(L,3);
+    lua_pushvalue(L,lua_upvalueindex(1));lua_insert(L,1);
+    lua_call(L,lua_gettop(L)-1,LUA_MULTRET);return lua_gettop(L);
+}
+/* The thread currently inside a string-library call. lua_strlib.c polls for
+   Esc through pico_lua_strlib_poll() and raises only on this thread; resuming
+   a coroutine clears it, so an error is never raised on a suspended thread. */
+static lua_State *strlib_state;static unsigned strlib_steps;
+int pico_lua_strlib_poll(int condition)
+{
+    if(strlib_state&&!(++strlib_steps&4095u)&&pico_lua_cancel())
+    {lua_State *L=strlib_state;strlib_state=NULL;get_context(L)->result->cancelled=1;luaL_error(L,"Interrupted");}
+    return condition;
+}
+static int has_location(const char *message)
+{
+    const char *colon=strchr(message,':'),*newline=strchr(message,'\n');
+    if(!colon||colon==message||(newline&&newline<colon))return 0;
+    const char *p=colon+1;if(!isdigit((unsigned char)*p))return 0;while(isdigit((unsigned char)*p))++p;return *p==':';
+}
+/* Upvalues: 1 original function, 2 wrap the first result again, 3 name. */
+static int guarded_call(lua_State *L,lua_State *state,lua_CFunction self)
+{
+    lua_State *previous=strlib_state;strlib_state=state;
+    lua_pushvalue(L,lua_upvalueindex(1));lua_insert(L,1);
+    int status=lua_pcall(L,lua_gettop(L)-1,LUA_MULTRET,0);strlib_state=previous;
+    if(status!=LUA_OK)
+    {
+        /* Called from this wrapper, Lua cannot name the function or locate the
+           caller; restore the messages the unwrapped library would give. */
+        if(lua_type(L,-1)==LUA_TSTRING)
+        {
+            const char *name=lua_tostring(L,lua_upvalueindex(3));
+            if(name){char quoted[24];snprintf(quoted,sizeof quoted,"'%s'",name);luaL_gsub(L,lua_tostring(L,-1),"'?'",quoted);lua_remove(L,-2);}
+            if(!has_location(lua_tostring(L,-1))){luaL_where(L,1);lua_insert(L,-2);lua_concat(L,2);}
+        }
+        return lua_error(L);
+    }
+    int results=lua_gettop(L);
+    /* gmatch and coroutine.wrap return functions that run later: guard them too. */
+    if(lua_toboolean(L,lua_upvalueindex(2))&&results>0&&lua_isfunction(L,1))
+    {lua_pushvalue(L,1);lua_pushboolean(L,0);lua_pushvalue(L,lua_upvalueindex(3));lua_pushcclosure(L,self,3);lua_replace(L,1);}
+    return results;
+}
+static int strlib_call(lua_State *L){return guarded_call(L,L,strlib_call);}
+static int thread_switch(lua_State *L){return guarded_call(L,NULL,thread_switch);}
+static void guard_function(lua_State *L,const char *name,lua_CFunction wrapper,int wrap_result)
+{
+    lua_getfield(L,-1,name);if(!lua_iscfunction(L,-1)){lua_pop(L,1);return;}
+    lua_pushboolean(L,wrap_result);if(*name=='_')lua_pushnil(L);else lua_pushstring(L,name);
+    lua_pushcclosure(L,wrapper,3);lua_setfield(L,-2,name);
+}
+static void initialize_guards(lua_State *L)
+{
+    static const char *const strings[]={"byte","char","find","format","gmatch","gsub","len","lower","match","rep","reverse","sub","upper","pack","packsize","unpack",NULL};
+    static const char *const methods[]={"__add","__sub","__mul","__mod","__pow","__div","__idiv","__unm",NULL};
+    lua_getglobal(L,LUA_STRLIBNAME);
+    for(const char *const *name=strings;*name;++name)guard_function(L,*name,strlib_call,!strcmp(*name,"gmatch"));
+    lua_pushnil(L);lua_setfield(L,-2,"dump");lua_pop(L,1);
+    /* Arithmetic on numeric strings also runs in lstrlib, via metamethods. */
+    lua_pushliteral(L,"");
+    if(lua_getmetatable(L,-1)){for(const char *const *name=methods;*name;++name)guard_function(L,*name,strlib_call,0);lua_pop(L,1);}
+    lua_pop(L,1);
+    lua_getglobal(L,LUA_COLIBNAME);guard_function(L,"resume",thread_switch,0);guard_function(L,"wrap",thread_switch,1);lua_pop(L,1);
+    lua_getglobal(L,"load");lua_pushcclosure(L,text_load,1);lua_setglobal(L,"load");
+}
 static int initialize(lua_State *L)
 {
     const struct {const char *name;lua_CFunction open;} libs[]={
@@ -249,6 +321,7 @@ static int initialize(lua_State *L)
         {LUA_STRLIBNAME,luaopen_string},{LUA_MATHLIBNAME,luaopen_math},
         {LUA_UTF8LIBNAME,luaopen_utf8},{LUA_COLIBNAME,luaopen_coroutine}};
     for(size_t i=0;i<sizeof libs/sizeof *libs;++i){luaL_requiref(L,libs[i].name,libs[i].open,1);lua_pop(L,1);}
+    initialize_guards(L);
     lua_pushnil(L);lua_setglobal(L,"dofile");lua_pushnil(L);lua_setglobal(L,"loadfile");
     lua_pushcfunction(L,print_line);lua_setglobal(L,"print");
     lua_newtable(L);lua_pushcfunction(L,calculator);lua_setfield(L,-2,"eval");lua_setglobal(L,"calc");

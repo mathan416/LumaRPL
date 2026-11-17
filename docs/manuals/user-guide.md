@@ -119,6 +119,8 @@ Functions take their input from the stack. `81 SQRT` gives 9; `1 LN` gives 0; `0
 
 Type `((2^3+4)-2)` and press Enter to get **10**. Entries beginning with parentheses use algebraic grouping and precedence; `(2+3)!` gives **120** and `(2+4)?` gives **21** on Enter. Classic complex literals such as `(1;3)` and `(1 3)` remain complex numbers.
 
+A typed power of two numbers, such as `2^3`, calculates on Enter. A leading minus belongs to the number, as on the RPN keys: `-2^2` gives **4**. For the negative of a power, use grouping: `(-(2^2))` gives -4.
+
 Use Left/Right to move the formula cursor. Cursor navigation updates the editor without clearing the whole display. When the cursor is inside an entry, operator keys insert text instead of calculating. Immediate numeric shortcuts apply at the end of the entry. If a formula has an error, the editor retains your original formula and maps the error cursor back into it; dismiss the error, correct the input, and press Enter again. Quoted algebra and RPL programs keep their existing syntax.
 
 ## Triangular sums with Termial
@@ -279,6 +281,8 @@ LumaRPL has a calculator session and several document types. Treat them as separ
 ## The calculator session
 
 Ctrl+S saves the stack, HOME variables/programs and calculator settings. Ctrl+L loads a saved session, replacing the current calculator state. Save work you want to keep before loading another state.
+
+Each save keeps the previous copy. If the saved session cannot be read at startup, LumaRPL loads that previous copy and tells you so.
 
 Ctrl+Q saves and returns to the loader. It checks for unsaved documents and offers the relevant save choices. Cancel, or a failed required save, leaves LumaRPL open.
 

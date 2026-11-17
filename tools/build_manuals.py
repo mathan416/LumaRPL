@@ -21,8 +21,15 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'docs/manuals'
 OUT=ROOT/'output/pdf'
 VERSION=(ROOT/'VERSION').read_text().strip()
-FALLBACK=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/libreoffice-headless/libreoffice/LibreOfficeDev.app/Contents/Resources/fonts/truetype'
-FONTS=Path(os.environ.get('LUMARPL_PDF_FONTS',str(FALLBACK)))
+def find_fonts():
+    # LUMARPL_PDF_FONTS wins; otherwise use a standard DejaVu installation.
+    required=('DejaVuSans.ttf','DejaVuSans-Bold.ttf','DejaVuSans-Oblique.ttf','DejaVuSansMono.ttf')
+    candidates=[os.environ.get('LUMARPL_PDF_FONTS'),'/usr/share/fonts/truetype/dejavu','/usr/share/fonts/dejavu',
+                '/usr/local/share/fonts','/opt/homebrew/share/fonts',str(Path.home()/'Library/Fonts'),'/Library/Fonts']
+    for candidate in filter(None,candidates):
+        if all((Path(candidate)/name).is_file() for name in required):return Path(candidate)
+    raise SystemExit('DejaVu fonts not found; set LUMARPL_PDF_FONTS to a directory containing '+', '.join(required))
+FONTS=find_fonts()
 W,H=504,648
 LEFT,RIGHT,TOP,BOTTOM=48,42,49,43
 CW=W-LEFT-RIGHT

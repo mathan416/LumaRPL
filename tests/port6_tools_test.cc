@@ -20,12 +20,24 @@ int main()
         assert(tools.replace_all("a","0123456789")==-1&&!strcmp(small,"aaaa aaaa"));
         assert(tools.replace_all("aaaa","")==2&&!strcmp(small," "));assert(tools.undo());assert(!strcmp(small," aaaa"));
     }
+    {
+        // Up to the undo depth, every replacement can be undone completely.
+        char text[64]="a a a a a a a a",copied[257]="";pico_text_editor ed{text,sizeof text,strlen(text),0};pico_editor_tools tools(ed,copied);
+        assert(tools.replace_all("a","b")==8&&!strcmp(text,"b b b b b b b b"));
+        while(tools.undo()){}assert(!strcmp(text,"a a a a a a a a"));
+        // More matches need confirmation; once confirmed they apply in full and
+        // clear undo, so no partial undo can leave a half-replaced source.
+        strcpy(text,"a a a a a a a a a a a a");ed.length=strlen(text);ed.cursor=0;
+        assert(tools.replace_all("a","b")==-2&&!strcmp(text,"a a a a a a a a a a a a"));
+        assert(tools.replace_all("a","b",true)==12&&!strcmp(text,"b b b b b b b b b b b b"));
+        assert(!tools.undo()&&!strcmp(text,"b b b b b b b b b b b b"));
+    }
     pico_graph_scene scene,loaded;strcpy(scene.curve[2],"SIN(X)+π");uint8_t data[1024];size_t n=scene.encode(data,sizeof data);assert(n>700&&n<1024);assert(loaded.decode(data,n));assert(!strcmp(loaded.curve[0],"X^2"));
     loaded.camera.rotate(0.5f,0.2f);loaded.colour[0]=0x123456;loaded.multiple=1;loaded.angle=1;strcpy(loaded.surface,"SIN(X)+COS(Y)");n=loaded.encode(data,sizeof data);assert(scene.decode(data,n));assert(scene.colour[0]==0x123456&&scene.angle==1&&!strcmp(scene.surface,"SIN(X)+COS(Y)"));
     pico_graph_scene previous=scene;data[40]^=1;assert(!scene.decode(data,n));assert(!memcmp(&previous,&scene,sizeof scene));data[40]^=1;
     assert(!scene.decode(data,n-1));scene.window[0]=scene.window[1];assert(!scene.encode(data,sizeof data));scene=previous;
     for(size_t i=0;i<n;++i){uint8_t old=data[i];data[i]^=0x80;assert(!loaded.decode(data,n));data[i]=old;}
-    pico_lua_input input;input.feed('A',1);input.feed('d',1);assert(input.held('a')&&input.held('D'));assert(input.poll()=='a');assert(input.poll()=='d');input.feed('A',3);assert(!input.held('a')&&input.held('d'));input.feed(27,1);assert(input.poll()==-2);
+    pico_lua_input input;input.feed('A',1);input.feed('d',1);assert(input.held('a')&&input.held('D'));assert(input.poll()=='a');assert(input.poll()=='d');input.feed('A',3);assert(!input.held('a')&&input.held('d'));input.feed(0x85,1);assert(input.poll()==0x85&&input.held(0x85));input.feed(0x85,3);input.feed(27,1);assert(input.poll()==-2);
     pico_source_style lua(pico_source_style::lua);assert(lua.next('-', '-')==pico_source_style::comment);lua.next('\n');assert(lua.next('\'')==pico_source_style::string);assert(lua.next('@')==pico_source_style::string);assert(lua.next('\'')==pico_source_style::string);assert(pico_source_style::lua_keyword("function",8));assert(!pico_source_style::lua_keyword("variable",8));
     puts("PASS: editor history/selection/clipboard/indent/find/replace, scene integrity/rollback, held-key queue and language colours");
 }

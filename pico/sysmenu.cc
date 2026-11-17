@@ -444,9 +444,14 @@ static int state_load_callback(cstring path, cstring name, void *data)
     return MRET_EXIT;
 
 error:
-    ui.draw_error();
-    lcd_refresh();
-    wait_for_key_press();
+    // Silent loads (startup, Ctrl+L recovery) report failure to the caller,
+    // which then tries the backups; they never stop for a key press.
+    if (!is_silent)
+    {
+        ui.draw_error();
+        lcd_refresh();
+        wait_for_key_press();
+    }
     return 1;
 }
 
@@ -631,6 +636,8 @@ bool save_state_file_silent(cstring path)
     int result = state_save_callback(temporary, temporary, STATE_IO_SILENT);
     bool ok = result == MRET_EXIT && !pico_io_failed()
         && pico_commit_state(temporary, path);
+    if (!ok)
+        pico_f_unlink(temporary); // previous session retained; drop partial copy
     set_reset_state_file(path);
     return ok;
 }
@@ -648,6 +655,7 @@ bool save_state_file(cstring path)
 }
 
 
+bool pico_session_recovered = false;
 bool load_system_state()
 // ----------------------------------------------------------------------------
 //   Load the default system state file
@@ -671,7 +679,7 @@ bool load_system_state()
                 {
                     char backup[160];snprintf(backup,sizeof backup,"%s%s",original,suffix);
                     if(file_exists(backup)&&load_state_file_silent(backup))
-                    {pico_storage_recovered(original,backup);set_reset_state_file(original);return true;}
+                    {pico_storage_recovered(original,backup);set_reset_state_file(original);pico_session_recovered=true;return true;}
                     rt.reset();Settings=settings();
                 }
                 return false;

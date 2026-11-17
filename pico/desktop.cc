@@ -281,7 +281,9 @@ bool save_source(const char *path,const char *source)
     if(pico_f_open(&f,temp,FA_WRITE|FA_CREATE_ALWAYS)!=FR_OK) return false;
     bool ok=pico_f_write(&f,source,count,&bytes)==FR_OK && bytes==count;
     if(pico_f_close(&f)!=FR_OK) ok=false;
-    return ok && !pico_io_failed() && pico_commit_state(temp,path);
+    ok=ok && !pico_io_failed() && pico_commit_state(temp,path);
+    if(!ok) pico_f_unlink(temp); // previous file retained; drop the partial copy
+    return ok;
 }
 #include "ui/editor.inc"
 #include "ui/editor_actions.inc"
@@ -322,7 +324,7 @@ bool assemble_file(const char *source,const char *path,pico_text_editor *editor=
     FIL f={};UINT written=0;pico_io_reset();
     bool ok=pico_f_open(&f,temp,FA_WRITE|FA_CREATE_ALWAYS)==FR_OK;
     if(ok){ok=pico_f_write(&f,bytes,length,&written)==FR_OK && written==length;if(pico_f_close(&f)!=FR_OK)ok=false;}
-    if(!ok || pico_io_failed() || !pico_commit_state(temp,rom)){notice("Assemble failed","Previous ROM retained");return false;}
+    if(!ok || pico_io_failed() || !pico_commit_state(temp,rom)){pico_f_unlink(temp);notice("Assemble failed","Previous ROM retained");return false;}
     unsigned pc=run_chip_file(rom,editor!=nullptr);if(editor&&pc){if(pc!=~0u){unsigned line=0;if(compiler.assemble(source,bytes,sizeof bytes,length,pc,&line))editor_jump(*editor,line);}return false;}return true;
 }
 // True means a saved program ran; browser should return to calculator results.
@@ -481,7 +483,17 @@ bool edit_file(const char *path,const char *name,bool is_new,source_language lan
             {
                 static const char *const choices[]={"Replace next","Replace all","Cancel"};int choice=screen_menu("desktop.edit_file.choose2","Replace",choices,3);
                 if(choice==0){if(tools->find(find_text))tools->insert(replacement,strlen(replacement));else notice("Replace","Text not found");}
-                else if(choice==1){int n=tools->replace_all(find_text,replacement);if(n<0)notice("Replace failed","Replacement exceeds source capacity");}
+                else if(choice==1)
+                {
+                    int n=tools->replace_all(find_text,replacement);bool cancelled=false;
+                    if(n==-2)
+                    {
+                        char question[160];snprintf(question,sizeof question,"Replace all %u matches? More than %u replacements cannot be undone; save first to keep a copy.",unsigned(tools->count_matches(find_text)),unsigned(pico_editor_tools::depth));
+                        if(confirm(question))n=tools->replace_all(find_text,replacement,true);else cancelled=true;
+                    }
+                    if(n<0&&!cancelled)notice("Replace failed","Replacement exceeds source capacity or editor storage; source unchanged");
+                    else if(n==0)notice("Replace","Text not found");
+                }
             }
         }
         else if(c==7)
@@ -683,6 +695,13 @@ void apply_theme(int theme)
 }
 } // namespace
 
+extern bool pico_session_recovered;
+static void report_session_recovery()
+{
+    // Startup loads are silent, so say when the damaged primary was replaced.
+    if(!pico_session_recovered)return;pico_session_recovered=false;
+    notice("Session recovered","The saved session could not be read; its previous copy was loaded.");
+}
 void pico_load_startup_session()
 {
     {pico_timezone zone;if(sys_disk_ok()&&pico_timezone_load(zone))pico_set_timezone(zone);}
@@ -708,6 +727,7 @@ void pico_load_startup_session()
 #else
     load_system_state();
 #endif
+    report_session_recovery();
 }
 
 static void file_browser()
@@ -994,7 +1014,7 @@ unsigned show_lua_file(const char *path,bool editor_context)
     lua_file_source source;source.open=pico_f_open(&source.file,path,FA_READ)==FR_OK;
     if(!source.open||f_size(&source.file)>=source_capacity){notice("Lua source","Use a saved script under 16 KiB");return 0;}
     pico_lua_result result;key_pop_all();pico_keyboard_reset();
-    screen_page("desktop.show_lua_file.page1","Lua running",pico_ui::Actions{{nullptr,nullptr,nullptr,nullptr,"Cancel"}});info_label(8,55,"Running script...");flush_display();
+    screen_page("desktop.show_lua_file.page1","Lua running",pico_ui::Actions{{nullptr,nullptr,nullptr,nullptr,nullptr}});info_label(8,55,"Running script... Esc cancels");flush_display();
     bool ok=pico_lua_run_stream(lua_file_source::read,&source,&result);
     if(editor_context&&!ok&&!result.cancelled){return editor_error("Lua error",*result.error?result.error:result.output,result.error_line)?result.error_line:0;}
     lua_result_view(result,ok);return 0;

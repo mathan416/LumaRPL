@@ -99,7 +99,8 @@ bool pico_calculator_text_key(Interface &ui,StackView &stack,unsigned c,bool rep
         ui.insert(c,Interface::DIRECT,false);
         return true;
     }
-    if(pico_calculator_grouped_formula(editor,0,rt.editing()) &&
+    if(pico_calculator_grouped_formula(editor,0,rt.editing()) && !stack.interactive &&
+       !ui.showing_help() && !ui.showing_graphics() &&
        (c=='+'||c=='-'||c=='*'||c=='/'||c=='^'||c=='!'||c=='?'))
     {
         ui.insert(c,Interface::DIRECT,false);
@@ -138,6 +139,24 @@ bool pico_calculator_text_key(Interface &ui,StackView &stack,unsigned c,bool rep
     return true;
 }
 
+// Locate a complete numeric-literal power such as 2^3 or -2^2 in [first,last).
+// Returns the '^' position, or last when the entry is not an inline power.
+inline size_t pico_calculator_inline_power(const byte *text,size_t first,size_t last)
+{
+    for(size_t power=first;power<last;++power)
+        if(text[power]=='^' &&
+           pico_calculator_numeric_literal(text,first,power) &&
+           pico_calculator_numeric_literal(text,power+1,last))
+            return power;
+    return last;
+}
+// A typed sign belongs to the base number, as on the RPN keys: -2^2 is 4.
+inline bool pico_calculator_signed_base(const byte *text,size_t first,size_t last)
+{
+    while(first<last && text[first]==' ')++first;
+    return first<last && (text[first]=='-'||text[first]=='+');
+}
+
 // Recognize the convenient imaginary-unit spelling in a calculator entry.
 // Keep RPL programs, quoted algebra and iterator names in longer lines intact.
 template<class Interface>
@@ -156,18 +175,18 @@ bool pico_calculator_prepare_entry(Interface &ui)
         ui.update_mode();
         return true;
     }
-    for(size_t power=first;power<last;++power)
+    size_t power=pico_calculator_inline_power(text,first,last);
+    if(power<last)
     {
-        if(text[power]=='^' &&
-           pico_calculator_numeric_literal(text,first,power) &&
-           pico_calculator_numeric_literal(text,power+1,last))
-        {
-            if(ui.insert(last,utf8("' EVAL"),6)!=6)return false;
-            if(ui.insert(first,U'\'')!=1)return false;
-            ui.cursor_position(last+7);
-            ui.update_mode();
-            return true;
-        }
+        // Insert right to left so earlier positions stay valid.
+        bool sign=pico_calculator_signed_base(text,first,power);
+        if(ui.insert(last,utf8("' EVAL"),6)!=6)return false;
+        if(sign && ui.insert(power,U')')!=1)return false;
+        if(sign && ui.insert(first,U'(')!=1)return false;
+        if(ui.insert(first,U'\'')!=1)return false;
+        ui.cursor_position(last+(sign?9:7));
+        ui.update_mode();
+        return true;
     }
     if(first==last || (text[first]!='i' && text[first]!='I'))return true;
     size_t suffix=first+1;
@@ -198,10 +217,16 @@ bool pico_calculator_key(Interface &ui,StackView &stack,int key,bool repeating,b
     while(first<length && rt.editor()[first]==' ')++first;
     bool transformed=!ui.in_input() &&
         pico_calculator_grouped_formula(rt.editor(),0,length);
-    for(size_t power=first;!transformed && !ui.in_input() && power<length;++power)
-        transformed=rt.editor()[power]=='^' &&
-            pico_calculator_numeric_literal(rt.editor(),first,power) &&
-            pico_calculator_numeric_literal(rt.editor(),power+1,length);
+    // A signed power base is wrapped as '(-2)^2'; map errors past both parentheses.
+    size_t power=length;bool sign=false;
+    if(!transformed && !ui.in_input())
+    {
+        size_t last=length;
+        while(last>first && rt.editor()[last-1]==' ')--last;
+        power=pico_calculator_inline_power(rt.editor(),first,last);
+        transformed=power<last;
+        sign=transformed && pico_calculator_signed_base(rt.editor(),first,power);
+    }
     text_g original=transformed?text::make(rt.editor(),length):nullptr;
     if(transformed && !original)return true;
     unsigned original_cursor=ui.cursor_position();
@@ -212,7 +237,9 @@ bool pico_calculator_key(Interface &ui,StackView &stack,int key,bool repeating,b
     {
         auto position=[&](unsigned pos)
         {
-            if(pos>first)--pos;
+            if(pos>first)--pos;                     // opening quote
+            if(sign && pos>first)--pos;             // '(' before the base
+            if(sign && pos>power)--pos;             // ')' after the base
             return pos>length?unsigned(length):pos;
         };
         unsigned cursor=rt.editing()?position(ui.cursor_position()):original_cursor;
